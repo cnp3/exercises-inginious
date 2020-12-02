@@ -1,4 +1,0 @@
-try:
-    path=[1,2,3]
-    print(path[0])
-    print(path[4])

@@ -18,7 +18,7 @@ jobs:
           WEBDAV_USERNAME: ${{ secrets.WEBDAV_USERNAME }}
           WEBDAV_PASSWORD: ${{ secrets.WEBDAV_PASSWORD }}
         run: |
-          wget -e robots=off --auth-no-challenge --http-user=$WEBDAV_USERNAME --http-password=$WEBDAV_PASSWORD --exclude-directories=:dir_browser -nH -np -m -P /tmp/ https://dav.inginious.org/cnp3/ > wget.log
+          wget -q -e robots=off --auth-no-challenge --http-user=$WEBDAV_USERNAME --http-password=$WEBDAV_PASSWORD --exclude-directories=:dir_browser -nH -np -m -P /tmp/ https://dav.inginious.org/cnp3/
           find /tmp/cnp3 -name index.html -delete
           echo "::set-output name=commit_id::"$(cat /tmp/cnp3/.commit_id)
         shell: bash

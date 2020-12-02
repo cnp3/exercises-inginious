@@ -1,2 +1,0 @@
-#!/bin/bash
-tshark -T pdml -r file.pcap -J "tcp" -r $1 -w $1.xml

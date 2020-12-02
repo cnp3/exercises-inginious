@@ -16,11 +16,13 @@ def run(cmd, stdout=sys.stdout, shell=False):
     return subprocess.run(cmd.split(' ') if not shell else cmd, check=True, universal_newlines=True, stdout=stdout, stderr=sys.stderr, shell=shell)
 
 base_url = os.environ['WEBDAV_URL']
+username = os.environ['WEBDAV_USERNAME'].strip()
+password = os.environ['WEBDAV_PASSWORD'].strip()
 
-curl_push = 'curl -s --user {}:{} -T {{}} {{}}'.format(os.environ['WEBDAV_USERNAME'], os.environ['WEBDAV_PASSWORD'])
-curl_mv = 'curl -s --user {}:{} -X MOVE --header "Destination:{{}}" {{}}'.format(os.environ['WEBDAV_USERNAME'], os.environ['WEBDAV_PASSWORD'])
-curl_mkdir = 'curl -s --user {}:{} -X MKCOL {{}}'.format(os.environ['WEBDAV_USERNAME'], os.environ['WEBDAV_PASSWORD'])
-curl_rmdir = 'curl -s --user {}:{} -X DELETE {{}}'.format(os.environ['WEBDAV_USERNAME'], os.environ['WEBDAV_PASSWORD'])
+curl_push = 'curl -s --user {}:{} -T {{}} {{}}'.format(username, password)
+curl_mv = 'curl -s --user {}:{} -X MOVE --header "Destination:{{}}" {{}}'.format(username, password)
+curl_mkdir = 'curl -s --user {}:{} -X MKCOL {{}}'.format(username, password)
+curl_rmdir = 'curl -s --user {}:{} -X DELETE {{}}'.format(username, password)
 
 git_log = 'git diff --name-status {}..{} -- {} | grep -E "^[A-Z]([0-9]{{3}})?" | sort | uniq'
 

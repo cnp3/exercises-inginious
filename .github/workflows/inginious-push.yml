@@ -1,0 +1,57 @@
+name: Push to INGInious
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/inginious-push.*'
+      - '**'
+
+jobs:
+  push_to_inginious:
+    name: Push to INGInious instance
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch WebDAV
+        id: fetch_remote
+        env:
+          WEBDAV_USERNAME: ${{ secrets.WEBDAV_USERNAME }}
+          WEBDAV_PASSWORD: ${{ secrets.WEBDAV_PASSWORD }}
+        run: |
+          wget -e robots=off --auth-no-challenge --http-user=$WEBDAV_USERNAME --http-password=$WEBDAV_PASSWORD --exclude-directories=:dir_browser -nH -np -m -P /tmp/ https://dav.inginious.org/cnp3/ > wget.log
+          find /tmp/cnp3 -name index.html -delete
+          echo "::set-output name=commit_id::"$(cat /tmp/cnp3/.commit_id)
+        shell: bash
+      - name: Checkout remote commit ID
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ steps.fetch_remote.outputs.commit_id }}
+      - name: Copy over remote files
+        run: |
+          rm -rf $GITHUB_WORKSPACE/*
+          cp -rf /tmp/cnp3/* $GITHUB_WORKSPACE/
+        shell: bash
+      - name: Prepare PR with changes if any
+        uses: peter-evans/create-pull-request@v3
+        id: create-pr
+        with:
+          commit-message: INGInious remote changes
+          title: "Remote changes from INGInious"
+          branch: inginious-remote-changes
+          body: "Remote changes not part of the repository"
+          base: main
+      - name: Abort if remote changes exists
+        run: exit 1
+        if: ${{ steps.create-pr.outputs.pull-request-number != null }}
+      - name: Checkout event commit
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Push using WebDAV
+        run: |
+          echo "$GITHUB_SHA" > .commit_id
+          .github/workflows/inginious-push.py ${{ steps.fetch_remote.outputs.commit_id }} $GITHUB_SHA .
+        env:
+          WEBDAV_USERNAME: ${{ secrets.WEBDAV_USERNAME }}
+          WEBDAV_PASSWORD: ${{ secrets.WEBDAV_PASSWORD }}
+          WEBDAV_URL: https://dav.inginious.org/cnp3/

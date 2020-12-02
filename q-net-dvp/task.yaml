@@ -1,0 +1,68 @@
+accessible: true
+author: ''
+categories: []
+contact_url: ''
+context: |-
+    Consider the network shown in the figure below. Assuming that all link weights are set to 1, what is the distance vector message that the routing protocol running on these routers will send once the network has converged assuming that all routers use poisoning ?
+
+       .. container:: text-center
+
+                .. image:: q-net-dvp/network-0.png
+                   :width: 200px
+
+
+    Express your answer as a list of pairs separated by commas. In each pair, ``<id>:<int>``,  where ``<id>`` is the name of the router and ``<int>`` an integer representing a distance. Use ``99`` as the distance to indicate a poisonned route.
+
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment_id: java7mockito
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: Distance vector routing with poisoning
+network_grading: false
+order: 5
+problems:
+    q1:
+        name: Distance vector sent by router R0 to router R1
+        default: ''
+        header: What is the poisonned distance vector sent by ``R0`` to ``R1`` ?
+        type: code_single_line
+    q2:
+        header: What is the poisonned distance vector sent by ``R0`` to ``R3`` ?
+        name: Distance vector sent by router R0 to router 3
+        type: code_single_line
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

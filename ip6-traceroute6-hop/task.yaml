@@ -1,0 +1,93 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- ipv6
+context: |-
+    ICMPv6, described in the `IPv6 chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/ipv6.html#icmp-version-6>`_ of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_ is a companion protocol for IPv6 that is used for various functions including network debugging. `traceroute6` is a popular debugging tool that allows to trace the path towards a destination.
+
+
+    .. raw:: html
+
+        <script>
+        $('#content').css("min-height", 0);
+
+        bodyHeight = 0;
+        function resizeAndPostSize() {
+            if (document.getElementById("content")) {
+                if (document.getElementById("content").scrollHeight != bodyHeight) {
+                    bodyHeight = document.getElementById("content").scrollHeight;
+                    window.parent.postMessage({height: bodyHeight}, "*");
+                }
+            }
+        }
+
+        var target = document.querySelector('body');
+
+        var observer = new MutationObserver(resizeAndPostSize);
+
+        var config = { attributes: true, subtree: true };
+
+        observer.observe(target, config);
+        $(window).ready(function() {
+           $('#content').css("min-height", 0);
+           setTimeout(resizeAndPostSize, 0);
+        });
+        </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: 'IPv6 : Hop Limit field with traceroute6 '
+network_grading: false
+order: 45
+problems:
+    test:
+        shuffle-feedback: ''
+        header: |-
+            Can you infer the Hop Limit value of the packets captured during the following traceroute6:
+
+            .. code:: console
+
+               traceroute6 -q 1 -n www.ietf.org
+               traceroute6: Warning: www.ietf.org.cdn.cloudflare.net has multiple addresses; using 2606:4700:10::6814:155
+               traceroute6 to www.ietf.org.cdn.cloudflare.net (2606:4700:10::6814:155) from 2a02:2788:484:59e:2c1c:849e:f74f:e233, 64 hops max, 12 byte packets
+               1  2a02:2788:484:59e:a221:b7ff:fed8:aa90  2.415 ms
+               2  2a02:2788:480::1  8.138 ms
+               3  2a02:2788:480:2::1  9.125 ms
+               4  2a02:2788:ffff:1b::1  9.757 ms
+               5  2001:7f8:26::a501:3335:1  7.960 ms
+               6  2400:cb00:78:1024::a29e:e959  7.934 ms
+        type: network-trace
+        name: Usage of Hop Limit by traceroute6
+        hide:
+            0:
+            - ipv6.hlim
+            1:
+            - ipv6.hlim
+            2:
+            - ipv6.hlim
+            3:
+            - ipv6.hlim
+            4:
+            - ipv6.hlim
+            5:
+            - ipv6.hlim
+        exclude: {}
+        feedback:
+            ipv6.hlim: '`traceroute6` first sends a packet with a Hop Limit set to
+                1 to force the first router on the path to send an ICMPv6 Hop Limit
+                exceeded message, then to 2, ...'
+        redact: {}
+        trace: ip6-traceroute6-86-98.pcap.xml
+        shuffle: false
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

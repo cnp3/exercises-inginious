@@ -1,0 +1,62 @@
+\documentclass[convert={density=300,size=400x300,outext=.png}]{standalone}
+\usepackage{tikz}
+
+\thispagestyle{empty}
+
+\begin{document}
+\begin{tikzpicture}
+  \usetikzlibrary{positioning,matrix,arrows}
+ 
+
+        \tikzstyle{arrow} = [thick,->,>=stealth]
+        \tikzset{router/.style = {rectangle, draw, text centered, minimum height=2em}, }
+        \tikzset{host/.style = {circle, draw, text centered, minimum height=2em}, }
+        \tikzset{ftable/.style={rectangle, dashed, draw} }
+        \node[host] (A) {A};
+        \node[router, right=of A] (R1) { R1 };
+        \node[ftable, above left=of R1] (FR1) { \begin{tabular}{l|l} 
+        Dest. & Nexthop \\
+        \hline 
+        2001:db8:1341:4/64 & 2001:db8:1341:12::2 \\
+        2001:db8:1341:1/64 & West \\        
+        \end{tabular}};
+        \node[router,right=of R1] (R2) {R2};
+        \node[ftable, above right=of R2] (FR2) { \begin{tabular}{l|l} 
+        Dest. & Nexthop \\
+        \hline 
+        2001:db8:1341:4/64 & 2001:db8:1341:23::3 \\
+        2001:db8:1341:1/64 & 2001:db8:1341:23:3 \\        
+        \end{tabular}};
+        \node[router,below=of R1] (R3) {R3};
+        \node[ftable,below left=of R3] (FR3) { \begin{tabular}{l|l} 
+        Dest. & Nexthop \\
+        \hline 
+        2001:db8:1341:1/64  & 2001:db8:1341:13::1 \\
+        2001:db8:1341:4/64 & 2001:db8:1341:34::4 \\        
+        \end{tabular}\\};
+        \node[router,below=of R2] (R4) {R4};
+        \node[ftable,below right=of R4] (FR4) { \begin{tabular}{l|l} 
+        Dest. & Nexthop \\
+        \hline 
+        2001:db8:1341:1/64  & 2001:db8:1341:24::2 \\
+        2001:db8:1341:4/64 & East \\        
+        \end{tabular}\\};
+        \node[host, right=of R4] (B) {B};
+
+        \path[draw,thick]
+        (A) edge (R1) 
+        (R1) edge (R2) 
+        (R2) edge (R3) 
+        (R1) edge (R3) 
+        (R4) edge (R3) 
+        (R2) edge (R4) 
+        (R4) edge (B); 
+
+        \draw[arrow, dashed] (FR1) -- (R1); 
+        \draw[arrow, dashed] (FR4) -- (R4); 
+        \draw[arrow, dashed] (FR2) -- (R2); 
+        \draw[arrow, dashed] (FR3) -- (R3); 
+
+
+\end{tikzpicture}
+\end{document}

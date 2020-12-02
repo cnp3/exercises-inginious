@@ -1,0 +1,107 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- http
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: A longer HTTP/2.0 packet trace
+network_grading: false
+problems:
+    q1:
+        choices:
+        -   valid: true
+            text: The client requested four web objects during this trace.
+        -   text: The client requested three web objects during this trace.
+            feedback: The GET requests appear in packets 4 and 16
+        -   feedback: The GET requests appear in packets 4 and 16
+            text: The client requested five web objects during this trace.
+        -   text: The server pushed one web object to the client
+            feedback: The `Settings` frame sent by the client in packet 4 did not
+                enable server push.
+        -   feedback: The second wave of GET requests are sent in packet 16 while
+                the last part of the first response arrives in packet 17.
+            valid: true
+            text: The client sent additional GET requests *before* having received
+                the entire response for its first GET
+        -   text: The client always sends a Window Update that contains the same increment
+            feedback: The client sends different Windows Updates, see packets 65 and
+                93
+        -   feedback: This is incorrect, packet 16 indicates that the client expects
+                this object to be received on stream 7.
+            text: 'The `/javascript/octopress.js` object is sent by the server on
+                stream 5 '
+        -   text: 'The `/javascript/octopress.js` object is sent by the server on
+                stream 7 '
+        -   valid: true
+            text: The initial response is 6616 bytes long
+            feedback: This is the content-length header in the `Headers` frame in
+                packet 9
+        -   text: The longest object retrieved during this session has a length of
+                39082 bytes
+            feedback: See the content-length headers in the `Headers` frame in packet
+                21
+            valid: true
+        -   text: The smallest object retrieved during this session has a length of
+                6616 bytes
+            feedback: This is the initial request for the HTML page. The css and the
+                javascript are longer.
+            valid: true
+        -   text: The longest `Data` frame in this trace has a length of 16384 bytes.
+            valid: true
+        type: multiple_choice
+        header: |-
+            The `attached packet trace <mcq-pkt-http2-2/nghttp-trace-1856.pcap>`_ was collected while retrieving the home page of the http://nghttp2.org website
+
+            Download the trace, analyze it with `wireshark <https://www.wireshark.org>`_ and indicate which of the affirmations below are valid.
+        name: A longer HTTP/2.0 trace
+        limit: 8
+        multiple: true
+    trace:
+        exclude:
+        - tcp.flags
+        - tcp.options
+        trace: http2-trace.xml
+        redact: {}
+        feedback: {}
+        name: A visualisation of this packet trace
+        shuffle-feedback: ''
+        header: ''
+        type: network-trace
+        hide: {}
+        shuffle: false
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

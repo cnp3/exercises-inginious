@@ -1,0 +1,120 @@
+#!/bin/python3
+
+# Olivier Bonaventure, 2019
+
+from inginious import input, feedback
+
+
+
+def toList(string):
+        return (string.upper()).split('-')
+
+
+#q1: R0-R1-R3-R2-R4-R5
+def checkq1(path):
+    response=""
+    errors=0
+    grade=0
+    try:                    
+        if(path[0]!='R0'):
+                response+="Your path does not start on R0.\n"
+                errors+=1
+        if(path[-1]!='R5'):
+                response+="Your path does not end on R5.\n"
+                errors+2
+        if(path[1]!='R1'):
+                errors+=4
+                response+="Check again the forwarding table of R0. Look at the binary representation of address 2001:5::1 and check whether it matches 2001:4/30."
+        if(path[1]=='R1' and path[2]!='R3'):
+                errors+=8
+                response+="Check again the forwarding table of R1. Look at the binary representation of address 2001:5::1 and check whether it matches 2001:5/32."
+        if(path[1]=='R1' and path[2]=='R3' and path[3]!='R2'):
+                errors+=16
+                response+="Check again the forwarding table of R3. Look at the binary representation of address 2001:5::1 and check whether it matches 2001:4/30."
+        if(path[1]=='R1' and path[2]=='R3' and path[3]=='R2' and path[4]!='R4'):
+                errors+=32
+                response+="Check again the forwarding table of R2. Since it only has a defaut route, this should be simple."
+                
+    except IndexError as e:
+        errors+=64   
+        pass
+
+    if(len(path)!=6):
+       errors+=128
+       
+    if(path!= ['R0','R1','R3','R2','R4','R5']):
+       errors+=256
+                    
+    if(errors>0):        
+       feedback.set_problem_result("failed","q1")
+       response+="Your answer to this question is incorrect.\n"
+       feedback.set_problem_feedback(response+str(errors),"q1")
+    else:
+       feedback.set_problem_result("success","q1")
+       feedback.set_problem_feedback("Correct","q1")
+       grade+=50
+            
+    return grade
+
+
+#q2: R5-R2-R4-R3-R1
+def checkq2(path):
+        response=""
+        errors=0
+        grade=0
+        try:                
+           if(path[0]!='R5'):
+                response+="Your path does not start on R5.\n"
+                errors+=1
+           if(path[-1]!='R1'):
+                response+="Your path does not end on R1.\n"
+                errors+=1
+           if(path[1]!='R2'):
+                errors+=1
+                response+="Check again the forwarding table of R5. Look at the binary representation of address 2001:1::1 and check whether it matches 2001:2/31."
+           if(path[1]=='R2' and path[2]!='R4'):
+                errors+=1
+                response+="Check again the forwarding table of R2."
+           if(path[1]=='R2' and path[2]=='R4' and path[3]!='R3'):
+                errors+=1
+                response+="Check again the forwarding table of R4. Look at the binary representation of address 2001:1::1 and check whether it matches 2001:5/32."
+           if(path[1]=='R2' and path[2]=='R4' and path[3]=='R3' and path[4]!='R1'):
+                errors+=1
+                response+="Check again the forwarding table of R3. Look at the binary representation of address 2001:1::1 and check whether it matches 2001:5/32."
+
+        except IndexError as e:
+           pass
+   
+        if(len(path)!=5):
+                errors+=1
+        if(path!= ['R5','R2','R4','R3','R1']):
+                errors+=1
+        if(errors>0):        
+                feedback.set_problem_result("failed","q2")
+                response+="Your answer to this question is incorrect.\n"
+                feedback.set_problem_feedback(response,"q2")
+        else:
+                feedback.set_problem_result("success","q2")
+                feedback.set_problem_feedback("Correct","q2")
+                grade+=50
+                
+        return grade
+
+
+
+
+grade=0
+
+
+grade+=checkq1(toList(input.get_input("q1")))
+grade+=checkq2(toList(input.get_input("q2")))
+
+
+feedback.set_grade(grade) 
+
+if grade==100:
+	feedback.set_global_result("success")
+else:
+	feedback.set_global_result("failed")
+#end
+    

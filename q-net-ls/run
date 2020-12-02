@@ -1,0 +1,59 @@
+#!/bin/python3
+
+from inginious import input, feedback
+
+#R0: expected seq:1,age:1,R0,R1:1,R3:1  (q1)
+#R4: expected seq:1,age:1,R4,R2:1,R3:1,R5:1 (q2)
+
+def check(correct,incorrect,question):
+	answer = input.get_input(question)
+	answer = ''.join(answer.split()) # remove spaces
+	answer = answer.upper()  # to upper case
+	grade=0
+	count=0
+	response=""
+	for pair in correct:
+		if pair in answer:
+			count=count+1
+		else:
+			if ':' in pair:
+				router,dist=pair.split(':')
+				response+="Your answer for router "+router+" is incorrect. \n"
+			else:
+				response+="Your answer does not include "+pair+" \n"
+	for pair in incorrect:
+		if pair in answer:
+			count=-1
+			response+="The requested link state packet cannot contain "+pair+" \n"
+#
+	if (count==len(correct)):
+		feedback.set_problem_result("success",question)
+		feedback.set_problem_feedback("Correct",question)
+		grade+=50
+	else:
+		feedback.set_problem_result("failed",question)
+		response+="Your answer to the this question is incorrect.\n"
+		feedback.set_problem_feedback(response,question)
+	return grade
+        
+
+
+answer1=["SEQ", "AGE","R0","R1:1","R3:1"]
+invalid1=["R2","R4","R5"]
+answer2=["SEQ", "AGE","R4","R2:1","R3:1","R5:1"]
+invalid2=["R0","R1"]
+grade=0
+
+
+grade+=check(answer1,invalid1,"q1") 
+grade+=check(answer2,invalid2,"q2") 
+
+
+feedback.set_grade(grade) 
+
+if grade==100:
+	feedback.set_global_result("success")
+else:
+	feedback.set_global_result("failed")
+#end
+    

@@ -1,0 +1,73 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- ipv6
+context: |-
+    IPv6, described in the `IPv6 chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/ipv6.html#icmp-version-6>`_ of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_ can fragment packets that are larger than the MTU.
+
+    .. raw:: html
+
+        <script>
+        $('#content').css("min-height", 0);
+
+        bodyHeight = 0;
+        function resizeAndPostSize() {
+            if (document.getElementById("content")) {
+                if (document.getElementById("content").scrollHeight != bodyHeight) {
+                    bodyHeight = document.getElementById("content").scrollHeight;
+                    window.parent.postMessage({height: bodyHeight}, "*");
+                }
+            }
+        }
+
+        var target = document.querySelector('body');
+
+        var observer = new MutationObserver(resizeAndPostSize);
+
+        var config = { attributes: true, subtree: true };
+
+        observer.observe(target, config);
+        $(window).ready(function() {
+           $('#content').css("min-height", 0);
+           setTimeout(resizeAndPostSize, 0);
+        });
+        </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: 'IPv6 : packet fragmentation'
+network_grading: false
+order: 43
+problems:
+    test:
+        shuffle: true
+        shuffle-feedback: Remember that the last fragment has its More bit set to
+            0 while all other segments have their More bit set to 1. Then the Offset
+            field is used to reorder the different fragments in increasing order.
+        header: |-
+            Can you reorder the IPv6 fragments below ?
+
+            Note that for technical reasons, the packet dissector shows the Offset field as two different bytes :
+             - the low order byte (Offset LB)
+             - the high order byte (Offset UB)
+
+            This implies that the Offset is :math:`LB+256*UB`.
+        type: network-trace
+        name: Reorder IPv6 packet fragments
+        hide: {}
+        exclude: {}
+        feedback: {}
+        redact: {}
+        trace: ip6-ping6-frag-161-165.pcap.xml
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

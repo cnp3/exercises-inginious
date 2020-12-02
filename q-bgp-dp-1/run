@@ -1,0 +1,78 @@
+#!/bin/python3
+
+# Olivier Bonaventure, 2019
+
+from inginious import input, feedback
+import re
+ 
+def removeSpaces(string):
+    return re.sub('[\s+]', '', string)
+
+def sanitize(string):
+    return (removeSpaces(string.upper()))
+
+
+
+
+# q: question
+# s: string from student
+# a: expected answer
+def check(q,s,a):
+    if(len(s)!=2 or s[0]!='R' or not(s[1].isdigit())):
+        feedback.set_problem_result("failed", q)
+        feedback.set_problem_feedback("Your answer is not one of the nexthops in the routing table.", q)
+        return 0
+    if(s==a):
+        feedback.set_problem_result("success", q)
+        feedback.set_problem_feedback("Correct", q)
+        return 20
+    else:
+        feedback.set_problem_result("failed", q)
+        response = "Remember that the decision process first removes the routes that don't have the highest value of the local preference. Then it prefers the routes with the shortest AS path length."
+        feedback.set_problem_feedback(response, q)
+
+
+    return 0
+
+
+# q: question
+# s: string from student
+# a: expected answer
+def checkp(q,s,a):
+    if(len(s)!=2 or s[0]!='R' or not(s[1].isdigit())):
+        feedback.set_problem_result("failed", q)
+        feedback.set_problem_feedback("Your answer is not one of the nexthops in the routing table.", q)
+        return 0
+    if(s==a):
+        feedback.set_problem_result("success", q)
+        feedback.set_problem_feedback("Correct", q)
+        return 20
+    else:
+        feedback.set_problem_result("failed", q)
+        response = "Remember that a router always selects the route towards the most specific prefix (in this case, the /48) and the decision process first removes the routes that don't have the highest value of the local preference. Then it prefers the routes with the shortest AS path length."
+        feedback.set_problem_feedback(response, q)
+
+
+    return 0
+
+
+grade = 0
+
+
+grade += check("q1",sanitize(input.get_input("q1")),"R2")
+grade += check("q2",sanitize(input.get_input("q2")),"R4")
+grade += check("q3",sanitize(input.get_input("q3")),"R4")
+grade += check("q4",sanitize(input.get_input("q4")),"R1")
+grade += checkp("q5",sanitize(input.get_input("q5")),"R4")
+
+
+
+
+
+feedback.set_grade(grade)
+
+if grade ==100:
+    feedback.set_global_result("success")
+else:
+    feedback.set_global_result("failed")
+# end

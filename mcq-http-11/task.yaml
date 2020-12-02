@@ -1,0 +1,113 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- http
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           bodyHeight = document.body.scrollHeight;
+           console.log({height: bodyHeight});
+           window.parent.postMessage({height: bodyHeight}, "*");
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(window).ready(function(){
+           if (document.body.scrollHeight != bodyHeight) {
+               document.querySelector('#content').style.minHeight = '';
+               setTimeout(postSize, 0);
+           }
+       });
+       </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: HTTP/1.1 and the underlying transport protocol
+network_grading: false
+problems:
+    q1:
+        choices:
+        -   feedback: Remember that HTTP/1.1 can use the same transport connection
+                to retrieve the web objects that are stored on the *same server*.
+                In this example, the each web object. There are multiple objects in
+                this HTML page.
+            text: '1'
+        -   text: '3'
+            valid: true
+            feedback: The browser will reuse the existing connection to retrieve `_static/alabaster.css`
+                which points to the stylesheet on the same server. This connection
+                will be reused to retrieve the `_static/custom.css` stylesheet the
+                `_static/cnp3.png` image. One connection on https://www.computer-networking.info/
+                to retrieve `_static/pygments.css`, another connection on https://js.computer-networking.info/
+                to retrieve `_static/jquery.js`. Note that https://www.computer-networking.info/
+                and http://www.computer-networking.info/ use two different transport
+                connections.
+        -   feedback: Note that the browser does not need to follow the links (listed
+                with the href tag). It only needs to retrieve the stylesheets (marked
+                with the `link rel="stylesheet"` tag), the javascript code (`script
+                tag`) and the images (`img` tag).
+            text: '12'
+        -   text: '6'
+            feedback: 'Check again the servers that the browser needs to contact.
+                Remember that with HTTP/1.1, several objects, stored on the same server,
+                can be retrieved over the same connection. '
+        -   feedback: 'Check again the servers that the browser needs to contact.
+                Remember that with HTTP/1.1, several objects, stored on the same server,
+                can be retrieved over the same connection. '
+            text: '4'
+        -   text: '2'
+            feedback: 'Check again the servers that the browser needs to contact.
+                Remember that with HTTP/1.1, several objects, stored on the same server,
+                can be retrieved over the same connection. '
+        -   feedback: 'Check again the servers that the browser needs to contact.
+                Remember that with HTTP/1.1, several objects, stored on the same server,
+                can be retrieved over the same connection. '
+            text: '5'
+        type: multiple_choice
+        header: |-
+            The HTTP/1.1 protocol has been described in the e-book as well as the principles of HTML. Consider a browser that retrieves the `index.html` file from `http://www.computer-networking.info` that contains the HTML code shown below.
+
+            .. code:: console
+
+               <!DOCTYPE html>
+               <html>
+               <head>
+               <title>Computer Networking : Principles,Protocols and Practice</title>
+                <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+                <link rel="stylesheet" href="https://www.computer-networking.info/_static/pygments.css" type="text/css" />
+                <script type="text/javascript" src="http://js.computer-networking.info/_static/jquery.js"></script>
+                <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+                </head><body>
+
+                <h1>Computer Networking : Principles,Protocols and Practice<a class="headerlink" href="#computer-networking-principles-protocols-and-practice" title="Permalink to this headline">¶</a>        </h1>
+
+                <p><a class="reference external" href="https://www.computer-networking.info/2nd/html/">Computer Networking : Principles, Protocols and Practice</a> is an open-source ...
+                <ul class="simple">
+                <li><p>October 2019: New content for the <a class="reference external" href="http://beta.computer-networking.info">third edition</a> is written every week. You can see the current beta on <a class="reference external" href="http://beta.computer-networking.info">http://beta.computer-networking.info</a> or track it via <a class="reference external" href="https://github.com/cnp3/ebook/commits/master">github</a>, <a class="reference external" href="https://www.linkedin.com/groups/8836707/">twitter</a>, <a class="reference external" href="https://www.facebook.com/pages/category/Book/Computer-Networking-Principles-Protocols-and-Practice-129951043755620/">facebook</a> or <a class="reference external" href="https://www.linkedin.com/groups/8836707/">linkedin</a></p>       </li>
+                </ul>
+                <img class="logo" src="_static/cnp3.png" alt="Logo"/>
+                </body>
+                </html>
+
+            How many transport connections would an HTTP/1.0 browser need to establish to show the entire page (including the one used to retrieve the HTML file itself)?
+        name: HTTP/1.1 and the transport layer
+        limit: 5
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

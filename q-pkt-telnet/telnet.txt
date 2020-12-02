@@ -1,0 +1,32 @@
+telnet ::1
+Trying ::1...
+Connected to ::1.
+Escape character is '^]'.
+Ubuntu 18.04.3 LTS
+obo-minipc login: test
+Password: 
+Last login: Tue Oct 29 12:02:20 CET 2019 from ::1 on pts/11
+Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 4.15.0-65-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+ * Kata Containers are now fully integrated in Charmed Kubernetes 1.16!
+   Yes, charms take the Krazy out of K8s Kata Kluster Konstruction.
+
+     https://ubuntu.com/kubernetes/docs/release-notes
+
+ * Canonical Livepatch is available for installation.
+   - Reduce system reboots and improve kernel security. Activate at:
+     https://ubuntu.com/livepatch
+
+0 packages can be updated.
+0 updates are security updates.
+
+*** /dev/sda1 will be checked for errors at next reboot ***
+
+*** System restart required ***
+test@obo-minipc:~$ exit
+logout
+Connection closed by foreign host.

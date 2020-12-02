@@ -1,0 +1,171 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- reliable
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Go-back-n
+network_grading: false
+order: 3
+problems:
+    q1:
+        choices:
+        -   feedback: 'If this was the case, then you would have received `C(OK,2)`
+                as the last acknowledgement. '
+            text: 'The receiver has correctly received the three frames that you have
+                sent, but one acknowledgement has been lost. '
+        -   text: 'The receiver has only received the first frame that you have sent.
+                It has neither received the second nor the third frame. '
+            feedback: In this case, then the receiver should have never sent a second
+                acknowledgement since it only sends acknowledgements when receiving
+                data frames.
+        -   text: The receiver has correctly received the first and the third frame
+                that your have sent. The second frame has been lost and should be
+                retransmitted.
+        -   text: 'The receiver has correctly received the first two frames. The third
+                frame and the second acknowledgements have been lost. '
+            valid: true
+        name: Frames sent by a go-back-n sender
+        type: multiple_choice
+        header: |-
+            You implement a Go-back-n sender and observe the following frames that you send/receive. Assume that you use a window of three frames.
+
+            .. container:: text-center
+
+                .. image:: mcq-rel-gbn/figure1.png
+                   :width: 500
+        limit: 3
+    q3:
+        header: |
+            You implement a Go-back-n sender and observe the following frames that you send/receive. Assume that you use a window of three frames.
+
+            .. container:: text-center
+
+                .. image:: mcq-rel-gbn/figure3.png
+                   :width: 500
+
+            Which affirmation is correct among the ones below:
+        choices:
+        -   feedback: 'If this were the case, then you would have received `C(OK,2)`
+                as the last acknowledgement. '
+            text: The receiver has correctly received the three frames that you have
+                sent, but one acknowledgement has been lost.
+        -   feedback: 'In this case, then the receiver should have never sent a second
+                acknowledgement since it only sends acknowledgements when receiving
+                data frames. '
+            text: 'The receiver has only received the first frame that you have sent.
+                It has neither received the second nor the third frame. '
+        -   text: |
+                The receiver has correctly received the first and the third frame that your have sent. The second frame has been lost and should be retransmitted.
+        -   valid: true
+            text: |
+                The receiver has correctly received the first two frames. The third frame and the second acknowledgements have been lost.
+        limit: 3
+        name: A go-back-n sender
+        type: multiple_choice
+    q4:
+        choices:
+        -   text: 'After having received `C(OK,1)`, you know that the first two frames
+                have been received correctly. Since you never received an acknowledgement
+                for the third frame, you will retransmit it after the expiration of
+                the associated retransmission timer. '
+            valid: true
+        -   feedback: |
+                If the first three frames would have been received correctly, you would have received `C(OK,2)`. When you receive `C(OK,2)`, you only know that the first two frames have been received correctly.
+            text: |
+                The first three frames have been received correctly. Upon reception of `C(OK,1)`, you can immediately transmit the next data frame, i.e. `D(3,d)`.
+        -   feedback: 'You cannot immediately infer than the third frame (or the corresponding
+                acknowledgement) has been lost. You will retransmit `D(2,c)` only
+                after the expiration of the retransmission timer. '
+            text: 'After having received `C(OK,1)`, you know that the first two frames
+                have been received correctly. You retransmit immediately the frame
+                `D(2,c)` that has not been received correctly. '
+        -   feedback: 'Since you received `C(OK,1)`, you *know* that the first two
+                frames have been received correctly. '
+            text: ' Since you never received `C(OK,0)`, there was something wrong
+                in the transmission of the first frame. You retransmit all frames
+                upon expiration of your retransmission timer. '
+        -   text: 'Since you never received `C(OK,0)`, there was something wrong in
+                the transmission of the first frame. You retransmit this frame immediately
+                after having received `C(OK,1)`. '
+            feedback: |
+                Since you received `C(OK,1)`, you *know* that the first two frames have been received correctly.
+        name: A go-back-n sender
+        limit: 3
+        type: multiple_choice
+        header: |
+            You implement a Go-back-n sender and observe the following sequence of frames. Assuming that you have a window of three segments.
+
+            .. container:: text-center
+
+                .. image:: mcq-rel-gbn/figure4.png
+                   :width: 500
+
+            Among the following affirmations, only one is correct. Which one ?
+    q2:
+        choices:
+        -   valid: true
+            text: You ignore the out-of-sequence frame and respond with `C(OK,0)`.
+        -   feedback: 'Since the frame is out-of-sequence, a go-back-n receiver would
+                ignore it. Furthermore, sending `C(OK,2)` indicates that all frames,
+                up to and including sequence number `2` have been received in sequence. '
+            text: 'You place the frame in your buffer and respond with `C(OK,2)`. '
+        -   feedback: 'The frame is out of sequence. It cannot be delivered to the
+                user. Furthermore, sending `C(OK,2)` indicates that all frames, up
+                to and including sequence number `2` have been received in sequence. '
+            text: You issue a `Data.ind(b)` to deliver the information to your user
+                and respond with `C(OK,2)`.
+        -   feedback: As a go-back-n receiver, you should respond with an acknowledgement
+                to each received frame.
+            text: You ignore the out-of-sequence frame and do not respond.
+        -   text: 'You ignore the out-of-sequence frame and respond with `C(OK,1)`. '
+            feedback: 'By sending `C(OK,1)`, you indicate that the second frame has
+                been received correctly, which is not the case. '
+        limit: 3
+        header: |-
+            You implement a go-back-n receiver and receive the following frames.
+
+            .. container:: text-center
+
+                .. image:: mcq-rel-gbn/figure2.png
+                   :width: 500
+
+              How do you respond to the reception of the frame `D(2,b)` ?
+        name: A go-back-n receiver
+        type: multiple_choice
+run_cmd: ''
+stored_submissions: 3
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

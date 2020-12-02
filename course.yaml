@@ -1,0 +1,94 @@
+accessible: true
+name: '[CNP3] Computer Networking : Principles, Protocols and Practice'
+description: 'This INGINIOUS site contains exercises to complement the `Computer Networking:
+    Principles, Protocols and Practice <https://www.computer-networking.info>`_ ebook.
+    This is work in progress, exercises are developed on `github <https://github.com/cnp3>`_,
+    see `https://github.com/cnp3/INGInious-packets <https://github.com/cnp3/INGInious-packets>`_
+    and `https://github.com/cnp3/INGInious-C <https://github.com/cnp3/INGInious-C>`_'
+admins:
+- obonaventure
+- mpiraux
+- michelfra
+- duchenef
+- vvandens
+tutors:
+- eassogba
+groups_student_choice: false
+use_classrooms: true
+allow_unregister: false
+allow_preview: true
+registration: false
+registration_password: null
+registration_ac: null
+registration_ac_list: []
+is_lti: true
+lti_keys:
+    interactivesyllabuscnp3: 0d17845ce0294e7b1e97164ddb275480e4d369
+lti_send_back_grade: false
+tags:
+    bgp:
+        name: BGP
+        visible: true
+        type: 2
+        description: BGP and interdomain routing
+    dns:
+        visible: true
+        type: 2
+        name: DNS
+        description: DNS protocol
+    ethernet:
+        name: Ethernet
+        description: Ethernet and Spanning Tree
+        type: 2
+        visible: true
+    http:
+        name: HTTP
+        type: 2
+        visible: true
+        description: HTTP protocol
+    ipv6:
+        visible: true
+        name: IPv6
+        description: IPv6 protocol
+        type: 2
+    ospf:
+        type: 2
+        description: OSPF
+        name: OSPF
+        visible: true
+    reliable:
+        visible: true
+        type: 2
+        description: Go-back-n and selective repeat
+        name: reliable
+    rip:
+        description: RIP
+        name: RIP
+        type: 2
+        visible: true
+    socket:
+        description: socket exercises
+        name: socket
+        visible: true
+        type: 2
+    ssh:
+        visible: true
+        name: ssh
+        type: 2
+        description: ssh protocol
+    tcp:
+        name: TCP
+        type: 2
+        visible: true
+        description: TCP protocol
+    telnet:
+        name: telnet
+        visible: true
+        type: 2
+        description: Telnet protocol
+    tls:
+        visible: true
+        name: TLS
+        description: TLS protocol
+        type: 2
+lti_url: https://beta.computer-networking.info/

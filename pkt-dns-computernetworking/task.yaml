@@ -1,0 +1,89 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- dns
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: DNS lookup for www.computernetworking.info
+network_grading: false
+problems:
+    id:
+        feedback: {}
+        shuffle: true
+        name: DNS lookup
+        shuffle-feedback: |-
+            The following DNS requests were sent by the resolver to find the answer.
+
+            .. code:: console
+
+               dig  -t NS .  @2001:4860:4860::8888
+               dig +bufsize=0 +noedns -t NS info @2001:7fd::1
+               dig +bufsize=0 +noedns -t NS computer-networking.info @2001:500:19::1
+               dig +bufsize=0 +noedns -t NS net @2001:7fd::1
+               dig +bufsize=0 +noedns -t NS ovh.net @2001:503:a83e::2:30
+               dig +bufsize=0 +noedns -t AAAA dns20.ovh.net @2001:41d0:1:1981::1
+               dig +bufsize=0 +noedns -t AAAA www.computer-networking.info @2001:41d0:1:4a8f::1
+               dig +bufsize=0 +noedns -t NS be @2001:7fd::1
+               dig +bufsize=0 +noedns -t NS ac.be @2001:678:9::1
+               dig +bufsize=0 +noedns -t NS ucl.ac.be @2001:6a8:3c80:c000::40
+               dig +bufsize=0 +noedns -t NS info.ucl.ac.be @2001:6a8:3081:1::53
+               dig +bufsize=0 +noedns -t AAAA cnp3book.info.ucl.ac.be @2001:6a8:308f:1::d
+        header: |-
+            A student collected a packet trace on its DNS resolver while running the following command:
+
+            .. code:: console
+
+               dig -t AAAA www.computer-networking.info
+
+            This trace was collected with a resolver that does not store any record in its cache. Can you reorder the packets of this trace by looking and the succession of the types of DNS requests starting from the root ?
+        trace: dns-computernetworking.pdml
+        hide: {}
+        exclude:
+        - geninfo.num
+        - geninfo.len
+        - geninfo.caplen
+        - geninfo.timestamp
+        - udp.checksum.status
+        - udp.port
+        - udp.port
+        - dns.qry.name.len
+        - dns.count.labels
+        redact:
+        - udp.checksum.status
+        type: network-trace
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

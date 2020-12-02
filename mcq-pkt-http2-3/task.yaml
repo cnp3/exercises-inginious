@@ -1,0 +1,107 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- http
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Another HTTP/2.0 trace
+network_grading: false
+problems:
+    q1:
+        choices:
+        -   valid: true
+            feedback: The `Settings` frame in packet 4 does not disable server push.
+                This feature is thus enabled.
+            text: The client authorizes the server to push web objects.
+        -   text: The client requests three web objects (including the initial request)
+            valid: true
+            feedback: The client receives four web objects, but only requests three
+                of them. The stylesheet (`screen.css`) is automatically pushed by
+                the server, see sixth packet.
+        -   feedback: The client receives four web objects, but only requests three
+                of them. The stylesheet (`screen.css`) is automatically pushed by
+                the server, see sixth packet.
+            text: The client requests four web objects (including the initial request)
+        -   text: The client sends the `Push_Promise` frame
+            feedback: No, the `Push_Promise` frame is sent by the server.
+        -   feedback: In HTTP/2.0, even stream identifiers are used to deliver resources
+                pushed by the server, while odd stream numbers are used for resources
+                requested by the client. The `Push_Promise` frame in packet 6 clearly
+                indicates that this resource will be pushed on stream 2.
+            valid: true
+            text: The `stylesheet/screen.css` resource is delivered on stream 2
+        -   text: The `stylesheet/screen.css` resource is delivered on stream 1
+            feedback: In HTTP/2.0, even stream identifiers are used to deliver resources
+                pushed by the server, while odd stream numbers are used for resources
+                requested by the client. The `Push_Promise` frame in packet 6 clearly
+                indicates that this resource will be pushed on stream 2.
+        -   feedback: In HTTP/2.0, even stream identifiers are used to deliver resources
+                pushed by the server, while odd stream numbers are used for resources
+                requested by the client. The `Push_Promise` frame in packet 15 clearly
+                indicates that this resource is expected by the client on stream 3.
+            text: The `/javascript/modernizr-2.0.js` resource is delivered on stream
+                2.
+        -   text: The `/javascript/modernizr-2.0.js` resource is delivered on stream
+                3.
+            feedback: In HTTP/2.0, even stream identifiers are used to deliver resources
+                pushed by the server, while odd stream numbers are used for resources
+                requested by the client. The `Push_Promise` frame in packet 15 clearly
+                indicates that this resource is expected by the client on stream 3.
+            valid: true
+        type: multiple_choice
+        header: |-
+            The attached `packet trace <mcq-pkt-http2-3/nghttp-trace-2768.pcap>`_ was collected while retrieving the home page of http://nghttp2.org
+
+            Using `wireshark <https://www.wireshark.org>`_, verify which of the following affirmations are valid.
+        name: Another HTTP/2.0 trace
+        limit: 6
+        multiple: true
+    trace:
+        exclude:
+        - tcp.flags
+        - tcp.options
+        trace: http2-trace.xml
+        redact: {}
+        feedback: {}
+        name: A visualisation of this packet trace
+        shuffle-feedback: ''
+        header: ''
+        type: network-trace
+        hide: {}
+        shuffle: false
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

@@ -1,0 +1,88 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- tls
+context: |-
+    .. raw:: html
+
+        <script>
+        $('#content').css("min-height", 0);
+
+        bodyHeight = 0;
+        function resizeAndPostSize() {
+            if (document.getElementById("content")) {
+                if (document.getElementById("content").scrollHeight != bodyHeight) {
+                    bodyHeight = document.getElementById("content").scrollHeight;
+                    window.parent.postMessage({height: bodyHeight}, "*");
+                }
+            }
+        }
+
+        var target = document.querySelector('body');
+
+        var observer = new MutationObserver(resizeAndPostSize);
+
+        var config = { attributes: true, subtree: true };
+
+        observer.observe(target, config);
+        $(window).ready(function() {
+           $('#content').css("min-height", 0);
+           setTimeout(resizeAndPostSize, 0);
+        });
+        </script>
+environment: pyjavacpp
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: A TLS trace
+network_grading: false
+problems:
+    q:
+        feedback: {}
+        name: A short TLS trace
+        type: network-trace
+        hide: {}
+        header: Analyse the  `attached packet trace <https://inginious.org/course/cnp3/q-pkt-tls-4/tls-trace.pcap>`_.
+        trace: tls-trace.xml
+        exclude:
+        - tcp.flags
+        - tcp.options
+        redact: {}
+        shuffle-feedback: ''
+        shuffle: false
+    q1:
+        type: code_single_line
+        optional: 'on'
+        name: Cipher suites
+        header: How many different cipher suites are proposed by the client ?
+        default: ''
+    q2:
+        header: What is the name of the server contacted by the client ?
+        optional: 'on'
+        type: code_single_line
+        default: ''
+        name: Server name
+    q3:
+        name: Selected cipher suite
+        default: ''
+        header: What is the cipher suite that has been selected by the server ?
+        type: code_single_line
+        optional: 'on'
+    q4:
+        type: code_single_line
+        default: ''
+        optional: 'on'
+        name: Application layer protocol
+        header: What is the application layer protocol used over this TLS session
+            ?
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

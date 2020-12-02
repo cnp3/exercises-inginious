@@ -1,0 +1,92 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- http
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Analysis of an HTTP packet trace
+network_grading: false
+problems:
+    q1:
+        choices:
+        -   valid: true
+            text: The client uses HTTP/1.0
+        -   text: The URL of the retrieved web object is http://nghttp2.org/robots.txt
+            valid: true
+        -   feedback: Check the User-Agent in the header of the HTTP GET
+            text: The client used to retrieve this object is Google Chrome
+        -   text: The server returns a status code of 200 which indicates a success.
+            valid: true
+        -   feedback: The Status Code of the server is 200.
+            text: The server returns a status code of 404 which indicates that the
+                requested object could not be found.
+        -   text: The URL of the retrieved web object is http://nghttp2.org/
+            feedback: |
+                This is incorrect. The URL is composed of two parts. The parameter of the `Host:` line and the parameter of the `GET` request
+        -   feedback: The version of HTTP used is the last parameter of the GET request.
+            text: The client uses HTTP/1.1
+        -   text: The MIME Content-Type of the retrieved web object is `text/html`
+            feedback: This is incorrect, check the `Content-Type` line in the HTTP
+                response.
+        -   text: The response was served by the Apache server
+            feedback: This is incorrect, check the `Server` line in the HTTP response.
+        -   text: The response returned by the server is 62 bytes long.
+            feedback: See the `Content-Length` header in the HTTP response.
+            valid: true
+        type: multiple_choice
+        header: |-
+            Network engineers often need to capture the packets that are exchanged over a network to debug various types of problems. Here is a `simple packet trace <mcq-http-trace/http-trace.pcap>`_
+
+            Open this packet trace in `wireshark <https://www.wireshark.org>`_ or use `tcpdump <https://www.tcpdump.org>`_ on the command line determine which of the affirmations below are correct.
+        name: A simple HTTP trace
+        limit: 6
+        multiple: true
+    trace:
+        exclude:
+        - tcp.flags
+        - tcp.options
+        trace: http-trace.xml
+        redact: {}
+        feedback: {}
+        name: The HTTP trace
+        shuffle-feedback: ''
+        header: ''
+        type: network-trace
+        hide: {}
+        shuffle: false
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

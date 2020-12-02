@@ -1,0 +1,82 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- ipv6
+context: |-
+    IPv6 is described in the `IPv6 chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/ipv6.html>`_ of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_. When a router forwards a packet, it updates some of its fields.
+
+    .. raw:: html
+
+        <script>
+        $('#content').css("min-height", 0);
+
+        bodyHeight = 0;
+        function resizeAndPostSize() {
+            if (document.getElementById("content")) {
+                if (document.getElementById("content").scrollHeight != bodyHeight) {
+                    bodyHeight = document.getElementById("content").scrollHeight;
+                    window.parent.postMessage({height: bodyHeight}, "*");
+                }
+            }
+        }
+
+        var target = document.querySelector('body');
+
+        var observer = new MutationObserver(resizeAndPostSize);
+
+        var config = { attributes: true, subtree: true };
+
+        observer.observe(target, config);
+        $(window).ready(function() {
+           $('#content').css("min-height", 0);
+           setTimeout(resizeAndPostSize, 0);
+        });
+        </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: 'IPv6 : packet forwarding'
+network_grading: false
+order: 36
+problems:
+    test:
+        shuffle-feedback: ''
+        header: The first packet was captured on an ingress interface of a router.
+            The second was captured on its egress interface after having been forwarded.
+            Can you infer the different fields of the forwarded  packet ?
+        type: network-trace
+        name: Packet forwarding
+        hide:
+            1:
+            - ipv6.plen
+            - ipv6.nxt
+            - ipv6.hlim
+            - ipv6.src
+            - ipv6.dst
+        exclude: {}
+        feedback:
+            ipv6.dst: A router never changes the Destination Address of the packets
+                that it forwards.
+            ipv6.hlim: A router always decrements the Hop Limit of the packets that
+                it forwards.
+            ipv6.nxt: A router never changes the Next Header of the packets that it
+                forwards.
+            ipv6.plen: A router never changes the payload length of the packets that
+                it forwards.
+            ipv6.src: A router never changes the Source Address of the packets that
+                it forwards.
+        redact: {}
+        trace: ethb.pcap.xml
+        shuffle: false
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

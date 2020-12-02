@@ -1,0 +1,22 @@
+ ssh -c "3des-cbc,aes128-gcm@openssh.com"  ::1
+test@::1's password: 
+Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 4.15.0-66-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+
+ * Canonical Livepatch is available for installation.
+   - Reduce system reboots and improve kernel security. Activate at:
+     https://ubuntu.com/livepatch
+
+0 packages can be updated.
+0 updates are security updates.
+
+*** /dev/sda1 will be checked for errors at next reboot ***
+
+Last login: Mon Nov  4 08:57:19 2019 from ::1
+test@obo-minipc:~$ exit
+logout
+Connection to ::1 closed.

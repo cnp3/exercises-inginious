@@ -1,0 +1,83 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- ipv6
+context: |-
+    The network below contains six routers. Each of these routers is configured with a single IPv6 address:
+
+     - ``R0`` uses ``2001:0::1/32``
+     - ``R1`` uses ``2001:1::1/32``
+     - ``R2`` uses ``2001:2::1/32``
+     - ``R3`` uses ``2001:3::1/32``
+     - ``R4`` uses ``2001:4::1/32``
+     - ``R5`` uses ``2001:5::1/32``
+
+    Remember that the binary notation for IPv6 address 2001:5::1 is ``0010 0000 0000 0001 0000 0000 0000 0101 .... 0001``
+
+    The network has been configured with the forwarding tables shown below.
+
+    .. image:: https://inginious.org/course/cnp3/q-ipv6-static-3/figure.png
+        :width: 60%
+    .. raw:: html
+
+        <script>
+        $('#content').css("min-height", 0);
+
+        bodyHeight = 0;
+        function resizeAndPostSize() {
+            if (document.getElementById("content")) {
+                if (document.getElementById("content").scrollHeight != bodyHeight) {
+                    bodyHeight = document.getElementById("content").scrollHeight;
+                    window.parent.postMessage({height: bodyHeight}, "*");
+                }
+            }
+        }
+
+        var target = document.querySelector('body');
+
+        var observer = new MutationObserver(resizeAndPostSize);
+
+        var config = { attributes: true, subtree: true };
+
+        observer.observe(target, config);
+        $(window).ready(function() {
+           $('#content').css("min-height", 0);
+           setTimeout(resizeAndPostSize, 0);
+        });
+        </script>
+environment: pyjavacpp
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: IPv6 paths in a network
+network_grading: false
+problems:
+    q1:
+        type: code_single_line
+        header: |-
+            What is the path followed by IPv6 packets from ``R0`` to ``R5`` ?
+
+            Provide your answer as a sequence of routers separated by ``-``.
+        optional: 'on'
+        name: Path from R0 to R5
+        default: ''
+    q2:
+        default: ''
+        type: code_single_line
+        header: |-
+            What is the path followed by IPv6 packets from ``R5`` to ``R1`` ?
+
+            Provide your answer as a sequence of routers separated by ``-``.
+        name: Path from R5 to R1
+        optional: 'on'
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

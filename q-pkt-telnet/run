@@ -1,0 +1,46 @@
+#!/bin/python3
+# O. Bonaventure, 2019
+
+from inginious import input, feedback, rst
+import array
+
+a1 = (input.get_input("q1")).strip()
+a2= (input.get_input("q2")).strip()
+grade=0
+
+# username is test, password te$t1234
+
+if(a1=="test"):
+  feedback.set_problem_result("success","q1")
+  grade+=50
+  feedback.set_problem_feedback("Correct","q1")
+else:
+  if(a1=="tteesstt"):
+    feedback.set_problem_result("failed","q1")
+    grade+=25
+    feedback.set_problem_feedback("Check again the packet trace. The client sends her username after having received the login: prompt from the server. The client terminates the username with \\r and \\n that are not part of the username. However, note that the server echoes the characters typed by the client.","q1")
+  else:
+    if(a1=="t" or a1=="te" or a1=="tes"):
+      feedback.set_problem_result("failed","q1")
+      grade+=20
+      feedback.set_problem_feedback("Check again the packet trace. The client sends her username after having received the login: prompt from the server. The client terminates the username with \\r and \\n that are not part of the username.","q1")
+    else:
+      feedback.set_problem_result("failed","q1")
+      feedback.set_problem_feedback("Check again the packet trace. The client sends her username after having received the login: prompt from the server. The client terminates the username with \\r and \\n that are not part of the username.","q1")
+    
+    
+    
+if(a2=="te$t1234"):
+  feedback.set_problem_result("success","q2")
+  grade+=50
+  feedback.set_problem_feedback("Correct","q2")
+else:
+  feedback.set_problem_result("failed","q2")
+  feedback.set_problem_feedback("Check again the packet trace. The client terminates the password with \\r and \\n that are not part of the username. There are eight caracteres in this password.","q2")
+  
+if(grade==100):
+  feedback.set_global_result("success")
+else:
+  feedback.set_global_result("failed")
+      
+feedback.set_grade(grade)

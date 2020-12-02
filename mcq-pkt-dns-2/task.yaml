@@ -1,0 +1,91 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- dns
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: DNS packets
+network_grading: false
+problems:
+    q1:
+        choices:
+        -   valid: true
+            feedback: Indeed, the query may be found in the fourth packet and the
+                response in the sixth one. The other packets of the trace are part
+                of the TCP protocol
+            text: The packet trace contains one DNS query and one DNS response
+        -   text: The packet trace contains 10 DNS messages
+            feedback: This is incorrect, most of the packets in the trace are TCP
+                packets. Only two DNS messages are exchanged.
+        -   valid: true
+            text: The query requested an IPv6 address (type `AAAA`)
+        -   text: The query requested an alias (type `CNAME`)
+            feedback: The response contains a CNAME, but the request was for an `AAAA`
+                record.
+        -   feedback: This is incorrect, the response contains three records, two
+                `CNAME` and one `AAAA`.
+            text: The response contains a single `AAAA` record
+        -   text: The query was sent to a DNS resolver.
+            valid: true
+            feedback: This is correct as the `Flags` indicate that the `Recursion
+                Desired` flag was set.
+        -   feedback: This is  incorrect as the `Flags` indicate that the `Recursion
+                Desired` flag was set.
+            text: The query was sent to an authoritative DNS server.
+        type: multiple_choice
+        header: |-
+            Although DNS is mainly used over UDP, there are some situations where it can be used over TCP as well. The attached `packet trace <mcq-pkt-dns-2/dns-trace-29365.pcap>`_ contains a TCP connection that was used by `dig` to interact with the Domain Name System.
+
+            Download the packet trace and select the affirmations below that are valid.
+        name: A closer look at DNS over TCP
+        limit: 6
+        multiple: true
+    trace:
+        exclude:
+        - tcp.flags
+        - tcp.options
+        trace: dns-trace.xml
+        redact: {}
+        feedback: {}
+        name: The packet trace
+        shuffle-feedback: ''
+        header: ''
+        type: network-trace
+        hide: {}
+        shuffle: false
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

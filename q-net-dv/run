@@ -1,0 +1,50 @@
+#!/bin/python3
+
+
+from inginious import input, feedback
+
+#R0: expected R0:0,R1:1,R2:2,R3:1,R4:2,R5:2 (q1)
+#R4: expected R0:2,R1:2,R2:1,R3:1,R4:0,R5:1 (q2)
+
+def check(correct,question):
+	answer = input.get_input(question)
+	answer = ''.join(answer.split()) # remove spaces
+	answer = answer.upper()  # to upper case
+	grade=0
+	count=0
+	response=""
+	for pair in correct:
+		if pair in answer:
+			count=count+1
+		else:
+			router,dist=pair.split(':')
+			response+="Your answer for destination "+router+" is incorrect. \n"
+	if (count==len(correct)):
+		feedback.set_problem_result("success",question)
+		feedback.set_problem_feedback("Correct",question)
+		grade+=50
+	else:
+		feedback.set_problem_result("failed",question)
+		response+="Your answer to the this question is incorrect.\n"
+		feedback.set_problem_feedback(response,question)
+	return grade
+        
+
+
+answer1=["R0:0", "R1:1","R2:2","R3:1","R4:2","R5:2"];
+answer2=["R0:2", "R1:2","R2:1","R3:1","R4:0","R5:1"];
+grade=0
+
+
+grade+=check(answer1,"q1") 
+grade+=check(answer2,"q2") 
+
+
+feedback.set_grade(grade) 
+
+if grade==100:
+	feedback.set_global_result("success")
+else:
+	feedback.set_global_result("failed")
+#end
+    

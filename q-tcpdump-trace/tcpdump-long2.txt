@@ -1,0 +1,12 @@
+What happened in this trace
+
+- launched chrome
+- launched firefox
+- visited github.com
+- visited ietf.org
+- sent an email
+- downloaded email over POP
+
+Chrome seems to send lots of DNS requests for strange reasons
+
+Probably a lot of other background noise in the trace (I cleaned multicast and other stuff)

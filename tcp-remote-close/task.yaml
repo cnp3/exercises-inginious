@@ -1,0 +1,76 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- tcp
+context: |-
+    .. raw:: html
+
+        <script>
+        $('#content').css("min-height", 0);
+
+        bodyHeight = 0;
+        function resizeAndPostSize() {
+            if (document.getElementById("content")) {
+                if (document.getElementById("content").scrollHeight != bodyHeight) {
+                    bodyHeight = document.getElementById("content").scrollHeight;
+                    window.parent.postMessage({height: bodyHeight}, "*");
+                }
+            }
+        }
+
+        var target = document.querySelector('body');
+
+        var observer = new MutationObserver(resizeAndPostSize);
+
+        var config = { attributes: true, subtree: true };
+
+        observer.observe(target, config);
+        $(window).ready(function() {
+           $('#content').css("min-height", 0);
+           setTimeout(resizeAndPostSize, 0);
+        });
+        </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: TCP connection release
+network_grading: false
+problems:
+    trace:
+        redact:
+        - tcp.flags
+        header: In this trace, the local host issued close immediately after having
+            accepted the connection. Can you fill the missing information in the last
+            four TCP segments ?
+        exclude:
+        - tcp.flags.str
+        hide:
+            3:
+            - tcp.seq
+            - tcp.ack
+            4:
+            - tcp.seq
+            - tcp.ack
+            5:
+            - tcp.seq
+            - tcp.ack
+        name: Connection release
+        trace: trace.xml
+        feedback:
+        -   tcp.seq: The FIN fag consumes one sequence number.
+        -   tcp.ack: Remember that the FIN flag consumes one sequence number.
+        type: network-trace
+        shuffle-feedback: ''
+        shuffle: false
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

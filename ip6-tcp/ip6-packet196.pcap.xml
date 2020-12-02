@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="pdml2html.xsl"?>
+<!-- You can find pdml2html.xsl in /Applications/Wireshark.app/Contents/Resources/share/wireshark or at https://code.wireshark.org/review/gitweb?p=wireshark.git;a=blob_plain;f=pdml2html.xsl. -->
+<pdml version="0" creator="wireshark/3.0.1" time="Thu May 16 16:35:24 2019" capture_file="ip6-packet196.pcap">
+<packet>
+  <proto name="geninfo" pos="0" showname="General information" size="121">
+    <field name="num" pos="0" show="1" showname="Number" value="1" size="121"/>
+    <field name="len" pos="0" show="121" showname="Frame Length" value="79" size="121"/>
+    <field name="caplen" pos="0" show="121" showname="Captured Length" value="79" size="121"/>
+    <field name="timestamp" pos="0" show="Nov 20, 2018 16:59:54.699139000 CET" showname="Captured Time" value="1542729594.699139000" size="121"/>
+  </proto>
+  <proto name="frame" showname="Frame 1: 121 bytes on wire (968 bits), 121 bytes captured (968 bits)" size="121" pos="0">
+    <field name="filtered" value="frame" />
+  </proto>
+  <proto name="eth" showname="Ethernet II, Src: 00:1b:21:38:e9:78, Dst: 68:5b:35:ad:aa:e1" size="14" pos="0">
+    <field name="filtered" value="eth" />
+  </proto>
+  <proto name="ipv6" showname="Internet Protocol Version 6, Src: 2a03:2880:f01b:1:face:b00c::1, Dst: 2001:6a8:308f:2:48e9:95ae:3a92:922d" size="40" pos="14">
+    <field name="ipv6.version" showname="0110 .... = Version: 6" size="1" pos="14" show="6" value="6" unmaskedvalue="60"/>
+    <field name="ip.version" showname="0110 .... = Version: 6 [This field makes the filter match on &quot;ip.version == 6&quot; possible]" hide="yes" size="1" pos="14" show="6" value="6" unmaskedvalue="60"/>
+    <field name="ipv6.tclass" showname=".... 0000 0000 .... .... .... .... .... = Traffic Class: 0x00 (DSCP: CS0, ECN: Not-ECT)" size="4" pos="14" show="0x00000000" value="0" unmaskedvalue="60000000">
+      <field name="ipv6.tclass.dscp" showname=".... 0000 00.. .... .... .... .... .... = Differentiated Services Codepoint: Default (0)" size="4" pos="14" show="0" value="0" unmaskedvalue="60000000"/>
+      <field name="ipv6.tclass.ecn" showname=".... .... ..00 .... .... .... .... .... = Explicit Congestion Notification: Not ECN-Capable Transport (0)" size="4" pos="14" show="0" value="0" unmaskedvalue="60000000"/>
+    </field>
+    <field name="ipv6.flow" showname=".... .... .... 0000 0000 0000 0000 0000 = Flow Label: 0x00000" size="4" pos="14" show="0x00000000" value="0" unmaskedvalue="60000000"/>
+    <field name="ipv6.plen" showname="Payload Length: 67" size="2" pos="18" show="67" value="0043"/>
+    <field name="ipv6.nxt" showname="Next Header: TCP (6)" size="1" pos="20" show="6" value="06"/>
+    <field name="ipv6.hlim" showname="Hop Limit: 53" size="1" pos="21" show="53" value="35"/>
+    <field name="ipv6.src" showname="Source: 2a03:2880:f01b:1:face:b00c::1" size="16" pos="22" show="2a03:2880:f01b:1:face:b00c::1" value="2a032880f01b0001faceb00c00000001"/>
+    <field name="ipv6.addr" showname="Source or Destination Address: 2a03:2880:f01b:1:face:b00c::1" hide="yes" size="16" pos="22" show="2a03:2880:f01b:1:face:b00c::1" value="2a032880f01b0001faceb00c00000001"/>
+    <field name="ipv6.src_host" showname="Source Host: 2a03:2880:f01b:1:face:b00c::1" hide="yes" size="16" pos="22" show="2a03:2880:f01b:1:face:b00c::1" value="2a032880f01b0001faceb00c00000001"/>
+    <field name="ipv6.host" showname="Source or Destination Host: 2a03:2880:f01b:1:face:b00c::1" hide="yes" size="16" pos="22" show="2a03:2880:f01b:1:face:b00c::1" value="2a032880f01b0001faceb00c00000001"/>
+    <field name="ipv6.dst" showname="Destination: 2001:6a8:308f:2:48e9:95ae:3a92:922d" size="16" pos="38" show="2001:6a8:308f:2:48e9:95ae:3a92:922d" value="200106a8308f000248e995ae3a92922d"/>
+    <field name="ipv6.addr" showname="Source or Destination Address: 2001:6a8:308f:2:48e9:95ae:3a92:922d" hide="yes" size="16" pos="38" show="2001:6a8:308f:2:48e9:95ae:3a92:922d" value="200106a8308f000248e995ae3a92922d"/>
+    <field name="ipv6.dst_host" showname="Destination Host: 2001:6a8:308f:2:48e9:95ae:3a92:922d" hide="yes" size="16" pos="38" show="2001:6a8:308f:2:48e9:95ae:3a92:922d" value="200106a8308f000248e995ae3a92922d"/>
+    <field name="ipv6.host" showname="Source or Destination Host: 2001:6a8:308f:2:48e9:95ae:3a92:922d" hide="yes" size="16" pos="38" show="2001:6a8:308f:2:48e9:95ae:3a92:922d" value="200106a8308f000248e995ae3a92922d"/>
+  </proto>
+  <proto name="tcp" showname="Transmission Control Protocol, Src Port: 443, Dst Port: 62416, Seq: 2730211067, Ack: 1456042411, Len: 35" size="32" pos="54">
+    <field name="tcp.srcport" showname="Source Port: 443" size="2" pos="54" show="443" value="01bb"/>
+    <field name="tcp.dstport" showname="Destination Port: 62416" size="2" pos="56" show="62416" value="f3d0"/>
+    <field name="tcp.port" showname="Source or Destination Port: 443" hide="yes" size="2" pos="54" show="443" value="01bb"/>
+    <field name="tcp.port" showname="Source or Destination Port: 62416" hide="yes" size="2" pos="56" show="62416" value="f3d0"/>
+    <field name="tcp.stream" showname="Stream index: 0" size="0" pos="54" show="0"/>
+    <field name="tcp.len" showname="TCP Segment Len: 35" size="1" pos="66" show="35" value="80"/>
+    <field name="tcp.seq" showname="Sequence number: 2730211067" size="4" pos="58" show="2730211067" value="a2bbb6fb"/>
+    <field name="tcp.nxtseq" showname="Next sequence number: 2730211102" size="0" pos="54" show="2730211102"/>
+    <field name="tcp.ack" showname="Acknowledgment number: 1456042411" size="4" pos="62" show="1456042411" value="56c971ab"/>
+    <field name="tcp.hdr_len" showname="1000 .... = Header Length: 32 bytes (8)" size="1" pos="66" show="32" value="80"/>
+    <field name="tcp.flags" showname="Flags: 0x018 (PSH, ACK)" size="2" pos="66" show="0x00000018" value="18" unmaskedvalue="8018">
+      <field name="tcp.flags.res" showname="000. .... .... = Reserved: Not set" size="1" pos="66" show="0" value="0" unmaskedvalue="80"/>
+      <field name="tcp.flags.ns" showname="...0 .... .... = Nonce: Not set" size="1" pos="66" show="0" value="0" unmaskedvalue="80"/>
+      <field name="tcp.flags.cwr" showname=".... 0... .... = Congestion Window Reduced (CWR): Not set" size="1" pos="67" show="0" value="0" unmaskedvalue="18"/>
+      <field name="tcp.flags.ecn" showname=".... .0.. .... = ECN-Echo: Not set" size="1" pos="67" show="0" value="0" unmaskedvalue="18"/>
+      <field name="tcp.flags.urg" showname=".... ..0. .... = Urgent: Not set" size="1" pos="67" show="0" value="0" unmaskedvalue="18"/>
+      <field name="tcp.flags.ack" showname=".... ...1 .... = Acknowledgment: Set" size="1" pos="67" show="1" value="1" unmaskedvalue="18"/>
+      <field name="tcp.flags.push" showname=".... .... 1... = Push: Set" size="1" pos="67" show="1" value="1" unmaskedvalue="18"/>
+      <field name="tcp.flags.reset" showname=".... .... .0.. = Reset: Not set" size="1" pos="67" show="0" value="0" unmaskedvalue="18"/>
+      <field name="tcp.flags.syn" showname=".... .... ..0. = Syn: Not set" size="1" pos="67" show="0" value="0" unmaskedvalue="18"/>
+      <field name="tcp.flags.fin" showname=".... .... ...0 = Fin: Not set" size="1" pos="67" show="0" value="0" unmaskedvalue="18"/>
+      <field name="tcp.flags.str" showname="TCP Flags: \xc2\xb7\xc2\xb7\xc2\xb7\xc2\xb7\xc2\xb7\xc2\xb7\xc2\xb7AP\xc2\xb7\xc2\xb7\xc2\xb7" size="2" pos="66" show="\xc2\xb7\xc2\xb7\xc2\xb7\xc2\xb7\xc2\xb7\xc2\xb7\xc2\xb7AP\xc2\xb7\xc2\xb7\xc2\xb7" value="8018"/>
+    </field>
+    <field name="tcp.window_size_value" showname="Window size value: 422" size="2" pos="68" show="422" value="01a6"/>
+    <field name="tcp.window_size" showname="Calculated window size: 422" size="2" pos="68" show="422" value="01a6"/>
+    <field name="tcp.window_size_scalefactor" showname="Window size scaling factor: -1 (unknown)" size="2" pos="68" show="-1" value="01a6"/>
+    <field name="tcp.checksum" showname="Checksum: 0xf0ff [unverified]" size="2" pos="70" show="0x0000f0ff" value="f0ff"/>
+    <field name="tcp.checksum.status" showname="Checksum Status: Unverified" size="0" pos="70" show="2"/>
+    <field name="tcp.urgent_pointer" showname="Urgent pointer: 0" size="2" pos="72" show="0" value="0000"/>
+    <field name="tcp.options" showname="Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps" size="12" pos="74" show="01:01:08:0a:78:b9:bd:42:47:3e:32:18" value="0101080a78b9bd42473e3218">
+      <field name="tcp.options.nop" showname="TCP Option - No-Operation (NOP)" size="1" pos="74" show="01" value="01">
+        <field name="tcp.option_kind" showname="Kind: No-Operation (1)" size="1" pos="74" show="1" value="01"/>
+      </field>
+      <field name="tcp.options.nop" showname="TCP Option - No-Operation (NOP)" size="1" pos="75" show="01" value="01">
+        <field name="tcp.option_kind" showname="Kind: No-Operation (1)" size="1" pos="75" show="1" value="01"/>
+      </field>
+      <field name="tcp.options.timestamp" showname="TCP Option - Timestamps: TSval 2025438530, TSecr 1195258392" size="10" pos="76" show="08:0a:78:b9:bd:42:47:3e:32:18" value="080a78b9bd42473e3218">
+        <field name="tcp.option_kind" showname="Kind: Time Stamp Option (8)" size="1" pos="76" show="8" value="08"/>
+        <field name="tcp.option_len" showname="Length: 10" size="1" pos="77" show="10" value="0a"/>
+        <field name="tcp.options.timestamp.tsval" showname="Timestamp value: 2025438530" size="4" pos="78" show="2025438530" value="78b9bd42"/>
+        <field name="tcp.options.timestamp.tsecr" showname="Timestamp echo reply: 1195258392" size="4" pos="82" show="1195258392" value="473e3218"/>
+      </field>
+    </field>
+    <field name="tcp.analysis" showname="SEQ/ACK analysis" size="0" pos="54" show="" value="">
+      <field name="tcp.analysis.bytes_in_flight" showname="Bytes in flight: 35" size="0" pos="54" show="35"/>
+      <field name="tcp.analysis.push_bytes_sent" showname="Bytes sent since last PSH flag: 35" size="0" pos="54" show="35"/>
+    </field>
+    <field name="" show="Timestamps" size="0" pos="54">
+      <field name="tcp.time_relative" showname="Time since first frame in this TCP stream: 0.000000000 seconds" size="0" pos="54" show="0.000000000"/>
+      <field name="tcp.time_delta" showname="Time since previous frame in this TCP stream: 0.000000000 seconds" size="0" pos="54" show="0.000000000"/>
+    </field>
+    <field name="tcp.payload" showname="TCP payload (35 bytes)" size="35" pos="86" show="17:03:03:00:1e:bd:9d:48:61:2e:54:13:b7:ff:82:f0:d3:c0:20:f9:2b:53:88:db:e2:58:77:c1:69:dc:e9:2d:43:8b:6d" value="170303001ebd9d48612e5413b7ff82f0d3c020f92b5388dbe25877c169dce92d438b6d"/>
+  </proto>
+  <proto name="tls" showname="Transport Layer Security" size="35" pos="86">
+    <field name="filtered" value="tls" />
+  </proto>
+</packet>
+
+
+</pdml>

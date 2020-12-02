@@ -1,0 +1,328 @@
+#!/bin/python3
+
+# Olivier Bonaventure, 2019
+
+from inginious import input, feedback
+import re
+
+
+def removeSpaces(string):
+    return re.sub('[\s+]', '', string)
+
+
+def validState(string):
+    s=removeSpaces(string.upper())
+    return ( s=='BLOCKED' or s=='ROOT' or s=='DESIGNATED')
+
+def validBPDU(string):
+    if re.search(r'R=(\d+),C=(\d+),T=(\d+)', string, re.I):
+        return True
+    else:
+        return False
+
+def getR(string):
+    s= (removeSpaces(string.upper()))
+    r=re.search(r'R=(\d+),.*', string, re.I)
+    if r:
+        return int(r.group(1))
+    else:
+        return None
+    
+def getC(string):
+    s= (removeSpaces(string.upper()))
+    r=re.search(r'.*,C=(\d+),.*', string, re.I)
+    if r:
+        return int(r.group(1))
+    else:
+        return None
+    
+def getT(string):
+    s= (removeSpaces(string.upper()))
+    r=re.search(r'.*T=(\d+)', string, re.I)
+    if r:
+        return int(r.group(1))
+    else:
+        return None
+
+# answer: 3
+    
+def checkQ1(answer):
+    s=removeSpaces(answer)
+    if not s.isdigit():
+        feedback.set_problem_result("failed", "q1")
+        response = "Your answer is not an integer"
+        feedback.set_problem_feedback(response, "q1")
+        return 0
+
+    if int(s)==3:
+        feedback.set_problem_result("success", "q1")
+        feedback.set_problem_feedback("Correct", "q1")
+        return 20
+        
+    else:
+        feedback.set_problem_result("failed", "q1")
+        response = "Once the network has converged, the root switch is always the one with the lowest identifier."
+        feedback.set_problem_feedback(response, "q1")
+        return 0
+        
+# expected answer: R=3,C=0,T=3
+    
+def checkQ2(answer):
+    response = ""
+    bpdu=removeSpaces(answer)
+    if not validBPDU(bpdu):
+        feedback.set_problem_result("failed", "q2")
+        response += "The format of your BPDU is incorect. Please encode it as R=123,C=456,T=7.9\n"
+        feedback.set_problem_feedback(response, "q2")
+        return 0
+
+    errors = 0
+    grade = 0
+    if(getR(bpdu)!=3):
+        errors+=1
+        response+="Check the root identifier of your BPDU.\n"
+
+    if(getC(bpdu)!=0):
+        errors+=1
+        response+="Check the cost of your BPDU.\n"
+
+    if(getT(bpdu)!=3):
+        errors+=1
+        response+="Check the transmitter identifier of your BPDU.\n"
+
+    if(errors > 0):
+        feedback.set_problem_result("failed", "q2")
+        response += "Your answer to this question is incorrect.\n"
+        feedback.set_problem_feedback(response, "q2")
+    else:
+        feedback.set_problem_result("success", "q2")
+        feedback.set_problem_feedback("Correct", "q2")
+        grade += 20
+
+    return grade
+
+
+# expected answer: R=3,C=2,T=4
+    
+def checkQ3(answer):
+    response = ""
+    bpdu=removeSpaces(answer)
+    if not validBPDU(bpdu):
+        feedback.set_problem_result("failed", "q3")
+        response += "The format of your BPDU is incorect. Please encode it as R=123,C=456,T=7\n"
+        feedback.set_problem_feedback(response, "q3")
+        return 0
+
+    errors = 0
+    grade = 0
+    if(getR(bpdu)!=3):
+        errors+=1
+        response+="Check the root identifier of your BPDU.\n"
+
+    if(getC(bpdu)!=2):
+        errors+=1
+        response+="Check the cost of your BPDU.\n"
+
+    if(getT(bpdu)!=4):
+        errors+=1
+        response+="Check the transmitter identifier of your BPDU.\n"
+
+    if(errors > 0):
+        feedback.set_problem_result("failed", "q3")
+        response += "Your answer to this question is incorrect.\n"
+        feedback.set_problem_feedback(response, "q3")
+    else:
+        feedback.set_problem_result("success", "q3")
+        feedback.set_problem_feedback("Correct", "q3")
+        grade += 20
+
+    return grade
+
+
+# expected answer: R=3,C=1,T=7
+    
+def checkQ4(answer):
+    response = ""
+    bpdu=removeSpaces(answer)
+    if not validBPDU(bpdu):
+        feedback.set_problem_result("failed", "q4")
+        response += "The format of your BPDU is incorect. Please encode it as R=123,C=456,T=7\n"
+        feedback.set_problem_feedback(response, "q4")
+        return 0
+
+    errors = 0
+    grade = 0
+    if(getR(bpdu)!=3):
+        errors+=1
+        response+="Check the root identifier of your BPDU.\n"
+
+    if(getC(bpdu)!=1):
+        errors+=1
+        response+="Check the cost of your BPDU.\n"
+
+    if(getT(bpdu)!=7):
+        errors+=1
+        response+="Check the transmitter identifier of your BPDU.\n"
+
+    if(errors > 0):
+        feedback.set_problem_result("failed", "q4")
+        response += "Your answer to this question is incorrect.\n"
+        feedback.set_problem_feedback(response, "q4")
+    else:
+        feedback.set_problem_result("success", "q4")
+        feedback.set_problem_feedback("Correct", "q4")
+        grade += 20
+
+    return grade
+
+# expected answer: R=3,C=1,T=9
+    
+def checkQ5(answer):
+    response = ""
+    bpdu=removeSpaces(answer)
+    if not validBPDU(bpdu):
+        feedback.set_problem_result("failed", "q5")
+        response += "The format of your BPDU is incorect. Please encode it as R=123,C=456,T=7\n"
+        feedback.set_problem_feedback(response, "q5")
+        return 0
+
+    errors = 0
+    grade = 0
+    if(getR(bpdu)!=3):
+        errors+=1
+        response+="Check the root identifier of your BPDU.\n"
+
+    if(getC(bpdu)!=1):
+        errors+=1
+        response+="Check the cost of your BPDU.\n"
+
+    if(getT(bpdu)!=9):
+        errors+=1
+        response+="Check the transmitter identifier of your BPDU.\n"
+
+    if(errors > 0):
+        feedback.set_problem_result("failed", "q5")
+        response += "Your answer to this question is incorrect.\n"
+        feedback.set_problem_feedback(response, "q5")
+    else:
+        feedback.set_problem_result("success", "q5")
+        feedback.set_problem_feedback("Correct", "q5")
+        grade += 20
+
+    return grade
+
+# answer: 4
+    
+def checkQ6(answer):
+    s=removeSpaces(answer)
+    if not s.isdigit():
+        feedback.set_problem_result("failed", "q6")
+        response = "Your answer is not an integer"
+        feedback.set_problem_feedback(response, "q6")
+        return 0
+
+    if int(s)==4:
+        feedback.set_problem_result("success", "q6")
+        feedback.set_problem_feedback("Correct", "q6")
+        return 20
+        
+    else:
+        response=""
+        if int(s)==5 or int(s)==7:
+            response+="Remember that all the ports of the Root switch are in the Designated state and that each switch has only one Root port."
+        feedback.set_problem_result("failed", "q6")
+        response = "Your answer is incorrect."
+        feedback.set_problem_feedback(response, "q6")
+        return 0
+
+# answer: 2
+    
+def checkQ7(answer):
+    s=removeSpaces(answer.upper())
+    if not s.isdigit():
+        feedback.set_problem_result("failed", "q7")
+        response = "Your answer is not an integer"
+        feedback.set_problem_feedback(response, "q7")
+        return 0
+
+    if int(s)==2:
+        feedback.set_problem_result("success", "q7")
+        feedback.set_problem_feedback("Correct", "q7")
+        return 20
+        
+    else:
+        response=""
+        if int(s)==4 :
+            response+="In this network, there are two cycles that must be broken  by the Spanning Tree. If the two port attached to a given link are Blocked, hosts attached to this link cannot send by frame."
+        feedback.set_problem_result("failed", "q7")
+        response = "Your answer is incorrect."
+        feedback.set_problem_feedback(response, "q7")
+        return 0
+
+
+    # answer: Root
+    
+def checkQ8(answer):
+    s=removeSpaces(answer.upper())
+    if not validState(s):
+        feedback.set_problem_result("failed", "q8")
+        response = "Your answer is not a port state"
+        feedback.set_problem_feedback(response, "q8")
+        return 0
+
+    if s=='ROOT':
+        feedback.set_problem_result("success", "q8")
+        feedback.set_problem_feedback("Correct", "q8")
+        return 20
+        
+    else:
+        feedback.set_problem_result("failed", "q8")
+        response = "Your answer is incorrect."
+        feedback.set_problem_feedback(response, "q8")
+        return 0
+
+# answer: Blocked
+    
+def checkQ9(answer):
+    s=removeSpaces(answer.upper())
+    if not validState(s):
+        feedback.set_problem_result("failed", "q9")
+        response = "Your answer is not a port state"
+        feedback.set_problem_feedback(response, "q9")
+        return 0
+
+    if s=='BLOCKED':
+        feedback.set_problem_result("success", "q9")
+        feedback.set_problem_feedback("Correct", "q9")
+        return 20
+        
+    else:
+        feedback.set_problem_result("failed", "q9")
+        response = "Your answer is incorrect."
+        feedback.set_problem_feedback(response, "q9")
+        return 0
+
+
+    
+
+
+grade=0
+grade += checkQ1(input.get_input("q1"))
+grade += checkQ2(input.get_input("q2"))
+grade += checkQ3(input.get_input("q3"))
+grade += checkQ4(input.get_input("q4"))
+grade += checkQ5(input.get_input("q5"))
+grade += checkQ6(input.get_input("q6"))
+grade += checkQ7(input.get_input("q7"))
+grade += checkQ8(input.get_input("q8"))
+grade += checkQ9(input.get_input("q9"))
+
+
+
+feedback.set_grade(grade/(1.8))
+
+if grade ==180:
+    feedback.set_global_result("success")
+else:
+    feedback.set_global_result("failed")
+# end

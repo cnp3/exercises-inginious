@@ -1,0 +1,44 @@
+#!/bin/python3
+
+
+from inginious import input, feedback, rst
+
+# random input
+n = int(input.get_input("@random")[0] * 17 + 3) 
+
+def isfloat(value):
+  try:
+    float(value)
+    return True
+  except:
+    return False
+
+  
+answer = int(input.get_input("q1"))
+sol=(2**n)-1
+grade=0
+
+if(isfloat(answer)):
+  if(answer==sol):
+    feedback.set_problem_result("success","q1")
+    feedback.set_problem_feedback("Correct","q1")
+    grade+=100
+  else:
+    feedback.set_problem_result("failed","q1")
+    response="Your answer is incorrect.\n"
+    if(answer==2**n):
+      response+="Remember that the go-back-n sender cannot transmit all the 2^n sequences number in a row. /n"
+    if(answer==2**(n-1)):
+      response+="Do not confuse go-back-n and selective repeat. Selective repeat needs to use a smaller window because the receiver stores out-of-order frames in its buffers./n"
+      
+    feedback.set_problem_feedback(response,"q1")
+else:
+  feedback.set_problem_result("failed","q1")
+  feedback.set_problem_feedback("Your answer is not a number","q1")
+  
+
+feedback.set_grade(grade)        
+if(grade>50):
+  feedback.set_global_result("success")
+else:
+  feedback.set_global_result("failed")

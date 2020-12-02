@@ -1,0 +1,79 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- ipv6
+context: |-
+    Consider the network shown in the figure below. In this network, the following addresses are used.
+
+      - host ``A`` : ``2001:db8:1341:1::A`` and its default route points to ``2001:db8:1341:1::1``
+      - host ``B`` : ``2001:db8:1341:4::B`` and its default route points to ``2001:db8:1341:4::4``
+
+    The routers have one address inside each network :
+
+     - router ``R1`` uses address ``2001:db8:1341:1::1`` on its West interface, address ``2001:db8:1341:12::1`` on its East interface and address ``2001:db8:1341:13::1`` on its South interface
+     - router ``R2`` uses address ``2001:db8:1341:12::2`` on its West interface, address ``2001:db8:1341:23::2`` on its South-West interface and address ``2001:db8:1341:24::2`` on its South interface.
+     - router ``R3`` uses address ``2001:db8:1341:34::3`` on its East interface, address ``2001:db8:1341:23::3`` on its North-East interface and address ``2001:db8:1341:13::3`` on its North interface
+     - router ``R4`` uses address ``2001:db8:1341:34::4`` on its West interface, address ``2001:db8:1341:24::4`` on its North interface and address ``2001:db8:1341:4::4`` on its East interface
+
+    The forwarding paths used in a network depend on the forwarding tables installed in the network nodes. Sometimes, these forwarding tables must be configured manually.
+
+    ..  image:: https://inginious.org/course/cnp3/q-ipv6-static-2/figure.png
+        :width: 60%
+
+    .. raw:: html
+
+        <script>
+        $('#content').css("min-height", 0);
+
+        bodyHeight = 0;
+        function resizeAndPostSize() {
+            if (document.getElementById("content")) {
+                if (document.getElementById("content").scrollHeight != bodyHeight) {
+                    bodyHeight = document.getElementById("content").scrollHeight;
+                    window.parent.postMessage({height: bodyHeight}, "*");
+                }
+            }
+        }
+
+        var target = document.querySelector('body');
+
+        var observer = new MutationObserver(resizeAndPostSize);
+
+        var config = { attributes: true, subtree: true };
+
+        observer.observe(target, config);
+        $(window).ready(function() {
+           $('#content').css("min-height", 0);
+           setTimeout(resizeAndPostSize, 0);
+        });
+        </script>
+environment: pyjavacpp
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Paths in an IPv6 network
+network_grading: false
+problems:
+    q1:
+        type: code_single_line
+        header: 'What is the path from ``A`` to ``B`` ? Provide your answer as ``A-Rx-Ry-B`` '
+        optional: 'on'
+        name: Path from A to B
+        default: ''
+    q2:
+        default: ''
+        type: code_single_line
+        header: What is the path from ``B`` to ``A`` ? Provide your answer as ``B-Rx-Ry-A``
+        name: Path from B to A
+        optional: 'on'
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

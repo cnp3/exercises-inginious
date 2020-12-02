@@ -1,0 +1,67 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- dns
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: The DNS transaction identifier
+network_grading: false
+problems:
+    id:
+        feedback:
+            dns.id: The DNS transaction identifier of the response DNS messages contains
+                the transaction identifier found in the DNS request.
+        name: The DNS transaction identifier
+        shuffle-feedback: ''
+        header: The transaction identifier is an important part of the DNS header.
+            Could you propose the transaction identifier for the DNS response ? *Note
+            that your answer must be provided in hexadecimal format*
+        trace: dns-req.pdml
+        hide:
+            1:
+            - dns.id
+        exclude:
+        - geninfo.num
+        - geninfo.len
+        - geninfo.caplen
+        - geninfo.timestamp
+        - udp.checksum.status
+        redact: {}
+        type: network-trace
+        shuffle: false
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

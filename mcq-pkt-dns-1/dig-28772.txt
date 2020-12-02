@@ -1,0 +1,5 @@
+dig +bufsize=0 +noedns -t NS com @2400:cb00:2048:1::c629:d7a2
+
+; <<>> DiG 9.11.3-1ubuntu1.9-Ubuntu <<>> +bufsize=0 +noedns -t NS com @2400:cb00:2048:1::c629:d7a2
+;; global options: +cmd
+;; connection timed out; no servers could be reached

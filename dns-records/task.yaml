@@ -1,0 +1,61 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- dns
+contact_url: ''
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: DNS records
+network_grading: false
+problems:
+    q1:
+        choices:
+        -   valid: true
+            text: The `AAAA` record
+        -   feedback: This record is used to retrieve the IPv4 address associated
+                to a name.
+            text: The `A` record
+        -   feedback: This record is used to retrieve the name server that is responsible
+                for a given domain name.
+            text: The `NS` record.
+        -   feedback: This record is used to retrieve the mail server that is responsible
+                for a given domain name.
+            text: The `MX` record.
+        limit: 4
+        type: multiple_choice
+        header: Which of the following DNS Resource Records will you query to retrieve
+            the IPv6 address associated to a name ?
+        name: DNS records to retrieve IPv6 addresses
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

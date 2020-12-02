@@ -1,0 +1,102 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- ethernet
+context: |
+    .. raw:: html
+
+        <script>
+        $('#content').css("min-height", 0);
+
+        bodyHeight = 0;
+        function resizeAndPostSize() {
+            if (document.getElementById("content")) {
+                if (document.getElementById("content").scrollHeight != bodyHeight) {
+                    bodyHeight = document.getElementById("content").scrollHeight;
+                    window.parent.postMessage({height: bodyHeight}, "*");
+                }
+            }
+        }
+
+        var target = document.querySelector('body');
+
+        var observer = new MutationObserver(resizeAndPostSize);
+
+        var config = { attributes: true, subtree: true };
+
+        observer.observe(target, config);
+        $(window).ready(function() {
+           $('#content').css("min-height", 0);
+           setTimeout(resizeAndPostSize, 0);
+        });
+        </script>
+
+    With the 802.1d protocol, Ethernet switches exchange BPDUs that contain four
+    informations :
+
+     - the `Root identifier`
+     - the `Cost` to reach the root
+     - the `Transmitter identifier`
+
+    The third information contains two parts: the identifier of the switch that sent the BPDU and the identifier of the port where the BPDU has been sent. Each switch uses a unique identifier for each of its ports.
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Comparing BPDUs
+network_grading: false
+problems:
+    q1:
+        type: multiple_choice
+        header: |4
+               Select among the list below *all* the BPDUs that are better than ``[R=123,C=17,T=15.4]``
+        choices:
+        -   text: |
+                ``[R=123,C=11,T=16.9]``
+            feedback: |4
+                 The two BPDUs have the same Root, but this BPDU has a lower cost.
+            valid: true
+        -   feedback: |
+                This BPDU has a smaller root.
+            text: |
+                ``[R=122,C=21,T=19]``
+            valid: true
+        -   feedback: |
+                The two BPDUs have the same Root, the same cost but this BPDU has a lower Transmitter identifier.
+            text: |
+                ``[R=123,C=17,T=15.1]``
+            valid: true
+        -   valid: true
+            feedback: |
+                The two BPDUs have the same Root, the same cost but this BPDU has a lower Transmitter identifier.
+            text: '``[R=123,C=17,T=12.19]``'
+        -   text: |
+                ``[R=126,C=11,T=6.9]``
+            feedback: |
+                This BPDU has a smaller root identifier.
+        -   text: |4
+                 ``[R=123,C=21,T=19]``
+            feedback: |
+                This BPDU has the same root, but a higher cost.
+        -   feedback: |4
+                 The two BPDUs have the same Root, the same cost but this BPDU has a  higher Transmitter identifier.
+            text: |
+                ``[R=123,C=17,T=25.1]``
+        -   text: |4
+                 ``[R=123,C=17,T=22.19]``
+            feedback: |
+                The two BPDUs have the same Root, the same cost but this BPDU has a larger Transmitter identifier.
+        multiple: true
+        limit: 6
+        name: 'Which BPDUs are better '
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

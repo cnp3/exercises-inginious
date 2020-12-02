@@ -1,0 +1,152 @@
+nghttp -v -n -a --no-push --no-dep http://nghttp2.org/
+[  0.247] Connected
+[  0.248] send SETTINGS frame <length=18, flags=0x00, stream_id=0>
+          (niv=3)
+          [SETTINGS_MAX_CONCURRENT_STREAMS(0x03):100]
+          [SETTINGS_INITIAL_WINDOW_SIZE(0x04):65535]
+          [SETTINGS_ENABLE_PUSH(0x02):0]
+[  0.249] send HEADERS frame <length=31, flags=0x05, stream_id=1>
+          ; END_STREAM | END_HEADERS
+          (padlen=0)
+          ; Open new stream
+          :method: GET
+          :path: /
+          :scheme: http
+          :authority: nghttp2.org
+          accept: */*
+          accept-encoding: gzip, deflate
+          user-agent: nghttp2/1.30.0
+[  0.485] recv SETTINGS frame <length=24, flags=0x00, stream_id=0>
+          (niv=4)
+          [SETTINGS_MAX_CONCURRENT_STREAMS(0x03):100]
+          [SETTINGS_INITIAL_WINDOW_SIZE(0x04):1048576]
+          [UNKNOWN(0x08):1]
+          [SETTINGS_HEADER_TABLE_SIZE(0x01):8192]
+[  0.485] recv SETTINGS frame <length=0, flags=0x01, stream_id=0>
+          ; ACK
+          (niv=0)
+[  0.485] send SETTINGS frame <length=0, flags=0x01, stream_id=0>
+          ; ACK
+          (niv=0)
+[  0.488] recv (stream_id=1) :status: 200
+[  0.488] recv (stream_id=1) date: Sun, 27 Oct 2019 17:14:31 GMT
+[  0.488] recv (stream_id=1) content-type: text/html
+[  0.488] recv (stream_id=1) last-modified: Mon, 19 Aug 2019 13:20:36 GMT
+[  0.488] recv (stream_id=1) etag: "5d5aa224-19d8"
+[  0.488] recv (stream_id=1) accept-ranges: bytes
+[  0.488] recv (stream_id=1) content-length: 6616
+[  0.488] recv (stream_id=1) x-backend-header-rtt: 0.001366
+[  0.488] recv (stream_id=1) server: nghttpx
+[  0.488] recv (stream_id=1) via: 2 nghttpx
+[  0.488] recv (stream_id=1) alt-svc: h3-23=":4433"; ma=3600
+[  0.488] recv (stream_id=1) x-frame-options: SAMEORIGIN
+[  0.488] recv (stream_id=1) x-xss-protection: 1; mode=block
+[  0.488] recv (stream_id=1) x-content-type-options: nosniff
+[  0.488] recv HEADERS frame <length=224, flags=0x04, stream_id=1>
+          ; END_HEADERS
+          (padlen=0)
+          ; First response header
+[  0.490] send HEADERS frame <length=27, flags=0x05, stream_id=3>
+          ; END_STREAM | END_HEADERS
+          (padlen=0)
+          ; Open new stream
+          :method: GET
+          :path: /stylesheets/screen.css
+          :scheme: http
+          :authority: nghttp2.org
+          accept: */*
+          accept-encoding: gzip, deflate
+          user-agent: nghttp2/1.30.0
+[  0.490] send HEADERS frame <length=29, flags=0x05, stream_id=5>
+          ; END_STREAM | END_HEADERS
+          (padlen=0)
+          ; Open new stream
+          :method: GET
+          :path: /javascripts/modernizr-2.0.js
+          :scheme: http
+          :authority: nghttp2.org
+          accept: */*
+          accept-encoding: gzip, deflate
+          user-agent: nghttp2/1.30.0
+[  0.490] send HEADERS frame <length=26, flags=0x05, stream_id=7>
+          ; END_STREAM | END_HEADERS
+          (padlen=0)
+          ; Open new stream
+          :method: GET
+          :path: /javascripts/octopress.js
+          :scheme: http
+          :authority: nghttp2.org
+          accept: */*
+          accept-encoding: gzip, deflate
+          user-agent: nghttp2/1.30.0
+[  0.491] recv DATA frame <length=6616, flags=0x01, stream_id=1>
+          ; END_STREAM
+[  0.731] recv (stream_id=3) :status: 200
+[  0.731] recv (stream_id=3) date: Sun, 27 Oct 2019 17:14:31 GMT
+[  0.731] recv (stream_id=3) content-type: text/css
+[  0.731] recv (stream_id=3) last-modified: Mon, 19 Aug 2019 13:20:36 GMT
+[  0.731] recv (stream_id=3) etag: "5d5aa224-98aa"
+[  0.731] recv (stream_id=3) accept-ranges: bytes
+[  0.731] recv (stream_id=3) content-length: 39082
+[  0.731] recv (stream_id=3) x-backend-header-rtt: 0.001359
+[  0.731] recv (stream_id=3) server: nghttpx
+[  0.731] recv (stream_id=3) via: 2 nghttpx
+[  0.732] recv (stream_id=3) alt-svc: h3-23=":4433"; ma=3600
+[  0.732] recv (stream_id=3) x-frame-options: SAMEORIGIN
+[  0.732] recv (stream_id=3) x-xss-protection: 1; mode=block
+[  0.732] recv (stream_id=3) x-content-type-options: nosniff
+[  0.732] recv HEADERS frame <length=49, flags=0x04, stream_id=3>
+          ; END_HEADERS
+          (padlen=0)
+          ; First response header
+[  0.732] recv (stream_id=5) :status: 200
+[  0.732] recv (stream_id=5) date: Sun, 27 Oct 2019 17:14:31 GMT
+[  0.732] recv (stream_id=5) content-type: application/javascript
+[  0.732] recv (stream_id=5) last-modified: Mon, 19 Aug 2019 13:20:36 GMT
+[  0.732] recv (stream_id=5) etag: "5d5aa224-1b6c"
+[  0.732] recv (stream_id=5) accept-ranges: bytes
+[  0.732] recv (stream_id=5) content-length: 7020
+[  0.732] recv (stream_id=5) x-backend-header-rtt: 0.001283
+[  0.732] recv (stream_id=5) server: nghttpx
+[  0.732] recv (stream_id=5) via: 2 nghttpx
+[  0.732] recv (stream_id=5) alt-svc: h3-23=":4433"; ma=3600
+[  0.732] recv (stream_id=5) x-frame-options: SAMEORIGIN
+[  0.732] recv (stream_id=5) x-xss-protection: 1; mode=block
+[  0.732] recv (stream_id=5) x-content-type-options: nosniff
+[  0.732] recv HEADERS frame <length=58, flags=0x04, stream_id=5>
+          ; END_HEADERS
+          (padlen=0)
+          ; First response header
+[  0.732] recv (stream_id=7) :status: 200
+[  0.732] recv (stream_id=7) date: Sun, 27 Oct 2019 17:14:31 GMT
+[  0.732] recv (stream_id=7) content-type: application/javascript
+[  0.732] recv (stream_id=7) last-modified: Mon, 19 Aug 2019 13:20:36 GMT
+[  0.732] recv (stream_id=7) etag: "5d5aa224-20a5"
+[  0.732] recv (stream_id=7) accept-ranges: bytes
+[  0.732] recv (stream_id=7) content-length: 8357
+[  0.732] recv (stream_id=7) x-backend-header-rtt: 0.001212
+[  0.732] recv (stream_id=7) server: nghttpx
+[  0.732] recv (stream_id=7) via: 2 nghttpx
+[  0.732] recv (stream_id=7) alt-svc: h3-23=":4433"; ma=3600
+[  0.732] recv (stream_id=7) x-frame-options: SAMEORIGIN
+[  0.732] recv (stream_id=7) x-xss-protection: 1; mode=block
+[  0.732] recv (stream_id=7) x-content-type-options: nosniff
+[  0.732] recv HEADERS frame <length=40, flags=0x04, stream_id=7>
+          ; END_HEADERS
+          (padlen=0)
+          ; First response header
+[  0.822] recv DATA frame <length=16384, flags=0x00, stream_id=3>
+[  0.977] recv DATA frame <length=7020, flags=0x01, stream_id=5>
+          ; END_STREAM
+[  0.994] send WINDOW_UPDATE frame <length=4, flags=0x00, stream_id=0>
+          (window_size_increment=33431)
+[  1.035] recv DATA frame <length=8357, flags=0x01, stream_id=7>
+          ; END_STREAM
+[  1.035] recv DATA frame <length=797, flags=0x00, stream_id=3>
+[  1.129] send WINDOW_UPDATE frame <length=4, flags=0x00, stream_id=3>
+          (window_size_increment=33524)
+[  1.143] recv DATA frame <length=16384, flags=0x00, stream_id=3>
+[  1.199] recv DATA frame <length=5517, flags=0x01, stream_id=3>
+          ; END_STREAM
+[  1.199] send GOAWAY frame <length=8, flags=0x00, stream_id=0>
+          (last_stream_id=0, error_code=NO_ERROR(0x00), opaque_data(0)=[])

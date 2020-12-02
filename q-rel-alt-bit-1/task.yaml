@@ -1,0 +1,65 @@
+accessible: true
+author: Olivier Bonaventure
+categories: []
+context: |-
+    The alternating bit protocol is described in section `Recovering from transmission errors <http://cnp3book.info.ucl.ac.be/2nd/html/principles/reliability.html#reliable-data-transfer-on-top-of-an-imperfect-link>`_
+
+    .. raw:: html
+
+       <script defer>
+
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: document.body.scrollHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: pyjavacpp
+evaluate: best
+file: ''
+groups: false
+input_random: '2'
+limits:
+    time: '30'
+    output: '2'
+    memory: '100'
+name: Alternating Bit Protocol
+network_grading: false
+order: 16
+problems:
+    q1:
+        name: Performance of the alternating bit protocol
+        default: ''
+        header: |4-
+
+
+            .. raw:: html
+
+               Consider an implementation of the alternating bit protocol that is used on between two hosts that are connected via a direct link. That link has a bandwidth of <b><span id="ipr1"></span></b> kbps and a propagation delay of <b><span id="ipr2"></span></b> msec.
+               <script>
+               var bw = parseInt(input["@random"][0] * 200 + 100);
+               var de = parseInt(input["@random"][1] * 20 + 20);
+               document.getElementById("ipr1").innerHTML = bw;
+               document.getElementById("ipr2").innerHTML = de;
+               </script>
+
+            If the data frames are 10,000 bits long and the control frames 100 bits long, what is the maximum throughput achieved by this protocol expressed in bytes/sec?
+        type: code_single_line
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

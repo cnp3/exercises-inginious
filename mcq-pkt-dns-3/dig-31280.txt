@@ -1,0 +1,95 @@
+dig +bufsize=0 +noedns @2001:4860:4860::8888 -6 -f dns.txt
+
+; <<>> DiG 9.11.3-1ubuntu1.9-Ubuntu <<>> NS google.be
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 22846
+;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;google.be.			IN	NS
+
+;; ANSWER SECTION:
+google.be.		21599	IN	NS	ns1.google.com.
+google.be.		21599	IN	NS	ns3.google.com.
+google.be.		21599	IN	NS	ns2.google.com.
+google.be.		21599	IN	NS	ns4.google.com.
+
+;; Query time: 22 msec
+;; SERVER: 2001:4860:4860::8888#53(2001:4860:4860::8888)
+;; WHEN: Sun Oct 27 16:04:43 CET 2019
+;; MSG SIZE  rcvd: 109
+
+; <<>> DiG 9.11.3-1ubuntu1.9-Ubuntu <<>> TXT google.com
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 50535
+;; flags: qr rd ra; QUERY: 1, ANSWER: 5, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;google.com.			IN	TXT
+
+;; ANSWER SECTION:
+google.com.		3599	IN	TXT	"v=spf1 include:_spf.google.com ~all"
+google.com.		3599	IN	TXT	"globalsign-smime-dv=CDYX+XFHUw2wml6/Gb8+59BsH31KzUr6c1l2BPvqKX8="
+google.com.		299	IN	TXT	"docusign=05958488-4752-4ef2-95eb-aa7ba8a3bd0e"
+google.com.		299	IN	TXT	"docusign=1b0a6754-49b1-4db5-8540-d2c12664b289"
+google.com.		3599	IN	TXT	"facebook-domain-verification=22rm551cu4k0ab0bxsw536tlds4h95"
+
+;; Query time: 25 msec
+;; SERVER: 2001:4860:4860::8888#53(2001:4860:4860::8888)
+;; WHEN: Sun Oct 27 16:04:43 CET 2019
+;; MSG SIZE  rcvd: 341
+
+; <<>> DiG 9.11.3-1ubuntu1.9-Ubuntu <<>> MX gmail.com
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 4915
+;; flags: qr rd ra; QUERY: 1, ANSWER: 5, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;gmail.com.			IN	MX
+
+;; ANSWER SECTION:
+gmail.com.		3599	IN	MX	5 gmail-smtp-in.l.google.com.
+gmail.com.		3599	IN	MX	20 alt2.gmail-smtp-in.l.google.com.
+gmail.com.		3599	IN	MX	40 alt4.gmail-smtp-in.l.google.com.
+gmail.com.		3599	IN	MX	10 alt1.gmail-smtp-in.l.google.com.
+gmail.com.		3599	IN	MX	30 alt3.gmail-smtp-in.l.google.com.
+
+;; Query time: 24 msec
+;; SERVER: 2001:4860:4860::8888#53(2001:4860:4860::8888)
+;; WHEN: Sun Oct 27 16:04:43 CET 2019
+;; MSG SIZE  rcvd: 150
+
+; <<>> DiG 9.11.3-1ubuntu1.9-Ubuntu <<>> AAAA www.google.com
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 60943
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;www.google.com.			IN	AAAA
+
+;; ANSWER SECTION:
+www.google.com.		299	IN	AAAA	2a00:1450:4013:c03::68
+
+;; Query time: 23 msec
+;; SERVER: 2001:4860:4860::8888#53(2001:4860:4860::8888)
+;; WHEN: Sun Oct 27 16:04:43 CET 2019
+;; MSG SIZE  rcvd: 60
+
+; <<>> DiG 9.11.3-1ubuntu1.9-Ubuntu <<>> A www.google.fr
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 25767
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;www.google.fr.			IN	A
+
+;; ANSWER SECTION:
+www.google.fr.		299	IN	A	108.177.119.94
+
+;; Query time: 23 msec
+;; SERVER: 2001:4860:4860::8888#53(2001:4860:4860::8888)
+;; WHEN: Sun Oct 27 16:04:43 CET 2019
+;; MSG SIZE  rcvd: 47
+

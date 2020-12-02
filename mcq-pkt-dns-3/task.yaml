@@ -1,0 +1,101 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- dns
+context: |-
+    .. raw:: html
+
+       <script defer>
+            $('#content').css("min-height", 0);
+
+           bodyHeight = 0;
+           function resizeAndPostSize() {
+               if (document.getElementById("content").scrollHeight != bodyHeight) {
+                   bodyHeight = document.getElementById("content").scrollHeight;
+                   window.parent.postMessage({height: bodyHeight}, "*");
+               }
+           }
+           var target = document.querySelector('body');
+
+           var observer = new MutationObserver(resizeAndPostSize);
+
+           var config = { attributes: true, subtree: true };
+
+           observer.observe(target, config);
+           $(window).ready(function(){
+               $('#content').css("min-height", 0);
+               setTimeout(resizeAndPostSize, 0);
+           });
+       </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: DNS queries
+network_grading: false
+problems:
+    q1:
+        choices:
+        -   valid: true
+            text: The trace contains five different queries.
+        -   text: The query for the `TXT` record returned an invalid answer.
+            feedback: See the fourth packet of the trace.
+        -   valid: true
+            feedback: This is correct.
+            text: The query for the `TXT` record returned five different records.
+        -   text: There are five mail exchanges for the `gmail.com` domain
+            feedback: See the sixth packet of the trace.
+            valid: true
+        -   feedback: See the sixth packet of the trace.
+            text: There are two mail exchanges for the `gmail.com` domain
+        -   text: 'There are two different IPv4 addresses associated with `www.google.fr` '
+            feedback: See the tenth packet of the trace.
+        -   text: 'There is only one IPv6 address associated with `www.google.com` '
+            valid: true
+        -   text: 'There are two different IPv6 addresses associated with `www.google.com` '
+            feedback: See the eighth packet of the trace
+        -   valid: true
+            text: The `NS` records have a longer Time to Live than the other DNS records
+                retrieve in this trace.
+        -   text: All the DNS records retrieved in this trace have the same Time to
+                Live
+            feedback: The `NS` records have a TTL of 21599 seconds (packet 2), while
+                the `A` and `AAAA` records have a lifetime of 299 seconds
+        -   text: The `MX` records have the same Time to Live as the `TXT` records
+            feedback: If you look at the fourth packet in more details, you will see
+                that some `TXT` records have a TTL of 3599 seconds, while others have
+                a TTL of 299 seconds.
+        -   feedback: 'The `A` and `AAAA` records have the same Time to Live in this
+                trace, but might not be true in other traces. '
+            text: The `A` and `AAAA` records have the same Time to Live
+            valid: true
+        type: multiple_choice
+        header: |-
+            A packet trace may contain multiple queries for different records and different domain names as shown in the `attached packet trace <mcq-pkt-dns-3/dns-trace-31280.pcap>`_.
+
+            Download the packet trace and use `wireshark <https://www.wireshark.org>`_ to select which affirmations below are valid.
+        name: DNS queries
+        limit: 8
+        multiple: true
+    packet:
+        name: Packet trace
+        header: Here is a visualisation of this packet trace.
+        type: network-trace
+        feedback: {}
+        exclude: {}
+        trace: dns-trace-31280.pdml
+        redact: {}
+        hide: {}
+        shuffle-feedback: ''
+        shuffle: false
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

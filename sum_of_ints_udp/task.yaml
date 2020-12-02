@@ -1,0 +1,98 @@
+accessible: true
+author: Jean-Martin Vlaeminck
+categories:
+- socket
+context: |-
+    Our CS department has recently acquired various supercomputers with various architecture. Given their processing power, the department would like to make them available as a cloud computing platform, where the researchers and students would send computationally-intensive tasks.
+
+    To use these computers, you need to design a first version of a simple client-server application. This first version will allow a client to send a vector of 32-bits integers and receive their sum from the server.
+
+    We first use UDP to allow the client to send a request to the server. In this case, the client must send the vector of integers in a single datagram and the server responds with a single datagram too. In theory, UDP supports datagrams that can be as large as 64 KBytes. In practice, most implementations restrict this maximum size even more.  We use the `MAX_SIZE` constant, which is currently set to `16000` to represent this maximum datagram size.
+
+    We ask you to complete the client and the server functions. These two functions are tested separately, so you will get partial points and partial results for each of them.
+
+    A few hints to help you:
+
+    - Recall that UDP sends datagrams and is connectionless.
+    - Remeber that there is a difference between the representation of integers on a host and its representation in the network. The C library contains macros to help you deal with these differences.
+    - Don't forget to release all the memory that you have allocated with malloc
+    - Your code needs to support both IPv4 and IPv6. It doesn't require a lot of adaptation (only one line in one function).
+
+    You may also need to read the manpages for the following calls: `recv`, `recvfrom`, `send`, `sendto`, `close`, `htonl`, `bind` and `connect`.
+
+    .. raw:: html
+
+       <script defer>
+
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: document.body.scrollHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: cpp
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Sum of integers - UDP edition
+network_grading: false
+order: 19
+problems:
+    client_io_udp:
+        default: ''
+        header: |+
+            Write the UDP client that sends to the server a 32 bits integer containing the number of elements in the vector followed by all its elements. The server replies with one integer that contains the computed sum.
+
+            `sockfd` is an UDP socket that has already been created and is "connected" to the server. This means that the socket remembers the remote address between each call, allowing the utilisation of `recv` and `send`.
+            `tab` contains the integers of the vector, `length` is the number of elements in the vector and `rep` will be used to store the server's reply
+
+            Your function should return ``0`` if everything worked correctly, ``-1`` if the function could not allocated the required memory, ``-2`` if any socket or I/O error occured and ``-3`` if the requested vector contained more integers than those that can fit inside one UDP datagram
+
+            .. code-block:: c
+
+                int get_sum_of_ints_udp(int sockfd, uint32_t *tab, size_t length, uint32_t *rep) {
+                // Do not end your code with }
+
+        type: code
+        language: C
+        name: Client-side
+    server_io_udp:
+        type: code
+        language: C
+        header: |+
+            Write the UDP server. It receives a datagram that contains a 32 bits integer that represents the size of the vector and then all the elements of the vector. It returns to the client the sum of all integers in the received vector.
+
+            ``sockfd`` is an already opened UDP socket, bound to the local address of the server. Logically, it is not connected to the remote client, so you will need to use `recvfrom` and `sendto`.
+
+            The function should return ``0`` if everything was OK, ``-1`` if there was not enough memory and ``-2`` if there was any socket or I/O error.
+
+            .. code-block:: c
+
+                int server_udp(int sockfd) {
+                // Do not end your code with }
+
+        default: ''
+        name: Server-side
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

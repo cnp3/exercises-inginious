@@ -1,0 +1,21 @@
+dig +bufsize=0 +noedns +tcp -t AAAA www.computer-networking.info @2001:4860:4860::8888
+
+; <<>> DiG 9.11.3-1ubuntu1.9-Ubuntu <<>> +bufsize=0 +noedns +tcp -t AAAA www.computer-networking.info @2001:4860:4860::8888
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 43454
+;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;www.computer-networking.info.	IN	AAAA
+
+;; ANSWER SECTION:
+www.computer-networking.info. 3599 IN	CNAME	cnp3book.info.ucl.ac.be.
+cnp3book.info.ucl.ac.be. 7199	IN	CNAME	cnp3.info.ucl.ac.be.
+cnp3.info.ucl.ac.be.	7199	IN	AAAA	2001:6a8:308f:8:0:82ff:fe68:e48c
+
+;; Query time: 109 msec
+;; SERVER: 2001:4860:4860::8888#53(2001:4860:4860::8888)
+;; WHEN: Sun Oct 27 15:21:20 CET 2019
+;; MSG SIZE  rcvd: 130
+

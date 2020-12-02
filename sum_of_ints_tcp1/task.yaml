@@ -1,0 +1,102 @@
+accessible: true
+author: Jean-Martin Vlaeminck
+categories:
+- socket
+context: |-
+    After the successful implementation of the UDP version of the integer-summing service, you need develop the TCP version.
+
+    TCP has several advantages and pecularities compared to UDP. TCP is a connection-oriented protocol. The client creates the TCP connection (with code that you do not need to write) and then the client sends the number of integers (as a 32-bits unsigned integer) in the vector and then all the elements of the vector. The server accepts the TCP connection (with code that you do not need to write) and then processes the integers received and returns the sum of the elements of the vector over this connection.
+
+    We ask you to complete the TCP version of the client and the functions. These two functions are tested separately. This implies that your client function is tested against a correct server function while your server function is tested against a correct client function.
+
+
+    There several important points about TCP that you need to remember before answering this question:
+
+    - As in the UDP question, you need to encode the integers that are transmitted in network byteorder
+    - TCP provides a bytestream service. Bytestream means that your code might receive a few bytes and then a few bytes later in contrast with UDP that always provides messages. Remember to check the return values of the ``send`` and ``recv`` system calls.
+    - Remember that memory leaks are a frequent problem in C code. Every memory block that you allocate with ``malloc`` must be released before the termination of your function, even if some system calls return errors.
+    - Remember computers using IPv4 and computers using IPv6 cohabitate, so your program should be able to handle both. It doesn't require a lot of adaptation (only one line in one function).
+
+    You may also need to read the manpages for the following calls: ``recv``, ``recvfrom``, ``send``, ``sendto``, ``close``, ``htonl/ntohl``, ``accept``, ``listen``, ``bind`` and ``connect``.
+
+    .. raw:: html
+
+       <script defer>
+
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: document.body.scrollHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: cpp
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Sum of integers - TCP edition
+network_grading: false
+order: 20
+problems:
+    client_io_tcp:
+        default: ''
+        language: C
+        header: |+
+            Write the TCP client function
+
+            ``sockfd`` is an TCP socket that has already been connected to the server.
+            ``tab`` is a vector that contains ``length`` unsigned 32-bits integers.
+
+            The answer computed by the server must be  written to ``*rep``.
+
+            The function should return ``0`` if everything was OK, ``-1`` if the function could not allocate the required memory, and ``-2`` if there was any socket or I/O error. You do not need to close the TCP connection after having received the server's response.
+
+            .. code-block:: c
+
+                int get_sum_of_ints_tcp(int sockfd, uint32_t *tab, size_t length, uint32_t *rep) {
+                // you do not need to write the terminating }
+
+        type: code
+        name: Client-side
+    server_io_tcp:
+        language: C
+        type: code
+        default: ''
+        name: Server-side
+        header: |+
+            Write the TCP server function
+
+            ``sockfd`` is a TCP socket that is bound to the address and port of the server. It already listens for connections. As such, your code only needs to accept the incoming connection.
+
+            Your function should receive the stream of integers and respond back with the sum. You need to gracefully close the TCP connection accepted from the client after having sent your
+            response.
+
+            Your function should return ``0`` if everything was OK, ``-1`` if you could not allocate enough memory, or ``-2`` if there was any socket or I/O error.
+
+            .. code-block:: c
+
+                int server_tcp(int sockfd) {
+                    // you do not need to write the terminating }
+
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

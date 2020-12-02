@@ -1,0 +1,62 @@
+accessible: true
+author: Olivier Bonaventure
+categories: []
+context: |-
+    .. raw:: html
+
+       <script defer>
+
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: document.body.scrollHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: default
+evaluate: best
+file: ''
+groups: false
+input_random: '2'
+limits:
+    time: '30'
+    output: '2'
+    memory: '100'
+name: Alternating Bit Protocol
+network_grading: false
+order: 18
+problems:
+    q1:
+        name: Alternating Bit Protocol in the presence of losses.
+        default: ''
+        header: |4+
+
+            .. raw:: html
+
+               Consider the utilisation of the Alternating Bit Protocol to transfer 15000 bytes of data. Both hosts are connected via a 1 Gbps link and there is a one-way delay of <b><span id="ipr1"></span></b> msec between the two hosts. The sender sends data frames that are 12000 bits long. Assuming that the retransmission timer is set to <b><span id="ipr2"></span></b> msec, how long does it take to transfer the 15000 bytes if the third data frame is lost ?
+
+               <script>
+               var delay = parseInt(input["@random"][0] * 7 + 2);
+               var timer = parseInt(input["@random"][1] * 200 + 100);
+               document.getElementById("ipr1").innerHTML = delay;
+               document.getElementById("ipr2").innerHTML = timer;
+               </script>
+
+        type: code_single_line
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

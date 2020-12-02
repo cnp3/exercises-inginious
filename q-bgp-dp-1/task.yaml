@@ -1,0 +1,84 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- bgp
+context: ''
+environment: pyjavacpp
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: The BGP decision process
+network_grading: false
+problems:
+    q1:
+        type: code_single_line
+        header: |
+            The BGP decision process is the process that is used by a BGP router to select the best path among all the paths learned towards a given destination prefix. The table below represents all the BGP routes learned by a BGP router and their  corresponding attributes. For simplicity, the nexthops are indicated as router names instead of IP addresses.
+
+               ================  ===========    ==========    =======
+               prefix            AS Path        local-pref    nexthop
+               ----------------  -----------    ----------    -------
+               2001:db8:1::/48   AS1:AS4        100           R1
+               2001:db8:1::/48   AS1:AS3:AS4    200           R2
+               2001:db8:1::/48   AS1:AS4        100           R3
+               2001:db8:1::/48   AS4            150           R4
+               2001:db8:2::/48   AS1:AS4        100           R1
+               2001:db8:2::/48   AS1:AS3:AS4    100           R2
+               2001:db8:2::/48   AS1:AS4        100           R3
+               2001:db8:2::/48   AS4            150           R4
+               2001:db8:0::/47   AS1:AS4        200           R1
+               2001:db8:0::/47   AS1:AS3:AS4    200           R2
+               2001:db8:0::/47   AS1:AS4        100           R3
+               2001:db8:0::/47   AS4            150           R4
+               2001:db8:0::/48   AS1:AS4        100           R1
+               2001:db8:0::/48   AS1:AS3:AS4    100           R2
+               2001:db8:0::/48   AS1:AS4        150           R3
+               2001:db8:0::/48   AS4            150           R4
+               ================  ===========    ==========    =======
+
+
+            What is the next hop that this router will prefer for prefix ``2001:db8:1::/48`` ?
+        optional: 'on'
+        name: The BGP decision process
+        default: ''
+    q2:
+        default: ''
+        type: code_single_line
+        header: |4-
+
+            What is the next hop that this router will prefer for prefix ``2001:db8:2::/48`` ?
+        name: Best route
+        optional: 'on'
+    q3:
+        default: ''
+        type: code_single_line
+        name: Best route
+        optional: 'on'
+        header: |4-
+
+            What is the next hop that this router will prefer for prefix ``2001:db8:0::/48`` ?
+    q4:
+        type: code_single_line
+        optional: 'on'
+        name: Best route
+        header: |4-
+
+            What is the next hop that this router will prefer for prefix ``2001:db8:0::/47`` ?
+        default: ''
+    q5:
+        default: ''
+        type: code_single_line
+        header: 'What is the next hop that this router will use to forward a packet
+            whose destination address is ``2001:db8:0::1234`` ? '
+        name: Route for a specific packet
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

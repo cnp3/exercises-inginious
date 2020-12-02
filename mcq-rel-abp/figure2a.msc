@@ -1,0 +1,18 @@
+msc{
+ a [label="", linecolour=white],
+        b [label="Host A", linecolour=black],
+        z [label="", linecolour=white],
+        c [label="Host B", linecolour=black],
+        d [label="", linecolour=white];
+        a=>b [ label = "DATA.req(x)\nstart timer" ] ,
+        b>>c [ label = "D(1,x)", arcskip="1"];
+        c=>d [ label = "DATA.ind(x)" ];
+        c>>b [label= "C(OK1)", arcskip="1"];
+        b->a [linecolour=white, label="cancel timer"];
+        |||;
+        a=>b [ label = "DATA.req(y)\nstart timer" ] ,
+        b>>c [ label = "D(0,y)", arcskip="1"];
+        c=>d [ label = "DATA.ind(y)" ];
+        c>>b [label= "C(OK0)", arcskip="1"]; 
+        b->a [linecolour=white, label="cancel timer"];
+	} 

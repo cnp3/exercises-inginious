@@ -1,0 +1,61 @@
+#!/bin/python3
+# O. Bonaventure, 2019
+
+from inginious import input, feedback, rst
+import array
+#q1 4 cipher suites
+#q2 = www.mozilla.org
+#q3 TLS_AES_256_GCM_SHA384
+#q4 h2
+
+a1=int(input.get_input("q1"),10)
+a2 = (input.get_input("q2")).lower().strip()
+a3= (input.get_input("q3")).upper().strip()
+a4= (input.get_input("q4")).lower().strip()
+
+
+grade=0
+
+
+if(a1==4):
+  feedback.set_problem_result("success","q1")
+  grade+=25
+  feedback.set_problem_feedback("Indeed, the client announces the ciphers that it supports in the Client Hello.","q1")
+else:
+  feedback.set_problem_result("failed","q1")
+  feedback.set_problem_feedback("Check again the contents of the ClientHello.","q1") 
+
+
+if(a2=="www.mozilla.org"):
+  feedback.set_problem_result("success","q2")
+  grade+=25
+  feedback.set_problem_feedback("Indeed, the client indicates the server name in the SNI extension.","q2")
+else:
+  feedback.set_problem_result("failed","q2")
+  feedback.set_problem_feedback("Check again the contents of the ClientHello.","q2") 
+  
+if(a3=="TLS_AES_256_GCM_SHA384"):
+  feedback.set_problem_result("success","q3")
+  grade+=25
+  feedback.set_problem_feedback("Indeed, the server selects this cipher suite.","q3")
+else:
+  feedback.set_problem_result("failed","q3")
+  feedback.set_problem_feedback("Check again the contents of the ServerHello and provide your answer as a string.","q3") 
+
+
+
+if("h2" in a4 or "http/1.1" in a4):
+  feedback.set_problem_result("success","q4")
+  grade+=25
+  feedback.set_problem_feedback("Indeed, the client indicates in the ALPN extension that it wishes to use either h2, i.e. HTTP/2.0, or HTTP/1.1 over this TLS session.","q4")
+else:
+  feedback.set_problem_result("failed","q4")
+  feedback.set_problem_feedback("Check again the contents of the ALPN extension in the ClientHello.","q4") 
+  
+  
+if(grade>=75):
+  feedback.set_global_result("success")
+else:
+  feedback.set_global_result("failed")
+      
+feedback.set_grade(grade)

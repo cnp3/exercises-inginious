@@ -1,0 +1,64 @@
+accessible: true
+author: ''
+categories: []
+contact_url: ''
+context: |-
+    Consider the network shown in the figure below. Assuming that all link weights are set to 1, what is the link state packet that the routing protocol running on these routers will send once the network has converged ? Remember that a link state packet contains a sequence number, an age and the cost to reach each direct neighbor.
+
+    .. container:: text-center
+
+        .. image:: q-net-ls/network-0.png
+            :width: 200px
+
+
+
+    Express your answer as a list fields separated by commas. For each field, use the ``<field>:<value>`` format,  where ``<field>`` is the name of the field (use ``seq`` for sequence number and ``age`` for the age) and ``<value>`` the value of this specific field. If you need to specify a distance to a router, specify it as a pair that contains the router name as a field and the distance as the value.
+
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: Link State Routing
+network_grading: false
+order: 6
+problems:
+    q1:
+        name: Link state packet for router R0
+        default: ''
+        header: Provide the link state packet sent by router R0
+        type: code_single_line
+    q2:
+        header: Provide the link state packet sent by router R4
+        name: Link state packet for router R4
+        type: code_single_line
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

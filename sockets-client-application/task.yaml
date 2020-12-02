@@ -1,0 +1,133 @@
+accessible: true
+author: Maxime Piraux
+categories:
+- socket
+context: |-
+    In this exercise, you have to build upon the client that you implemented previously, i.e. the code that sends a request to a particular server.
+    Now that you have two versions of the server, one that output integers and one that output strings, you might want to combine them into a single application using a simple protocol to request particular output format.
+    Then, the client must be able to request the operation to perform, i.e. the sum or the multiplication of the integers.
+
+    Let us first define this protocol in details. The client sends its request using the following message format.
+
+    ::
+
+         0                   1                   2                   3
+         0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+        |Unused |Opcod|F|            Payload (max 256 bytes)          ...
+        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+    The first 4 bits are unused, i.e. they are simply not considered and can contain any value.
+    The next 3 bits represent the code of the operation (Opcode) that the server should execute.
+    The currently defined opcodes are:
+
+        * 0: The sum operation.
+        * 1: The multiplication operation.
+
+    The final, least-significant, bit represent the output format (F) that should be used for the result.
+    The formats defined are:
+
+        * 0: The network-ordered unsigned integer format.
+        * 1: The ASCII string format.
+
+    This header byte is followed by the payload, that can be up to 256 bytes long. The payload is a sequence of network-ordered unsigned integers. Up to 64 integers can thus be sent in a request. Each request contains at least one integer within the payload.
+
+    Upon receiving a request, the server performs the required operation and outputs the result in the following message format.
+
+    ::
+
+         0                   1                   2                   3
+         0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+        |S|   Unused    |            Payload (max 256 bytes)          ...
+        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+    The 1st and most-significant bit contains the status code (S). 0 indicates an error and 1 indicates a success.
+    The remaining 7 bits are unused, i.e. they are simply not considered and can contain any value.
+    The error code is used by the server when receiving requests with unknown opcodes.
+    Messages with the status code set to error can contains a payload, but it is not meaningful to the client.
+
+    ------------------
+
+    Implement a client function that takes a series of integers as parameter and sends them in the correct format to the given server address.
+    Set the correct operation in the request based on the function parameters.
+    After sending the request, wait for the receipt of the response and return the result of the operation.
+
+    For each of the calls that you use, if one of them were to encounter an error, immediately return -1. All require headers are already included.
+
+    Manpages of interest:
+
+    * http://man7.org/linux/man-pages/man2/socket.2.html
+    * http://man7.org/linux/man-pages/man7/ipv6.7.html
+    * http://man7.org/linux/man-pages/man2/connect.2.html
+    * http://man7.org/linux/man-pages/man2/send.2.html
+    * http://man7.org/linux/man-pages/man3/htonl.3.html
+
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: cpp
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '10'
+    output: '2'
+name: Sockets - An advanced client application
+network_grading: false
+order: 13
+problems:
+    client-app:
+        default: |-
+            /**
+             * `ints` is a pointer to a buffer of `no_int` integers.
+             * `operation` is char representing the operation to request, '+' being the sum, and '*' being the multiplication.
+             * `output_format` is char representing the output format to request, 'd' being network-ordered integers and 's' being ASCII strings.
+             */
+            int create_and_send_message(const struct sockaddr *dest_addr, socklen_t addrlen, int *ints, size_t no_int, char operation, char output_format, int *result) {
+                // TODO: Create a socket supporting datagrams, connect it
+                // TODO: Create the request message and send it
+                // TODO: Receive the result and return it using the result argument
+                return 0;
+            }
+        language: C
+        header: |-
+            Copy the function signature and fill in its body
+
+            .. code-block:: C
+
+                int create_and_send_message(const struct sockaddr *dest_addr, socklen_t addrlen, int *ints, size_t no_int, char operation, char output_format, int *result) {
+                    // TODO: Create a socket supporting datagrams, connect it
+                    // TODO: Create the request message and send it
+                    // TODO: Receive the result and return it using the result argument
+                    return 0;
+                }
+        name: An advanced client application
+        type: code
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

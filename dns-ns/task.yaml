@@ -1,0 +1,65 @@
+accessible: true
+author: Olivier Bonaventure
+categories: []
+context: |-
+    The first field of the header of a DNS message is the transaction identifier.
+
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '10'
+    output: '2'
+name: The DNS transaction identifier
+network_grading: false
+order: 15
+problems:
+    id:
+        feedback:
+            dns.id: The server always copies in the response the transaction identifier
+                received in the request. This allows the client to match the response
+                with the request that it sent, even if the response also contains
+                the question.
+        name: Transaction identifier
+        shuffle-feedback: ''
+        header: The first packet is a DNS request sent by a client. Can you provide
+            the transaction identifier in the response sent by the server ?
+        trace: dns-ns.xml
+        hide: {}
+        exclude:
+            2:
+            - dns.id
+        redact: {}
+        type: network-trace
+        shuffle: false
+run_cmd: ''
+stored_submissions: 3
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

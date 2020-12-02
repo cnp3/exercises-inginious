@@ -1,0 +1,74 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- dns
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    time: '30'
+    output: '2'
+    memory: '100'
+name: DNS lookup for www.google.com
+network_grading: false
+problems:
+    id:
+        feedback: {}
+        shuffle-feedback: |-
+            The following DNS requests were sent by the resolver to find the answer:
+             dig  -t NS com @2001:7fd::1
+             dig  -t NS example.com @2001:501:b1f9::30
+             dig -t NS net @2001:7fd::1
+             dig -t NS iana-servers.net @2001:501:b1f9::30
+             dig  -t AAAA www.example.com @2001:500:8f::53
+        shuffle: true
+        type: network-trace
+        hide: {}
+        redact:
+        - udp.checksum.status
+        name: DNS lookup
+        trace: dns-google.pdml
+        exclude:
+        - geninfo.num
+        - geninfo.len
+        - geninfo.caplen
+        - geninfo.timestamp
+        header: |-
+            A student collected a packet trace while running the following command:
+
+            .. code:: console
+
+               dig -t AAAA www.google.com
+
+            This trace was collected with a resolver that does not store any record in its cache.  Can you reorder the packets of this trace by looking and the succession of the types of DNS requests starting from the root ?
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

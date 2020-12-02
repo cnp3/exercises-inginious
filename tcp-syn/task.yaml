@@ -1,0 +1,67 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- tcp
+context: |-
+    TCP segments contain flags. These are defined in `Section 3.1 <https://tools.ietf.org/html/rfc793#section-3.1>`_ of `RFC793 <https://tools.ietf.org/html/rfc793>`_.
+
+    The segment below was sent by a client to create a TCP connection towards a web server. Ingicated the values of the SYN, URG, PSH, ACK, FIN and RST flags inside this segment (1 means set and 0 means reset)?
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: The first TCP segment sent by a client.
+network_grading: false
+order: 21
+problems:
+    test:
+        exclude:
+        - tcp.flags.str
+        - tcp.window_size
+        - tcp.window_size_scalefactor
+        - tcp.len
+        - tcp.checksum
+        name: Establishment of a TCP connection
+        hide:
+            0:
+            - tcp.flags.ack
+            - tcp.flags.urg
+            - tcp.flags.push
+            - tcp.flags.reset
+            - tcp.flags.syn
+            - tcp.flags.fin
+        header: This segment was sent by a client to create a TCP connection towards
+            a web server. What are the flags that must be set inside this segment
+            ?
+        type: network-trace
+        trace: tcp-rfc793-104.xml
+        shuffle-feedback: ''
+        redact:
+        - tcp.flags
+        feedback:
+            tcp.flags.ack: The ACK flag is only set when the segment contains a valid
+                acknowledgement number. This is not the case in the initial segment
+                sent by a client.
+            tcp.flags.fin: The RST flag is used to gracefully terminate a connection,
+                not to create one.
+            tcp.flags.psh: The PSH flag is only associated with data. It is never
+                set in the first segment sent to create a TCP connection.
+            tcp.flags.rst: The RST flag is used to abruptly terminate a connection,
+                not to create one.
+            tcp.flags.syn: The SYN flag is set in the first segment sent to initiate
+                a TCP connection as described in `Section 3.7 of RFC 793 <https://tools.ietf.org/html/rfc793#section-3.4>`_.
+            tcp.flags.urg: The URG flag is only set in Urgent data as described in
+                `Section 3.7 of RFC 793 <https://tools.ietf.org/html/rfc793#section-3.4>`_.
+                It is never set in the first segment sent to create a TCP connection.
+        shuffle: false
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

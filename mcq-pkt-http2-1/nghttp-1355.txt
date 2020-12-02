@@ -1,0 +1,52 @@
+nghttp -v -n --no-push --no-dep http://nghttp2.org/robots.txt
+[  0.250] Connected
+[  0.250] send SETTINGS frame <length=18, flags=0x00, stream_id=0>
+          (niv=3)
+          [SETTINGS_MAX_CONCURRENT_STREAMS(0x03):100]
+          [SETTINGS_INITIAL_WINDOW_SIZE(0x04):65535]
+          [SETTINGS_ENABLE_PUSH(0x02):0]
+[  0.250] send HEADERS frame <length=40, flags=0x05, stream_id=1>
+          ; END_STREAM | END_HEADERS
+          (padlen=0)
+          ; Open new stream
+          :method: GET
+          :path: /robots.txt
+          :scheme: http
+          :authority: nghttp2.org
+          accept: */*
+          accept-encoding: gzip, deflate
+          user-agent: nghttp2/1.30.0
+[  0.489] recv SETTINGS frame <length=24, flags=0x00, stream_id=0>
+          (niv=4)
+          [SETTINGS_MAX_CONCURRENT_STREAMS(0x03):100]
+          [SETTINGS_INITIAL_WINDOW_SIZE(0x04):1048576]
+          [UNKNOWN(0x08):1]
+          [SETTINGS_HEADER_TABLE_SIZE(0x01):8192]
+[  0.489] recv SETTINGS frame <length=0, flags=0x01, stream_id=0>
+          ; ACK
+          (niv=0)
+[  0.490] send SETTINGS frame <length=0, flags=0x01, stream_id=0>
+          ; ACK
+          (niv=0)
+[  0.492] recv (stream_id=1) :status: 200
+[  0.492] recv (stream_id=1) date: Sun, 27 Oct 2019 16:53:23 GMT
+[  0.492] recv (stream_id=1) content-type: text/plain
+[  0.492] recv (stream_id=1) last-modified: Mon, 19 Aug 2019 13:20:36 GMT
+[  0.492] recv (stream_id=1) etag: "5d5aa224-3e"
+[  0.492] recv (stream_id=1) accept-ranges: bytes
+[  0.492] recv (stream_id=1) content-length: 62
+[  0.492] recv (stream_id=1) x-backend-header-rtt: 0.00149
+[  0.492] recv (stream_id=1) server: nghttpx
+[  0.492] recv (stream_id=1) via: 2 nghttpx
+[  0.492] recv (stream_id=1) alt-svc: h3-23=":4433"; ma=3600
+[  0.492] recv (stream_id=1) x-frame-options: SAMEORIGIN
+[  0.492] recv (stream_id=1) x-xss-protection: 1; mode=block
+[  0.492] recv (stream_id=1) x-content-type-options: nosniff
+[  0.492] recv HEADERS frame <length=221, flags=0x04, stream_id=1>
+          ; END_HEADERS
+          (padlen=0)
+          ; First response header
+[  0.492] recv DATA frame <length=62, flags=0x01, stream_id=1>
+          ; END_STREAM
+[  0.492] send GOAWAY frame <length=8, flags=0x00, stream_id=0>
+          (last_stream_id=0, error_code=NO_ERROR(0x00), opaque_data(0)=[])

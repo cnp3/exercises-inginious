@@ -1,0 +1,88 @@
+accessible: true
+author: Maxime Piraux
+categories:
+- socket
+context: |-
+    In this exercise, you have to create a IPv6 socket, then connect it to the given destination and send a message through the socket.
+
+    To create the socket, you have to use the *socket()* call and provide it with the correct parameters. Make sure to configure it for the *IPv6 domain* and set its type to support *datagrams*. Datagrams are simple unreliable messages abstractions.
+
+    Setting the socket destination is achieved using the *connect()* call.
+
+    Use the pointer to the destination address that is passed by argument to your function to send a message to the correct destination. The *send()* call allows sending a message through the socket. For this exercice, *send()*'s *flags* argument will not be used.
+
+    The message you have to send is the sequence of odd **digits** as network-ordered integers (``int``) in increasing order.
+
+    For each of the calls that you use, if one of them were to encounter an error, immediately return -1. All required C headers are already included.
+
+    Manpages of interest:
+
+    * http://man7.org/linux/man-pages/man2/socket.2.html
+    * http://man7.org/linux/man-pages/man7/ipv6.7.html
+    * http://man7.org/linux/man-pages/man2/connect.2.html
+    * http://man7.org/linux/man-pages/man2/send.2.html
+    * http://man7.org/linux/man-pages/man3/htonl.3.html
+
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: cpp
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '10'
+    output: '2'
+name: Sockets - Creating a socket
+network_grading: false
+order: 10
+problems:
+    create-socket:
+        name: Creating a socket
+        default: |-
+            int create_and_send_message(const struct sockaddr *dest_addr, socklen_t addrlen) {
+                // TODO: Create a IPv6 socket supporting datagrams
+                // TODO: Connect it to the destination
+                // TODO: Send a message through the socket
+                return 0;
+            }
+        type: code
+        header: |-
+            Copy the function signature and fill in its body
+
+            .. code-block:: C
+
+                int create_and_send_message(const struct sockaddr *dest_addr, socklen_t addrlen) {
+                    // TODO: Create a IPv6 socket supporting datagrams
+                    // TODO: Connect it to the destination
+                    // TODO: Send a message through the socket
+                    return 0;
+                }
+        language: C
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

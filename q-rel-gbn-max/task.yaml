@@ -1,0 +1,60 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- reliable
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: pyjavacpp
+evaluate: best
+file: ''
+groups: false
+input_random: '1'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Maximum window size for Go-back-n
+network_grading: false
+order: 8
+problems:
+    q1:
+        type: code_single_line
+        header: |-
+            .. raw:: html
+
+               Consider a go-back-n protocol that uses a frame that contains <b><span id="ipr1"></span></b> bits to encode the sequence number. What is the maximum number of frames that a sender can send before being forced to wait for an acknowledgment ?
+
+               <script>
+               var n = parseInt(input["@random"][0] * 17 + 3);
+               document.getElementById("ipr1").innerHTML = n;
+               </script>
+        name: 'Maximum window size '
+        default: ''
+regenerate_input_random: 'on'
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

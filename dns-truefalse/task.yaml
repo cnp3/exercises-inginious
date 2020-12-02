@@ -1,0 +1,87 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- dns
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: The Domain Name System
+network_grading: false
+problems:
+    q:
+        type: multiple_choice
+        multiple: true
+        choices:
+        -   text: An A record contains an IPv4 address
+            valid: true
+        -   valid: true
+            text: An AAAA record contains an IPv6 address
+        -   text: A NS record contains the IPv4 address of the nameserver that is
+                responsible for a domain
+            feedback: A NS record contains the name of the nameserver and not its
+                address.
+        -   feedback: A NS record contains the name of the nameserver and not its
+                address.
+            text: A NS record contains the IPv6 address of the nameserver that is
+                responsible for a domain
+        -   text: A MX record contains the IPv4 address of the mailserver that accepts
+                emails for a domain
+            feedback: A MX record contains the name of the mailserver and not its
+                address.
+        -   text: A MX record contains the name of the mailserver that accepts emails
+                for a domain
+            valid: true
+        -   valid: true
+            text: A NS record contains the name of the nameserver that is responsible
+                for a domain
+        -   valid: true
+            text: The TTL associated to a DNS record indicates the time in seconds
+                during which this record can be cached by resolvers.
+        -   text: A client can contact any root nameserver to convert www.computer-networking.info
+                into an IP address
+            feedback: Root nameservers only provide the nameservers that are responsible
+                for the top-level domains. Do not confuse a root nameserver with a
+                resolver.
+        -   feedback: This is a recursive query.
+            valid: true
+            text: When a client sends a query to retrieve the IP address corresponding
+                to www.computer-networking.info to its local resolver, the resolver
+                may need to query different nameservers to return the answer.
+        header: Which of the following sentences about the DNS are correct ?
+        limit: 7
+        name: Affirmations about the DNS
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

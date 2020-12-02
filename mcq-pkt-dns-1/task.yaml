@@ -1,0 +1,86 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- dns
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Analysis of DNS packets
+network_grading: false
+problems:
+    q1:
+        choices:
+        -   valid: true
+            feedback: Indeed, the two packets of the trace are both UDP segments.
+            text: In this packet trace, DNS is used over UDP
+        -   text: The query of the first packet was for a record of type `NS`
+            valid: true
+        -   text: The query of the first packet was for a record of type `AAAA`
+        -   text: The first packet contains a query
+            feedback: This is correct, the high order bit of the `Flags` field is
+                set to 0
+            valid: true
+        -   feedback: This is incorrect, the second packet also contains a query,
+                see the `Flags` field
+            text: The second packet contains a response
+        -   text: The second packet is a retransmission of the first one
+            valid: true
+            feedback: Indeed, the second packet contains exactly the same information
+                as the first one.
+        -   text: The identifier of the request in the second packet is `0xedc5`
+            valid: true
+        -   text: The identifier of the request in the second packet is `0x0120`
+            feedback: This is the `Flags` field
+        type: multiple_choice
+        header: Load the attached  `packet trace <cq-pkt-dns-1/dns-trace-28772.pcap>`_
+            using `wireshark <https://www.wireshark.org>`_ and indicate which of the
+            following affimations are correct.
+        name: Two DNS packets
+        limit: 6
+        multiple: true
+    trace:
+        exclude: {}
+        trace: dns-trace.xml
+        redact: {}
+        feedback: {}
+        name: The packet trace
+        shuffle-feedback: ''
+        header: ''
+        type: network-trace
+        hide: {}
+        shuffle: false
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

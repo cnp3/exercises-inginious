@@ -1,0 +1,175 @@
+#!/bin/python3
+
+# Olivier Bonaventure, 2019
+
+from inginious import input, feedback
+import re
+ 
+def removeSpaces(string):
+    return re.sub('[\s+]', '', string)
+
+def toList(string):
+    return (removeSpaces(string.upper())).split(',')
+
+
+def getASPath(string):
+    return (removeSpaces(string.upper())).split(':')
+
+# AS2 shared cost AS4
+# q1: AS4:AS1
+def checkq1(path):
+    response = ""
+    errors = 0
+    grade = 0
+    if(len(path) == 0):
+        feedback.set_problem_result("failed", "q1")
+        response += "Your answer to this question is incorrect. AS3 will receive a path from its client.\n"
+        feedback.set_problem_feedback(response, "q1")
+        return grade
+    if(len(path) > 1):
+        feedback.set_problem_result("failed", "q1")
+        response += "Your answer to this question is incorrect. AS3 cannot learn a path from AS2. Remember that an AS cannot advertise to a shared cost peer routes that it has learned from another shared cost peer. \n"
+        feedback.set_problem_feedback(response, "q1")
+        return grade
+    try:
+        p = getASPath(path[0])
+        if(p[0] == '0'):
+            response += "AS3 receives a path towards AS1.\n"
+            errors += 1
+        if(p[-1] != 'AS1'):
+            response += "Your path does not end on AS1.\n"
+            errors += 1
+        if(p[0] != 'AS4'):
+            response += "Your path is incorrect.\n"
+            errors+2
+    except IndexError as e:
+        errors += 64
+        pass
+
+    if(errors > 0):
+        feedback.set_problem_result("failed", "q1")
+        response += "Your answer to this question is incorrect.\n"
+        feedback.set_problem_feedback(response, "q1")
+    else:
+        feedback.set_problem_result("success", "q1")
+        feedback.set_problem_feedback("Correct", "q1")
+        grade += 33
+
+    return grade
+
+# AS2 customer of AS4
+# q2: AS4:AS3
+
+def checkq2(path):
+    response = ""
+    errors = 0
+    grade = 0
+    if(len(path) == 0):
+        feedback.set_problem_result("failed", "q2")
+        response += "Your answer to this question is incorrect. \n"
+        feedback.set_problem_feedback(response, "q2")
+        return grade
+    if(len(path) > 2):
+        feedback.set_problem_result("failed", "q2")
+        response += "Your answer to this question is incorrect. AS3 cannot receive more than 2 AS paths to reach AS1 since it only has 2 BGP sessions. \n"
+        feedback.set_problem_feedback(response, "q2")
+        return grade
+    try:
+        p = getASPath(path[0])
+        if(p[-1] != 'AS1'):
+            response += "Your path does not end on AS1.\n"
+            errors += 1
+            
+        if(p[0] == 'AS2'):
+            response += "AS2 has received two paths towards AS1: AS4:AS1 and AS1. It prefers the direct path from AS1 since it was received by a shared cost peer while the other was received from a provider.\n"
+            errors += 2
+        if(p != ['AS4', 'AS1']):
+            response += "Your path is incorrect\n"
+            errors+=4
+            
+    except IndexError as e:
+        errors += 64
+        pass
+
+    if(errors > 0):
+        feedback.set_problem_result("failed", "q2")
+        response += "Your answer to this question is incorrect.\n"
+        feedback.set_problem_feedback(response, "q2")
+    else:
+        feedback.set_problem_result("success", "q2")
+        feedback.set_problem_feedback("Correct", "q2")
+        grade += 33
+
+    return grade
+
+# AS2 provider of AS4
+# q3: AS4:AS3
+
+def checkq3(path):
+    response = ""
+    errors = 0
+    grade = 0
+    if(len(path) == 0):
+        feedback.set_problem_result("failed", "q3")
+        response += "Your answer to this question is incorrect. \n"
+        feedback.set_problem_feedback(response, "q3")
+        return grade
+    if(len(path) == 1):
+        feedback.set_problem_result("failed", "q3")
+        response += "Your answer to this question is incorrect. AS3 has received two paths towards AS1. Update your answer. \n"        
+        feedback.set_problem_feedback(response, "q3")
+        return grade
+    
+    if(len(path) > 2):
+        feedback.set_problem_result("failed", "q3")
+        response += "Your answer to this question is incorrect. AS3 cannot receive more than 2 AS paths to reach AS1 since it only has 2 BGP sessions. \n"
+        feedback.set_problem_feedback(response, "q3")
+        return grade
+    try:
+        # best
+        p = getASPath(path[0])
+        if(p[-1] != 'AS1'):
+            response += "Your best path does not end on AS1.\n"
+            errors += 1
+        if(p != ['AS4', 'AS1']):
+            response += "Your best path is incorrect\n"
+            errors+=2
+        p = getASPath(path[1])
+        if(p[-1] != 'AS1'):
+            response += "Your second path does not end on AS1.\n"
+            errors +=4 
+        if(p != ['AS2', 'AS4', 'AS1']):
+            response += "Your second path is incorrect\n"
+            errors+=8
+            
+    except IndexError as e:
+        errors += 64
+        pass
+
+    if(errors > 0):
+        feedback.set_problem_result("failed", "q3")
+        response += "Your answer to this question is incorrect.\n"
+        feedback.set_problem_feedback(response, "q3")
+    else:
+        feedback.set_problem_result("success", "q3")
+        feedback.set_problem_feedback("Correct", "q3")
+        grade += 33
+
+    return grade
+
+
+grade = 0
+
+
+grade += checkq1(toList(input.get_input("q1")))
+grade += checkq2(toList(input.get_input("q2")))
+grade += checkq3(toList(input.get_input("q3")))
+
+
+feedback.set_grade(grade)
+
+if grade >= 99:
+    feedback.set_global_result("success")
+else:
+    feedback.set_global_result("failed")
+# end

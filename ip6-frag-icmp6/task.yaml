@@ -1,0 +1,71 @@
+accessible: false
+author: Olivier Bonaventure
+categories:
+- ipv6
+context: |-
+    IPv6, described in the `IPv6 chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/ipv6.html>`_ of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_ includes a packet fragmentation mechanism that allows to send large packets as a series of fragments.
+
+    .. raw:: html
+
+        <script>
+        $('#content').css("min-height", 0);
+
+        bodyHeight = 0;
+        function resizeAndPostSize() {
+            if (document.getElementById("content")) {
+                if (document.getElementById("content").scrollHeight != bodyHeight) {
+                    bodyHeight = document.getElementById("content").scrollHeight;
+                    window.parent.postMessage({height: bodyHeight}, "*");
+                }
+            }
+        }
+
+        var target = document.querySelector('body');
+
+        var observer = new MutationObserver(resizeAndPostSize);
+
+        var config = { attributes: true, subtree: true };
+
+        observer.observe(target, config);
+        $(window).ready(function() {
+           $('#content').css("min-height", 0);
+           setTimeout(resizeAndPostSize, 0);
+        });
+        </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: 'IPv6 : packet fragmentation'
+network_grading: false
+order: 42
+problems:
+    test:
+        shuffle: true
+        shuffle-feedback: |-
+            The IPv6 Fragment Header is defined in `Section 4.5 <https://tools.ietf.org/html/rfc8200#section-4.5>`_ of `RFC8200 <https://tools.ietf.org/html/rfc8200>`_. It contains three important fields :
+             - the Identification field (all fragments of a packet contain the same identification)
+             - the Offset (for technical reasons, the packet dissector shows it as a low order byte and a high order byte values)
+             - the More flag (which is set to 1 in all fragments except the last one)
+        header: Can you reorder the packet packet fragments that were captured while
+            a host was using `ping6` to verify the reachability of destination `2001:7ab:2::b`
+            with packets that are longer than the MTU ? This packet was sent by a
+            Linux host that sends the first fragment of the packet last.
+        type: network-trace
+        name: Reorder the fragments
+        hide: {}
+        exclude: {}
+        feedback: {}
+        redact: {}
+        trace: ip6-frag-9-10.pcap.xml
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

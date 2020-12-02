@@ -1,0 +1,101 @@
+accessible: true
+author: Olivier Bonaventure
+categories: []
+context: |-
+    The Trivial File Transfer Protocol (TFTP), defined in `RFC1350 <https://datatracker.ietf.org/doc/rfc1350/?include_text=1>`_ is a simple file transfer protocol that runs on top of UDP. Network engineers sometimes need to look at protocol specification to debug strange problems. This is a skill that students also need to learn. Read the TFTP specification to answer the following questions :
+
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: pyjavacpp
+evaluate: best
+file: ''
+groups: false
+input_random: '1'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: The TFTP protocol
+network_grading: false
+order: 0
+problems:
+    qcm1:
+        choices:
+        -   valid: true
+            feedback: This is used to read a file from the server
+            text: Read request (RRQ)
+        -   feedback: This is used to write a file on the server
+            text: Write request (WRQ)
+            valid: true
+        -   text: Data (DATA)
+            feedback: A DATA packet is never the first packet sent
+        -   feedback: An ACK packet is always sent in response to another packet
+            text: Acknowledgment (ACK)
+        -   text: Error (ERROR)
+            feedback: An ERROR packet is always sent in response to another packet
+        multiple: true
+        limit: 0
+        name: The different packet types
+        header: |
+            The TFTP specification defines five types of packets. Which of these packets can be sent by a client to start a TFTP connection with a server ?
+        type: multiple_choice
+    q2:
+        name: The header of the DATA packets
+        type: code_single_line
+        header: |
+            What is the length in bytes of the header in DATA packets ?
+        default: ''
+    q1:
+        type: code_single_line
+        header: |+
+            What is the maximum length in bytes of the DATA packets exchanged by this protocol (including the header) ?
+
+        name: Length of the DATA packets
+        default: ''
+    q4:
+        default: ''
+        header: |
+            What is the first sequence number for DATA segments ?
+        name: Sequence numbers
+        type: code_single_line
+    q3:
+        name: Number of packets
+        header: |4
+
+
+            .. raw:: html
+
+               Assuming that there are no losses, how many DATA packets will a client receive from a server when it downloads a <b><span id="ipr1"></span></b> bytes file ?
+
+               <script>
+               var len = parseInt(input["@random"][0] * 2000 + 520);
+               document.getElementById("ipr1").innerHTML = len;
+               </script>
+        default: ''
+        type: code_single_line
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="pdml2html.xsl"?>
+<!-- You can find pdml2html.xsl in /usr/share/wireshark or at https://code.wireshark.org/review/gitweb?p=wireshark.git;a=blob_plain;f=pdml2html.xsl. -->
+<pdml version="0" creator="wireshark/2.6.10" time="Wed Oct 30 20:11:06 2019" capture_file="public/dns-trace-28772.pcap">
+<packet>
+  <proto name="geninfo" pos="0" showname="General information" size="85">
+    <field name="num" pos="0" show="1" showname="Number" value="1" size="85"/>
+    <field name="len" pos="0" show="85" showname="Frame Length" value="55" size="85"/>
+    <field name="caplen" pos="0" show="85" showname="Captured Length" value="55" size="85"/>
+    <field name="timestamp" pos="0" show="Oct 27, 2019 14:59:26.059893000 CET" showname="Captured Time" value="1572184766.059893000" size="85"/>
+  </proto>
+  <proto name="frame" showname="Frame 1: 85 bytes on wire (680 bits), 85 bytes captured (680 bits)" size="85" pos="0">
+    <field name="filtered" value="frame" />
+  </proto>
+  <proto name="sll" showname="Linux cooked capture" size="16" pos="0">
+    <field name="filtered" value="sll" />
+  </proto>
+  <proto name="ipv6" showname="Internet Protocol Version 6, Src: 2001:6a8:3081:a001:130:104:240:230, Dst: 2400:cb00:2048:1::c629:d7a2" size="40" pos="16">
+    <field name="filtered" value="ipv6" />
+  </proto>
+  <proto name="udp" showname="User Datagram Protocol, Src Port: 49925, Dst Port: 53" size="8" pos="56">
+    <field name="udp.srcport" showname="Source Port: 49925" size="2" pos="56" show="49925" value="c305"/>
+    <field name="udp.dstport" showname="Destination Port: 53" size="2" pos="58" show="53" value="0035"/>
+    <field name="udp.port" showname="Source or Destination Port: 49925" hide="yes" size="2" pos="56" show="49925" value="c305"/>
+    <field name="udp.port" showname="Source or Destination Port: 53" hide="yes" size="2" pos="58" show="53" value="0035"/>
+    <field name="udp.length" showname="Length: 29" size="2" pos="60" show="29" value="001d"/>
+    <field name="udp.checksum" showname="Checksum: 0x2cdc [unverified]" size="2" pos="62" show="0x00002cdc" value="2cdc"/>
+    <field name="udp.checksum.status" showname="Checksum Status: Unverified" size="0" pos="62" show="2"/>
+    <field name="udp.stream" showname="Stream index: 0" size="0" pos="64" show="0"/>
+  </proto>
+  <proto name="dns" showname="Domain Name System (query)" size="21" pos="64">
+    <field name="dns.id" showname="Transaction ID: 0xedc5" size="2" pos="64" show="0x0000edc5" value="edc5"/>
+    <field name="dns.flags" showname="Flags: 0x0120 Standard query" size="2" pos="66" show="0x00000120" value="0120">
+      <field name="dns.flags.response" showname="0... .... .... .... = Response: Message is a query" size="2" pos="66" show="0" value="0" unmaskedvalue="0120"/>
+      <field name="dns.flags.opcode" showname=".000 0... .... .... = Opcode: Standard query (0)" size="2" pos="66" show="0" value="0" unmaskedvalue="0120"/>
+      <field name="dns.flags.truncated" showname=".... ..0. .... .... = Truncated: Message is not truncated" size="2" pos="66" show="0" value="0" unmaskedvalue="0120"/>
+      <field name="dns.flags.recdesired" showname=".... ...1 .... .... = Recursion desired: Do query recursively" size="2" pos="66" show="1" value="1" unmaskedvalue="0120"/>
+      <field name="dns.flags.z" showname=".... .... .0.. .... = Z: reserved (0)" size="2" pos="66" show="0" value="0" unmaskedvalue="0120"/>
+      <field name="dns.flags.authenticated" showname=".... .... ..1. .... = AD bit: Set" size="2" pos="66" show="1" value="1" unmaskedvalue="0120"/>
+      <field name="dns.flags.checkdisable" showname=".... .... ...0 .... = Non-authenticated data: Unacceptable" size="2" pos="66" show="0" value="0" unmaskedvalue="0120"/>
+    </field>
+    <field name="dns.count.queries" showname="Questions: 1" size="2" pos="68" show="1" value="0001"/>
+    <field name="dns.count.answers" showname="Answer RRs: 0" size="2" pos="70" show="0" value="0000"/>
+    <field name="dns.count.auth_rr" showname="Authority RRs: 0" size="2" pos="72" show="0" value="0000"/>
+    <field name="dns.count.add_rr" showname="Additional RRs: 0" size="2" pos="74" show="0" value="0000"/>
+    <field name="" show="Queries" size="9" pos="76" value="03636f6d0000020001">
+      <field name="" show="com: type NS, class IN" size="9" pos="76" value="03636f6d0000020001">
+        <field name="dns.qry.name" showname="Name: com" size="5" pos="76" show="com" value="03636f6d00"/>
+        <field name="dns.qry.name.len" showname="Name Length: 3" size="3" pos="76" show="3" value="03636f"/>
+        <field name="dns.count.labels" showname="Label Count: 1" size="3" pos="76" show="1" value="03636f"/>
+        <field name="dns.qry.type" showname="Type: NS (authoritative Name Server) (2)" size="2" pos="81" show="2" value="0002"/>
+        <field name="dns.qry.class" showname="Class: IN (0x0001)" size="2" pos="83" show="0x00000001" value="0001"/>
+      </field>
+    </field>
+  </proto>
+</packet>
+
+
+<packet>
+  <proto name="geninfo" pos="0" showname="General information" size="85">
+    <field name="num" pos="0" show="2" showname="Number" value="2" size="85"/>
+    <field name="len" pos="0" show="85" showname="Frame Length" value="55" size="85"/>
+    <field name="caplen" pos="0" show="85" showname="Captured Length" value="55" size="85"/>
+    <field name="timestamp" pos="0" show="Oct 27, 2019 14:59:31.060050000 CET" showname="Captured Time" value="1572184771.060050000" size="85"/>
+  </proto>
+  <proto name="frame" showname="Frame 2: 85 bytes on wire (680 bits), 85 bytes captured (680 bits)" size="85" pos="0">
+    <field name="filtered" value="frame" />
+  </proto>
+  <proto name="sll" showname="Linux cooked capture" size="16" pos="0">
+    <field name="filtered" value="sll" />
+  </proto>
+  <proto name="ipv6" showname="Internet Protocol Version 6, Src: 2001:6a8:3081:a001:130:104:240:230, Dst: 2400:cb00:2048:1::c629:d7a2" size="40" pos="16">
+    <field name="filtered" value="ipv6" />
+  </proto>
+  <proto name="udp" showname="User Datagram Protocol, Src Port: 49925, Dst Port: 53" size="8" pos="56">
+    <field name="udp.srcport" showname="Source Port: 49925" size="2" pos="56" show="49925" value="c305"/>
+    <field name="udp.dstport" showname="Destination Port: 53" size="2" pos="58" show="53" value="0035"/>
+    <field name="udp.port" showname="Source or Destination Port: 49925" hide="yes" size="2" pos="56" show="49925" value="c305"/>
+    <field name="udp.port" showname="Source or Destination Port: 53" hide="yes" size="2" pos="58" show="53" value="0035"/>
+    <field name="udp.length" showname="Length: 29" size="2" pos="60" show="29" value="001d"/>
+    <field name="udp.checksum" showname="Checksum: 0x2cdc [unverified]" size="2" pos="62" show="0x00002cdc" value="2cdc"/>
+    <field name="udp.checksum.status" showname="Checksum Status: Unverified" size="0" pos="62" show="2"/>
+    <field name="udp.stream" showname="Stream index: 0" size="0" pos="64" show="0"/>
+  </proto>
+  <proto name="dns" showname="Domain Name System (query)" size="21" pos="64">
+    <field name="dns.id" showname="Transaction ID: 0xedc5" size="2" pos="64" show="0x0000edc5" value="edc5"/>
+    <field name="dns.flags" showname="Flags: 0x0120 Standard query" size="2" pos="66" show="0x00000120" value="0120">
+      <field name="dns.flags.response" showname="0... .... .... .... = Response: Message is a query" size="2" pos="66" show="0" value="0" unmaskedvalue="0120"/>
+      <field name="dns.flags.opcode" showname=".000 0... .... .... = Opcode: Standard query (0)" size="2" pos="66" show="0" value="0" unmaskedvalue="0120"/>
+      <field name="dns.flags.truncated" showname=".... ..0. .... .... = Truncated: Message is not truncated" size="2" pos="66" show="0" value="0" unmaskedvalue="0120"/>
+      <field name="dns.flags.recdesired" showname=".... ...1 .... .... = Recursion desired: Do query recursively" size="2" pos="66" show="1" value="1" unmaskedvalue="0120"/>
+      <field name="dns.flags.z" showname=".... .... .0.. .... = Z: reserved (0)" size="2" pos="66" show="0" value="0" unmaskedvalue="0120"/>
+      <field name="dns.flags.authenticated" showname=".... .... ..1. .... = AD bit: Set" size="2" pos="66" show="1" value="1" unmaskedvalue="0120"/>
+      <field name="dns.flags.checkdisable" showname=".... .... ...0 .... = Non-authenticated data: Unacceptable" size="2" pos="66" show="0" value="0" unmaskedvalue="0120"/>
+    </field>
+    <field name="dns.count.queries" showname="Questions: 1" size="2" pos="68" show="1" value="0001"/>
+    <field name="dns.count.answers" showname="Answer RRs: 0" size="2" pos="70" show="0" value="0000"/>
+    <field name="dns.count.auth_rr" showname="Authority RRs: 0" size="2" pos="72" show="0" value="0000"/>
+    <field name="dns.count.add_rr" showname="Additional RRs: 0" size="2" pos="74" show="0" value="0000"/>
+    <field name="" show="Queries" size="9" pos="76" value="03636f6d0000020001">
+      <field name="" show="com: type NS, class IN" size="9" pos="76" value="03636f6d0000020001">
+        <field name="dns.qry.name" showname="Name: com" size="5" pos="76" show="com" value="03636f6d00"/>
+        <field name="dns.qry.name.len" showname="Name Length: 3" size="3" pos="76" show="3" value="03636f"/>
+        <field name="dns.count.labels" showname="Label Count: 1" size="3" pos="76" show="1" value="03636f"/>
+        <field name="dns.qry.type" showname="Type: NS (authoritative Name Server) (2)" size="2" pos="81" show="2" value="0002"/>
+        <field name="dns.qry.class" showname="Class: IN (0x0001)" size="2" pos="83" show="0x00000001" value="0001"/>
+      </field>
+    </field>
+  </proto>
+</packet>
+
+
+</pdml>

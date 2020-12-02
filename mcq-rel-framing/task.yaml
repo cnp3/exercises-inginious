@@ -1,0 +1,159 @@
+accessible: true
+author: ''
+categories: []
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Framing techniques
+network_grading: false
+order: 2
+problems:
+    q1:
+        choices:
+        -   valid: true
+            feedback: This is indeed valid
+            text: |-
+                ================  ================================
+                     Before stuffing   After stuffing
+                     ================  ================================
+                     0001001010000110  01111110000100101000011001111110
+                     ================  ================================
+        -   text: |4+
+
+                     ===============================  ========================================================
+                     Before stuffing                  After stuffing
+                     ===============================  ========================================================
+                     1111110110111100110101101110101  01111110111110101101111000111111011010110111010101111110
+                     ===============================  ========================================================
+
+            valid: true
+            feedback: This is indeed valid
+        -   feedback: This is an invalid frame. After having processed 6 bits set
+                to one, the bit stuffing sender must have added an additional bit
+                set to 0. This is not the case in this example.
+            text: |4+
+
+                     ================ ================================
+                     Before stuffing  After stuffing
+                     ================ ================================
+                     0111111000101010 01111110011111100010101001111110
+                     ================ ================================
+
+        -   text: |4+
+
+                     ================ ================
+                     Before stuffing   After stuffing
+                     ================ ================
+                     0111111001111110 0111111001111110
+                     ================ ================
+
+            feedback: Here, no stuffing has been applied.
+        -   feedback: In this example, the end marker is missing.
+            text: |4+
+
+                     ================================================ =========================================================================
+                     Before stuffing                                  After stuffing
+                     ================================================ =========================================================================
+                     011111100010101001111001010101011011011101010110 0111111001111101000101010011111100111100101010101011111101011011101010110
+                     ================================================ =========================================================================
+
+
+
+
+
+        type: multiple_choice
+        header: '*Bit stuffing*. Consider a simple protocol that uses 16 bits frames.
+            Bit stuffing can be used to recover the frames from a string of bits.
+            The table below shows an original frame (before bit stuffing) and a transmitted
+            frame (after having applied bit stuffing). Only one of the lines below
+            corresponds to a valid utilisation of bit stuffing (the frame boundary
+            marker is 01111110). Which one ? '
+        name: Bit stuffing
+        limit: 3
+    q2:
+        choices:
+        -   valid: true
+            text: |4+
+
+                     =========================    =====================================================
+                     Before stuffing              After stuffing
+                     =========================    =====================================================
+                     DLE STX 1 2 3 DLE DLE ETX    DLE STX DLE DLE STX 1 2 3 DLE DLE DLE DLE ETX DLE ETX
+                     =========================    =====================================================
+
+        -   text: |4+
+
+                     ================  ================================================
+                     Before stuffing   After stuffing
+                     ================  ================================================
+                     DLE DLE DLE DLE   DLE STX DLE DLE DLE DLE DLE DLE DLE DLE DLE ETX
+                     ================  ================================================
+
+            valid: true
+        -   feedback: The marker at the beginning of a frame is DLE followed by STX
+                and not STX alone. Same at the end of the frame.
+            text: |4+
+
+                     =================== ===================================
+                     Before stuffing     After stuffing
+                     =================== ===================================
+                     1 2 3 4 DLE DLE 7 8 STX 1 2 3 4 DLE DLE DLE DLE 7 8 ETX
+                     =================== ===================================
+
+        -   feedback: The beginning and end marker have not been added.
+            text: |4-
+                     ================ =======================
+                     Before stuffing  After stuffing
+                     ================ =======================
+                     DLE STX DLE ETX  DLE STX DLE DLE ETX
+                     ================ =======================
+        -   text: |4+
+
+                     =========================================== =========================================================================
+                     Before stuffing                             After stuffing
+                     =========================================== =========================================================================
+                     DLE A Z R STX DLE ETX ETX DLE 1 1 1 1 0 0 4 DLE STX DLE DLE A Z R DLE STX DLE DLE ETX ETX DLE 1 1 1 1 0 0 4 DLE ETX
+                     =========================================== =========================================================================
+
+            feedback: Inside the frame, no DLE character needs to be added before
+                STX and ETX. The DLE character is only added before another DLE character.
+        name: Character stuffing
+        limit: 3
+        type: multiple_choice
+        header: |4
+             *Character stuffing* is another framing technique. It uses the `DLE`, `STX` and `ETX` characters. The table below shows original (before stuffing) and transmitted frames (after stuffing). Only one of the proposed answers is valid. Which one ?
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

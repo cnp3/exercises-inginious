@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="pdml2html.xsl"?>
+<!-- You can find pdml2html.xsl in /Applications/Wireshark.app/Contents/Resources/share/wireshark or at https://code.wireshark.org/review/gitweb?p=wireshark.git;a=blob_plain;f=pdml2html.xsl. -->
+<pdml version="0" creator="wireshark/3.0.1" time="Thu Oct 10 14:16:00 2019" capture_file="dns-req.pcap">
+<packet>
+  <proto name="geninfo" pos="0" showname="General information" size="95">
+    <field name="num" pos="0" show="1" showname="Number" value="1" size="95"/>
+    <field name="len" pos="0" show="95" showname="Frame Length" value="5f" size="95"/>
+    <field name="caplen" pos="0" show="95" showname="Captured Length" value="5f" size="95"/>
+    <field name="timestamp" pos="0" show="Oct 10, 2019 13:34:15.626321000 CEST" showname="Captured Time" value="1570707255.626321000" size="95"/>
+  </proto>
+  <proto name="frame" showname="Frame 1: 95 bytes on wire (760 bits), 95 bytes captured (760 bits)" size="95" pos="0">
+    <field name="filtered" value="frame" />
+  </proto>
+  <proto name="eth" showname="Ethernet II, Src: 68:5b:35:ad:aa:e1, Dst: 00:18:e7:08:35:a7" size="14" pos="0">
+    <field name="filtered" value="eth" />
+  </proto>
+  <proto name="ipv6" showname="Internet Protocol Version 6, Src: 2001:6a8:308f:2:24ed:a920:24fd:a50b, Dst: 2001:6a8:3081:1::53" size="40" pos="14">
+    <field name="filtered" value="ipv6" />
+  </proto>
+  <proto name="udp" showname="User Datagram Protocol" size="8" pos="54">
+    <field name="udp.srcport" showname="Source Port: 63126" size="2" pos="54" show="63126" value="f696"/>
+    <field name="udp.dstport" showname="Destination Port: 53" size="2" pos="56" show="53" value="0035"/>
+    <field name="udp.port" showname="Source or Destination Port: 63126" hide="yes" size="2" pos="54" show="63126" value="f696"/>
+    <field name="udp.port" showname="Source or Destination Port: 53" hide="yes" size="2" pos="56" show="53" value="0035"/>
+    <field name="udp.length" showname="Length: 41" size="2" pos="58" show="41" value="0029"/>
+    <field name="udp.checksum" showname="Checksum: 0x4709 [unverified]" size="2" pos="60" show="0x00004709" value="4709"/>
+    <field name="udp.checksum.status" showname="Checksum Status: Unverified" size="0" pos="60" show="2"/>
+    <field name="udp.stream" showname="Stream index: 0" size="0" pos="62" show="0"/>
+    <field name="" show="Timestamps" size="0" pos="54">
+      <field name="udp.time_relative" showname="Time since first frame: 0.000000000 seconds" size="0" pos="54" show="0.000000000"/>
+      <field name="udp.time_delta" showname="Time since previous frame: 0.000000000 seconds" size="0" pos="54" show="0.000000000"/>
+    </field>
+  </proto>
+  <proto name="dns" showname="Domain Name System (query)" size="33" pos="62">
+    <field name="dns.id" showname="Transaction ID: 0x16eb" size="2" pos="62" show="0x000016eb" value="16eb"/>
+    <field name="dns.flags" showname="Flags: 0x0120 Standard query" size="2" pos="64" show="0x00000120" value="0120">
+      <field name="dns.flags.response" showname="0... .... .... .... = Response: Message is a query" size="2" pos="64" show="0" value="0" unmaskedvalue="0120"/>
+      <field name="dns.flags.opcode" showname=".000 0... .... .... = Opcode: Standard query (0)" size="2" pos="64" show="0" value="0" unmaskedvalue="0120"/>
+      <field name="dns.flags.truncated" showname=".... ..0. .... .... = Truncated: Message is not truncated" size="2" pos="64" show="0" value="0" unmaskedvalue="0120"/>
+      <field name="dns.flags.recdesired" showname=".... ...1 .... .... = Recursion desired: Do query recursively" size="2" pos="64" show="1" value="1" unmaskedvalue="0120"/>
+      <field name="dns.flags.z" showname=".... .... .0.. .... = Z: reserved (0)" size="2" pos="64" show="0" value="0" unmaskedvalue="0120"/>
+      <field name="dns.flags.authenticated" showname=".... .... ..1. .... = AD bit: Set" size="2" pos="64" show="1" value="1" unmaskedvalue="0120"/>
+      <field name="dns.flags.checkdisable" showname=".... .... ...0 .... = Non-authenticated data: Unacceptable" size="2" pos="64" show="0" value="0" unmaskedvalue="0120"/>
+    </field>
+    <field name="dns.count.queries" showname="Questions: 1" size="2" pos="66" show="1" value="0001"/>
+    <field name="dns.count.answers" showname="Answer RRs: 0" size="2" pos="68" show="0" value="0000"/>
+    <field name="dns.count.auth_rr" showname="Authority RRs: 0" size="2" pos="70" show="0" value="0000"/>
+    <field name="dns.count.add_rr" showname="Additional RRs: 0" size="2" pos="72" show="0" value="0000"/>
+    <field name="" show="Queries" size="21" pos="74" value="03777777076578616d706c65036f726700001c0001">
+      <field name="" show="www.example.org: type AAAA, class IN" size="21" pos="74" value="03777777076578616d706c65036f726700001c0001">
+        <field name="dns.qry.name" showname="Name: www.example.org" size="17" pos="74" show="www.example.org" value="03777777076578616d706c65036f726700"/>
+        <field name="dns.qry.name.len" showname="Name Length: 15" size="15" pos="74" show="15" value="03777777076578616d706c65036f72"/>
+        <field name="dns.count.labels" showname="Label Count: 3" size="15" pos="74" show="3" value="03777777076578616d706c65036f72"/>
+        <field name="dns.qry.type" showname="Type: AAAA (IPv6 Address) (28)" size="2" pos="91" show="28" value="001c"/>
+        <field name="dns.qry.class" showname="Class: IN (0x0001)" size="2" pos="93" show="0x00000001" value="0001"/>
+      </field>
+    </field>
+  </proto>
+</packet>
+
+
+<packet>
+  <proto name="geninfo" pos="0" showname="General information" size="123">
+    <field name="num" pos="0" show="2" showname="Number" value="2" size="123"/>
+    <field name="len" pos="0" show="123" showname="Frame Length" value="7b" size="123"/>
+    <field name="caplen" pos="0" show="123" showname="Captured Length" value="7b" size="123"/>
+    <field name="timestamp" pos="0" show="Oct 10, 2019 13:34:15.626949000 CEST" showname="Captured Time" value="1570707255.626949000" size="123"/>
+  </proto>
+  <proto name="frame" showname="Frame 2: 123 bytes on wire (984 bits), 123 bytes captured (984 bits)" size="123" pos="0">
+    <field name="filtered" value="frame" />
+  </proto>
+  <proto name="eth" showname="Ethernet II, Src: 00:18:e7:08:35:a7, Dst: 68:5b:35:ad:aa:e1" size="14" pos="0">
+    <field name="filtered" value="eth" />
+  </proto>
+  <proto name="ipv6" showname="Internet Protocol Version 6, Src: 2001:6a8:3081:1::53, Dst: 2001:6a8:308f:2:24ed:a920:24fd:a50b" size="40" pos="14">
+    <field name="filtered" value="ipv6" />
+  </proto>
+  <proto name="udp" showname="User Datagram Protocol" size="8" pos="54">
+    <field name="udp.srcport" showname="Source Port: 53" size="2" pos="54" show="53" value="0035"/>
+    <field name="udp.dstport" showname="Destination Port: 63126" size="2" pos="56" show="63126" value="f696"/>
+    <field name="udp.port" showname="Source or Destination Port: 53" hide="yes" size="2" pos="54" show="53" value="0035"/>
+    <field name="udp.port" showname="Source or Destination Port: 63126" hide="yes" size="2" pos="56" show="63126" value="f696"/>
+    <field name="udp.length" showname="Length: 69" size="2" pos="58" show="69" value="0045"/>
+    <field name="udp.checksum" showname="Checksum: 0xa528 [unverified]" size="2" pos="60" show="0x0000a528" value="a528"/>
+    <field name="udp.checksum.status" showname="Checksum Status: Unverified" size="0" pos="60" show="2"/>
+    <field name="udp.stream" showname="Stream index: 0" size="0" pos="62" show="0"/>
+    <field name="" show="Timestamps" size="0" pos="54">
+      <field name="udp.time_relative" showname="Time since first frame: 0.000628000 seconds" size="0" pos="54" show="0.000628000"/>
+      <field name="udp.time_delta" showname="Time since previous frame: 0.000628000 seconds" size="0" pos="54" show="0.000628000"/>
+    </field>
+  </proto>
+  <proto name="dns" showname="Domain Name System (response)" size="61" pos="62">
+    <field name="dns.id" showname="Transaction ID: 0x16eb" size="2" pos="62" show="0x000016eb" value="16eb"/>
+    <field name="dns.flags" showname="Flags: 0x81a0 Standard query response, No error" size="2" pos="64" show="0x000081a0" value="81a0">
+      <field name="dns.flags.response" showname="1... .... .... .... = Response: Message is a response" size="2" pos="64" show="1" value="1" unmaskedvalue="81a0"/>
+      <field name="dns.flags.opcode" showname=".000 0... .... .... = Opcode: Standard query (0)" size="2" pos="64" show="0" value="0" unmaskedvalue="81a0"/>
+      <field name="dns.flags.authoritative" showname=".... .0.. .... .... = Authoritative: Server is not an authority for domain" size="2" pos="64" show="0" value="0" unmaskedvalue="81a0"/>
+      <field name="dns.flags.truncated" showname=".... ..0. .... .... = Truncated: Message is not truncated" size="2" pos="64" show="0" value="0" unmaskedvalue="81a0"/>
+      <field name="dns.flags.recdesired" showname=".... ...1 .... .... = Recursion desired: Do query recursively" size="2" pos="64" show="1" value="1" unmaskedvalue="81a0"/>
+      <field name="dns.flags.recavail" showname=".... .... 1... .... = Recursion available: Server can do recursive queries" size="2" pos="64" show="1" value="1" unmaskedvalue="81a0"/>
+      <field name="dns.flags.z" showname=".... .... .0.. .... = Z: reserved (0)" size="2" pos="64" show="0" value="0" unmaskedvalue="81a0"/>
+      <field name="dns.flags.authenticated" showname=".... .... ..1. .... = Answer authenticated: Answer/authority portion was authenticated by the server" size="2" pos="64" show="1" value="1" unmaskedvalue="81a0"/>
+      <field name="dns.flags.checkdisable" showname=".... .... ...0 .... = Non-authenticated data: Unacceptable" size="2" pos="64" show="0" value="0" unmaskedvalue="81a0"/>
+      <field name="dns.flags.rcode" showname=".... .... .... 0000 = Reply code: No error (0)" size="2" pos="64" show="0" value="0" unmaskedvalue="81a0"/>
+    </field>
+    <field name="dns.count.queries" showname="Questions: 1" size="2" pos="66" show="1" value="0001"/>
+    <field name="dns.count.answers" showname="Answer RRs: 1" size="2" pos="68" show="1" value="0001"/>
+    <field name="dns.count.auth_rr" showname="Authority RRs: 0" size="2" pos="70" show="0" value="0000"/>
+    <field name="dns.count.add_rr" showname="Additional RRs: 0" size="2" pos="72" show="0" value="0000"/>
+    <field name="" show="Queries" size="21" pos="74" value="03777777076578616d706c65036f726700001c0001">
+      <field name="" show="www.example.org: type AAAA, class IN" size="21" pos="74" value="03777777076578616d706c65036f726700001c0001">
+        <field name="dns.qry.name" showname="Name: www.example.org" size="17" pos="74" show="www.example.org" value="03777777076578616d706c65036f726700"/>
+        <field name="dns.qry.name.len" showname="Name Length: 15" size="15" pos="74" show="15" value="03777777076578616d706c65036f72"/>
+        <field name="dns.count.labels" showname="Label Count: 3" size="15" pos="74" show="3" value="03777777076578616d706c65036f72"/>
+        <field name="dns.qry.type" showname="Type: AAAA (IPv6 Address) (28)" size="2" pos="91" show="28" value="001c"/>
+        <field name="dns.qry.class" showname="Class: IN (0x0001)" size="2" pos="93" show="0x00000001" value="0001"/>
+      </field>
+    </field>
+    <field name="" show="Answers" size="28" pos="95" value="c00c001c0001000147d1001026062800022000010248189325c81946">
+      <field name="" show="www.example.org: type AAAA, class IN, addr 2606:2800:220:1:248:1893:25c8:1946" size="28" pos="95" value="c00c001c0001000147d1001026062800022000010248189325c81946">
+        <field name="dns.resp.name" showname="Name: www.example.org" size="2" pos="95" show="www.example.org" value="c00c"/>
+        <field name="dns.resp.type" showname="Type: AAAA (IPv6 Address) (28)" size="2" pos="97" show="28" value="001c"/>
+        <field name="dns.resp.class" showname="Class: IN (0x0001)" size="2" pos="99" show="0x00000001" value="0001"/>
+        <field name="dns.resp.ttl" showname="Time to live: 83921" size="4" pos="101" show="83921" value="000147d1"/>
+        <field name="dns.resp.len" showname="Data length: 16" size="2" pos="105" show="16" value="0010"/>
+        <field name="dns.aaaa" showname="AAAA Address: 2606:2800:220:1:248:1893:25c8:1946" size="16" pos="107" show="2606:2800:220:1:248:1893:25c8:1946" value="26062800022000010248189325c81946"/>
+      </field>
+    </field>
+    <field name="dns.response_to" showname="Request In: 1" size="0" pos="62" show="1"/>
+    <field name="dns.time" showname="Time: 0.000628000 seconds" size="0" pos="62" show="0.000628000"/>
+  </proto>
+</packet>
+
+
+</pdml>

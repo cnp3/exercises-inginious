@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="pdml2html.xsl"?>
+<!-- You can find pdml2html.xsl in /Applications/Wireshark.app/Contents/Resources/share/wireshark or at https://code.wireshark.org/review/gitweb?p=wireshark.git;a=blob_plain;f=pdml2html.xsl. -->
+<pdml version="0" creator="wireshark/3.0.1" time="Thu May 16 16:36:52 2019" capture_file="ip6-packet409.pcap">
+<packet>
+  <proto name="geninfo" pos="0" showname="General information" size="94">
+    <field name="num" pos="0" show="1" showname="Number" value="1" size="94"/>
+    <field name="len" pos="0" show="94" showname="Frame Length" value="5e" size="94"/>
+    <field name="caplen" pos="0" show="94" showname="Captured Length" value="5e" size="94"/>
+    <field name="timestamp" pos="0" show="Nov 20, 2018 17:00:36.721366000 CET" showname="Captured Time" value="1542729636.721366000" size="94"/>
+  </proto>
+  <proto name="frame" showname="Frame 1: 94 bytes on wire (752 bits), 94 bytes captured (752 bits)" size="94" pos="0">
+    <field name="filtered" value="frame" />
+  </proto>
+  <proto name="eth" showname="Ethernet II, Src: 68:5b:35:ad:aa:e1, Dst: 00:1b:21:38:e9:78" size="14" pos="0">
+    <field name="filtered" value="eth" />
+  </proto>
+  <proto name="ipv6" showname="Internet Protocol Version 6, Src: 2001:6a8:308f:2:48e9:95ae:3a92:922d, Dst: 2001:6a8:3081:1::53" size="40" pos="14">
+    <field name="ipv6.version" showname="0110 .... = Version: 6" size="1" pos="14" show="6" value="6" unmaskedvalue="60"/>
+    <field name="ip.version" showname="0110 .... = Version: 6 [This field makes the filter match on &quot;ip.version == 6&quot; possible]" hide="yes" size="1" pos="14" show="6" value="6" unmaskedvalue="60"/>
+    <field name="ipv6.tclass" showname=".... 0000 0000 .... .... .... .... .... = Traffic Class: 0x00 (DSCP: CS0, ECN: Not-ECT)" size="4" pos="14" show="0x00000000" value="0" unmaskedvalue="600f35d3">
+      <field name="ipv6.tclass.dscp" showname=".... 0000 00.. .... .... .... .... .... = Differentiated Services Codepoint: Default (0)" size="4" pos="14" show="0" value="0" unmaskedvalue="600f35d3"/>
+      <field name="ipv6.tclass.ecn" showname=".... .... ..00 .... .... .... .... .... = Explicit Congestion Notification: Not ECN-Capable Transport (0)" size="4" pos="14" show="0" value="0" unmaskedvalue="600f35d3"/>
+    </field>
+    <field name="ipv6.flow" showname=".... .... .... 1111 0011 0101 1101 0011 = Flow Label: 0xf35d3" size="4" pos="14" show="0x000f35d3" value="F35D3" unmaskedvalue="600f35d3"/>
+    <field name="ipv6.plen" showname="Payload Length: 40" size="2" pos="18" show="40" value="0028"/>
+    <field name="ipv6.nxt" showname="Next Header: UDP (17)" size="1" pos="20" show="17" value="11"/>
+    <field name="ipv6.hlim" showname="Hop Limit: 255" size="1" pos="21" show="255" value="ff"/>
+    <field name="ipv6.src" showname="Source: 2001:6a8:308f:2:48e9:95ae:3a92:922d" size="16" pos="22" show="2001:6a8:308f:2:48e9:95ae:3a92:922d" value="200106a8308f000248e995ae3a92922d"/>
+    <field name="ipv6.addr" showname="Source or Destination Address: 2001:6a8:308f:2:48e9:95ae:3a92:922d" hide="yes" size="16" pos="22" show="2001:6a8:308f:2:48e9:95ae:3a92:922d" value="200106a8308f000248e995ae3a92922d"/>
+    <field name="ipv6.src_host" showname="Source Host: 2001:6a8:308f:2:48e9:95ae:3a92:922d" hide="yes" size="16" pos="22" show="2001:6a8:308f:2:48e9:95ae:3a92:922d" value="200106a8308f000248e995ae3a92922d"/>
+    <field name="ipv6.host" showname="Source or Destination Host: 2001:6a8:308f:2:48e9:95ae:3a92:922d" hide="yes" size="16" pos="22" show="2001:6a8:308f:2:48e9:95ae:3a92:922d" value="200106a8308f000248e995ae3a92922d"/>
+    <field name="ipv6.dst" showname="Destination: 2001:6a8:3081:1::53" size="16" pos="38" show="2001:6a8:3081:1::53" value="200106a8308100010000000000000053"/>
+    <field name="ipv6.addr" showname="Source or Destination Address: 2001:6a8:3081:1::53" hide="yes" size="16" pos="38" show="2001:6a8:3081:1::53" value="200106a8308100010000000000000053"/>
+    <field name="ipv6.dst_host" showname="Destination Host: 2001:6a8:3081:1::53" hide="yes" size="16" pos="38" show="2001:6a8:3081:1::53" value="200106a8308100010000000000000053"/>
+    <field name="ipv6.host" showname="Source or Destination Host: 2001:6a8:3081:1::53" hide="yes" size="16" pos="38" show="2001:6a8:3081:1::53" value="200106a8308100010000000000000053"/>
+  </proto>
+  <proto name="udp" showname="User Datagram Protocol, Src Port: 50119, Dst Port: 53" size="8" pos="54">
+    <field name="udp.srcport" showname="Source Port: 50119" size="2" pos="54" show="50119" value="c3c7"/>
+    <field name="udp.dstport" showname="Destination Port: 53" size="2" pos="56" show="53" value="0035"/>
+    <field name="udp.port" showname="Source or Destination Port: 50119" hide="yes" size="2" pos="54" show="50119" value="c3c7"/>
+    <field name="udp.port" showname="Source or Destination Port: 53" hide="yes" size="2" pos="56" show="53" value="0035"/>
+    <field name="udp.length" showname="Length: 40" size="2" pos="58" show="40" value="0028"/>
+    <field name="udp.checksum" showname="Checksum: 0x5a49 [unverified]" size="2" pos="60" show="0x00005a49" value="5a49"/>
+    <field name="udp.checksum.status" showname="Checksum Status: Unverified" size="0" pos="60" show="2"/>
+    <field name="udp.stream" showname="Stream index: 0" size="0" pos="62" show="0"/>
+    <field name="" show="Timestamps" size="0" pos="54">
+      <field name="udp.time_relative" showname="Time since first frame: 0.000000000 seconds" size="0" pos="54" show="0.000000000"/>
+      <field name="udp.time_delta" showname="Time since previous frame: 0.000000000 seconds" size="0" pos="54" show="0.000000000"/>
+    </field>
+  </proto>
+  <proto name="dns" showname="Domain Name System (query)" size="32" pos="62">
+    <field name="filtered" value="dns" />
+  </proto>
+</packet>
+
+
+</pdml>

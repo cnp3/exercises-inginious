@@ -1,0 +1,73 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- dns
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: DNS and the UDP port numbers
+network_grading: false
+problems:
+    id:
+        feedback:
+            udp.dstport: '- The DNS request was sent by the client from port 63126.  The
+                response must be sent towards this port to reach the client application.'
+            udp.srcport: |
+                - The DNS request was sent to UDP port 53 on the server. The response must originate from the same port
+        name: The UDP port numbers
+        shuffle-feedback: ''
+        header: DNS messages are carried inside UDP segments. Could you predict the
+            source and destination port numbers of the DNS response knowing the DNS
+            request ?
+        trace: dns-req.pdml
+        hide:
+            1:
+            - udp.srcport
+            - udp.dstport
+        exclude:
+        - geninfo.num
+        - geninfo.len
+        - geninfo.caplen
+        - geninfo.timestamp
+        - udp.checksum.status
+        - udp.port
+        - udp.port
+        redact:
+        - udp.checksum.status
+        type: network-trace
+        shuffle: false
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

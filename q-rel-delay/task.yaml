@@ -1,0 +1,64 @@
+accessible: true
+author: Olivier Bonaventure
+categories: []
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: pyjavacpp
+evaluate: best
+file: ''
+groups: false
+input_random: '3'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Transfert delay of one frame
+network_grading: false
+order: 6
+problems:
+    q1:
+        type: code_single_line
+        header: |
+            .. raw:: html
+
+               Consider a <b><span id="ipr1"></span></b> bits per second link between two hosts that has a propagation delay of <b><span id="ipr2"></span></b> milliseconds. What is the delay (in milliseconds) between the transmission of the first bit of a <b><span id="ipr3"></span></b> bytes frame from a sending host and the reception of the last bit of this segment on the receiving host.
+
+
+               <script>
+               var bw = 10000*parseInt(input["@random"][0] * 100 + 1);
+               var de = parseInt(input["@random"][1] * 50 + 20);
+               var len = 100*parseInt(input["@random"][2] * 10 + 10);
+               document.getElementById("ipr1").innerHTML = bw;
+               document.getElementById("ipr2").innerHTML = de;
+               document.getElementById("ipr3").innerHTML = len;
+
+               </script>
+        name: How long does it take to deliver a frame ?
+        default: ''
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

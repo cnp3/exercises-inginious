@@ -1,0 +1,65 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- tcp
+context: 'The TCP header, shown in the `TCP chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/tcp.html>`_
+    of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_
+    contains several flags, including the `SYN` and the `ACK` flags. These two flags
+    play an important role during the establishment of a connection. The three segments
+    below correspond to the three-way handshake that is used to establish  a TCP connection.'
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Utilisation of the SYN and ACK flags during the three-way-handshake used by
+    TCP
+network_grading: false
+order: 25
+problems:
+    test:
+        exclude:
+        - tcp.flags.str
+        - tcp.window_size
+        - tcp.window_size_scalefactor
+        - tcp.len
+        - tcp.checksum
+        name: Acknowledgement numbers
+        hide:
+            0:
+            - tcp.flags.syn
+            - tcp.flags.ack
+            1:
+            - tcp.flags.syn
+            - tcp.flags.ack
+            2:
+            - tcp.flags.syn
+            - tcp.flags.ack
+        header: Can you infer the value of the `SYN` and `ACK` flags in the three
+            segments below ?
+        type: network-trace
+        trace: tcp-rfc793-24-26.pcap.xml
+        shuffle-feedback: ''
+        redact: tcp.flags
+        feedback:
+            tcp.flags.ack: 'The `ACK` must be set when the TCP header contains a valid
+                acknowledgement number. In practice, the only segment that does not
+                contain a valid acknowledgement number is the initial segment sent
+                by the client to create a connection (in some cases, it is also possible
+                to observe a `RST` segment that does not contain the `ACK` flag, but
+                this is rare) '
+            tcp.flags.syn: The `SYN` flag must only be set in the first segment sent
+                by a host when establishing a TCP connection. Once the initial `SYN`
+                has been acknowledged, this flag must remain reset during the entire
+                lifetime of the connection.
+        shuffle: false
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

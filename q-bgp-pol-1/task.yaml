@@ -1,0 +1,87 @@
+accessible: true
+author: Olivier Bonaventure
+categories: []
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: pyjavacpp
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Interdomain routing policies
+network_grading: false
+problems:
+    q1:
+        type: code_single_line
+        header: |-
+            Consider the network below where the red arrows represent customer->provider peerings and the blue lines shared cost peerings. We consider different policies for the green line.
+
+            .. image:: https://inginious.org/course/cnp3/q-bgp-pol-1/figure.png
+                :width: 60%
+
+            Provide your answer as a comma-separated list of paths starting with the preferred one. For example, the answer::
+
+             AS9:AS1, AS8:AS7:AS1
+
+            indicates that the AS has learned two different paths. The preferred one is the one via ``AS9`` that has a length of 2 AS hops while the second path has a length of 3 AS hops. If there is no path, return 0 as your answer.
+
+            What are the interdomain paths that ``AS3`` has learned to reach the prefix advertised by ``AS1`` in the network above if ``AS2`` is a shared-cost peer of ``AS3`` ?
+
+            .. image:: https://inginious.org/course/cnp3/q-bgp-pol-1/figure1.png
+                :width: 60%
+        optional: 'on'
+        default: ''
+        name: 'Interdomain paths '
+    q2:
+        name: Interdomain paths
+        optional: 'on'
+        header: |-
+            What are the interdomain paths that ``AS3`` has learned to reach the prefix advertised by ``AS1`` in the network above if ``AS2`` is a customer of ``AS3`` ?
+
+
+            .. image:: https://inginious.org/course/cnp3/q-bgp-pol-1/figure2.png
+                :width: 60%
+        type: code_single_line
+        default: ''
+    q3:
+        name: Interdomain paths
+        optional: 'on'
+        type: code_single_line
+        header: |-
+            What are the interdomain paths that ``AS3`` has learned to reach the prefix advertised by ``AS1`` in the network above if ``AS2`` is a provider of ``AS3`` ?
+
+
+            .. image:: https://inginious.org/course/cnp3/q-bgp-pol-1/figure3.png
+                :width: 60%
+        default: ''
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

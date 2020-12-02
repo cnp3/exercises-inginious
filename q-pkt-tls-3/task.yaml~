@@ -1,0 +1,93 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- tls
+context: ''
+environment: pyjavacpp
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    time: '30'
+    output: '2'
+    memory: '100'
+name: A TLS trace
+network_grading: false
+problems:
+    trace:
+        feedback: {}
+        type: network-trace
+        name: A TLS trace
+        exclude:
+        - tcp.flags
+        - tcp.options
+        header: 'The `attached packet trace <q-pkt-tls-1/tls-trace.pcap>`_ was collected
+            on a Linux client. '
+        redact: {}
+        trace: tls-trace.xml
+        shuffle-feedback: ''
+        hide: {}
+        shuffle: false
+    mcq2:
+        choices:
+        -   valid: true
+            text: TLS 1.0
+        -   text: TLS 1.1
+            valid: true
+        -   valid: true
+            text: TLS 1.2
+        -   valid: true
+            text: TLS 1.3
+        name: What are the versions of TLS supported by the client
+        limit: 0
+        type: multiple_choice
+        header: ''
+        multiple: true
+    mcq:
+        choices:
+        -   text: TLS 1.0
+        -   text: TLS 1.2
+        -   text: TLS 1.3
+            valid: true
+        type: multiple_choice
+        limit: 0
+        name: Version of TLS
+        header: What is the version of TLS chosen by the server ?
+    q1:
+        type: code_single_line
+        default: ''
+        header: How many different cipher suites are proposed by this client ?
+        optional: 'on'
+        name: Cipher suites
+    q2:
+        optional: 'on'
+        header: 'The Server Name Indication is a TLS extension that is used by the
+            client to specify the fully qualified domaine name of the contacted server.
+            What is the name of the server contacted in this trace ? '
+        default: ''
+        name: Server name
+        type: code_single_line
+    q3:
+        optional: 'on'
+        type: code_single_line
+        name: Cipher suite
+        header: In TLS, the server selects its preferred cipher suite among the ones
+            supported by the client. These cipher suites are encoded as a string.
+            What is the cipher suite used in this trace ?
+        default: ''
+    q4:
+        default: ''
+        header: Since different application layer protocols can be used above TLS,
+            there must be a way for the client to indicate that application layer
+            protocol that it wishes to use over the TLS session. What is the application
+            layer protocol used in this trace ?
+        name: Application layer protocol
+        optional: 'on'
+        type: code_single_line
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

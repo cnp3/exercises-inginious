@@ -1,0 +1,65 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- dns
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: DNS over TCP
+network_grading: false
+problems:
+    tcp:
+        shuffle-feedback: ''
+        trace: tcp-dns.pdml
+        exclude: {}
+        feedback: {}
+        redact: {}
+        name: A short DNS over TCP trace
+        type: network-trace
+        hide:
+            3:
+            - dns.length
+            5:
+            - dns.length
+        header: DNS can also be used over TCP instead of UDP. In this case, several
+            requests and responses can be sent over the bytestream. The transaction
+            identifier is still used to identify the response that matches a request.
+            The only difference with DNS over UDP is that each DNS message is prefixed
+            with a length field that contains the length of the DNS message. Can you
+            infer the value of this length field in the attached TCP trace ?
+        shuffle: false
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

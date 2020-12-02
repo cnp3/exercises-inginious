@@ -1,0 +1,55 @@
+#!/bin/python3
+
+
+from inginious import input, feedback, rst
+import array
+
+# random input
+
+f = int(input.get_input("@random")[0] * 1000000000 + 1000000000)
+
+# source: https://stackoverflow.com/questions/1767910/checksum-udp-calculation-python
+def checksum(pkt):
+       if len(pkt) % 2 == 1:
+           pkt += "\0"
+       s = sum(array.array("H", pkt))
+       s = (s >> 16) + (s & 0xffff)
+       s += s >> 16
+       s = ~s
+       return (((s>>8)&0xff)|s<<8) & 0xffff
+
+#source https://wiki.python.org/moin/BitManipulation
+def bin(s):
+    return str(s) if s<=1 else bin(s>>1) + str(s&1)
+
+answer = input.get_input("q1")
+a=int(answer,2)
+
+
+fs=f.to_bytes(4,byteorder='big')
+fa=a.to_bytes(4,byteorder='big')
+
+if(f==a):
+  feedback.set_problem_result("failed","q1")
+  feedback.set_grade(0)
+  feedback.set_global_result("failed")       
+  feedback.set_problem_feedback("This is the same frame, you did not modify any bit. The checksum of this frame is "+str(bin(checksum(fs))),"q1")
+else:  
+
+  if(len(bin(f))!=len(answer)):
+    feedback.set_problem_result("failed","q1")
+    feedback.set_grade(0)
+    feedback.set_global_result("failed")       
+    feedback.set_problem_feedback("The frame that you proposed that does not have the same length as the original one.","q1")
+  else:
+    if(checksum(fs)==checksum(fa)):  
+      feedback.set_problem_result("success","q1")
+      feedback.set_grade(100)
+      feedback.set_global_result("success")       
+      feedback.set_problem_feedback("The checksum of this frame is "+bin(checksum(fs))+" and the checksum of your answer is "+bin(checksum(fa)),"q1")
+    else:
+      feedback.set_problem_result("failed","q1")
+      feedback.set_grade(0)
+      feedback.set_global_result("failed")       
+      ret="The checksum of this frame is "+bin(checksum(fs))+" while the checksum of your answer is "+bin(checksum(fa))
+      feedback.set_problem_feedback(ret,"q1")

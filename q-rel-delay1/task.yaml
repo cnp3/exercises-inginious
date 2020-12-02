@@ -1,0 +1,71 @@
+accessible: true
+author: Olivier Bonaventure
+categories: []
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: pyjavacpp
+evaluate: best
+file: ''
+groups: false
+input_random: '2'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Round trip time
+network_grading: false
+order: 7
+problems:
+    q1:
+        type: code_single_line
+        header: |-
+            .. raw:: html
+
+               Consider two hosts connected by a physical cable. The two hosts are separated by a distance of <b><span id="ipr1"></span></b> kilometers and the propagation delay is 5 microseconds per kilometer. What is the delay required to send one bit from the sender to the receiver (in milliseconds) ?
+
+               <script>
+               var km = 10*parseInt(input["@random"][0] * 200 + 10);
+               document.getElementById("ipr1").innerHTML = km;
+               </script>
+        name: Transmission delay
+        default: ''
+    q2:
+        name: Round trip time
+        type: code_single_line
+        header: |-
+            .. raw:: html
+
+               If the bandwidth of this physical cable is <b><span id="ipr2"></span></b> Mbps. If the data frames have a length of 1000 bits and the acknowledgments a length of 40 bits, what is the exact value of the round-trip-time, i.e. the delay in seconds between the transmission of the first bit of a data frame and the reception of the last bit of the acknowledgment ? To compute this delay, you can assume that the receiver needs one millisecond to verify a received frame and prepare the corresponding acknowledgment.
+
+               <script>
+               var bw = parseInt(input["@random"][0] * 50 + 5);
+               document.getElementById("ipr2").innerHTML = bw;
+               </script>
+        default: ''
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

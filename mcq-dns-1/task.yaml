@@ -1,0 +1,67 @@
+accessible: true
+author: Olivier Bonaventure
+categories: []
+context: |-
+    .. raw:: html
+
+       <script defer>
+
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: document.body.scrollHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    time: '30'
+    output: '2'
+    memory: '100'
+name: The types of DNS records
+network_grading: false
+order: 17
+problems:
+    types:
+        choices:
+        -   text: The `AAAA` record.
+            feedback: This is indeed the type of record that contains an IPv6 address.
+            valid: true
+        -   feedback: This record is used to retrieve the IPv4 address associated
+                to a name.
+            text: The `A` record.
+        -   feedback: This record is used to retrieve the name server that is responsible
+                for a given domain name.
+            text: The `NS` record.
+        -   text: The `MX` record.
+            feedback: This record is used to retrieve the mail server that is responsible
+                for a given domain name.
+        -   feedback: This record contains textual information in free format. Some
+                applications or services use it to store some very specific informations.
+            text: The `TXT` record.
+        limit: 0
+        name: The types of DNS Resource Records
+        header: Which of the following DNS Resource Records should be queried to retrieve
+            the IPv6 address associated to a name ?
+        type: multiple_choice
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

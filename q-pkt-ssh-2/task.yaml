@@ -1,0 +1,95 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- ssh
+context: |-
+    .. raw:: html
+
+        <script>
+        $('#content').css("min-height", 0);
+
+        bodyHeight = 0;
+        function resizeAndPostSize() {
+            if (document.getElementById("content")) {
+                if (document.getElementById("content").scrollHeight != bodyHeight) {
+                    bodyHeight = document.getElementById("content").scrollHeight;
+                    window.parent.postMessage({height: bodyHeight}, "*");
+                }
+            }
+        }
+
+        var target = document.querySelector('body');
+
+        var observer = new MutationObserver(resizeAndPostSize);
+
+        var config = { attributes: true, subtree: true };
+
+        observer.observe(target, config);
+        $(window).ready(function() {
+           $('#content').css("min-height", 0);
+           setTimeout(resizeAndPostSize, 0);
+        });
+        </script>
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Another ssh trace
+network_grading: false
+problems:
+    trace:
+        hide: {}
+        type: network-trace
+        feedback: {}
+        exclude:
+        - tcp.flags
+        - tcp.options
+        header: 'The `attached packet trace <https://inginious.org/course/cnp3/q-pkt-ssh-2/ssh6.pcap>`_
+            was collected on a Linux server. In the ssh protocol, the client and the
+            server propose an ordered list of encryption schemes and technique that
+            is supported by both of them and has the highest preference is selected.  '
+        trace: ssh.xml
+        name: A simple ssh trace
+        redact: {}
+        shuffle-feedback: ''
+        shuffle: false
+    qcm:
+        choices:
+        -   valid: true
+            text: The client proposed the ``aes128-gcm@openssh.com`` encryption scheme
+        -   valid: true
+            text: The client proposed the ``3des-cbc`` encryption scheme
+        -   valid: true
+            text: The server proposed the ``aes128-gcm@openssh.com`` encryption scheme
+        -   text: The server proposed the ``3des-cbc`` encryption scheme
+            feedback: Only the client proposed the ``3des-cbc`` encryption scheme
+        -   valid: true
+            text: The server proposed the ``aes128-ctr`` encryption scheme
+        -   valid: true
+            text: The server proposed the ``aes256-gcm@openssh.com`` encryption scheme
+        -   feedback: Only the server proposed this encryption technique
+            text: The client proposed the ``chacha20-poly1305@openssh.com`` encryption
+                scheme
+        -   text: The ``3des-cbc`` encryption scheme was used for this session
+        -   text: The ``chacha20-poly1305@openssh.com`` encryption scheme was used
+                for this session
+        -   valid: true
+            text: The ``aes128-gcm@openssh.com`` encryption scheme was used for this
+                session
+        header: Looking at the trace above, select the affirmations below that are
+            correct.
+        type: multiple_choice
+        name: Affirmations
+        limit: 0
+        multiple: true
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

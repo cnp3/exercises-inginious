@@ -1,0 +1,88 @@
+accessible: true
+author: Maxime Piraux
+categories:
+- socket
+context: |-
+    In this exercise, you will built upon the small server you just implemented to add new functionalities.
+
+    So far your server, i.e. the code that receive the message and performs the sum, sent back the result as network-ordered unsigned integers. In this task you have to change the format of the result. Instead of using integers, the result must be encoded as a string. Use the *sprintf()* call to achieve this.
+
+    For each of the calls that you use, if one of them were to encounter an error, immediately return -1. All require headers are already included.
+
+    Manpages of interest:
+
+    * http://man7.org/linux/man-pages/man2/socket.2.html
+    * http://man7.org/linux/man-pages/man7/ipv6.7.html
+    * http://man7.org/linux/man-pages/man2/bind.2.html
+    * http://man7.org/linux/man-pages/man2/recvfrom.2.html
+    * http://man7.org/linux/man-pages/man2/sendto.2.html
+    * http://man7.org/linux/man-pages/man3/htonl.3.html
+    * http://man7.org/linux/man-pages/man3/printf.3.html
+
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment: cpp
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '10'
+    output: '2'
+name: Sockets - Sending strings
+network_grading: false
+order: 12
+problems:
+    sending-strings:
+        type: code
+        header: |-
+            Copy the function signature and fill in its body
+
+            .. code-block:: C
+
+                int recv_and_handle_message(const struct sockaddr *src_addr, socklen_t addrlen) {
+                    // TODO: Create a IPv6 socket supporting datagrams
+                    // TODO: Bind it to the source
+                    // TODO: Receive a message through the socket
+                    // TODO: Perform the computation
+                    // TODO: Send back the result
+                    return 0;
+                }
+        name: Sending strings through sockets
+        language: C
+        default: |-
+            int recv_and_handle_message(const struct sockaddr *src_addr, socklen_t addrlen) {
+                // TODO: Create a IPv6 socket supporting datagrams
+                // TODO: Bind it to the source
+                // TODO: Receive a message through the socket
+                // TODO: Perform the computation
+                // TODO: Send back the result
+                return 0;
+            }
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

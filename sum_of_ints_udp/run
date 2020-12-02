@@ -1,0 +1,50 @@
+#!/bin/python3
+
+# Script d'interface entre INGInious et des tests unitaires écrits à l'aide de CUnit
+# Auteurs : Jean-Martin Vlaeminck
+# Licence : GPLv3
+
+from __future__ import print_function
+import subprocess, os, shlex, sys
+
+# Get a copy of CTester in the student/ directory, as well as the run.py file
+# From CTester, we need:
+# - the run.py file, at the root of the task
+# - the Makefile, in the student/ folder
+# - the CTester folder, containing all the wraping code, in the student/ folder too
+# We can find it
+# - in the current directory
+
+"""CTester_files = ["/student/Ctester", "/run.py", "/student/Makefile"]"""
+
+def has_CTester(path="."):
+    return os.path.isdir(path + "/student/CTester") and os.path.exists(path + "/run.py") and os.path.exists(path + "/student/Makefile")
+
+def copy_CTester():
+    if has_CTester("."):
+        return 0 # Use it right here
+    elif has_CTester("/common/CTester"):
+        # Copy it to here
+        p = subprocess.Popen(shlex.split("cp -r /common/CTester/* ."), stdin=None, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        (cp_output, cp_errput) = p.communicate()
+        if p.returncode:
+            print("Unable to move CTester", file=sys.stderr)
+            return 1
+        return 0
+    else:
+        print("Unable to locate CTester", file=sys.stderr)
+        return 1
+
+def run():
+    """Call the subprocess"""
+    p = subprocess.Popen(shlex.split("/bin/python3 run.py --no-use-fifty"))
+    p.wait()
+    return p.returncode
+
+if __name__ == "__main__":
+    ret = copy_CTester()
+    if ret:
+        exit(ret)
+    ret = run()
+    exit(ret)
+

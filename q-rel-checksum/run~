@@ -1,0 +1,48 @@
+#!/bin/python3
+
+
+from inginious import input, feedback
+
+# random input
+delay = int(input.get_input("@random")[0] * 7 + 2)
+timer = int(input.get_input("@random")[1] * 200 + 100)
+
+
+def isfloat(value):
+  try:
+    float(value)
+    return True
+  except:
+    return False
+
+def almost(answer,value):
+	if((answer<=(value+value/20)) and (answer>=(value-value/20))):
+		return True
+	else:	
+		return False
+
+sol=11*delay*2+timer
+
+answer = input.get_input("q1")
+if(isfloat(answer)):
+	if (almost(float(answer),sol)):
+		feedback.set_problem_result("success","q1")
+		feedback.set_problem_feedback("Correct","q1")
+		feedback.set_grade(100)
+		feedback.set_global_result("success")        
+	else:
+		feedback.set_problem_result("failed","q1")
+		response="Your answer is incorrect.\n"
+		if(float(answer)<10):
+			response+="Remember that a byte contains 8 bits. To transmit 15000 bytes, the sender needs to send 10 frames.\n"
+		if(almost(float(answer),10*delay)):
+			response+="If the third frame is lost, it needs to be retransmitted. Your answer does not consider this retransmission.\n"
+		feedback.set_problem_feedback(response,"q1")
+		feedback.set_grade(0)
+		feedback.set_global_result("failed")        
+else:
+	feedback.set_problem_result("failed","q1")
+	feedback.set_problem_feedback("Your answer is not a number","q1")
+	feedback.set_grade(0)
+	feedback.set_global_result("failed")    
+

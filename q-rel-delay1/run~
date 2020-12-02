@@ -1,0 +1,47 @@
+#!/bin/python3
+
+
+from inginious import input, feedback, rst
+
+# random input
+bw = 10000*int(input.get_input("@random")[0] * 100 + 1)   #bps
+de = int(input.get_input("@random")[1] * 50 + 20)  #msec
+fl = 100*int(input.get_input("@random")[2] * 10 + 10)  #bytes
+
+def isfloat(value):
+  try:
+    float(value)
+    return True
+  except:
+    return False
+
+def almost(answer,value):
+	if((answer<=(value+value/20)) and (answer>=(value-value/20))):
+		return True
+	else:	
+		return False
+
+delay=de+(fl*8/bw)*1000
+
+answer = input.get_input("q1")
+if(isfloat(answer)):
+	if (almost(float(answer),delay)):
+		feedback.set_problem_result("success","q1")
+		feedback.set_problem_feedback("Correct","q1")
+		feedback.set_grade(100)
+		feedback.set_global_result("success")        
+	else:
+		feedback.set_problem_result("failed","q1")
+		response="Your answer is incorrect.\n"
+		if(almost(float(answer),delay-de)):
+			response+="Remember that the electrical/optical signal corresponding to each bit needs to travel from the sender to the receiver. \n"
+		if(almost(float(answer),de+(fl/bw)*1000)):
+			response+="Remember that the frame length is specified in bytes while bandwidth is specified in bits per seconde. One byte corresponds to 8 bits.\n"
+		feedback.set_problem_feedback(response,"q1")
+		feedback.set_grade(0)
+		feedback.set_global_result("failed")        
+else:
+	feedback.set_problem_result("failed","q1")
+	feedback.set_problem_feedback("Your answer is not a number","q1")
+	feedback.set_grade(0)
+	feedback.set_global_result("failed")

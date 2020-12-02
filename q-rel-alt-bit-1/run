@@ -1,0 +1,50 @@
+#!/bin/python3
+
+
+from inginious import input, feedback, rst
+
+# random input
+b = int(input.get_input("@random")[0] * 200 + 100)  #kbps
+d = int(input.get_input("@random")[1] * 20 + 20)    #msec
+
+
+def isfloat(value):
+  try:
+    float(value)
+    return True
+  except:
+    return False
+
+def almost(answer,value):
+	if((answer<=(value+value/20)) and (answer>=(value-value/20))):
+		return True
+	else:	
+		return False
+
+bandwidth=b*1000
+dframe=10000
+cframe=100
+delay=d/1000
+throughput=dframe/(dframe/bandwidth+delay+cframe/bandwidth+delay)/8 # bytes/sec
+answer = input.get_input("q1")
+if(isfloat(answer)):
+	if (almost(float(answer),throughput)):
+		feedback.set_problem_result("success","q1")
+		feedback.set_problem_feedback("Correct","q1")
+		feedback.set_grade(100)
+		feedback.set_global_result("success")        
+	else:
+		feedback.set_problem_result("failed","q1")
+		response="Your answer is incorrect.\n"
+		if(almost(float(answer),8*throughput)):
+			response+="Remember that a byte contains 8 bits. Your answer is close to a throughput expressed in bits/second and not bytes/seconds\n"
+		if(almost(float(answer),throughput/2)):
+			response+="Remember that the propagation delay affects the transmission of both the data and control frames\n"
+		feedback.set_problem_feedback(response,"q1")
+		feedback.set_grade(0)
+		feedback.set_global_result("failed")        
+else:
+	feedback.set_problem_result("failed","q1")
+	feedback.set_problem_feedback("Your answer is not a number","q1")
+	feedback.set_grade(0)
+	feedback.set_global_result("failed")

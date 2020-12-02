@@ -1,0 +1,65 @@
+#!/bin/python3
+
+# Olivier Bonaventure, 2019
+
+from inginious import input, feedback
+
+def sanitize(string):        
+        return string.lower().strip()
+
+def check(question,answer,correct,comment):
+   try:
+      num=int(answer,2)
+   except ValueError:
+      feedback.set_problem_result("failed",question)
+      feedback.set_problem_feedback("Your answer must be binary number.",question)
+      return 0
+
+   if(num==int(correct,16)):
+      feedback.set_problem_result("success",question)
+      feedback.set_problem_feedback("Correct",question)
+      return 10
+   else:
+      feedback.set_problem_result("failed",question)
+      feedback.set_problem_feedback("Incorrect."+str(num)+" "+str(int(correct,16))+comment,question)     
+
+   return 0   
+      
+grade=0
+
+# 02
+a1=sanitize(input.get_input("q1"))
+
+grade+=check("q1",a1,"02","")
+
+# 23
+a2=sanitize(input.get_input("q2"))
+
+grade+=check("q2",a2,"23","")
+
+# 54
+a3=sanitize(input.get_input("q3"))
+
+grade+=check("q3",a3,"54","")
+
+# ba
+a4=sanitize(input.get_input("q4"))
+
+grade+=check("q4",a4,"ba","")
+
+
+# 9a
+a5=sanitize(input.get_input("q5"))
+
+grade+=check("q5",a5,"9a","")
+
+full_grade = 100*(grade/50)
+
+feedback.set_grade(full_grade)
+
+if grade>=40:
+	feedback.set_global_result("success")
+else:
+	feedback.set_global_result("failed")
+#end
+    

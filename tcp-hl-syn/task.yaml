@@ -1,0 +1,49 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- tcp
+context: 'The TCP header, shown in the `TCP chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/tcp.html>`_
+    of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_
+    contains a TCP Header Length or Data Offset field that indicates the start of
+    the payload of a TCP segment. '
+environment: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: The TCP header length
+network_grading: false
+order: 35
+problems:
+    test:
+        exclude:
+        - tcp.flags.str
+        - tcp.window_size
+        - tcp.window_size_scalefactor
+        - tcp.len
+        - tcp.checksum
+        name: TCP Header Length
+        hide:
+            0:
+            - tcp.hdr_len
+        header: The TCP segment was sent inside an IPv6 packet whose payload length
+            is set to 34 bytes. Can you recompute its TCP Header Length  ?
+        type: network-trace
+        trace: tcp-timestamp-4.pcap.xml
+        shuffle-feedback: ''
+        redact: tcp.flags
+        feedback:
+            tcp.hdr_len: The Data Offset (or TCP Header Length) field is defined in
+                `Section 3.1 of RFC793 <https://tools.ietf.org/html/rfc793>`_ is the
+                length of the TCP header measured in units of 32 bits words.
+        shuffle: false
+run_cmd: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

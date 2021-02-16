@@ -1,6 +1,8 @@
 accessible: true
 author: Olivier Bonaventure
-categories: []
+categories:
+- reliable
+contact_url: ''
 context: |-
     .. raw:: html
 
@@ -24,27 +26,30 @@ context: |-
            setTimeout(postSize, 0);
        });
        </script>
-environment: default
+environment_id: default
+environment_parameters:
+    limits:
+        memory: '100'
+        hard_time: ''
+        time: '30'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
 file: ''
 groups: false
 input_random: '2'
-limits:
-    time: '30'
-    output: '2'
-    memory: '100'
 name: Alternating Bit Protocol
 network_grading: false
 order: 18
 problems:
     q1:
-        name: Alternating Bit Protocol in the presence of losses.
+        type: code_single_line
         default: ''
         header: |4+
 
             .. raw:: html
 
-               Consider the utilisation of the Alternating Bit Protocol to transfer 15000 bytes of data. Both hosts are connected via a 1 Gbps link and there is a one-way delay of <b><span id="ipr1"></span></b> msec between the two hosts. The sender sends data frames that are 12000 bits long. Assuming that the retransmission timer is set to <b><span id="ipr2"></span></b> msec, how long does it take to transfer the 15000 bytes if the third data frame is lost ?
+               Consider the utilisation of the Alternating Bit Protocol to transfer 15000 bytes of data. Both hosts are connected via a 1 Gbps link and there is a one-way delay of <b><span id="ipr1"></span></b> msec between the two hosts. The sender sends data frames that are 12000 bits long. Assuming that the retransmission timer is set to <b><span id="ipr2"></span></b> msec, how long does it take to transfer the 15000 bytes if the third data frame is lost? Express your answer in milliseconds.
 
                <script>
                var delay = parseInt(input["@random"][0] * 7 + 2);
@@ -53,8 +58,7 @@ problems:
                document.getElementById("ipr2").innerHTML = timer;
                </script>
 
-        type: code_single_line
-run_cmd: ''
+        name: Alternating Bit Protocol in the presence of losses.
 stored_submissions: 0
 submission_limit:
     amount: -1

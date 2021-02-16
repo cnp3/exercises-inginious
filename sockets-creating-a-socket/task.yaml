@@ -2,6 +2,7 @@ accessible: true
 author: Maxime Piraux
 categories:
 - socket
+contact_url: ''
 context: |-
     In this exercise, you have to create a IPv6 socket, then connect it to the given destination and send a message through the socket.
 
@@ -45,29 +46,24 @@ context: |-
            setTimeout(postSize, 0);
        });
        </script>
-environment: cpp
+environment_id: cpp
+environment_parameters:
+    limits:
+        memory: '100'
+        hard_time: ''
+        time: '10'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '10'
-    output: '2'
 name: Sockets - Creating a socket
 network_grading: false
 order: 10
 problems:
     create-socket:
-        name: Creating a socket
-        default: |-
-            int create_and_send_message(const struct sockaddr *dest_addr, socklen_t addrlen) {
-                // TODO: Create a IPv6 socket supporting datagrams
-                // TODO: Connect it to the destination
-                // TODO: Send a message through the socket
-                return 0;
-            }
-        type: code
+        language: C
         header: |-
             Copy the function signature and fill in its body
 
@@ -76,11 +72,18 @@ problems:
                 int create_and_send_message(const struct sockaddr *dest_addr, socklen_t addrlen) {
                     // TODO: Create a IPv6 socket supporting datagrams
                     // TODO: Connect it to the destination
-                    // TODO: Send a message through the socket
+                    // TODO: Send the required message (cfr. statement) through the socket
                     return 0;
                 }
-        language: C
-run_cmd: ''
+        type: code
+        name: Creating a socket
+        default: |-
+            int create_and_send_message(const struct sockaddr *dest_addr, socklen_t addrlen) {
+                // TODO: Create a IPv6 socket supporting datagrams
+                // TODO: Connect it to the destination
+                // TODO: Send the required message (cfr. statement) through the socket
+                return 0;
+            }
 stored_submissions: 0
 submission_limit:
     amount: -1

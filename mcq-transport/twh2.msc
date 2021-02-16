@@ -1,0 +1,19 @@
+msc{
+      a [label="", linecolour=white],
+      b [label="Host A", linecolour=black],
+      z [label="", linecolour=white],
+      c [label="Host B", linecolour=black],
+      d [label="", linecolour=white];
+
+      a=>b [ label = "CONNECT.req()" ] ,
+      b>>c [ arcskip="1", label="CR(seq=12345)"];
+      c=>d [ label = "CONNECT.ind()" ];
+
+      |||;
+
+      d=>c [ label = "CONNECT.resp()" ] ,
+      c>>b [ arcskip="1", label="CA(seq=56789,ack=12345)"];
+      b=>a [ label = "CONNECT.conf()"];
+
+      |||;
+}

@@ -2,6 +2,7 @@ accessible: true
 author: Maxime Piraux
 categories:
 - socket
+contact_url: ''
 context: |-
     In this exercise, you will implement a server for the protocol detailed in the previous task. Combine the code that you wrote previously and add the missing part for the application to be complete.
 
@@ -39,31 +40,26 @@ context: |-
            setTimeout(postSize, 0);
        });
        </script>
-environment: cpp
+environment_id: cpp
+environment_parameters:
+    limits:
+        memory: '100'
+        hard_time: ''
+        time: '10'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '10'
-    output: '2'
 name: Sockets - An advanced server application
 network_grading: false
 order: 14
 problems:
     server-app:
-        name: An advanced server application
-        default: |-
-            int recv_and_handle_message(const struct sockaddr *src_addr, socklen_t addrlen) {
-                // TODO: Create a IPv6 socket supporting datagrams
-                // TODO: Bind it to the source
-                // TODO: Receive a message through the socket
-                // TODO: Perform the computation
-                // TODO: Send back the result
-                return 0;
-            }
         type: code
+        name: An advanced server application
+        language: C
         header: |-
             Copy the function signature and fill in its body
 
@@ -77,8 +73,15 @@ problems:
                     // TODO: Send back the result
                     return 0;
                 }
-        language: C
-run_cmd: ''
+        default: |-
+            int recv_and_handle_message(const struct sockaddr *src_addr, socklen_t addrlen) {
+                // TODO: Create a IPv6 socket supporting datagrams
+                // TODO: Bind it to the source
+                // TODO: Receive a message through the socket
+                // TODO: Perform the computation
+                // TODO: Send back the result
+                return 0;
+            }
 stored_submissions: 0
 submission_limit:
     amount: -1

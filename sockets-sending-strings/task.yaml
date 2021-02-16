@@ -2,10 +2,11 @@ accessible: true
 author: Maxime Piraux
 categories:
 - socket
+contact_url: ''
 context: |-
     In this exercise, you will built upon the small server you just implemented to add new functionalities.
 
-    So far your server, i.e. the code that receive the message and performs the sum, sent back the result as network-ordered unsigned integers. In this task you have to change the format of the result. Instead of using integers, the result must be encoded as a string. Use the *sprintf()* call to achieve this.
+    So far your server, i.e. the code that receive the message and performs the sum, sent back the result as network-ordered unsigned integers. In this task you have to change the format of the result. Instead of using network-ordered unsigned integers, the result must be encoded as a string. Use the *sprintf()* call to achieve this.
 
     For each of the calls that you use, if one of them were to encounter an error, immediately return -1. All require headers are already included.
 
@@ -41,21 +42,24 @@ context: |-
            setTimeout(postSize, 0);
        });
        </script>
-environment: cpp
+environment_id: cpp
+environment_parameters:
+    limits:
+        memory: '100'
+        hard_time: ''
+        time: '10'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '10'
-    output: '2'
 name: Sockets - Sending strings
 network_grading: false
 order: 12
 problems:
     sending-strings:
-        type: code
+        name: Sending strings through sockets
         header: |-
             Copy the function signature and fill in its body
 
@@ -69,8 +73,7 @@ problems:
                     // TODO: Send back the result
                     return 0;
                 }
-        name: Sending strings through sockets
-        language: C
+        type: code
         default: |-
             int recv_and_handle_message(const struct sockaddr *src_addr, socklen_t addrlen) {
                 // TODO: Create a IPv6 socket supporting datagrams
@@ -80,7 +83,7 @@ problems:
                 // TODO: Send back the result
                 return 0;
             }
-run_cmd: ''
+        language: C
 stored_submissions: 0
 submission_limit:
     amount: -1

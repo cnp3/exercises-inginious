@@ -1,6 +1,8 @@
 accessible: true
 author: Olivier Bonaventure
-categories: []
+categories:
+- reliable
+contact_url: ''
 context: |-
     .. raw:: html
 
@@ -24,21 +26,25 @@ context: |-
            setTimeout(postSize, 0);
        });
        </script>
-environment: pyjavacpp
+environment_id: pyjavacpp
+environment_parameters:
+    limits:
+        memory: '100'
+        hard_time: ''
+        time: '30'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
 file: ''
 groups: false
 input_random: '3'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
 name: Transfert delay of one frame
 network_grading: false
 order: 6
 problems:
     q1:
         type: code_single_line
+        default: ''
         header: |
             .. raw:: html
 
@@ -55,8 +61,6 @@ problems:
 
                </script>
         name: How long does it take to deliver a frame ?
-        default: ''
-run_cmd: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

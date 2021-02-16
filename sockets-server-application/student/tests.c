@@ -283,10 +283,21 @@ void test_create_socket_sent_content_call() {
         SANDBOX_END;
 
         CU_ASSERT_EQUAL(stats.sendto.called, 1);
-        CU_ASSERT((*(uint8_t*)stats.sendto.last_params_buffered.buf) & 0x80);
+        if (((*(uint8_t*)stats.sendto.last_params_buffered.buf) & 0x80) == 0) {
+            CU_ASSERT(false);
+            push_info_msg("The S bit is not set for a valid request");
+        }
         uint8_t response_payload[sizeof(int)] = {0, 0, 0, 9};
-        CU_ASSERT_EQUAL(stats.sendto.last_params.len, 1 + sizeof(response_payload));
-        CU_ASSERT_EQUAL(memcmp(response_payload, stats.sendto.last_params_buffered.buf + 1, stats.sendto.last_params.len - 1), 0);
+        if (stats.sendto.last_params.len != 1 + sizeof(response_payload)) {
+            CU_ASSERT(false);
+            char buf[256];
+            sprintf(buf, "Sum of ints: Expecting message of size %d, but received message of size %d", (int) (1 + sizeof(response_payload)), (int) stats.sendto.last_params.len);
+            push_info_msg(buf);
+        }
+        if (memcmp(response_payload, stats.sendto.last_params_buffered.buf + 1, stats.sendto.last_params.len - 1) != 0) {
+            CU_ASSERT(false);
+            push_info_msg("The sum of ints does not return the correct result");
+        }
     }
 
     {
@@ -302,10 +313,20 @@ void test_create_socket_sent_content_call() {
         SANDBOX_END;
 
         CU_ASSERT_EQUAL(stats.sendto.called, 1);
-        CU_ASSERT((*(uint8_t*)stats.sendto.last_params_buffered.buf) & 0x80);
+        if (((*(uint8_t*)stats.sendto.last_params_buffered.buf) & 0x80) == 0) {
+            CU_ASSERT(false);
+            push_info_msg("The S bit is not set for a valid request");
+        }
         char response_payload[1] = {'9'};
-        CU_ASSERT_EQUAL(stats.sendto.last_params.len, 1 + sizeof(response_payload));
-        CU_ASSERT_EQUAL(memcmp(response_payload, stats.sendto.last_params_buffered.buf + 1, stats.sendto.last_params.len - 1), 0);
+        if (stats.sendto.last_params.len != 1 + sizeof(response_payload)) {
+            CU_ASSERT(false);
+            char buf[256];
+            sprintf(buf, "Sum of strs: Expecting message of size %d, but received message of size %d", (int) (1 + sizeof(response_payload)), (int) stats.sendto.last_params.len);
+        }
+        if (memcmp(response_payload, stats.sendto.last_params_buffered.buf + 1, stats.sendto.last_params.len - 1) != 0) {
+            CU_ASSERT(false);
+            push_info_msg("The sum of strs does not return the correct result");
+        }
     }
 
     {
@@ -321,10 +342,20 @@ void test_create_socket_sent_content_call() {
         SANDBOX_END;
 
         CU_ASSERT_EQUAL(stats.sendto.called, 1);
-        CU_ASSERT((*(uint8_t*)stats.sendto.last_params_buffered.buf) & 0x80);
+        if (((*(uint8_t*)stats.sendto.last_params_buffered.buf) & 0x80) == 0) {
+            CU_ASSERT(false);
+            push_info_msg("The S bit is not set for a valid request");
+        }
         uint8_t response_payload[sizeof(int)] = {0, 0, 0, 24};
-        CU_ASSERT_EQUAL(stats.sendto.last_params.len, 1 + sizeof(response_payload));
-        CU_ASSERT_EQUAL(memcmp(response_payload, stats.sendto.last_params_buffered.buf + 1, stats.sendto.last_params.len - 1), 0);
+        if (stats.sendto.last_params.len != 1 + sizeof(response_payload)) {
+            CU_ASSERT(false);
+            char buf[256];
+            sprintf(buf, "Product of ints: Expecting message of size %d, but received message of size %d", (int) (1 + sizeof(response_payload)), (int) stats.sendto.last_params.len);
+        }
+        if (memcmp(response_payload, stats.sendto.last_params_buffered.buf + 1, stats.sendto.last_params.len - 1) != 0) {
+            CU_ASSERT(false);
+            push_info_msg("The product of ints does not return the correct result");
+        }
     }
 
     {
@@ -340,10 +371,20 @@ void test_create_socket_sent_content_call() {
         SANDBOX_END;
 
         CU_ASSERT_EQUAL(stats.sendto.called, 1);
-        CU_ASSERT((*(uint8_t*)stats.sendto.last_params_buffered.buf) & 0x80);
+        if (((*(uint8_t*)stats.sendto.last_params_buffered.buf) & 0x80) == 0) {
+            CU_ASSERT(false);
+            push_info_msg("The S bit is not set for a valid request");
+        }
         char response_payload[2] = {'2', '4'};
-        CU_ASSERT_EQUAL(stats.sendto.last_params.len, 1 + sizeof(response_payload));
-        CU_ASSERT_EQUAL(memcmp(response_payload, stats.sendto.last_params_buffered.buf + 1, stats.sendto.last_params.len - 1), 0);
+        if (stats.sendto.last_params.len != 1 + sizeof(response_payload)) {
+            CU_ASSERT(false);
+            char buf[256];
+            sprintf(buf, "Product of strs: Expecting message of size %d, but received message of size %d", (int) (1 + sizeof(response_payload)), (int) stats.sendto.last_params.len);
+        }
+        if (memcmp(response_payload, stats.sendto.last_params_buffered.buf + 1, stats.sendto.last_params.len - 1) != 0) {
+            CU_ASSERT(false);
+            push_info_msg("The product of strs does not return the correct result");
+        }
     }
 
     {
@@ -360,7 +401,10 @@ void test_create_socket_sent_content_call() {
 
         CU_ASSERT_EQUAL(stats.sendto.called, 1);
         CU_ASSERT(stats.sendto.last_params.len >= 1);
-        CU_ASSERT_FALSE((*(uint8_t*)stats.sendto.last_params_buffered.buf) & 0x80);
+        if (((*(uint8_t*)stats.sendto.last_params_buffered.buf) & 0x80) != 0) {
+            CU_ASSERT(false);
+            push_info_msg("The S bit is set for an invalid request");
+        }
     }
 }
 

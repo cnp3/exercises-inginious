@@ -7,33 +7,33 @@
 \begin{tikzpicture}
 
 % vertical lines 
-                \draw (4,0) -- (4,-6.5);
-                %\draw (7,0) -- (7,-8);
+                \draw (4,0) -- (4,-8);
+                \draw (7,0) -- (7,-8);
                 %window of 3 
                 % data request 
                 \draw [->] (1,0) --  node [above] {Data.req(abcd)} (3.9,0);
                 %
                 % data indication 
-                %\draw [->] (7,-2) --  node [above] {Data.ind(a)} (10,-2);
-                %\draw [->, thick] (7,-2) -- (4.1,-4);
-                %\node at (3,-4) (cok0) [color=red] {C(OK,0)};
-                %\draw [->] (7,-3) --  node [above] {Data.ind(b)} (10,-3);
+                \draw [->] (7,-2) --  node [above] {Data.ind(a)} (10,-2);
+                \draw [->, thick] (7,-2) -- (4.1,-4);
+                \node at (3,-4) (cok0) [color=red] {C(OK,0)};
+                \draw [->] (7,-3) --  node [above] {Data.ind(b)} (10,-3);
                 %
                 \draw [->, thick] (7,-3) -- (4.1,-5) ;
                 \node at (3,-5) (cok1) [color=red] {C(OK,1)};
                 %
-                %\draw [->] (7,-4) --  node [above] {Data.ind(c)} (10,-4);
+                \draw [->] (7,-4) --  node [above] {Data.ind(c)} (10,-4);
                 %
                 \draw [->, thick] (7,-4) -- (4.1,-6);
                 \node at (3,-6) (cok2) [color=red] {C(OK,2)};
                 %
-                %\draw [->] (7,-6) --  node [above] {Data.ind(d)} (10,-6);
-                %\draw [->, thick] (7,-6) -- (4.1,-8);
-                %\node at (3,-8) (cok2) [color=red] {C(OK,3)};
+                \draw [->] (7,-6) --  node [above] {Data.ind(d)} (10,-6);
+                \draw [->, thick] (7,-6) -- (4.1,-8);
+                \node at (3,-8) (cok2) [color=red] {C(OK,3)};
                 %data at the end
                 \draw [->, thick] (4.1,0) -- (6.9,-2) node [midway, sloped, fill=white] {D(0,a)};
                 \draw [->, thick] (4.1,-1) -- (6.9,-3) node [midway, sloped, fill=white] {D(1,b)};
                 \draw [->, thick] (4.1,-2) -- (6.9,-4) node [midway, sloped, fill=white] {D(2,c)};
-                %\draw [->, thick] (4.1,-4) -- (6.9,-6) node [midway, sloped, fill=white] {D(3,d)};
+                \draw [->, thick] (4.1,-4) -- (6.9,-6) node [midway, sloped, fill=white] {D(3,d)};
 \end{tikzpicture}
 \end{document}

@@ -56,6 +56,23 @@ ssize_t static_recv_str(int sockfd, void *buf, size_t len, int flags) {
     return sizeof(resp);
 }
 
+ssize_t static_recv_str_9(int sockfd, void *buf, size_t len, int flags) {
+    UNUSED(flags);
+    uint8_t resp[2] = {0x8f, '9'};
+    if (sockfd < 0) {
+        errno = EBADF;
+        return -1;
+    }
+    if (!buf) {
+        return 0;
+    }
+    if (len < sizeof(resp)) {
+        return 0;
+    }
+    memcpy(buf, resp, sizeof(resp));
+    return sizeof(resp);
+}
+
 void test_create_socket_socket_call() {
     set_test_metadata("client-app", _("Checks that the socket call is correct"), 1);
 
@@ -138,13 +155,27 @@ void test_create_socket_send_content() {
         CU_ASSERT_EQUAL(stats.send.called, 1);
         CU_ASSERT_EQUAL(stats.send.last_params.sockfd, stats.socket.last_return);
         CU_ASSERT_PTR_NOT_NULL(stats.send.last_params.buf);
-        CU_ASSERT_EQUAL(stats.send.last_params.len, 1 + (4 * sizeof(int)));
+        if (stats.send.last_params.len != 1 + (4 * sizeof(int))) {
+            CU_ASSERT(false);
+            char buf[256];
+            sprintf(buf, "Sum of ints: Expecting message of size %d, but sent message of size %d", (int) (1 + 4 * sizeof(int)), (int) stats.send.last_params.len);
+            push_info_msg(buf);
+        }
 
         uint8_t first_byte = *(uint8_t *)stats.send.last_params_buffered.buf;
-        CU_ASSERT_EQUAL((first_byte & 0xE) >> 1, 0);
-        CU_ASSERT_EQUAL(first_byte & 0x1, 0);
-
-        CU_ASSERT_EQUAL(memcmp(&ints_sent, stats.send.last_params_buffered.buf + 1, stats.send.last_params.len - 1), 0);
+        if ((first_byte & 0xE) >> 1 != 0) {
+            CU_ASSERT(false);
+            push_info_msg("Sum of ints: invalid opcode");
+        }
+        if ((first_byte & 0x1) != 0) {
+            CU_ASSERT(false);
+            push_info_msg("Sum of ints: the F bit should not be set");
+        }
+        
+        if (memcmp(&ints_sent, stats.send.last_params_buffered.buf + 1, stats.send.last_params.len - 1) != 0) {
+            CU_ASSERT(false);
+            push_info_msg("Sum of ints: the content of the message is not correct");
+        }
     }
 
     {
@@ -166,13 +197,27 @@ void test_create_socket_send_content() {
         CU_ASSERT_EQUAL(stats.send.called, 1);
         CU_ASSERT_EQUAL(stats.send.last_params.sockfd, stats.socket.last_return);
         CU_ASSERT_PTR_NOT_NULL(stats.send.last_params.buf);
-        CU_ASSERT_EQUAL(stats.send.last_params.len, 1 + (4 * sizeof(int)));
+        if (stats.send.last_params.len != 1 + (4 * sizeof(int))) {
+            CU_ASSERT(false);
+            char buf[256];
+            sprintf(buf, "Product of ints: Expecting message of size %d, but sent message of size %d", (int) (1 + 4 * sizeof(int)), (int) stats.send.last_params.len);
+            push_info_msg(buf);
+        }
 
         uint8_t first_byte = *(uint8_t *)stats.send.last_params_buffered.buf;
-        CU_ASSERT_EQUAL((first_byte & 0xE) >> 1, 1);
-        CU_ASSERT_EQUAL(first_byte & 0x1, 0);
+        if ((first_byte & 0xE) >> 1 != 1) {
+            CU_ASSERT(false);
+            push_info_msg("Product of ints: invalid opcode");
+        }
+        if ((first_byte & 0x1) != 0) {
+            CU_ASSERT(false);
+            push_info_msg("Product of ints: the F bit should not be set");
+        }
 
-        CU_ASSERT_EQUAL(memcmp(&ints_sent, stats.send.last_params_buffered.buf + 1, stats.send.last_params.len - 1), 0);
+        if (memcmp(&ints_sent, stats.send.last_params_buffered.buf + 1, stats.send.last_params.len - 1) != 0) {
+            CU_ASSERT(false);
+            push_info_msg("Product of ints: the content of the message is not correct");
+        }
     }
 
     {
@@ -194,13 +239,27 @@ void test_create_socket_send_content() {
         CU_ASSERT_EQUAL(stats.send.called, 1);
         CU_ASSERT_EQUAL(stats.send.last_params.sockfd, stats.socket.last_return);
         CU_ASSERT_PTR_NOT_NULL(stats.send.last_params.buf);
-        CU_ASSERT_EQUAL(stats.send.last_params.len, 1 + (4 * sizeof(int)));
+        if (stats.send.last_params.len != 1 + (4 * sizeof(int))) {
+            CU_ASSERT(false);
+            char buf[256];
+            sprintf(buf, "Product of strs: Expecting message of size %d, but sent message of size %d", (int) (1 + 4 * sizeof(int)), (int) stats.send.last_params.len);
+            push_info_msg(buf);
+        }
 
         uint8_t first_byte = *(uint8_t *)stats.send.last_params_buffered.buf;
-        CU_ASSERT_EQUAL((first_byte & 0xE) >> 1, 1);
-        CU_ASSERT_EQUAL(first_byte & 0x1, 1);
+        if ((first_byte & 0xE) >> 1 != 1) {
+            CU_ASSERT(false);
+            push_info_msg("Product of strs: invalid opcode");
+        }
+        if ((first_byte & 0x1) != 1) {
+            CU_ASSERT(false);
+            push_info_msg("Product of strs: the F bit should be set");
+        }
 
-        CU_ASSERT_EQUAL(memcmp(&ints_sent, stats.send.last_params_buffered.buf + 1, stats.send.last_params.len - 1), 0);
+        if (memcmp(&ints_sent, stats.send.last_params_buffered.buf + 1, stats.send.last_params.len - 1) != 0) {
+            CU_ASSERT(false);
+            push_info_msg("Product of strs: the content of the message is not correct");
+        }
     }
 
     {
@@ -222,13 +281,27 @@ void test_create_socket_send_content() {
         CU_ASSERT_EQUAL(stats.send.called, 1);
         CU_ASSERT_EQUAL(stats.send.last_params.sockfd, stats.socket.last_return);
         CU_ASSERT_PTR_NOT_NULL(stats.send.last_params.buf);
-        CU_ASSERT_EQUAL(stats.send.last_params.len, 1 + (4 * sizeof(int)));
+        if (stats.send.last_params.len != 1 + (4 * sizeof(int))) {
+            CU_ASSERT(false);
+            char buf[256];
+            sprintf(buf, "Sum of strs: Expecting message of size %d, but sent message of size %d", (int) (1 + 4 * sizeof(int)), (int) stats.send.last_params.len);
+            push_info_msg(buf);
+        }
 
         uint8_t first_byte = *(uint8_t *)stats.send.last_params_buffered.buf;
-        CU_ASSERT_EQUAL((first_byte & 0xE) >> 1, 0);
-        CU_ASSERT_EQUAL(first_byte & 0x1, 1);
-
-        CU_ASSERT_EQUAL(memcmp(&ints_sent, stats.send.last_params_buffered.buf + 1, stats.send.last_params.len - 1), 0);
+        if ((first_byte & 0xE) >> 1 != 0) {
+            CU_ASSERT(false);
+            push_info_msg("Sum of strs: invalid opcode");
+        }
+        if ((first_byte & 0x1) != 1) {
+            CU_ASSERT(false);
+            push_info_msg("Sum of strs: the F bit should be set");
+        }
+        
+        if (memcmp(&ints_sent, stats.send.last_params_buffered.buf + 1, stats.send.last_params.len - 1) != 0) {
+            CU_ASSERT(false);
+            push_info_msg("Sum of strs: the content of the message is not correct");
+        }
     }
 }
 
@@ -344,8 +417,8 @@ void test_create_socket_return_content_call() {
         int ret;
         void *addr_ptr = (void *) 0xdeadbeef;
         int result = 0;
-        int ints[4] = {1, 2, 3, 4};
-        failures.recv_fun = (void(*)()) static_recv_str;
+        int ints[4] = {1, 2, 1, 5};
+        failures.recv_fun = (void(*)()) static_recv_str_9;
 
         SANDBOX_BEGIN;
         ret = create_and_send_message(addr_ptr, 42, ints, sizeof(ints) / sizeof(int), '+', 's', &result);
@@ -353,7 +426,7 @@ void test_create_socket_return_content_call() {
 
         CU_ASSERT_EQUAL(stats.recv.called, 1);
         CU_ASSERT_EQUAL(ret, 0);
-        CU_ASSERT_EQUAL(result, 10);
+        CU_ASSERT_EQUAL(result, 9);
     }
 
     {
@@ -361,7 +434,7 @@ void test_create_socket_return_content_call() {
         int ret;
         void *addr_ptr = (void *) 0xdeadbeef;
         int result = 0;
-        int ints[4] = {1, 2, 3, 4};
+        int ints[4] = {1, 2, 1, 5};
         failures.recv_fun = (void(*)()) static_recv_int;
 
         SANDBOX_BEGIN;

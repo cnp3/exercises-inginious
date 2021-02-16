@@ -29,7 +29,7 @@ clen=40
 prop=km*5/1000
 
 
-rtt=1000*(dlen/(bw*1000000)+0.0001+clen/(bw*1000000)+2*prop)
+rtt=1000*(dlen/(bw*1000000)+clen/(bw*1000000)) + 2*prop + 1.0
 
 grade=0
 answer1 = input.get_input("q1")

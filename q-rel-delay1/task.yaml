@@ -1,6 +1,8 @@
 accessible: true
 author: Olivier Bonaventure
-categories: []
+categories:
+- reliable
+contact_url: ''
 context: |-
     .. raw:: html
 
@@ -24,21 +26,25 @@ context: |-
            setTimeout(postSize, 0);
        });
        </script>
-environment: pyjavacpp
+environment_id: pyjavacpp
+environment_parameters:
+    limits:
+        memory: '100'
+        hard_time: ''
+        time: '30'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
 file: ''
 groups: false
 input_random: '2'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
 name: Round trip time
 network_grading: false
 order: 7
 problems:
     q1:
         type: code_single_line
+        default: ''
         header: |-
             .. raw:: html
 
@@ -49,21 +55,19 @@ problems:
                document.getElementById("ipr1").innerHTML = km;
                </script>
         name: Transmission delay
-        default: ''
     q2:
-        name: Round trip time
-        type: code_single_line
         header: |-
             .. raw:: html
 
-               If the bandwidth of this physical cable is <b><span id="ipr2"></span></b> Mbps. If the data frames have a length of 1000 bits and the acknowledgments a length of 40 bits, what is the exact value of the round-trip-time, i.e. the delay in seconds between the transmission of the first bit of a data frame and the reception of the last bit of the acknowledgment ? To compute this delay, you can assume that the receiver needs one millisecond to verify a received frame and prepare the corresponding acknowledgment.
+               If the bandwidth of this physical cable is <b><span id="ipr2"></span></b> Mbps. If the data frames have a length of 1000 bits and the acknowledgments a length of 40 bits, what is the exact value of the round-trip-time, i.e. the delay <b>expressed in milliseconds</b> between the transmission of the first bit of a data frame and the reception of the last bit of the acknowledgment ? To compute this delay, you can assume that the receiver needs one millisecond to verify a received frame and prepare the corresponding acknowledgment.
 
                <script>
                var bw = parseInt(input["@random"][0] * 50 + 5);
                document.getElementById("ipr2").innerHTML = bw;
                </script>
+        type: code_single_line
+        name: Round trip time
         default: ''
-run_cmd: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

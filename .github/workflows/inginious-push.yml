@@ -55,3 +55,5 @@ jobs:
           WEBDAV_USERNAME: ${{ secrets.WEBDAV_USERNAME }}
           WEBDAV_PASSWORD: ${{ secrets.WEBDAV_PASSWORD }}
           WEBDAV_URL: https://dav.inginious.org/cnp3/
+          DRY_RUN: true
+

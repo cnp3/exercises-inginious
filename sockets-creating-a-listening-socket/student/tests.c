@@ -190,6 +190,13 @@ void test_create_socket_sent_content_call() {
 
     CU_ASSERT_EQUAL(stats.sendto.last_params.len, sizeof(int));
     int sum = htonl(1 + 2 + 3 + 4 + 5);
+    if (stats.sendto.last_params.len == sizeof(int) && memcmp(&sum, stats.sendto.last_params_buffered.buf, stats.sendto.last_params.len) != 0) {
+        CU_ASSERT(false);
+        char buf[256];
+        int recv = *((int *) stats.sendto.last_params_buffered.buf);
+        sprintf(buf, "Expecting %d, but sent %d; did you read garbage on the stack?", (int) ntohl(sum), (int) ntohl(recv));
+        push_info_msg(buf);
+    }
     CU_ASSERT_EQUAL(memcmp(&sum, stats.sendto.last_params_buffered.buf, stats.sendto.last_params.len), 0);
 }
 

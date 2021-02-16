@@ -1,6 +1,8 @@
 accessible: true
 author: ''
-categories: []
+categories:
+- reliable
+contact_url: ''
 context: |-
     .. raw:: html
 
@@ -24,39 +26,37 @@ context: |-
            setTimeout(postSize, 0);
        });
        </script>
-environment: mcq
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
 name: Framing techniques
 network_grading: false
 order: 2
 problems:
     q1:
         choices:
-        -   valid: true
-            feedback: This is indeed valid
-            text: |-
-                ================  ================================
+        -   text: |4-
+                     ================  ================================
                      Before stuffing   After stuffing
                      ================  ================================
                      0001001010000110  01111110000100101000011001111110
                      ================  ================================
-        -   text: |4+
+            valid: true
+            feedback: This is indeed valid
+        -   feedback: This is indeed valid
+            valid: true
+            text: |4+
 
                      ===============================  ========================================================
                      Before stuffing                  After stuffing
                      ===============================  ========================================================
-                     1111110110111100110101101110101  01111110111110101101111000111111011010110111010101111110
+                     1111110110111100110101101110101  011111101111101011011110011010110111010101111110
                      ===============================  ========================================================
 
-            valid: true
-            feedback: This is indeed valid
         -   feedback: This is an invalid frame. After having processed 6 bits set
                 to one, the bit stuffing sender must have added an additional bit
                 set to 0. This is not the case in this example.
@@ -68,7 +68,8 @@ problems:
                      0111111000101010 01111110011111100010101001111110
                      ================ ================================
 
-        -   text: |4+
+        -   feedback: Here, no stuffing has been applied.
+            text: |4+
 
                      ================ ================
                      Before stuffing   After stuffing
@@ -76,7 +77,6 @@ problems:
                      0111111001111110 0111111001111110
                      ================ ================
 
-            feedback: Here, no stuffing has been applied.
         -   feedback: In this example, the end marker is missing.
             text: |4+
 
@@ -110,7 +110,8 @@ problems:
                      DLE STX 1 2 3 DLE DLE ETX    DLE STX DLE DLE STX 1 2 3 DLE DLE DLE DLE ETX DLE ETX
                      =========================    =====================================================
 
-        -   text: |4+
+        -   valid: true
+            text: |4+
 
                      ================  ================================================
                      Before stuffing   After stuffing
@@ -118,7 +119,6 @@ problems:
                      DLE DLE DLE DLE   DLE STX DLE DLE DLE DLE DLE DLE DLE DLE DLE ETX
                      ================  ================================================
 
-            valid: true
         -   feedback: The marker at the beginning of a frame is DLE followed by STX
                 and not STX alone. Same at the end of the frame.
             text: |4+
@@ -129,13 +129,13 @@ problems:
                      1 2 3 4 DLE DLE 7 8 STX 1 2 3 4 DLE DLE DLE DLE 7 8 ETX
                      =================== ===================================
 
-        -   feedback: The beginning and end marker have not been added.
-            text: |4-
+        -   text: |4-
                      ================ =======================
                      Before stuffing  After stuffing
                      ================ =======================
                      DLE STX DLE ETX  DLE STX DLE DLE ETX
                      ================ =======================
+            feedback: The beginning and end marker have not been added.
         -   text: |4+
 
                      =========================================== =========================================================================
@@ -146,12 +146,11 @@ problems:
 
             feedback: Inside the frame, no DLE character needs to be added before
                 STX and ETX. The DLE character is only added before another DLE character.
-        name: Character stuffing
-        limit: 3
-        type: multiple_choice
         header: |4
              *Character stuffing* is another framing technique. It uses the `DLE`, `STX` and `ETX` characters. The table below shows original (before stuffing) and transmitted frames (after stuffing). Only one of the proposed answers is valid. Which one ?
-run_cmd: ''
+        type: multiple_choice
+        name: Character stuffing
+        limit: 3
 stored_submissions: 0
 submission_limit:
     amount: -1

@@ -11,6 +11,7 @@ admins:
 - michelfra
 - duchenef
 - vvandens
+- qdeconinck
 tutors:
 - eassogba
 groups_student_choice: false
@@ -27,68 +28,203 @@ lti_keys:
 lti_send_back_grade: false
 tags:
     bgp:
-        name: BGP
         visible: true
         type: 2
         description: BGP and interdomain routing
+        name: BGP
     dns:
-        visible: true
-        type: 2
         name: DNS
         description: DNS protocol
+        visible: true
+        type: 2
     ethernet:
         name: Ethernet
-        description: Ethernet and Spanning Tree
         type: 2
+        description: Ethernet and Spanning Tree
         visible: true
     http:
+        visible: true
         name: HTTP
         type: 2
-        visible: true
         description: HTTP protocol
     ipv6:
-        visible: true
+        type: 2
         name: IPv6
         description: IPv6 protocol
-        type: 2
+        visible: true
     ospf:
-        type: 2
         description: OSPF
         name: OSPF
+        type: 2
         visible: true
     reliable:
-        visible: true
-        type: 2
         description: Go-back-n and selective repeat
+        type: 2
+        visible: true
         name: reliable
     rip:
         description: RIP
-        name: RIP
-        type: 2
         visible: true
+        type: 2
+        name: RIP
     socket:
+        type: 2
         description: socket exercises
         name: socket
         visible: true
-        type: 2
     ssh:
-        visible: true
-        name: ssh
-        type: 2
         description: ssh protocol
-    tcp:
-        name: TCP
         type: 2
+        name: ssh
         visible: true
+    tcp:
+        type: 2
+        name: TCP
         description: TCP protocol
+        visible: true
     telnet:
         name: telnet
+        description: Telnet protocol
         visible: true
         type: 2
-        description: Telnet protocol
     tls:
+        type: 2
+        description: TLS protocol
         visible: true
         name: TLS
-        description: TLS protocol
+    transport:
+        visible: true
+        description: Transport exercises
         type: 2
+        name: transport
 lti_url: https://beta.computer-networking.info/
+task_dispenser: toc
+dispenser_data:
+-   config:
+        closed: false
+    id: reliable_transfer
+    rank: 0
+    tasks_list:
+        mcq-rel-abp: 3
+        mcq-rel-framing: 0
+        mcq-rel-gbn: 6
+        mcq-rel-sr: 7
+        q-rel-alt-bit-1: 4
+        q-rel-alt-bit-2: 5
+        q-rel-delay: 1
+        q-rel-delay1: 2
+        q-rel-gbn-max: 8
+        q-rel-sr-max: 9
+    title: Connecting two hosts / Reliable transfer
+-   config:
+        closed: false
+    id: using_sockets_for_interprocess_communication
+    rank: 1
+    tasks_list:
+        sockets-client-application: 3
+        sockets-creating-a-listening-socket: 1
+        sockets-creating-a-socket: 0
+        sockets-sending-strings: 2
+        sockets-server-application: 4
+    title: Using sockets for inter-process communication
+-   config:
+        closed: false
+    id: new_section
+    rank: 2
+    tasks_list:
+        mcq-network-ftable: 3
+        q-net-dv: 0
+        q-net-dvp: 1
+        q-net-ls: 2
+    title: Building a network
+-   config:
+        closed: false
+    id: the_transport_layer_serving_applications
+    rank: 3
+    tasks_list:
+        TFTP: 1
+        mcq-transport: 0
+    title: The transport layer / Serving applications
+-   config:
+        closed: false
+    id: tasks-list
+    rank: 4
+    tasks_list:
+        dns-ns: 47
+        dns-records: 0
+        dns-truefalse: 1
+        ip6-frag-icmp6: 72
+        ip6-hop: 66
+        ip6-icmpv6: 67
+        ip6-ping6: 70
+        ip6-ping6-frag1: 74
+        ip6-ping6-frag2: 73
+        ip6-ping6-reorder: 71
+        ip6-tcp: 68
+        ip6-traceroute6-hop: 75
+        ip6-traceroute6-reorder: 76
+        ip6-udp: 69
+        mcq-dns-1: 48
+        mcq-http-10: 2
+        mcq-http-11: 3
+        mcq-http-20: 4
+        mcq-http-trace: 5
+        mcq-pkt-dns-1: 6
+        mcq-pkt-dns-2: 7
+        mcq-pkt-dns-3: 8
+        mcq-pkt-http2-1: 9
+        mcq-pkt-http2-2: 10
+        mcq-pkt-http2-3: 11
+        pkt-dns-computernetworking: 12
+        pkt-dns-example: 13
+        pkt-dns-google: 14
+        pkt-dns-id: 15
+        pkt-dns-port: 16
+        pkt-dns-tcp: 17
+        q-bgp-dp-1: 18
+        q-bgp-pol-0: 19
+        q-bgp-pol-1: 20
+        q-bgp-pol-2: 21
+        q-bgp-pol-3: 22
+        q-bgp-pol-4: 23
+        q-ipv6-binary: 24
+        q-ipv6-forwarding: 25
+        q-ipv6-static-1: 26
+        q-ipv6-static-2: 27
+        q-ipv6-static-3: 28
+        q-pkt-ssh-1: 29
+        q-pkt-ssh-2: 30
+        q-pkt-ssh-3: 31
+        q-pkt-telnet: 32
+        q-pkt-telnet2: 33
+        q-pkt-tls-1: 34
+        q-pkt-tls-2: 35
+        q-pkt-tls-4: 36
+        q-pkt-tls-smtp: 37
+        q-rel-checksum: 46
+        q-stp-1: 38
+        q-tcpdump-trace: 39
+        stp-bpdu: 40
+        stp-ports-state: 41
+        sum_of_ints_tcp1: 50
+        sum_of_ints_udp: 49
+        tcp-data-ack: 54
+        tcp-data-ack2: 56
+        tcp-dual: 42
+        tcp-fin: 62
+        tcp-hl-syn: 65
+        tcp-infer-ack: 57
+        tcp-local-close: 43
+        tcp-local-close2: 44
+        tcp-remote-close: 45
+        tcp-reorder-conn: 60
+        tcp-reorder-data: 61
+        tcp-reorder-twh: 58
+        tcp-reorder-twh2: 59
+        tcp-syn: 51
+        tcp-syn-ack-bits: 55
+        tcp-syn-port: 52
+        tcp-syn-seq-ack: 53
+        tcp-syn-timestamp: 63
+        tcp-wscale: 64
+    title: Liste des exercices

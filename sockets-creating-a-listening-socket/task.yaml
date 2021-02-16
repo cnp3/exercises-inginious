@@ -2,6 +2,7 @@ accessible: true
 author: Maxime Piraux
 categories:
 - socket
+contact_url: ''
 context: |-
     In this exercise, you have to create a IPv6 socket, set it to listening mode and read an incoming message. Then you have to perform some computation using the received message and send back the result to the message sender.
 
@@ -45,15 +46,18 @@ context: |-
            setTimeout(postSize, 0);
        });
        </script>
-environment: cpp
+environment_id: cpp
+environment_parameters:
+    limits:
+        memory: '100'
+        hard_time: ''
+        time: '10'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '10'
-    output: '2'
 name: Sockets - Creating a listening socket
 network_grading: false
 order: 11
@@ -81,10 +85,9 @@ problems:
                 // TODO: Send back the result
                 return 0;
             }
+        type: code
         name: Creating a listening socket
         language: C
-        type: code
-run_cmd: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

@@ -2,6 +2,7 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - reliable
+contact_url: ''
 context: |-
     .. raw:: html
 
@@ -25,40 +26,40 @@ context: |-
            setTimeout(postSize, 0);
        });
        </script>
-environment: mcq
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
 name: Alternating Bit Protocol
 network_grading: false
 order: 1
 problems:
     q1:
         choices:
-        -   valid: true
-            text: 'If the right host receives `D(1,x)`, it will ignore the frame and
+        -   text: 'If the right host receives `D(1,x)`, it will ignore the frame and
                 reply with `C(OK1)`.  '
-        -   text: 'If the left host receives `C(OK,0)`, it will retransmit the frame
-                `D(1,x)`. '
             valid: true
+        -   text: 'If the left host receives `C(OK,1)`, it will retransmit the frame
+                `D(1,x)`. '
         -   text: |
                 If the right host receives `D(1,x)`, it will ignore the frame and reply with `C(OK0)`.
         -   text: If the right host receives `D(0,x)`, it will ignore the frame and
                 reply with `C(OK1)`.
-        -   text: If the right host receives `D(0,x)`, it will accept the frame and
+        -   valid: true
+            text: If the right host receives `D(0,x)`, it will accept the frame and
                 reply with `C(OK0)`.
         type: multiple_choice
-        header: |
+        header: |-
             After having correctly transmitted several frames, a host sends a data frame that is correctly acknowledged. This corresponds to the situation shown in the figure below:
 
             .. container:: text-center
 
                 .. image:: mcq-rel-abp/figure1.png
+
+            At this stage of the transfer, which of the following proposals is true?
         name: Alternating Bit Protocol
         limit: 3
     q2:
@@ -71,25 +72,24 @@ problems:
                 .. container:: text-center
 
                     .. image:: mcq-rel-abp/figure2a.png
-        -   text: |-
+        -   feedback: |
+                This scenario is incorrect. The same sequence number is used incorrectly to send `x` and `y`.
+            text: |-
                 .. container:: text-center
 
                     .. image:: mcq-rel-abp/figure2b.png
-            feedback: |
-                This scenario is incorrect. The same sequence number is used incorrectly to send `x` and `y`.
         -   feedback: |4
                         This scenario is incorrect. The host on the right should not send `C(OK1)` after having received `D(0,x)`
             text: |-
                 .. container:: text-center
 
                     .. image:: mcq-rel-abp/figure2c.png
+        header: Consider a host on the left that needs to transmit 2 data frames to
+            the right host. Among the following time sequence diagrams, which is the
+            one that corresponds to a successful transmission of these two frames?
+        type: multiple_choice
         name: ''
         limit: 0
-        type: multiple_choice
-        header: Consider a host on the left that needs to transmit 2 bytes of data
-            to the host on right. Among the following time sequence diagrams, which
-            is the one that corresponds to a successful transmission of these two
-            bytes ?
     q3:
         choices:
         -   valid: true
@@ -97,11 +97,11 @@ problems:
                 .. container:: text-center
 
                     .. image:: mcq-rel-abp/figure3a.png
-        -   valid: true
-            text: |-
+        -   text: |-
                 .. container:: text-center
 
                     .. image:: mcq-rel-abp/figure3b.png
+            valid: true
         -   feedback: This example is incorrect. The second frame is a retransmission
                 for the host on the right since it carries the same sequence number.
                 It should never delivery the data to its user.
@@ -109,13 +109,13 @@ problems:
                 .. container:: text-center
 
                     .. image:: mcq-rel-abp/figure3c.png
-        -   text: |-
+        -   feedback: This example is incorrect. The second frame is a retransmission
+                for the host on the right since it carries the same sequence number.
+                It should never delivery the data to its user.
+            text: |-
                 .. container:: text-center
 
                     .. image:: mcq-rel-abp/figure3d.png
-            feedback: This example is incorrect. The second frame is a retransmission
-                for the host on the right since it carries the same sequence number.
-                It should never delivery the data to its user.
         -   feedback: This example is incorrect. The acknowledgements sent by the
                 host on the right are incorrect. When receiving `D(1,d)` and accepting
                 it since it issues a `Data.ind(d)`, it should not send `C(OK0)` but
@@ -124,13 +124,12 @@ problems:
                 .. container:: text-center
 
                     .. image:: mcq-rel-abp/figure3e.png
-        name: Sending the same information twice
         header: 'Sometimes, a host needs to send the same information twice. Consider
             a host that sends `d` followed by `d`. What is the correct time sequence
             diagram for this scenario ? '
-        type: multiple_choice
         limit: 3
-run_cmd: ''
+        type: multiple_choice
+        name: Sending the same information twice
 stored_submissions: 0
 submission_limit:
     amount: -1

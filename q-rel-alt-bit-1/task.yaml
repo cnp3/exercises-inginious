@@ -1,6 +1,8 @@
 accessible: true
 author: Olivier Bonaventure
-categories: []
+categories:
+- reliable
+contact_url: ''
 context: |-
     The alternating bit protocol is described in section `Recovering from transmission errors <http://cnp3book.info.ucl.ac.be/2nd/html/principles/reliability.html#reliable-data-transfer-on-top-of-an-imperfect-link>`_
 
@@ -26,21 +28,24 @@ context: |-
            setTimeout(postSize, 0);
        });
        </script>
-environment: pyjavacpp
+environment_id: pyjavacpp
+environment_parameters:
+    limits:
+        memory: '100'
+        hard_time: ''
+        time: '30'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
 file: ''
 groups: false
 input_random: '2'
-limits:
-    time: '30'
-    output: '2'
-    memory: '100'
 name: Alternating Bit Protocol
 network_grading: false
 order: 16
 problems:
     q1:
-        name: Performance of the alternating bit protocol
+        type: code_single_line
         default: ''
         header: |4-
 
@@ -56,8 +61,7 @@ problems:
                </script>
 
             If the data frames are 10,000 bits long and the control frames 100 bits long, what is the maximum throughput achieved by this protocol expressed in bytes/sec?
-        type: code_single_line
-run_cmd: ''
+        name: Performance of the alternating bit protocol
 stored_submissions: 0
 submission_limit:
     amount: -1

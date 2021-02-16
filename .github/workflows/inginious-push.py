@@ -3,6 +3,7 @@ import os
 import sys
 import subprocess
 import traceback
+import tempfile
 from urllib.parse import urljoin
 
 if len(sys.argv) < 4:
@@ -19,10 +20,34 @@ base_url = os.environ['WEBDAV_URL']
 username = os.environ['WEBDAV_USERNAME'].strip()
 password = os.environ['WEBDAV_PASSWORD'].strip()
 
-curl_push = 'curl -s --user {}:{} -T {{}} {{}}'.format(username, password)
-curl_mv = 'curl -s --user {}:{} -X MOVE --header "Destination:{{}}" {{}}'.format(username, password)
-curl_mkdir = 'curl -s --user {}:{} -X MKCOL {{}}'.format(username, password)
-curl_rmdir = 'curl -s --user {}:{} -X DELETE {{}}'.format(username, password)
+curl_push_config = """
+user = "{}:{}"
+upload-file = "{{}}"
+url = "{{}}"
+
+""".format(username, password)
+
+curl_mv_config = """
+user = "{}:{}"
+request = "MOVE"
+header = "Destination:{{}}"
+url = "{{}}"
+
+""".format(username, password)
+
+curl_mkdir_config = """
+user = "{}:{}"
+request = "MKCOL"
+url = "{{}}"
+
+""".format(username, password)
+
+curl_rmdir_config = """
+user = "{}:{}"
+request = "DELETE"
+url = "{{}}"
+
+""".format(username, password)
 
 git_log = 'git diff --name-status {}..{} -- {} | grep -E "^[A-Z]([0-9]{{3}})?" | sort | uniq'
 
@@ -55,21 +80,30 @@ for l in log:
     else:
         print("Unsupported git file status %s" % status)
 
+curl_config = ""
+
 print("Creating %d directories" % len(dirnames))
 for d in sorted(dirnames):
-    run(curl_mkdir.format(urljoin(base_url, d)))
+    curl_config += curl_mkdir_config.format(base_url, d)
 
 print("Adding %d files" % len(pushes))
 for f in pushes:
-    run(curl_push.format(f, urljoin(base_url, os.path.relpath(f, start=sys.argv[3]))))
+    curl_config += curl_push_config.format(f, urljoin(base_url, os.path.relpath(f, start=sys.argv[3])))
 
 print("Moving %d files" % len(renames))
 for old_path, new_path in renames:
-    run(curl_mv.format(urljoin(base_url, old_path), urljoin(base_url, new_path)))
+    curl_config += curl_mv_config.format(urljoin(base_url, old_path), urljoin(base_url, new_path))
 
 print("Deleting %d files" % len(deletes))
 for f in deletes:
-    run(curl_rmdir.format(urljoin(base_url, os.path.relpath(f, start=sys.argv[3]))))
+    curl_config += curl_rmdir_config.format(urljoin(base_url, os.path.relpath(f, start=sys.argv[3])))
 
 print("Setting new remote commit ID")
-run(curl_push.format('.commit_id', urljoin(base_url, '.commit_id')))
+curl_config += curl_push_config.format('.commit_id', urljoin(base_url, '.commit_id'))
+
+config_filename = None
+with tempfile.NamedTemporaryFile(mode='w',delete=False) as f:
+    f.write(curl_config)
+    config_filename = f.name
+
+run('curl --fail-early -K {}'.format(config_filename))

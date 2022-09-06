@@ -1,0 +1,132 @@
+accessible: true
+author: Emilie Deprez
+categories:
+- bgp
+contact_url: ''
+context: |-
+    In a network whose topology is not known, ``AS100`` has the following Routing Information Base
+
+    .. raw:: html
+
+        <table class="colwidths-given docutils table table-bordered">
+        <colgroup>
+        <col width="20%" />
+        <col width="80%" />
+        </colgroup>
+            <thead class="thead-light">
+            <tr><th class="head">Prefix</th>
+            <th class="head">Route</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><br><br><code id="pa" class="docutils literal"></code></td>
+                <td>
+                <code id="pa1" class="docutils literal"></code> learned from a <em>client</em> <br><br>
+                <code id="pa2" class="docutils literal"></code> learned from a <em>provider</em> <br><br>
+                <code id="pa3" class="docutils literal"></code> learned through a <em>shared-cost</em> link
+                </td>
+            </tr>
+            <tr><td><br><code id="pb" class="docutils literal"></code></td>
+                <td>
+                <code id="pb1" class="docutils literal"></code> learned from a <em>provider</em> <br><br>
+                <code id="pb2" class="docutils literal"></code> learned from a <em>provider</em>
+                </td>
+            </tr>
+            <tr><td><br><code id="pc" class="docutils literal"></code></td>
+                <td>
+                <code id="pc1" class="docutils literal"></code> learned through a <em>shared-cost</em> link <br><br>
+                <code id="pc2" class="docutils literal"></code> learned from a <em>provider</em>
+                </td>
+            </tr>
+            <tr><td><br><br><code id="pd" class="docutils literal"></code></td>
+                <td>
+                <code id="pd1" class="docutils literal"></code> learned from a <em>client</em> <br><br>
+                <code id="pd2" class="docutils literal"></code> learned from a <em>client</em> <br><br>
+                <code id="pd3" class="docutils literal"></code> learned from a <em>provider</em>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <script src="q-bgp-rib/data.js"></script>
+        <script>
+            var index = 0;
+            if (input["@random"][0] != 0){
+                index = parseInt(input["@random"][0].toString().slice(2,4));
+            }
+
+            function getData(tag){
+                return data[index][tag];
+            }
+
+            document.getElementById("pa").innerHTML = "p" + getData("a");
+            document.getElementById("pb").innerHTML = "p" + getData("b");
+            document.getElementById("pc").innerHTML = "p" + getData("c");
+            document.getElementById("pd").innerHTML = "p" + getData("l");
+            document.getElementById("pa1").innerHTML = "AS" + getData("d") + ":AS" + getData("e") + ":AS" + getData("a");
+            document.getElementById("pa2").innerHTML = "AS" + getData("f") + ":AS" + getData("a");
+            document.getElementById("pa3").innerHTML = "AS" + getData("g") + ":AS" + getData("a");
+            document.getElementById("pb1").innerHTML =  "AS" + getData("h") + ":AS" + getData("i") + ":AS" + getData("b");
+            document.getElementById("pb2").innerHTML = "AS" + getData("j") + ":AS" + getData("b");
+            document.getElementById("pc1").innerHTML = "AS" + getData("k") + ":AS" + getData("c");
+            document.getElementById("pc2").innerHTML = "AS" + getData("c");
+            document.getElementById("pd1").innerHTML = "AS" + getData("m") + ":AS" + getData("n") + ":AS" + getData("l");
+            document.getElementById("pd2").innerHTML = "AS" + getData("o") + ":AS" + getData("l");
+            document.getElementById("pd3").innerHTML = "AS" + getData("l");
+
+        </script>
+
+
+    In this network we assume ``AS1`` advertises the prefix ``p1``, ``AS2`` the prefix ``p2``, ...
+environment_id: pyjavacpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 1
+name: BGP - Routing Information Base
+network_grading: false
+problems:
+    q1:
+        type: code_single_line
+        name: Best path
+        header: |-
+            For each prefix, give the preferred route by ``AS100``.
+
+            *Provide your answer as a list* ``<prefix>-<route>`` *such as p1-AS2:AS1, p2-AS2, ...*
+        default: ''
+    q2:
+        type: code_single_line
+        name: Routes advertised to a provider
+        header: |-
+            What are the routes announced by ``AS100`` to a provider ?
+
+            *Provide your answer as a list* ``<prefix>-<route>`` *such as p1-AS2:AS1, p2-AS2, ...*
+        default: ''
+    q3:
+        type: code_single_line
+        name: Routes advertised to a client
+        header: |-
+            What are the routes announced by a ``AS100`` to a client ?
+
+            *Provide your answer as a list* ``<prefix>-<route>`` *such as p1-AS2:AS1, p2-AS2, ...*
+        default: ''
+    q4:
+        type: code_single_line
+        name: Routes advertised through a shared-cost
+        header: |-
+            What are the routes announced by a ``AS100`` through a shared-cost ?
+
+            *Provide your answer as a list* ``<prefix>-<route>`` *such as p1-AS2:AS1, p2-AS2, ...*
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

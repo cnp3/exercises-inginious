@@ -1,0 +1,245 @@
+accessible: true
+author: Emilie Deprez
+categories:
+- ethernet
+contact_url: ''
+context: |-
+    .. raw:: html
+
+            Consider the network shown in the figure below where all links have a cost of 1.
+
+            <br><br>
+
+            <center>
+            <svg width="240" height="240">
+                    <polygon points="0 40,40 80,80 40,40 0" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <polygon points="160 40,200 80,240 40,200 0" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <polygon points="0 200,40 240,80 200,40 160" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <polygon points="160 200,200 240,240 200,200 160" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <line x1="80" y1="40" x2="160" y2="40" style="stroke:#000; stroke-width: 2px;"/>
+                    <line x1="80" y1="200" x2="160" y2="200" style="stroke:#000; stroke-width: 2px;"/>
+                    <line x1="200" y1="80" x2="200" y2="160" style="stroke:#000; stroke-width: 2px;"/>
+                    <line x1="60" y1="60" x2="180" y2="180" style="stroke:#000; stroke-width: 2px;"/>
+                    <text id="Sa" x="40" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="Sd" x="200" y="200" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="Sc" x="200" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="Sb" x="40" y="200" text-anchor="middle" dominant-baseline="central"/>
+                    <text x="90" y="30" text-anchor="middle" dominant-baseline="central">1</text>
+                    <text x="60" y="80" text-anchor="middle" dominant-baseline="central">2</text>
+                    <text x="150" y="30" text-anchor="middle" dominant-baseline="central">1</text>
+                    <text x="210" y="90" text-anchor="middle" dominant-baseline="central">2</text>
+                    <text x="90" y="210" text-anchor="middle" dominant-baseline="central">1</text>
+                    <text x="210" y="150" text-anchor="middle" dominant-baseline="central">1</text>
+                    <text x="180" y="160" text-anchor="middle" dominant-baseline="central">2</text>
+                    <text x="150" y="210" text-anchor="middle" dominant-baseline="central">3</text>
+            </svg>
+            </center>
+
+            <script src="q-stp-sbs-2/data.js"></script>
+            <script>
+            var index = 0;
+            if (input["@random"][0] != 0){
+                index = parseInt(input["@random"][0].toString().slice(2,4));
+            }
+
+            function getSwitch(tag){
+                return data[index][tag];
+            }
+
+            document.getElementById("Sa").innerHTML = getSwitch("Sa");
+            document.getElementById("Sb").innerHTML = getSwitch("Sb");
+            document.getElementById("Sc").innerHTML = getSwitch("Sc");
+            document.getElementById("Sd").innerHTML = getSwitch("Sd");
+            </script>
+environment_id: pyjavacpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 1
+name: The spanning tree protocol - step by step - 2
+network_grading: false
+problems:
+    q1:
+        type: code_single_line
+        name: 'Root switch '
+        header: |-
+            Which is the root switch in this network ?
+
+            *Provide your answer as Sx where x is the number of the switch*
+        default: ''
+    q2:
+        type: code_single_line
+        name: BPDU sent
+        header: |-
+            .. raw:: html
+
+                <p>What is the BPDU sent by switch <code id="q2"></code> in this network ?</p>
+
+                <script> document.getElementById("q2").innerHTML = getSwitch("Sa"); </script>
+
+            *Provide your answer as R=123, C=456, T=789*
+        default: ''
+    q3:
+        type: code_single_line
+        name: BPDU sent
+        header: |-
+            .. raw:: html
+
+                <p>What is the BPDU sent by switch <code id="q3"></code> in this network ?</p>
+
+                <script> document.getElementById("q3").innerHTML = getSwitch("Sc"); </script>
+
+            *Provide your answer as R=123, C=456, T=789*
+        default: ''
+    q4:
+        type: code_single_line
+        name: BPDU sent
+        header: |-
+            .. raw:: html
+
+                <p>What is the BPDU sent by switch <code id="q4"></code> in this network ?</p>
+
+                <script> document.getElementById("q4").innerHTML = getSwitch("Sb"); </script>
+
+            *Provide your answer as R=123, C=456, T=789*
+        default: ''
+    q5:
+        type: code_single_line
+        name: BPDU sent
+        header: |-
+            .. raw:: html
+
+                <p>What is the BPDU sent by switch <code id="q5"></code> in this network ?</p>
+
+                <script> document.getElementById("q5").innerHTML = getSwitch("Sd"); </script>
+
+            *Provide your answer as R=123, C=456, T=789*
+        default: ''
+    q6:
+        type: code_single_line
+        name: Best BPDU
+        header: |-
+            .. raw:: html
+
+                <p>Between <code id="q6a"></code> and <code id="q6c"></code>, which switch has the best BPDU ?</p>
+
+                <script>
+                    document.getElementById("q6a").innerHTML = getSwitch("Sa");
+                    document.getElementById("q6c").innerHTML = getSwitch("Sc");
+                </script>
+
+            *Provide your answer as Sx where x is the number of the switch*
+        default: ''
+    q7:
+        type: code_single_line
+        name: Best BPDU
+        header: |-
+            .. raw:: html
+
+                <p>Between <code id="q7a"></code> and <code id="q7d"></code>, which switch has the best BPDU ?</p>
+
+                <script>
+                    document.getElementById("q7a").innerHTML = getSwitch("Sa");
+                    document.getElementById("q7d").innerHTML = getSwitch("Sd");
+                </script>
+
+            *Provide your answer as Sx where x is the number of the switch*
+        default: ''
+    q8:
+        type: code_single_line
+        name: Best BPDU
+        header: |-
+            .. raw:: html
+
+                <p>Between <code id="q8c"></code> and <code id="q8d"></code>, which switch has the best BPDU ?</p>
+
+                <script>
+                    document.getElementById("q8c").innerHTML = getSwitch("Sc");
+                    document.getElementById("q8d").innerHTML = getSwitch("Sd");
+                </script>
+
+            *Provide your answer as Sx where x is the number of the switch*
+        default: ''
+    q9:
+        type: code_single_line
+        name: Best BPDU
+        header: |-
+            .. raw:: html
+
+                <p>Between <code id="q9b"></code> and <code id="q9d"></code>, which switch has the best BPDU ?</p>
+
+                <script>
+                    document.getElementById("q9b").innerHTML = getSwitch("Sb");
+                    document.getElementById("q9d").innerHTML = getSwitch("Sd");
+                </script>
+
+            *Provide your answer as Sx where x is the number of the switch*
+        default: ''
+    q10:
+        type: code_single_line
+        name: Port State
+        header: |-
+            .. raw:: html
+
+                <p>What is the state of each port of <code id="q10"></code> ? </p>
+
+                <script>
+                    document.getElementById("q10").innerHTML = getSwitch("Sa");
+                </script>
+
+            *Provide your answer as 1:root, 2:designated, 3:blocked, ...*
+        default: ''
+    q11:
+        type: code_single_line
+        name: Port State
+        header: |-
+            .. raw:: html
+
+                <p>What is the state of each port of <code id="q11"></code> ? </p>
+
+                <script>
+                    document.getElementById("q11").innerHTML = getSwitch("Sc");
+                </script>
+
+            *Provide your answer as 1:root, 2:designated, 3:blocked, ...*
+        default: ''
+    q12:
+        type: code_single_line
+        name: Port State
+        header: |-
+            .. raw:: html
+
+                <p>What is the state of each port of <code id="q12"></code> ? </p>
+
+                <script>
+                    document.getElementById("q12").innerHTML = getSwitch("Sb");
+                </script>
+
+            *Provide your answer as 1:root, 2:designated, 3:blocked, ...*
+        default: ''
+    q13:
+        type: code_single_line
+        name: Port State
+        header: |-
+            .. raw:: html
+
+                <p>What is the state of each port of <code id="q13"></code> ? </p>
+
+                <script>
+                    document.getElementById("q13").innerHTML = getSwitch("Sd");
+                </script>
+
+            *Provide your answer as 1:root, 2:designated, 3:blocked, ...*
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

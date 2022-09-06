@@ -1,0 +1,643 @@
+accessible: true
+author: Emilie Deprez
+categories:
+- bgp
+contact_url: ''
+context: |-
+    In theses exercices we assume that ``AS1`` advertises the prefix ``p1``, ``AS2`` the prefix ``p2``, ...
+
+    .. raw:: html
+
+        <script src="q-bgp-re-1/data.js"></script>
+        <script>
+            var index1 = 0;
+            if (input["@random"][0] != 0){
+                index1 = parseInt(input["@random"][0].toString().slice(2,4));
+            }
+
+            var index2 = 0;
+            if (input["@random"][0] != 0){
+                index2 = parseInt(input["@random"][1].toString().slice(2,4));
+            }
+
+            var index3 = 0;
+            if (input["@random"][0] != 0){
+                index3 = parseInt(input["@random"][2].toString().slice(2,4));
+            }
+
+            var index4 = 0;
+            if (input["@random"][0] != 0){
+                index4 = parseInt(input["@random"][3].toString().slice(2,4));
+            }
+
+            var index5 = 0;
+            if (input["@random"][0] != 0){
+                index5 = parseInt(input["@random"][4].toString().slice(2,4));
+            }
+
+            var index6 = 0;
+            if (input["@random"][0] != 0){
+                index6 = parseInt(input["@random"][5].toString().slice(2,4));
+            }
+
+            function getAS(index, tag){
+                return data[index][tag];
+            }
+
+        </script>
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: 6
+name: BGP - Relation between AS - 1
+network_grading: false
+problems:
+    q1:
+        type: multiple_choice
+        name: ''
+        header: |-
+            .. raw:: html
+
+                <p>Consider the interdomain topology shown in the figure below.</p>
+
+
+                <svg width="400" height="80">
+                    <defs>
+                            <marker id="arrow" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto">
+                                    <polygon points="0 0, 0 5, 5 2.5" style=" fill: #f00;" />
+                            </marker>
+                    </defs>
+                    <circle cx="40" cy="40" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <circle cx="200" cy="40" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <circle cx="360" cy="40" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <line x1="78" y1="40" x2="162" y2="40" style="stroke:#f00; stroke-width: 2px;" marker-end="url(#arrow)"/>
+                    <line x1="238" y1="40" x2="322" y2="40" style="stroke:#f00; stroke-width: 2px;" marker-end="url(#arrow)"/>
+                    <text id="ASaq1" x="40" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="ASbq1" x="200" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="AScq1" x="360" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text x="120" y="30" text-anchor="middle" dominant-baseline="central" fill="#f00">$</text>
+                    <text x="280" y="30" text-anchor="middle" dominant-baseline="central" fill="#f00">$</text>
+                </svg>
+                <br><br>
+
+                <p>
+                <code id="q1asa"></code> and <code id="q1asc"></code> announce their prefixes to <code id="q1asb"></code>. Select all the correct statements. </p>
+
+                <script>
+                    document.getElementById("ASaq1").innerHTML = getAS(index1, "ASa");
+                    document.getElementById("ASbq1").innerHTML = getAS(index1, "ASb");
+                    document.getElementById("AScq1").innerHTML = getAS(index1, "ASc");
+                    document.getElementById("q1asa").innerHTML = getAS(index1, "ASa");
+                    document.getElementById("q1asb").innerHTML = getAS(index1, "ASb");
+                    document.getElementById("q1asc").innerHTML = getAS(index1, "ASc");
+                </script>
+        multiple: true
+        limit: 0
+        success_message: Correct
+        error_message: |-
+            Over a *customer->provider relationship*, the *customer domain* only advertises to its provider its own prefixes and all the routes that it has learned from its own customers.
+
+
+            Over a *customer->provider relationship*, the *provider* advertises all the routes that it knows to its customer.
+        choices:
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q1asb1"></code> announces <code id="q1pa" class="docutils literal"></code> via <code id="q1path1" class="docutils literal"></code> to <code id="q1asc1" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q1asb1").innerHTML = getAS(index1, "ASb");
+                        document.getElementById("q1pa").innerHTML = "p" + getAS(index1, "ASa").slice(2);
+                        document.getElementById("q1path1").innerHTML = getAS(index1, "ASb") + ":" + getAS(index1, "ASa")
+                        document.getElementById("q1asc1").innerHTML = getAS(index1, "ASc");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q1asb2"></code> announces <code id="q1pb1" class="docutils literal"></code> via <code id="q1path2" class="docutils literal"></code> to <code id="q1asa1" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q1asb2").innerHTML = getAS(index1, "ASb");
+                        document.getElementById("q1pb1").innerHTML = "p" + getAS(index1, "ASb").slice(2);
+                        document.getElementById("q1path2").innerHTML = getAS(index1, "ASb");
+                        document.getElementById("q1asa1").innerHTML = getAS(index1, "ASa");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q1asb3"></code> announces <code id="q1pb2" class="docutils literal"></code> via <code id="q1path3" class="docutils literal"></code> to <code id="q1asc2" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q1asb3").innerHTML = getAS(index1, "ASb");
+                        document.getElementById("q1pb2").innerHTML = "p" + getAS(index1, "ASb").slice(2);
+                        document.getElementById("q1path3").innerHTML = getAS(index1, "ASb");
+                        document.getElementById("q1asc2").innerHTML = getAS(index1, "ASc");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q1asb4"></code> announces <code id="q1pc" class="docutils literal"></code> via <code id="q1path4" class="docutils literal"></code> to <code id="q1asa2" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q1asb4").innerHTML = getAS(index1, "ASb");
+                        document.getElementById("q1pc").innerHTML = "p" + getAS(index1, "ASc").slice(2);
+                        document.getElementById("q1path4").innerHTML = getAS(index1, "ASb") + ":" + getAS(index1, "ASc")
+                        document.getElementById("q1asa2").innerHTML = getAS(index1, "ASa");
+                    </script>
+            valid: true
+    q2:
+        type: multiple_choice
+        name: ''
+        header: |-
+            .. raw:: html
+
+                <p>Consider the interdomain topology shown in the figure below.</p>
+
+
+                <svg width="400" height="80">
+                    <defs>
+                            <marker id="arrow" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto">
+                                    <polygon points="0 0, 0 5, 5 2.5" style=" fill: #f00;" />
+                            </marker>
+                    </defs>
+                    <circle cx="40" cy="40" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <circle cx="200" cy="40" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <circle cx="360" cy="40" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <line x1="162" y1="40" x2="78" y2="40" style="stroke:#f00; stroke-width: 2px;" marker-end="url(#arrow)"/>
+                    <line x1="238" y1="40" x2="322" y2="40" style="stroke:#f00; stroke-width: 2px;" marker-end="url(#arrow)"/>
+                    <text id="ASaq2" x="40" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="ASbq2" x="200" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="AScq2" x="360" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text x="120" y="30" text-anchor="middle" dominant-baseline="central" fill="#f00">$</text>
+                    <text x="280" y="30" text-anchor="middle" dominant-baseline="central" fill="#f00">$</text>
+                </svg>
+                <br><br>
+
+                <p>
+                <code id="q2asa"></code> and <code id="q2asc"></code> announce their prefixes to <code id="q2asb"></code>. Select all the correct statements. </p>
+
+                <script>
+                    document.getElementById("ASaq2").innerHTML = getAS(index2, "ASa");
+                    document.getElementById("ASbq2").innerHTML = getAS(index2, "ASb");
+                    document.getElementById("AScq2").innerHTML = getAS(index2, "ASc");
+                    document.getElementById("q2asa").innerHTML = getAS(index2, "ASa");
+                    document.getElementById("q2asb").innerHTML = getAS(index2, "ASb");
+                    document.getElementById("q2asc").innerHTML = getAS(index2, "ASc");
+                </script>
+        multiple: true
+        limit: 0
+        success_message: Correct
+        error_message: Over a *customer->provider relationship*, the *customer domain*
+            only advertises to its provider its own prefixes and all the routes that
+            it has learned from its own customers.
+        choices:
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q2asb1"></code> announces <code id="q2pa" class="docutils literal"></code> via <code id="q2path1" class="docutils literal"></code> to <code id="q2asc1" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q2asb1").innerHTML = getAS(index2, "ASb");
+                        document.getElementById("q2pa").innerHTML = "p" + getAS(index2, "ASa").slice(2);
+                        document.getElementById("q2path1").innerHTML = getAS(index2, "ASb") + ":" + getAS(index2, "ASa")
+                        document.getElementById("q2asc1").innerHTML = getAS(index2, "ASc");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q2asb2"></code> announces <code id="q2pb1" class="docutils literal"></code> via <code id="q2path2" class="docutils literal"></code> to <code id="q2asa1" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q2asb2").innerHTML = getAS(index2, "ASb");
+                        document.getElementById("q2pb1").innerHTML = "p" + getAS(index2, "ASb").slice(2);
+                        document.getElementById("q2path2").innerHTML = getAS(index2, "ASb");
+                        document.getElementById("q2asa1").innerHTML = getAS(index2, "ASa");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q2asb3"></code> announces <code id="q2pb2" class="docutils literal"></code> via <code id="q2path3" class="docutils literal"></code> to <code id="q2asc2" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q2asb3").innerHTML = getAS(index2, "ASb");
+                        document.getElementById("q2pb2").innerHTML = "p" + getAS(index2, "ASb").slice(2);
+                        document.getElementById("q2path3").innerHTML = getAS(index2, "ASb");
+                        document.getElementById("q2asc2").innerHTML = getAS(index2, "ASc");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q2asb4"></code> announces <code id="q2pc" class="docutils literal"></code> via <code id="q2path4" class="docutils literal"></code> to <code id="q2asa2" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q2asb4").innerHTML = getAS(index2, "ASb");
+                        document.getElementById("q2pc").innerHTML = "p" + getAS(index2, "ASc").slice(2);
+                        document.getElementById("q2path4").innerHTML = getAS(index2, "ASb") + ":" + getAS(index2, "ASc")
+                        document.getElementById("q2asa2").innerHTML = getAS(index2, "ASa");
+                    </script>
+    q3:
+        type: multiple_choice
+        name: ''
+        header: |-
+            .. raw:: html
+
+                <p>Consider the interdomain topology shown in the figure below.</p>
+
+
+                <svg width="400" height="80">
+                    <defs>
+                            <marker id="arrow" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto">
+                                    <polygon points="0 0, 0 5, 5 2.5" style=" fill: #f00;" />
+                            </marker>
+                    </defs>
+                    <circle cx="40" cy="40" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <circle cx="200" cy="40" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <circle cx="360" cy="40" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <line x1="78" y1="40" x2="162" y2="40" style="stroke:#f00; stroke-width: 2px;" marker-end="url(#arrow)"/>
+                    <line x1="322" y1="40" x2="238" y2="40" style="stroke:#f00; stroke-width: 2px;" marker-end="url(#arrow)"/>
+                    <text id="ASaq3" x="40" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="ASbq3" x="200" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="AScq3" x="360" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text x="120" y="30" text-anchor="middle" dominant-baseline="central" fill="#f00">$</text>
+                    <text x="280" y="30" text-anchor="middle" dominant-baseline="central" fill="#f00">$</text>
+                </svg>
+                <br><br>
+
+                <p>
+                <code id="q3asa"></code> and <code id="q3asc"></code> announce their prefixes to <code id="q3asb"></code>. Select all the correct statements. </p>
+
+                <script>
+                    document.getElementById("ASaq3").innerHTML = getAS(index3, "ASa");
+                    document.getElementById("ASbq3").innerHTML = getAS(index3, "ASb");
+                    document.getElementById("AScq3").innerHTML = getAS(index3, "ASc");
+                    document.getElementById("q3asa").innerHTML = getAS(index3, "ASa");
+                    document.getElementById("q3asb").innerHTML = getAS(index3, "ASb");
+                    document.getElementById("q3asc").innerHTML = getAS(index3, "ASc");
+                </script>
+        multiple: true
+        limit: 0
+        success_message: Correct
+        error_message: Over a *customer->provider* relationship, the *provider* advertises
+            all the routes that it knows to its customer.
+        choices:
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q3asb1"></code> announces <code id="q3pa" class="docutils literal"></code> via <code id="q3path1" class="docutils literal"></code> to <code id="q3asc1" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q3asb1").innerHTML = getAS(index3, "ASb");
+                        document.getElementById("q3pa").innerHTML = "p" + getAS(index3, "ASa").slice(2);
+                        document.getElementById("q3path1").innerHTML = getAS(index3, "ASb") + ":" + getAS(index3, "ASa")
+                        document.getElementById("q3asc1").innerHTML = getAS(index3, "ASc");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q3asb2"></code> announces <code id="q3pb1" class="docutils literal"></code> via <code id="q3path2" class="docutils literal"></code> to <code id="q3asa1" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q3asb2").innerHTML = getAS(index3, "ASb");
+                        document.getElementById("q3pb1").innerHTML = "p" + getAS(index3, "ASb").slice(2);
+                        document.getElementById("q3path2").innerHTML = getAS(index3, "ASb");
+                        document.getElementById("q3asa1").innerHTML = getAS(index3, "ASa");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q3asb3"></code> announces <code id="q3pb2" class="docutils literal"></code> via <code id="q3path3" class="docutils literal"></code> to <code id="q3asc2" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q3asb3").innerHTML = getAS(index3, "ASb");
+                        document.getElementById("q3pb2").innerHTML = "p" + getAS(index3, "ASb").slice(2);
+                        document.getElementById("q3path3").innerHTML = getAS(index3, "ASb");
+                        document.getElementById("q3asc2").innerHTML = getAS(index3, "ASc");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q3asb4"></code> announces <code id="q3pc" class="docutils literal"></code> via <code id="q3path4" class="docutils literal"></code> to <code id="q3asa2" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q3asb4").innerHTML = getAS(index3, "ASb");
+                        document.getElementById("q3pc").innerHTML = "p" + getAS(index3, "ASc").slice(2);
+                        document.getElementById("q3path4").innerHTML = getAS(index3, "ASb") + ":" + getAS(index3, "ASc")
+                        document.getElementById("q3asa2").innerHTML = getAS(index3, "ASa");
+                    </script>
+            valid: true
+    q4:
+        type: multiple_choice
+        name: ''
+        header: |-
+            .. raw:: html
+
+                <p>Consider the interdomain topology shown in the figure below.</p>
+
+
+                <svg width="400" height="80">
+                    <defs>
+                            <marker id="arrow" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto">
+                                    <polygon points="0 0, 0 5, 5 2.5" style=" fill: #f00;" />
+                            </marker>
+                    </defs>
+                    <circle cx="40" cy="40" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <circle cx="200" cy="40" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <circle cx="360" cy="40" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <line x1="78" y1="40" x2="162" y2="40" style="stroke:#00f; stroke-width: 2px;"/>
+                    <line x1="322" y1="40" x2="238" y2="40" style="stroke:#f00; stroke-width: 2px;" marker-end="url(#arrow)"/>
+                    <text id="ASaq4" x="40" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="ASbq4" x="200" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="AScq4" x="360" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text x="120" y="30" text-anchor="middle" dominant-baseline="central" fill="#00f">=</text>
+                    <text x="280" y="30" text-anchor="middle" dominant-baseline="central" fill="#f00">$</text>
+                </svg>
+                <br><br>
+
+                <p>
+                <code id="q4asa"></code> and <code id="q4asc"></code> announce their prefixes to <code id="q4asb"></code>. Select all the correct statements. </p>
+
+                <script>
+                    document.getElementById("ASaq4").innerHTML = getAS(index4, "ASa");
+                    document.getElementById("ASbq4").innerHTML = getAS(index4, "ASb");
+                    document.getElementById("AScq4").innerHTML = getAS(index4, "ASc");
+                    document.getElementById("q4asa").innerHTML = getAS(index4, "ASa");
+                    document.getElementById("q4asb").innerHTML = getAS(index4, "ASb");
+                    document.getElementById("q4asc").innerHTML = getAS(index4, "ASc");
+                </script>
+        multiple: true
+        limit: 0
+        success_message: Correct
+        error_message: |-
+            Over a *shared-cost* peering relationship, a domain only advertises its own prefixes and all the routes that it has learned from its own customers.
+
+
+            Over a *customer->provider* relationship, the *provider* advertises all the routes that it knows to its customer.
+        choices:
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q4asb1"></code> announces <code id="q4pa" class="docutils literal"></code> via <code id="q4path1" class="docutils literal"></code> to <code id="q4asc1" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q4asb1").innerHTML = getAS(index4, "ASb");
+                        document.getElementById("q4pa").innerHTML = "p" + getAS(index4, "ASa").slice(2);
+                        document.getElementById("q4path1").innerHTML = getAS(index4, "ASb") + ":" + getAS(index4, "ASa")
+                        document.getElementById("q4asc1").innerHTML = getAS(index4, "ASc");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q4asb2"></code> announces <code id="q4pb1" class="docutils literal"></code> via <code id="q4path2" class="docutils literal"></code> to <code id="q4asa1" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q4asb2").innerHTML = getAS(index4, "ASb");
+                        document.getElementById("q4pb1").innerHTML = "p" + getAS(index4, "ASb").slice(2);
+                        document.getElementById("q4path2").innerHTML = getAS(index4, "ASb");
+                        document.getElementById("q4asa1").innerHTML = getAS(index4, "ASa");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q4asb3"></code> announces <code id="q4pb2" class="docutils literal"></code> via <code id="q4path3" class="docutils literal"></code> to <code id="q4asc2" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q4asb3").innerHTML = getAS(index4, "ASb");
+                        document.getElementById("q4pb2").innerHTML = "p" + getAS(index4, "ASb").slice(2);
+                        document.getElementById("q4path3").innerHTML = getAS(index4, "ASb");
+                        document.getElementById("q4asc2").innerHTML = getAS(index4, "ASc");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q4asb4"></code> announces <code id="q4pc" class="docutils literal"></code> via <code id="q4path4" class="docutils literal"></code> to <code id="q4asa2" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q4asb4").innerHTML = getAS(index4, "ASb");
+                        document.getElementById("q4pc").innerHTML = "p" + getAS(index4, "ASc").slice(2);
+                        document.getElementById("q4path4").innerHTML = getAS(index4, "ASb") + ":" + getAS(index4, "ASc")
+                        document.getElementById("q4asa2").innerHTML = getAS(index4, "ASa");
+                    </script>
+            valid: true
+    q5:
+        type: multiple_choice
+        name: ''
+        header: |-
+            .. raw:: html
+
+                <p>Consider the interdomain topology shown in the figure below.</p>
+
+
+                <svg width="400" height="80">
+                    <defs>
+                            <marker id="arrow" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto">
+                                    <polygon points="0 0, 0 5, 5 2.5" style=" fill: #f00;" />
+                            </marker>
+                    </defs>
+                    <circle cx="40" cy="40" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <circle cx="200" cy="40" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <circle cx="360" cy="40" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <line x1="78" y1="40" x2="162" y2="40" style="stroke:#00f; stroke-width: 2px;"/>
+                    <line x1="238" y1="40" x2="322" y2="40" style="stroke:#f00; stroke-width: 2px;" marker-end="url(#arrow)"/>
+                    <text id="ASaq5" x="40" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="ASbq5" x="200" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="AScq5" x="360" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text x="120" y="30" text-anchor="middle" dominant-baseline="central" fill="#00f">=</text>
+                    <text x="280" y="30" text-anchor="middle" dominant-baseline="central" fill="#f00">$</text>
+                </svg>
+                <br><br>
+
+                <p>
+                <code id="q5asa"></code> and <code id="q5asc"></code> announce their prefixes to <code id="q5asb"></code>. Select all the correct statements. </p>
+
+                <script>
+                    document.getElementById("ASaq5").innerHTML = getAS(index5, "ASa");
+                    document.getElementById("ASbq5").innerHTML = getAS(index5, "ASb");
+                    document.getElementById("AScq5").innerHTML = getAS(index5, "ASc");
+                    document.getElementById("q5asa").innerHTML = getAS(index5, "ASa");
+                    document.getElementById("q5asb").innerHTML = getAS(index5, "ASb");
+                    document.getElementById("q5asc").innerHTML = getAS(index5, "ASc");
+                </script>
+        multiple: true
+        limit: 0
+        success_message: Correct
+        error_message: |-
+            Over a *shared-cost* peering relationship, a domain only advertises its own prefixes and all the routes that it has learned from its own customers.
+
+
+            Over a *customer->provider* relationship, the *customer domain* only advertises to its provider its own prefixes and all the routes that it has learned from its own customers.
+        choices:
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q5asb1"></code> announces <code id="q5pa" class="docutils literal"></code> via <code id="q5path1" class="docutils literal"></code> to <code id="q5asc1" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q5asb1").innerHTML = getAS(index5, "ASb");
+                        document.getElementById("q5pa").innerHTML = "p" + getAS(index5, "ASa").slice(2);
+                        document.getElementById("q5path1").innerHTML = getAS(index5, "ASb") + ":" + getAS(index5, "ASa")
+                        document.getElementById("q5asc1").innerHTML = getAS(index5, "ASc");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q5asb2"></code> announces <code id="q5pb1" class="docutils literal"></code> via <code id="q5path2" class="docutils literal"></code> to <code id="q5asa1" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q5asb2").innerHTML = getAS(index5, "ASb");
+                        document.getElementById("q5pb1").innerHTML = "p" + getAS(index5, "ASb").slice(2);
+                        document.getElementById("q5path2").innerHTML = getAS(index5, "ASb");
+                        document.getElementById("q5asa1").innerHTML = getAS(index5, "ASa");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q5asb3"></code> announces <code id="q5pb2" class="docutils literal"></code> via <code id="q5path3" class="docutils literal"></code> to <code id="q5asc2" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q5asb3").innerHTML = getAS(index5, "ASb");
+                        document.getElementById("q5pb2").innerHTML = "p" + getAS(index5, "ASb").slice(2);
+                        document.getElementById("q5path3").innerHTML = getAS(index5, "ASb");
+                        document.getElementById("q5asc2").innerHTML = getAS(index5, "ASc");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q5asb4"></code> announces <code id="q5pc" class="docutils literal"></code> via <code id="q5path4" class="docutils literal"></code> to <code id="q5asa2" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q5asb4").innerHTML = getAS(index5, "ASb");
+                        document.getElementById("q5pc").innerHTML = "p" + getAS(index5, "ASc").slice(2);
+                        document.getElementById("q5path4").innerHTML = getAS(index5, "ASb") + ":" + getAS(index5, "ASc")
+                        document.getElementById("q5asa2").innerHTML = getAS(index5, "ASa");
+                    </script>
+    q6:
+        type: multiple_choice
+        name: ''
+        header: |-
+            .. raw:: html
+
+                <p>Consider the interdomain topology shown in the figure below.</p>
+
+
+                <svg width="400" height="80">
+                    <circle cx="40" cy="40" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <circle cx="200" cy="40" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <circle cx="360" cy="40" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <line x1="78" y1="40" x2="162" y2="40" style="stroke:#00f; stroke-width: 2px;"/>
+                    <line x1="238" y1="40" x2="322" y2="40" style="stroke:#00f; stroke-width: 2px;"/>
+                    <text id="ASaq6" x="40" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="ASbq6" x="200" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="AScq6" x="360" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text x="120" y="30" text-anchor="middle" dominant-baseline="central" fill="#00f">=</text>
+                    <text x="280" y="30" text-anchor="middle" dominant-baseline="central" fill="#00f">=</text>
+                </svg>
+                <br><br>
+
+                <p>
+                <code id="q6asa"></code> and <code id="q6asc"></code> announce their prefixes to <code id="q6asb"></code>. Select all the correct statements. </p>
+
+                <script>
+                    document.getElementById("ASaq6").innerHTML = getAS(index6, "ASa");
+                    document.getElementById("ASbq6").innerHTML = getAS(index6, "ASb");
+                    document.getElementById("AScq6").innerHTML = getAS(index6, "ASc");
+                    document.getElementById("q6asa").innerHTML = getAS(index6, "ASa");
+                    document.getElementById("q6asb").innerHTML = getAS(index6, "ASb");
+                    document.getElementById("q6asc").innerHTML = getAS(index6, "ASc");
+                </script>
+        multiple: true
+        limit: 0
+        success_message: Correct
+        error_message: Over a *shared-cost* peering relationship, a domain only advertises
+            its own prefixes and all the routes that it has learned from its own customers.
+        choices:
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q6asb1"></code> announces <code id="q6pa" class="docutils literal"></code> via <code id="q6path1" class="docutils literal"></code> to <code id="q6asc1" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q6asb1").innerHTML = getAS(index6, "ASb");
+                        document.getElementById("q6pa").innerHTML = "p" + getAS(index6, "ASa").slice(2);
+                        document.getElementById("q6path1").innerHTML = getAS(index6, "ASb") + ":" + getAS(index6, "ASa")
+                        document.getElementById("q6asc1").innerHTML = getAS(index6, "ASc");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q6asb2"></code> announces <code id="q6pb1" class="docutils literal"></code> via <code id="q6path2" class="docutils literal"></code> to <code id="q6asa1" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q6asb2").innerHTML = getAS(index6, "ASb");
+                        document.getElementById("q6pb1").innerHTML = "p" + getAS(index6, "ASb").slice(2);
+                        document.getElementById("q6path2").innerHTML = getAS(index6, "ASb");
+                        document.getElementById("q6asa1").innerHTML = getAS(index6, "ASa");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q6asb3"></code> announces <code id="q6pb2" class="docutils literal"></code> via <code id="q6path3" class="docutils literal"></code> to <code id="q6asc2" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q6asb3").innerHTML = getAS(index6, "ASb");
+                        document.getElementById("q6pb2").innerHTML = "p" + getAS(index6, "ASb").slice(2);
+                        document.getElementById("q6path3").innerHTML = getAS(index6, "ASb");
+                        document.getElementById("q6asc2").innerHTML = getAS(index6, "ASc");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <p>
+                    <code id="q6asb4"></code> announces <code id="q6pc" class="docutils literal"></code> via <code id="q6path4" class="docutils literal"></code> to <code id="q6asa2" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("q6asb4").innerHTML = getAS(index6, "ASb");
+                        document.getElementById("q6pc").innerHTML = "p" + getAS(index6, "ASc").slice(2);
+                        document.getElementById("q6path4").innerHTML = getAS(index6, "ASb") + ":" + getAS(index6, "ASc")
+                        document.getElementById("q6asa2").innerHTML = getAS(index6, "ASa");
+                    </script>
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

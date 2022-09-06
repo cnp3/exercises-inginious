@@ -1,0 +1,397 @@
+accessible: true
+author: Emilie Deprez
+categories:
+- ethernet
+contact_url: ''
+context: |-
+    .. raw:: html
+
+            Consider the network shown in the figure below where all links have a cost of 1.
+
+            <br><br>
+            <center>
+            <svg width="360" height="360">
+                    <polygon id="a" points="0 180,40 220,80 180,40 140" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <polygon id="b" points="140 40,180 80,220 40,180 0" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <polygon id="c" points="140 180,180 220,220 180,180 140" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <polygon id="d" points="280 180,320 220,360 180,320 140" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <polygon id="e" points="140 320,180 360,220 320,180 280" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <line x1="60" y1="160" x2="160" y2="60" style="stroke:#000; stroke-width: 2px;"/>
+                    <line x1="80" y1="180" x2="140" y2="180" style="stroke:#000; stroke-width: 2px;"/>
+                    <line x1="200" y1="60" x2="300" y2="160" style="stroke:#000; stroke-width: 2px;"/>
+                    <line x1="220" y1="180" x2="280" y2="180" style="stroke:#000; stroke-width: 2px;"/>
+                    <line x1="180" y1="220" x2="180" y2="280" style="stroke:#000; stroke-width: 2px;"/>
+                    <line x1="300" y1="200" x2="200" y2="300" style="stroke:#000; stroke-width: 2px;"/>
+                    <text id="Sa" x="40" y="180" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="Sb" x="180" y="40" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="Sc" x="180" y="180" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="Sd" x="320" y="180" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="Se" x="180" y="320" text-anchor="middle" dominant-baseline="central"/>
+                    <text x="60" y="140" text-anchor="middle" dominant-baseline="central">1</text>
+                    <text x="90" y="170" text-anchor="middle" dominant-baseline="central">2</text>
+                    <text x="140" y="60" text-anchor="middle" dominant-baseline="central">1</text>
+                    <text x="220" y="60" text-anchor="middle" dominant-baseline="central">2</text>
+                    <text x="130" y="170" text-anchor="middle" dominant-baseline="central">1</text>
+                    <text x="230" y="170" text-anchor="middle" dominant-baseline="central">2</text>
+                    <text x="170" y="230" text-anchor="middle" dominant-baseline="central">3</text>
+                    <text x="300" y="140" text-anchor="middle" dominant-baseline="central">1</text>
+                    <text x="270" y="170" text-anchor="middle" dominant-baseline="central">2</text>
+                    <text x="300" y="220" text-anchor="middle" dominant-baseline="central">3</text>
+                    <text x="170" y="270" text-anchor="middle" dominant-baseline="central">1</text>
+                    <text x="220" y="300" text-anchor="middle" dominant-baseline="central">2</text>
+            </svg>
+            </center>
+
+            <script src="q-stp-2/data.js"></script>
+            <script>
+            var index = 0;
+            if (input["@random"][0] != 0){
+                index = parseInt(input["@random"][0].toString().slice(2,4));
+            }
+
+            function getSwitch(tag){
+                return data[index][tag];
+            }
+
+            document.getElementById("Sa").innerHTML = getSwitch("Sa");
+            document.getElementById("Sb").innerHTML = getSwitch("Sb");
+            document.getElementById("Sc").innerHTML = getSwitch("Sc");
+            document.getElementById("Sd").innerHTML = getSwitch("Sd");
+            document.getElementById("Se").innerHTML = getSwitch("Se");
+            </script>
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: 1
+name: The spanning tree protocol - state of switches ports - 1
+network_grading: false
+problems:
+    q1:
+        type: multiple_choice
+        name: Root switch
+        header: Which is the root switch in this network ?
+        limit: 0
+        success_message: Correct
+        choices:
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q1a" class="docutils literal"></code>
+                    <script> document.getElementById("q1a").innerHTML = getSwitch("Sa");</script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q1b" class="docutils literal"></code>
+                    <script> document.getElementById("q1b").innerHTML = getSwitch("Sb");</script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q1c" class="docutils literal"></code>
+                    <script> document.getElementById("q1c").innerHTML = getSwitch("Sc");</script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q1d" class="docutils literal"></code>
+                    <script> document.getElementById("q1d").innerHTML = getSwitch("Sd");</script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q1e" class="docutils literal"></code>
+                    <script> document.getElementById("q1e").innerHTML = getSwitch("Se");</script>
+    q2:
+        type: multiple_choice
+        name: Designate state
+        header: Select all ports that are in a **designated** state.
+        multiple: true
+        limit: 0
+        success_message: Correct
+        choices:
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q2a" class="docutils literal"></code><code class="docutils literal">.1</code>
+                    <script>
+                        document.getElementById("q2a").innerHTML = getSwitch("Sa");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q2b" class="docutils literal"></code><code class="docutils literal">.2</code>
+                    <script>
+                        document.getElementById("q2b").innerHTML = getSwitch("Sa");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q2c" class="docutils literal"></code><code class="docutils literal">.1</code>
+                    <script>
+                        document.getElementById("q2c").innerHTML = getSwitch("Sb");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q2d" class="docutils literal"></code><code class="docutils literal">.2</code>
+                    <script>
+                        document.getElementById("q2d").innerHTML = getSwitch("Sb");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q2e" class="docutils literal"></code><code class="docutils literal">.1</code>
+                    <script>
+                        document.getElementById("q2e").innerHTML = getSwitch("Sc");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q2f" class="docutils literal"></code><code class="docutils literal">.2</code>
+                    <script>
+                        document.getElementById("q2f").innerHTML = getSwitch("Sc");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q2g" class="docutils literal"></code><code class="docutils literal">.3</code>
+                    <script>
+                        document.getElementById("q2g").innerHTML = getSwitch("Sc");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q2h" class="docutils literal"></code><code class="docutils literal">.1</code>
+                    <script>
+                        document.getElementById("q2h").innerHTML = getSwitch("Sd");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q2i" class="docutils literal"></code><code class="docutils literal">.2</code>
+                    <script>
+                        document.getElementById("q2i").innerHTML = getSwitch("Sd");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q2j" class="docutils literal"></code><code class="docutils literal">.3</code>
+                    <script>
+                        document.getElementById("q2j").innerHTML = getSwitch("Sd");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q2k" class="docutils literal"></code><code class="docutils literal">.1</code>
+                    <script>
+                        document.getElementById("q2k").innerHTML = getSwitch("Se");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q2l" class="docutils literal"></code><code class="docutils literal">.2</code>
+                    <script>
+                        document.getElementById("q2l").innerHTML = getSwitch("Se");
+                    </script>
+    q3:
+        type: multiple_choice
+        name: Root state
+        header: Select all ports that are in a **root** state.
+        multiple: true
+        limit: 0
+        success_message: Correct
+        choices:
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q3a" class="docutils literal"></code><code class="docutils literal">.1</code>
+                    <script>
+                        document.getElementById("q3a").innerHTML = getSwitch("Sa");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q3b" class="docutils literal"></code><code class="docutils literal">.2</code>
+                    <script>
+                        document.getElementById("q3b").innerHTML = getSwitch("Sa");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q3c" class="docutils literal"></code><code class="docutils literal">.1</code>
+                    <script>
+                        document.getElementById("q3c").innerHTML = getSwitch("Sb");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q3d" class="docutils literal"></code><code class="docutils literal">.2</code>
+                    <script>
+                        document.getElementById("q3d").innerHTML = getSwitch("Sb");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q3e" class="docutils literal"></code><code class="docutils literal">.1</code>
+                    <script>
+                        document.getElementById("q3e").innerHTML = getSwitch("Sc");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q3f" class="docutils literal"></code><code class="docutils literal">.2</code>
+                    <script>
+                        document.getElementById("q3f").innerHTML = getSwitch("Sc");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q3g" class="docutils literal"></code><code class="docutils literal">.3</code>
+                    <script>
+                        document.getElementById("q3g").innerHTML = getSwitch("Sc");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q3h" class="docutils literal"></code><code class="docutils literal">.1</code>
+                    <script>
+                        document.getElementById("q3h").innerHTML = getSwitch("Sd");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q3i" class="docutils literal"></code><code class="docutils literal">.2</code>
+                    <script>
+                        document.getElementById("q3i").innerHTML = getSwitch("Sd");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q3j" class="docutils literal"></code><code class="docutils literal">.3</code>
+                    <script>
+                        document.getElementById("q3j").innerHTML = getSwitch("Sd");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q3k" class="docutils literal"></code><code class="docutils literal">.1</code>
+                    <script>
+                        document.getElementById("q3k").innerHTML = getSwitch("Se");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q3l" class="docutils literal"></code><code class="docutils literal">.2</code>
+                    <script>
+                        document.getElementById("q3l").innerHTML = getSwitch("Se");
+                    </script>
+    q4:
+        type: multiple_choice
+        name: Blocked state
+        header: Select all ports that are in a **blocked** state.
+        multiple: true
+        limit: 0
+        success_message: Correct
+        choices:
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q4a" class="docutils literal"></code><code class="docutils literal">.1</code>
+                    <script>
+                        document.getElementById("q4a").innerHTML = getSwitch("Sa");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q4b" class="docutils literal"></code><code class="docutils literal">.2</code>
+                    <script>
+                        document.getElementById("q4b").innerHTML = getSwitch("Sa");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q4c" class="docutils literal"></code><code class="docutils literal">.1</code>
+                    <script>
+                        document.getElementById("q4c").innerHTML = getSwitch("Sb");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q4d" class="docutils literal"></code><code class="docutils literal">.2</code>
+                    <script>
+                        document.getElementById("q4d").innerHTML = getSwitch("Sb");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q4e" class="docutils literal"></code><code class="docutils literal">.1</code>
+                    <script>
+                        document.getElementById("q4e").innerHTML = getSwitch("Sc");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q4f" class="docutils literal"></code><code class="docutils literal">.2</code>
+                    <script>
+                        document.getElementById("q4f").innerHTML = getSwitch("Sc");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q4g" class="docutils literal"></code><code class="docutils literal">.3</code>
+                    <script>
+                        document.getElementById("q4g").innerHTML = getSwitch("Sc");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q4h" class="docutils literal"></code><code class="docutils literal">.1</code>
+                    <script>
+                        document.getElementById("q4h").innerHTML = getSwitch("Sd");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q4i" class="docutils literal"></code><code class="docutils literal">.2</code>
+                    <script>
+                        document.getElementById("q4i").innerHTML = getSwitch("Sd");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q4j" class="docutils literal"></code><code class="docutils literal">.3</code>
+                    <script>
+                        document.getElementById("q4j").innerHTML = getSwitch("Sd");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q4k" class="docutils literal"></code><code class="docutils literal">.1</code>
+                    <script>
+                        document.getElementById("q4k").innerHTML = getSwitch("Se");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <code id="q4l" class="docutils literal"></code><code class="docutils literal">.2</code>
+                    <script>
+                        document.getElementById("q4l").innerHTML = getSwitch("Se");
+                    </script>
+            valid: true
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

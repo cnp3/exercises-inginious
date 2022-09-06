@@ -1,0 +1,17 @@
+.node circle{
+    stroke: #000;
+    fill: #fff;
+    stroke-width: 1.5px;
+}
+
+.pro-cust {
+    stroke: #f00;
+    fill: #f00;
+    stroke-width: 1.5px;
+}
+
+.shared {
+    stroke: #fff;
+    fill: #fff;
+    stroke-width: 0px;   
+}

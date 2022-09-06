@@ -1,0 +1,201 @@
+accessible: true
+author: Emilie Deprez
+categories:
+- bgp
+contact_url: ''
+context: |-
+    Consider the interdomain topology shown in the figure below. Assuming, that ``AS1`` advertises the prefix ``p1``, ``AS2`` the prefix ``p2``, ...
+
+    .. raw:: html
+
+        <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+        <script src="https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.js"></script>
+        <link rel="stylesheet" type="text/css" href="q-bgp-re-3/diagram.css">
+
+        <svg width=960 height=600><g/></svg>
+
+        <script src="q-bgp-re-3/data.js"></script>
+        <script src="q-bgp-re-3/diagram.js"></script>
+
+        <p>
+        <code id="ASa" class="docutils literal"></code>, <code id="ASc" class="docutils literal"></code> and <code id="ASd" class="docutils literal"></code> announce their prefixes to <code id="ASb" class="docutils literal"></code>. </p>
+
+        <p>The Routing Information Base of <code id="asb" class="docutils literal"></code> is  as follows
+
+
+        <table class="colwidths-given docutils table table-bordered">
+        <colgroup>
+        <col width="20%" />
+        <col width="20%" />
+        </colgroup>
+            <thead class="thead-light">
+            <tr><th class="head">Prefix</th>
+            <th class="head">Route</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><code id="pa" class="docutils literal"></code></td>
+            <td><code id="asa" class="docutils literal"></code></td>
+            </tr>
+            <tr><td><code id="pc" class="docutils literal"></code></td>
+            <td><code id="asc" class="docutils literal"></code></td>
+            </tr>
+            <tr><td><code id="pd" class="docutils literal"></code></td>
+            <td><code id="asd" class="docutils literal"></code></td>
+            </tr>
+            </tbody>
+        </table>
+
+        Which prefixes will <code id="ASB" class="docutils literal"></code> announce to <code id="ASA" class="docutils literal"></code>, <code id="ASC" class="docutils literal"></code> and <code id="ASD" class="docutils literal"></code> ?
+        </p>
+
+        <script>
+        document.getElementById("ASa").innerHTML = getAS("ASa");
+        document.getElementById("ASA").innerHTML = getAS("ASa");
+        document.getElementById("asa").innerHTML = getAS("ASa");
+        document.getElementById("pa").innerHTML = "p" + getAS("ASa").slice(2);
+        document.getElementById("ASb").innerHTML = getAS("ASb");
+        document.getElementById("ASB").innerHTML = getAS("ASb");
+        document.getElementById("asb").innerHTML = getAS("ASb");
+        document.getElementById("ASc").innerHTML = getAS("ASc");
+        document.getElementById("ASC").innerHTML = getAS("ASc");
+        document.getElementById("asc").innerHTML = getAS("ASc");
+        document.getElementById("pc").innerHTML = "p" + getAS("ASc").slice(2);
+        document.getElementById("ASd").innerHTML = getAS("ASd");
+        document.getElementById("ASD").innerHTML = getAS("ASd");
+        document.getElementById("asd").innerHTML = getAS("ASd");
+        document.getElementById("pd").innerHTML = "p" + getAS("ASd").slice(2);
+        </script>
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: 1
+name: BGP - Relation between AS - 3
+network_grading: false
+problems:
+    q1:
+        type: multiple_choice
+        name: ''
+        header: Select all the correct statements.
+        multiple: true
+        limit: 0
+        success_message: Correct
+        error_message: |-
+            Over a *customer->provider* relationship, the *customer domain* only advertises to its provider its own prefixes and all the routes that it has learned from its own customers.
+
+
+            Over a *customer->provider* relationship, the *provider* advertises all the routes that it knows to its customer.
+
+
+            Over a *shared-cost* peering relationship, a domain only advertises its own prefixes and all the routes that it has learned from its own customers.
+        choices:
+        -   text: |-
+                .. raw:: html
+
+                    <p> <code id="asb1" class="docutils literal"></code> announces <code id="pa1" class="docutils literal"></code> via <code id="path1" class="docutils literal"></code> to <code id="asc1" class="docutils literal"></code> </p>
+
+                    <script>
+                        document.getElementById("asb1").innerHTML = getAS("ASb");
+                        document.getElementById("pa1").innerHTML = "p" + getAS("ASa").slice(2);
+                        document.getElementById("path1").innerHTML = getAS("ASb") + ":" + getAS("ASa")
+                        document.getElementById("asc1").innerHTML = getAS("ASc");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <p><code id="asb2" class="docutils literal"></code> announces <code id="pa2" class="docutils literal"></code> via <code id="path2" class="docutils literal"></code> to <code id="asd1" class="docutils literal"></code></p>
+
+                    <script>
+                        document.getElementById("asb2").innerHTML = getAS("ASb");
+                        document.getElementById("pa2").innerHTML = "p" + getAS("ASa").slice(2);
+                        document.getElementById("path2").innerHTML = getAS("ASb") + ":" + getAS("ASa")
+                        document.getElementById("asd1").innerHTML = getAS("ASd");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <p><code id="asb3" class="docutils literal"></code> announces <code id="pc1" class="docutils literal"></code> via <code id="path3" class="docutils literal"></code> to <code id="asa1" class="docutils literal"></code></p>
+
+                    <script>
+                        document.getElementById("asb3").innerHTML = getAS("ASb");
+                        document.getElementById("pc1").innerHTML = "p" + getAS("ASc").slice(2);
+                        document.getElementById("path3").innerHTML = getAS("ASb") + ":" + getAS("ASc")
+                        document.getElementById("asa1").innerHTML = getAS("ASa");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <p><code id="asb4" class="docutils literal"></code> announces <code id="pc2" class="docutils literal"></code> via <code id="path4" class="docutils literal"></code> to <code id="asd2" class="docutils literal"></code></p>
+
+                    <script>
+                        document.getElementById("asb4").innerHTML = getAS("ASb");
+                        document.getElementById("pc2").innerHTML = "p" + getAS("ASc").slice(2);
+                        document.getElementById("path4").innerHTML = getAS("ASb") + ":" + getAS("ASc")
+                        document.getElementById("asd2").innerHTML = getAS("ASd");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <p><code id="asb5" class="docutils literal"></code> announces <code id="pd1" class="docutils literal"></code> via <code id="path5" class="docutils literal"></code> to <code id="asa2" class="docutils literal"></code></p>
+
+                    <script>
+                        document.getElementById("asb5").innerHTML = getAS("ASb");
+                        document.getElementById("pd1").innerHTML = "p" + getAS("ASd").slice(2);
+                        document.getElementById("path5").innerHTML = getAS("ASb") + ":" + getAS("ASd")
+                        document.getElementById("asa2").innerHTML = getAS("ASa");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <p><code id="asb6" class="docutils literal"></code> announces <code id="pd2" class="docutils literal"></code> via <code id="path6" class="docutils literal"></code> to <code id="asc2" class="docutils literal"></code></p>
+
+                    <script>
+                        document.getElementById("asb6").innerHTML = getAS("ASb");
+                        document.getElementById("pd2").innerHTML = "p" + getAS("ASd").slice(2);
+                        document.getElementById("path6").innerHTML = getAS("ASb") + ":" + getAS("ASd")
+                        document.getElementById("asc2").innerHTML = getAS("ASc");
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                    <p><code id="asb7" class="docutils literal"></code> announces <code id="pb1" class="docutils literal"></code> via <code id="path7" class="docutils literal"></code> to <code id="asa3" class="docutils literal"></code></p>
+
+                    <script>
+                        document.getElementById("asb7").innerHTML = getAS("ASb");
+                        document.getElementById("pb1").innerHTML = "p" + getAS("ASb").slice(2);
+                        document.getElementById("path7").innerHTML = getAS("ASb");
+                        document.getElementById("asa3").innerHTML = getAS("ASa");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <p><code id="asb8" class="docutils literal"></code> announces <code id="pb2" class="docutils literal"></code> via <code id="path8" class="docutils literal"></code> to <code id="asc3" class="docutils literal"></code></p>
+
+                    <script>
+                        document.getElementById("asb8").innerHTML = getAS("ASb");
+                        document.getElementById("pb2").innerHTML = "p" + getAS("ASb").slice(2);
+                        document.getElementById("path8").innerHTML = getAS("ASb");
+                        document.getElementById("asc3").innerHTML = getAS("ASc");
+                    </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                    <p><code id="asb9" class="docutils literal"></code> announces <code id="pb3" class="docutils literal"></code> via <code id="path9" class="docutils literal"></code> to <code id="asd3" class="docutils literal"></code></p>
+
+                    <script>
+                        document.getElementById("asb9").innerHTML = getAS("ASb");
+                        document.getElementById("pb3").innerHTML = "p" + getAS("ASb").slice(2);
+                        document.getElementById("path9").innerHTML = getAS("ASb");
+                        document.getElementById("asd3").innerHTML = getAS("ASd");
+                    </script>
+            valid: true
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

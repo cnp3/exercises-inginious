@@ -1,45 +1,86 @@
 name: Push to INGInious
 on:
   push:
-    branches:
-      - main
-    paths:
-      - '.github/workflows/inginious-push.*'
-      - '**'
+    branches: [ main ]
+  pull_request_target:
+    types:
+      - closed
+  workflow_dispatch:
+
+env:
+  COURSE_ID: cnp3  # Put the INGInious course ID
+  COURSE_URL: https://dav.inginious.org/cnp3/ # Put the WebDAV url of the course
+  REPO_COURSE_DIR: "." # Put the directory name of the root of the INGinious course in this repo
 
 jobs:
-  push_to_inginious:
-    name: Push to INGInious instance
+  reset_changes:
+    name: Reset INGInious changes
+    if: github.head_ref == 'inginious-remote-changes' && github.event.pull_request.merged == false
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch WebDAV
-        id: fetch_remote
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y davfs2
+      - name: Mount course directory
+        id: mount
         env:
           WEBDAV_USERNAME: ${{ secrets.WEBDAV_USERNAME }}
           WEBDAV_PASSWORD: ${{ secrets.WEBDAV_PASSWORD }}
         run: |
-          wget -q -e robots=off --auth-no-challenge --http-user=$WEBDAV_USERNAME --http-password=$WEBDAV_PASSWORD --exclude-directories=:dir_browser -nH -np -m -P /tmp/ https://dav.inginious.org/cnp3/
-          find /tmp/cnp3 -name index.html -delete
-          echo "::set-output name=commit_id::"$(cat /tmp/cnp3/.commit_id)
-        shell: bash
+          mkdir /tmp/webdav
+          echo -e "$WEBDAV_USERNAME\n$WEBDAV_PASSWORD\n" | sudo mount -t davfs $COURSE_URL /tmp/webdav -o uid=$(id -u),gid=$(id -g)
+          ls -lah /tmp/webdav
+          echo "commit_id=$(cat /tmp/webdav/.commit_id)" >> $GITHUB_OUTPUT
       - name: Checkout remote commit ID
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
-          ref: ${{ steps.fetch_remote.outputs.commit_id }}
+          ref: ${{ steps.mount.outputs.commit_id }}
+      - name: Push using WebDAV
+        run: |
+          rsync -rv --exclude ".github" --exclude "lost+found" --exclude ".commit_id" --inplace --cvs-exclude --delete $GITHUB_WORKSPACE/$REPO_COURSE_DIR/ /tmp/webdav/
+          sudo umount /tmp/webdav
+  push_to_inginious:
+    name: Push to INGInious instance
+    if: always() && ((github.head_ref == 'inginious-remote-changes' && github.event.pull_request.merged == false) || github.event_name == 'push')
+    needs: reset_changes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y davfs2
+      - name: Mount course directory
+        id: mount
+        env:
+          WEBDAV_USERNAME: ${{ secrets.WEBDAV_USERNAME }}
+          WEBDAV_PASSWORD: ${{ secrets.WEBDAV_PASSWORD }}
+        run: |
+          mkdir /tmp/webdav
+          echo -e "$WEBDAV_USERNAME\n$WEBDAV_PASSWORD\n" | sudo mount -t davfs $COURSE_URL /tmp/webdav -o uid=$(id -u),gid=$(id -g)
+          ls -lah /tmp/webdav
+          echo "commit_id=$(cat /tmp/webdav/.commit_id)" >> $GITHUB_OUTPUT
+      - name: Initialise remote commit ID
+        if: ${{ steps.mount.outputs.commit_id == '' }}
+        run: echo "$GITHUB_SHA" > /tmp/webdav/.commit_id
+      - name: Checkout remote commit ID
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ steps.mount.outputs.commit_id }}
       - name: Copy over remote files
         run: |
-          rm -rf $GITHUB_WORKSPACE/*
-          cp -rf /tmp/cnp3/* $GITHUB_WORKSPACE/
-        shell: bash
+          rm -rf $GITHUB_WORKSPACE/$REPO_COURSE_DIR/*
+          cp -rf /tmp/webdav/* $GITHUB_WORKSPACE/$REPO_COURSE_DIR
       - name: Prepare PR with changes if any
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         id: create-pr
         with:
           commit-message: INGInious remote changes
           title: "Remote changes from INGInious"
           branch: inginious-remote-changes
-          body: "Remote changes not part of the repository"
+          body: "Remote changes not part of the repository. *Closing this PR without merging will reset the remote changes.*"
           base: main
+          delete-branch: true
       - name: Abort if remote changes exists
         run: exit 1
         if: ${{ steps.create-pr.outputs.pull-request-number != null }}
@@ -49,10 +90,6 @@ jobs:
           fetch-depth: 0
       - name: Push using WebDAV
         run: |
-          echo "$GITHUB_SHA" > .commit_id
-          .github/workflows/inginious-push.py ${{ steps.fetch_remote.outputs.commit_id }} $GITHUB_SHA .
-        env:
-          WEBDAV_USERNAME: ${{ secrets.WEBDAV_USERNAME }}
-          WEBDAV_PASSWORD: ${{ secrets.WEBDAV_PASSWORD }}
-          WEBDAV_URL: https://dav.inginious.org/cnp3/
-
+          rsync -rv --exclude ".github" --exclude "lost+found" --exclude ".commit_id" --inplace --cvs-exclude --delete $GITHUB_WORKSPACE/$REPO_COURSE_DIR/ /tmp/webdav/
+          echo "$GITHUB_SHA" > /tmp/webdav/.commit_id
+          sudo umount /tmp/webdav

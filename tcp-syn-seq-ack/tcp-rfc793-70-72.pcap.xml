@@ -85,7 +85,7 @@
   <proto name="ipv6" showname="Internet Protocol Version 6, Src: 2001:7ab:3::c, Dst: 2001:7ab:1::a" size="40" pos="14">
     <field name="filtered" value="ipv6" />
   </proto>
-  <proto name="tcp" showname="Transmission Control Protocol, Src Port: 1234, Dst Port: 53712, Seq: 4037529898, Ack: 4207062860, Len: 0" size="24" pos="54">
+  <proto name="tcp" showname="Transmission Control Protocol, Src Port: 1234, Dst Port: 53712, Seq: 4037529898, Ack: ????, Len: 0" size="24" pos="54">
     <field name="tcp.srcport" showname="Source Port: 1234" size="2" pos="54" show="1234" value="04d2"/>
     <field name="tcp.dstport" showname="Destination Port: 53712" size="2" pos="56" show="53712" value="d1d0"/>
     <field name="tcp.port" showname="Source or Destination Port: 1234" hide="yes" size="2" pos="54" show="1234" value="04d2"/>
@@ -156,7 +156,7 @@
   <proto name="ipv6" showname="Internet Protocol Version 6, Src: 2001:7ab:1::a, Dst: 2001:7ab:3::c" size="40" pos="14">
     <field name="filtered" value="ipv6" />
   </proto>
-  <proto name="tcp" showname="Transmission Control Protocol, Src Port: 53712, Dst Port: 1234, Seq: 4207062860, Ack: 4037529899, Len: 0" size="20" pos="54">
+  <proto name="tcp" showname="Transmission Control Protocol, Src Port: 53712, Dst Port: 1234, Seq: ????, Ack: ????, Len: 0" size="20" pos="54">
     <field name="tcp.srcport" showname="Source Port: 53712" size="2" pos="54" show="53712" value="d1d0"/>
     <field name="tcp.dstport" showname="Destination Port: 1234" size="2" pos="56" show="1234" value="04d2"/>
     <field name="tcp.port" showname="Source or Destination Port: 53712" hide="yes" size="2" pos="54" show="53712" value="d1d0"/>

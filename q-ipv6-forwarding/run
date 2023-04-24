@@ -20,7 +20,7 @@ def check(question,answer,correct,comment):
       return 10
    else:
       feedback.set_problem_result("failed",question)
-      feedback.set_problem_feedback("Incorrect."+comment,question)     
+      feedback.set_problem_feedback("Incorrect. "+comment,question)     
 
    return 0   
       
@@ -31,7 +31,7 @@ grade+=check("q1",a1,"nexthop0","This destination address matches the default ro
 
 # addr 2001:DB8:1342:5555::1
 a2=sanitize(input.get_input("q2"))
-grade+=check("q2",a2,"nexthop4","This destination address matches 2001:db8::/16")
+grade+=check("q2",a2,"nexthop4","This destination address matches 2001:db8::/32")
 
 # addr 2001:DB8:1341:3000::1234
 a3=sanitize(input.get_input("q3"))

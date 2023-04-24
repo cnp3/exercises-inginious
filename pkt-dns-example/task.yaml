@@ -2,6 +2,7 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - dns
+contact_url: ''
 context: |-
     .. raw:: html
 
@@ -25,33 +26,27 @@ context: |-
            setTimeout(postSize, 0);
        });
        </script>
-environment: mcq
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    time: '30'
-    output: '2'
-    memory: '100'
 name: DNS lookup for www.example.com
 network_grading: false
 problems:
     id:
-        feedback: {}
-        shuffle-feedback: |-
-            The following DNS requests were sent by the resolver to find the answer:
-             dig  -t NS com @2001:7fd::1
-             dig  -t NS example.com @2001:501:b1f9::30
-             dig -t NS net @2001:7fd::1
-             dig -t NS iana-servers.net @2001:501:b1f9::30
-             dig  -t AAAA www.example.com @2001:500:8f::53
-        shuffle: true
         type: network-trace
-        hide: {}
-        redact:
-        - udp.checksum.status
         name: DNS lookup
+        header: |-
+            A student collected a packet trace while running the following command:
+
+            .. code:: console
+
+               dig -t AAAA www.example.com
+
+            This trace was collected with a resolver that does not store any record in its cache. Can you reorder the packets of this trace by looking at the succession of the types of DNS requests starting from the root ?
         trace: dns-example.pdml
         exclude:
         - geninfo.num
@@ -61,15 +56,18 @@ problems:
         - udp.checksum.status
         - udp.port
         - udp.port
-        header: |-
-            A student collected a packet trace while running the following command:
-
-            .. code:: console
-
-               dig -t AAAA www.example.com
-
-            This trace was collected with a resolver that does not store any record in its cache. Can you reorder the packets of this trace by looking and the succession of the types of DNS requests starting from the root ?
-run_cmd: ''
+        redact:
+        - udp.checksum.status
+        hide: {}
+        feedback: {}
+        shuffle: true
+        shuffle-feedback: |-
+            The following DNS requests were sent by the resolver to find the answer:
+             dig  -t NS com @2001:7fd::1
+             dig  -t NS example.com @2001:501:b1f9::30
+             dig -t NS net @2001:7fd::1
+             dig -t NS iana-servers.net @2001:501:b1f9::30
+             dig  -t AAAA www.example.com @2001:500:8f::53
 stored_submissions: 0
 submission_limit:
     amount: -1

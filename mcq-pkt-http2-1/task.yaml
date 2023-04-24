@@ -2,6 +2,7 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - http
+contact_url: ''
 context: |-
     .. raw:: html
 
@@ -25,71 +26,68 @@ context: |-
            setTimeout(postSize, 0);
        });
        </script>
-environment: mcq
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
 name: A simple HTTP/2 GET
 network_grading: false
 problems:
     q1:
+        type: multiple_choice
+        name: An HTTP/2 trace
+        header: |-
+            The `attached packet trace <mcq-pkt-http2-1/nghttp-trace-1355.pcap>`_ was collected while retrieving a web object from  the http://nghttp2.org website.
+
+            Download this packet trace and open it with `wireshark <https://www.wireshark.org>`_ to select which of the following affirmations are valid.
+        multiple: true
+        limit: 9
         choices:
-        -   valid: true
-            feedback: This is the standard magic string
-            text: |+
+        -   text: |+
                 The client starts the connection by sending `PRI * HTTP/2.0\\r\\n\\r\\nSM\\r\\n\\r\\n`
 
+            feedback: This is the standard magic string
+            valid: true
         -   text: The trace contains a single GET request
             valid: true
-        -   feedback: Check the contents of the third packet in the trace
-            text: The URL of the requested web object is http://nghttp2.org/index.html
+        -   text: The URL of the requested web object is http://nghttp2.org/index.html
+            feedback: Check the contents of the third packet in the trace
         -   text: The URL of the requested web object is http://nghttp2.org/robots.txt
             valid: true
-        -   feedback: 'This is incorrect. This is the server SETTINGS frame in the
+        -   text: The initial HTTP window size announced by the client is 1048576
+                bytes
+            feedback: 'This is incorrect. This is the server SETTINGS frame in the
                 fifth packet. The client SETTINGS frame is sent in the third packet '
-            text: The initial window size announced by the client is 1048576 bytes
-        -   text: The initial window size announced by the client is 65535 bytes
+        -   text: The initial HTTP window size announced by the client is 65535 bytes
             valid: true
-        -   feedback: See the SETTINGS frame in the third packet.
-            text: The client proposes the utilization of server push.
+        -   text: The client proposes the utilization of server push.
+            feedback: See the SETTINGS frame in the third packet.
         -   text: The client refuses the utilization of server push.
             feedback: See the SETTINGS frame in the third packet.
             valid: true
-        -   text: ''
         -   text: The server uses nghttpx.
             feedback: See the `Headers` frame in the eighth packet
             valid: true
         -   text: The server uses nghttp2/1.30.0
             feedback: This is the implementation used by the client, not the server.
-        -   text: The last frame sent by the server is the GOAWAY frame.
+        -   text: The last frame sent by the client is the GOAWAY frame.
             valid: true
-        type: multiple_choice
-        header: |-
-            The `attached packet trace <mcq-pkt-http2-1/nghttp-trace-1355.pcap>`_ was collected while retrieving a web object from  the http://nghttp2.org website.
-
-            Download this packet trace and open it with `wireshark <https://www.wireshark.org>`_ to select which of the following affirmations are valid.
-        name: An HTTP/2 trace
-        limit: 7
-        multiple: true
     trace:
+        type: network-trace
+        name: A visualisation of this packet trace
+        header: ''
+        trace: http2-trace.xml
         exclude:
         - tcp.flags
         - tcp.options
-        trace: http2-trace.xml
         redact: {}
-        feedback: {}
-        name: A visualisation of this packet trace
-        shuffle-feedback: ''
-        header: ''
-        type: network-trace
         hide: {}
+        feedback: {}
+        shuffle-feedback: ''
         shuffle: false
-run_cmd: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

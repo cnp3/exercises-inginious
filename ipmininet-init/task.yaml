@@ -1,0 +1,120 @@
+accessible: false
+author: Emilie Deprez
+categories: []
+contact_url: ''
+context: |-
+    This exercise aims to introduce you to different ipmininet commands. You can try all the different commands by starting a ssh session with the submit button.
+
+
+    The topology used in this example is the following
+
+    .. image:: https://inginious.org/course/cnp3-beta/ipmininet-init/first-topology.png
+
+
+    The ``nodes`` command shows all nodes in the topology.
+
+    .. code-block:: console
+
+          mininet> nodes
+          available nodes are:
+          a b c r1 r2 r3 r4
+
+    The ``links`` command shows all links in the topology
+
+    .. code-block:: console
+
+          mininet> links
+          a-eth0<->r1-eth0 (OK OK)
+          r1-eth1<->r2-eth0 (OK OK)
+          r1-eth2<->r3-eth0 (OK OK)
+          r2-eth2<->b-eth0 (OK OK)
+          r2-eth1<->r4-eth0 (OK OK)
+          r3-eth2<->c-eth0 (OK OK)
+          r3-eth1<->r4-eth1 (OK OK)
+
+
+    You can see all IPv6 address of a node with ``<node> ip -6 addr``
+
+    .. code-block:: console
+
+          mininet> a ip -6 addr
+          1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 state UNKNOWN qlen 1000
+             inet6 ::1/128 scope host
+                valid_lft forever preferred_lft forever
+          2: a-eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 state UP qlen 1000
+             inet6 2001:db8:1341:1::a/64 scope global
+                valid_lft forever preferred_lft forever
+             inet6 fe80::e066:7aff:fe1a:73ef/64 scope link
+                valid_lft forever preferred_lft forever
+
+    ``a`` uses IPv6 address ``2001:db8:1341:1::a/64`` on its a-eth0 interface
+
+    You can see all IPv6 routes of a node with ``<node> ip -6 route``
+
+    .. code-block:: console
+
+          mininet> a ip -6 route
+          2001:db8:1341:1::/64 dev a-eth0 proto kernel metric 256 pref medium
+          fe80::/64 dev a-eth0 proto kernel metric 256 pref medium
+          default via 2001:db8:1341:1::1 dev a-eth0 metric 1024 pref medium
+
+    This command shows the routing table.
+
+
+    You can ping from a node to an ip address by applying the command ``<node> ping -6 <ip>``
+
+    .. code-block:: console
+
+            mininet> a ping -6 2001:db8:1341:2::b
+            PING 2001:db8:1341:2::b(2001:db8:1341:2::b) 56 data bytes
+            64 bytes from 2001:db8:1341:2::b: icmp_seq=1 ttl=62 time=0.259 ms
+            64 bytes from 2001:db8:1341:2::b: icmp_seq=2 ttl=62 time=0.096 ms
+            64 bytes from 2001:db8:1341:2::b: icmp_seq=3 ttl=62 time=0.116 ms
+            ^C
+            --- 2001:db8:1341:2::b ping statistics ---
+            3 packets transmitted, 3 received, 0% packet loss, time 2044ms
+            rtt min/avg/max/mdev = 0.096/0.157/0.259/0.072 ms
+
+    The ``ping6all`` command pings between all host in IPv6.
+
+    .. code-block:: console
+
+          mininet> ping6all
+          *** Ping: testing reachability over IPv6
+          a --IPv6--> b c
+          b --IPv6--> a c
+          c --IPv6--> a b
+          *** Results: 0% dropped (6/6 received)
+
+
+    You can perform a traceroute from a node to an ip address by applying the command ``<node> traceroute -6 <ip>``
+
+    .. code-block:: console
+
+          mininet> a traceroute -6 2001:db8:1341:2::b
+          traceroute to 2001:db8:1341:2::b (2001:db8:1341:2::b), 30 hops max, 80 byte packets
+          1  r1 (2001:db8:1341:1::1)  0.117 ms  0.021 ms  0.022 ms
+          2  r2 (2001:db8:1341:12::2)  0.056 ms  0.032 ms  0.029 ms
+          3  b (2001:db8:1341:2::b)  0.052 ms  0.026 ms  0.025 ms
+environment_id: ipmininet
+environment_parameters:
+    limits:
+        time: '3600'
+        hard_time: ''
+        memory: '1024'
+    network_grading: 'on'
+    ssh_allowed: 'on'
+    run_cmd: ''
+environment_type: kata
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Initiation to ipmininet commands
+network_grading: false
+problems: {}
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 0.0

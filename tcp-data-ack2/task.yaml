@@ -3,9 +3,31 @@ author: Olivier Bonaventure
 categories:
 - tcp
 contact_url: ''
-context: 'The TCP header, shown in the `TCP chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/tcp.html>`_
-    of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_
-    contains an acknowledgement number. '
+context: |-
+    The TCP header, shown in the `TCP chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/tcp.html>`_ of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_ contains an acknowledgement number.
+
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
 environment_id: mcq
 environment_parameters: {}
 environment_type: mcq
@@ -18,31 +40,31 @@ network_grading: false
 order: 26
 problems:
     test:
+        type: network-trace
+        name: Sequence numbers
+        header: A data transfer has started with a three-way handshake that is not
+            shown in this trace. Can you infer the acknowledgements numbers of the
+            two missing segments in the trace below ?
+        trace: tcp-rfc793-53-60.pcap.xml
         exclude:
         - tcp.flags.str
         - tcp.window_size
         - tcp.window_size_scalefactor
         - tcp.len
         - tcp.checksum
+        redact:
+        - tcp.flags
         hide:
             3:
             - tcp.ack
             7:
             - tcp.ack
-        name: Sequence numbers
-        shuffle-feedback: ''
         feedback:
             tcp.ack: The Acknowledgement Number is defined in `Section 3.3 of RFC793
                 <https://tools.ietf.org/html/rfc793>`_   Remember that on a TCP connection,
                 acknowledgements are always cumulative and they always indicate the
                 next expected sequence number.
-        header: A data transfer has started with a three-way handshake that is not
-            shown in this trace. Can you infer the acknowledgements numbers of the
-            two missing segments in the trace below ?
-        trace: tcp-rfc793-53-60.pcap.xml
-        type: network-trace
-        redact:
-        - tcp.flags
+        shuffle-feedback: ''
         shuffle: false
 stored_submissions: 0
 submission_limit:

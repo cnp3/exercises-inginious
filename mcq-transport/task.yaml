@@ -37,13 +37,17 @@ name: Serving applications - Multiple Choices Questions
 network_grading: false
 problems:
     services:
+        type: multiple_choice
+        name: The transport services
         header: The services play an important role in computer networks since they
             define what the user can really expect. Selection all the correct affirmations
             about the connectionless network service ?
+        multiple: true
+        limit: 6
         choices:
-        -   valid: true
-            text: The connectionless network service can transfer SDUs of limited
+        -   text: The connectionless network service can transfer SDUs of limited
                 size
+            valid: true
         -   text: The connectionless network will always deliver SDUs in order at
                 their destination.
         -   text: The connectionless network service may never deliver some SDUs to
@@ -51,20 +55,25 @@ problems:
             valid: true
         -   text: The connectionless network service can only transfer SDUs of fixed
                 size.
-        -   valid: true
-            text: The connectionless network service may deliver the same SDU several
+        -   text: The connectionless network service may deliver the same SDU several
                 times to a given destination.
-        -   valid: true
-            text: The connectionless network service may deliver corrupted SDUs at
+            valid: true
+        -   text: The connectionless network service may deliver corrupted SDUs at
                 their destination
+            valid: true
         -   text: The connectionless network service will never deliver twice the
                 same SDU to a given destination.
-        type: multiple_choice
-        limit: 6
-        multiple: true
-        name: The transport services
     co-services:
+        type: multiple_choice
         name: 'The connection-oriented service: user interactions'
+        header: The connection-oriented service is perhaps the most widely used transport
+            service. The interactions between the user of the service and the underlying
+            protocol can be represented as the exchange of various primitives. Considering
+            the interactions between a user of the connection-oriented transport service
+            and its provider, which of the following affirmations are correct? Select
+            all the correct ones.
+        multiple: true
+        limit: 10
         choices:
         -   text: To refuse the establishment of a connection, a user responds to
                 a *Connect.indication* primitive with a *Disconnect.indication* primitive.
@@ -74,19 +83,19 @@ problems:
         -   text: A *Connect.request* primitive is issued by the user to request the
                 establishment of a connection.
             valid: true
-        -   valid: true
-            text: To confirm the establishment of a connection, a user responds to
+        -   text: To confirm the establishment of a connection, a user responds to
                 a *Connect.request* primitive by issuing a *Connect.response* primitive.
+            valid: true
         -   text: A user that has initiated a connection can issue a *Data.request*
                 after having issued the *Connect.request* primitive.
         -   text: A user that has received a *Connect.indication* primitive can immediately
                 issue *Data.request* primitives to send data over the connection.
-        -   valid: true
-            text: To refuse the establishment of a connection, a user responds to
+        -   text: To refuse the establishment of a connection, a user responds to
                 a *Connect.indication* primitive with a *Disconnect.request* primitive.
-        -   valid: true
-            text: A service provider may issue a *Disconnect.indication* primitive
+            valid: true
+        -   text: A service provider may issue a *Disconnect.indication* primitive
                 on an established connection at any time.
+            valid: true
         -   text: A user that has accepted a connection cannot issue a *Data.request*
                 until the delivery of a *Connect.confirm* to the connection initiator.
         -   text: A *Connect.request* primitive issued by a user can be followed by
@@ -97,20 +106,16 @@ problems:
         -   text: A user that has initiated a connection cannot issue a *Data.request*
                 before having received a *Connect.confirm* primitive.
             valid: true
-        -   valid: true
-            text: The service provider issues a *Connect.indication* primitive to
+        -   text: The service provider issues a *Connect.indication* primitive to
                 indicate that it has received a connection establishment attempt.
-        type: multiple_choice
-        limit: 10
-        multiple: true
-        header: The connection-oriented service is perhaps the most widely used transport
-            service. The interactions between the user of the service and the underlying
-            protocol can be represented as the exchange of various primitives. Considering
-            the interactions between a user of the connection-oriented transport service
-            and its provider, which of the following affirmations are correct? Select
-            all the correct ones.
+            valid: true
     co-services2:
+        type: multiple_choice
+        name: The connection-oriented transport service
+        header: Consider the connection-oriented transport service. Among the following
+            affirmations about this service, select the ones that are correct.
         multiple: true
+        limit: 8
         choices:
         -   text: An abrupt connection release may cause some SDUs to be corrupted.
         -   text: A user may issue a *Data.request* after having received a graceful
@@ -124,11 +129,12 @@ problems:
         -   text: A transport service provider may issue a *Data.indication* primitive
                 to a user after having received a graceful *Disconnect.request* from
                 this user.
+            valid: true
         -   text: An abrupt connection release may cause some SDUs to be discarded.
             valid: true
-        -   valid: true
-            text: A transport service provider may issue a *Disconnect.indication*
+        -   text: A transport service provider may issue a *Disconnect.indication*
                 at any time to terminate a connection.
+            valid: true
         -   text: A user may issue a *Data.request* after having issued a graceful
                 *Disconnect.request*.
         -   text: With a message-mode service, each *Data.request* issued by one user
@@ -138,65 +144,66 @@ problems:
                 after having received a *Disconnect.request* from the other user.
         -   text: With a bytestream service, each *Data.request* issued by one user
                 will lead to a *Data.indication* at the other end.
-        name: The connection-oriented transport service
-        limit: 8
-        type: multiple_choice
-        header: Consider the connection-oriented transport service. Among the following
-            affirmations about this service, select the ones that are correct.
     networklayer:
+        type: multiple_choice
+        name: The network layer
+        header: Which of the following affirmations correspond to the behaviour of
+            the network layer ? Select all the correct ones.
+        multiple: true
+        limit: 4
         choices:
-        -   valid: true
-            text: The network layer may modify the content of packets.
+        -   text: The network layer may modify the content of packets.
+            valid: true
         -   text: The network layer will never deliver a given packet twice.
-        -   valid: true
-            text: The network layer may loose packets.
+        -   text: The network layer may loose packets.
+            valid: true
         -   text: The network layer may deliver the same packet several times to a
                 given destination.
             valid: true
         -   text: The network layer always deliver packets in sequence.
-        header: Which of the following affirmations correspond to the behaviour of
-            the network layer ? Select all the correct ones.
-        limit: 4
-        multiple: true
-        name: The network layer
-        type: multiple_choice
     cltransport:
-        choices:
-        -   feedback: If the transport service is unreliable, then there is no need
-                to try to retransmit lost data.
-            text: A retransmission timer to retransmit lost data.
-        -   text: Port numbers to identify the communicating applications.
-            valid: true
-        -   feedback: A connectionless transport service provides an unreliable service.
-                Selective repeat is a technique to ensure the reliable delivery of
-                data.
-            text: Selective repeat.
-        -   valid: true
-            feedback: Even if the transport service is unreliable, applications usually
-                do not want to receive corrupted data.
-            text: A CRC to detect transmission errors.
-        -   valid: true
-            text: A checksum to detect transmission errors.
-            feedback: Even if the transport service is unreliable, applications usually
-                do not want to receive corrupted data.
-        -   feedback: This is required when providing the connection-oriented transport
-                service, but not for a connectionless one.
-            text: A connection establishment mechanism.
-        -   feedback: If the transport service is unreliable, then there is not need
-                to use sequence number to detect out-of-order data.
-            text: Sequence numbers to detect out-of-order data.
-        -   text: Go-back-n.
-            feedback: A connectionless transport service provides an unreliable service.
-                Go-back-n is a technique to ensure the reliable delivery of data.
+        type: multiple_choice
         name: Connectionless transport
-        limit: 6
-        multiple: true
         header: Which of the following mechanisms are likely to be used inside a protocol
             that provides the unreliable connectionless transport service running
             on top of an unreliable connectionless network layer? Select all the applicable
             mechanisms.
-        type: multiple_choice
+        multiple: true
+        limit: 6
+        choices:
+        -   text: A retransmission timer to retransmit lost data.
+            feedback: If the transport service is unreliable, then there is no need
+                to try to retransmit lost data.
+        -   text: Port numbers to identify the communicating applications.
+            valid: true
+        -   text: Selective repeat.
+            feedback: A connectionless transport service provides an unreliable service.
+                Selective repeat is a technique to ensure the reliable delivery of
+                data.
+        -   text: A CRC to detect transmission errors.
+            feedback: Even if the transport service is unreliable, applications usually
+                do not want to receive corrupted data.
+            valid: true
+        -   text: A checksum to detect transmission errors.
+            feedback: Even if the transport service is unreliable, applications usually
+                do not want to receive corrupted data.
+            valid: true
+        -   text: A connection establishment mechanism.
+            feedback: This is required when providing the connection-oriented transport
+                service, but not for a connectionless one.
+        -   text: Sequence numbers to detect out-of-order data.
+            feedback: If the transport service is unreliable, then there is not need
+                to use sequence number to detect out-of-order data.
+        -   text: Go-back-n.
+            feedback: A connectionless transport service provides an unreliable service.
+                Go-back-n is a technique to ensure the reliable delivery of data.
     twh1:
+        type: multiple_choice
+        name: The three-way handshake
+        header: The three-way handshake allows successfully negotiating the establishment
+            of a transport connection. Among the following time-sequence diagrams,
+            which is the one that corresponds to a valid three-way handshake ?
+        limit: 3
         choices:
         -   text: |-
                 .. container:: text-center
@@ -225,13 +232,9 @@ problems:
 
                     .. image:: mcq-transport/twh1-4.png
                        :width: 500
-        name: The three-way handshake
-        limit: 3
-        type: multiple_choice
-        header: The three-way handshake allows successfully negotiating the establishment
-            of a transport connection. Among the following time-sequence diagrams,
-            which is the one that corresponds to a valid three-way handshake ?
     twh2:
+        type: multiple_choice
+        name: 'The three-way handshake: possible scenarios'
         header: |-
             The three-way handshake allows successfully negotiating the establishment of a transport connection. Consider a transport connection that begins which the exchange of two segments as shown in the figure below.
 
@@ -243,6 +246,7 @@ problems:
 
 
             Consider what happens after the exchange of these two segments. Only one of the affirmations below is correct. Which one ?
+        limit: 3
         choices:
         -   text: If *Host B* does not receive *CA(seq=12345,ack=56789)* after some
                 time, it will retransmit *CA(seq=56789,ack=12345)*.
@@ -265,9 +269,6 @@ problems:
                 was lost. The correct reaction is to retransmit the *CA* segment.
         -   text: If *Host B* receives *CR(seq=12345)*, it will respond with *CA(seq=56789,ack=12345)*.
             valid: true
-        name: 'The three-way handshake: possible scenarios'
-        type: multiple_choice
-        limit: 3
 stored_submissions: 0
 submission_limit:
     amount: -1

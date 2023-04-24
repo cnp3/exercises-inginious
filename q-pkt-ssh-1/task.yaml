@@ -2,93 +2,86 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - ssh
+contact_url: ''
 context: |-
     .. raw:: html
 
-        <script>
-        $('#content').css("min-height", 0);
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
 
-        bodyHeight = 0;
-        function resizeAndPostSize() {
-            if (document.getElementById("content")) {
-                if (document.getElementById("content").scrollHeight != bodyHeight) {
-                    bodyHeight = document.getElementById("content").scrollHeight;
-                    window.parent.postMessage({height: bodyHeight}, "*");
-                }
-            }
-        }
+       var observer = new MutationObserver(postSize);
 
-        var target = document.querySelector('body');
+       var config = { attributes: true, subtree: true }
 
-        var observer = new MutationObserver(resizeAndPostSize);
-
-        var config = { attributes: true, subtree: true };
-
-        observer.observe(target, config);
-        $(window).ready(function() {
-           $('#content').css("min-height", 0);
-           setTimeout(resizeAndPostSize, 0);
-        });
-        </script>
-environment: mcq
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 500);
+       });
+       </script>
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
 evaluate: best
 file: ''
 groups: false
-input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
+input_random: 0
 name: A first look at ssh
 network_grading: false
 problems:
+    qcm:
+        type: multiple_choice
+        name: Affirmations
+        header: Looking at the trace above, select the affirmations below that are
+            correct.
+        multiple: true
+        limit: 0
+        choices:
+        -   text: The client used SSH-2.0-OpenSSH_7.6p1 Ubuntu-4ubuntu0.3
+            feedback: The client announces its version of ssh in the sixth packet
+                of the trace
+            valid: true
+        -   text: The server used SSH-2.0-OpenSSH_7.6p1 Ubuntu-4ubuntu0.3
+            feedback: The server announces its version of ssh in the sixth packet
+                of the trace
+            valid: true
+        -   text: The client cookie is ``efc6f2ef18380a6f9ab9c156f390397f``
+            feedback: This is part of the Key Exchange Init message sent by the client
+            valid: true
+        -   text: The server cookie is ``efc6f2ef18380a6f9ab9c156f390397f``
+            feedback: No, this is the client cookie. The server cookie is ``259c2d965153f7daf785102d91422e05``
+        -   text: The server cookie is ``259c2d965153f7daf785102d91422e05``
+            feedback: This is part of the Key Exchange Init message sent by the server
+            valid: true
+        -   text: The encryption algorithm used for this session is ``chacha20-poly1305@openssh.com``
+            valid: true
+        -   text: The server uses a key of type ``ecdsa-sha2-nistp256``
+            feedback: See the thirteenth packet of the trace.
+            valid: true
+        -   text: The server uses a key of type ``ssh-rsa``
+            feedback: The server indicates that it supports this type of key in the
+                eleventh packet, but does not use it in this trace.
     trace:
-        hide: {}
         type: network-trace
-        feedback: {}
-        exclude:
-        - tcp.flags
-        - tcp.options
+        name: A simple ssh trace
         header: 'The `attached packet trace <https://inginious.org/course/cnp3/q-pkt-ssh-1/ssh.pcap>`_
             was collected on a Linux server. '
         trace: ssh.xml
-        name: A simple ssh trace
+        exclude:
+        - tcp.flags
+        - tcp.options
         redact: {}
+        hide: {}
+        feedback: {}
         shuffle-feedback: ''
         shuffle: false
-    qcm:
-        choices:
-        -   valid: true
-            feedback: The client announces its version of ssh in the sixth packet
-                of the trace
-            text: The client used SSH-2.0-OpenSSH_7.6p1 Ubuntu-4ubuntu0.3
-        -   valid: true
-            feedback: The server announces its version of ssh in the sixth packet
-                of the trace
-            text: The server used SSH-2.0-OpenSSH_7.6p1 Ubuntu-4ubuntu0.3
-        -   feedback: This is part of the Key Exchange Init message sent by the client
-            valid: true
-            text: The client cookie is ``efc6f2ef18380a6f9ab9c156f390397f``
-        -   text: The server cookie is ``efc6f2ef18380a6f9ab9c156f390397f``
-            feedback: No, this is the client cookie. The server cookie is ``259c2d965153f7daf785102d91422e05``
-        -   valid: true
-            feedback: This is part of the Key Exchange Init message sent by the server
-            text: The server cookie is ``259c2d965153f7daf785102d91422e05``
-        -   valid: true
-            text: The encryption algorithm used for this session is ``chacha20-poly1305@openssh.com``
-        -   feedback: See the thirteenth packet of the trace.
-            text: The server uses a key of type ``ecdsa-sha2-nistp256``
-            valid: true
-        -   feedback: The server indicates that it supports this type of key in the
-                eleventh packet, but does not use it in this trace.
-            text: The server uses a key of type ``ssh-rsa``
-        header: Looking at the trace above, select the affirmations below that are
-            correct.
-        type: multiple_choice
-        name: Affirmations
-        limit: 0
-        multiple: true
-run_cmd: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

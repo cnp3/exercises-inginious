@@ -35,12 +35,12 @@ context: |-
            setTimeout(postSize, 0);
        });
        </script>
-environment_id: java7mockito
+environment_id: pyjavacpp
 environment_parameters:
     limits:
-        memory: '100'
-        hard_time: ''
         time: '30'
+        hard_time: ''
+        memory: '100'
     run_cmd: ''
 environment_type: docker
 evaluate: best
@@ -53,16 +53,15 @@ order: 4
 problems:
     q1:
         type: code_single_line
-        default: ''
+        name: Distance vector for router R0
         header: Please encode here the distance vector that ``R0`` will send once
             the network has converged.
-        name: Distance vector for router R0
+        default: ''
     q2:
+        type: code_single_line
+        name: Distance vector for router R4
         header: Please encode here the distance vector that ``R4`` will send once
             the network has converged.
-        type: code
-        name: Distance vector for router R4
-        language: ''
         default: ''
 stored_submissions: 0
 submission_limit:

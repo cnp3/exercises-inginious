@@ -2,54 +2,51 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - tcp
+contact_url: ''
 context: |-
     .. raw:: html
 
-        <script>
-        $('#content').css("min-height", 0);
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
 
-        bodyHeight = 0;
-        function resizeAndPostSize() {
-            if (document.getElementById("content")) {
-                if (document.getElementById("content").scrollHeight != bodyHeight) {
-                    bodyHeight = document.getElementById("content").scrollHeight;
-                    window.parent.postMessage({height: bodyHeight}, "*");
-                }
-            }
-        }
+       var observer = new MutationObserver(postSize);
 
-        var target = document.querySelector('body');
+       var config = { attributes: true, subtree: true }
 
-        var observer = new MutationObserver(resizeAndPostSize);
-
-        var config = { attributes: true, subtree: true };
-
-        observer.observe(target, config);
-        $(window).ready(function() {
-           $('#content').css("min-height", 0);
-           setTimeout(resizeAndPostSize, 0);
-        });
-        </script>
-environment: mcq
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
 name: TCP simultaneous establishment
 network_grading: false
 problems:
     trace:
-        redact: {}
+        type: network-trace
+        name: TCP simultaneous connection establishment
         header: Under specific circumstances, two TCP hosts can send a SYN segment
             at the same time. In this case, the establishment of a connection requires
             the transmission of four segments. Can you fill the missing fields of
             these four segments ?
+        trace: trace.xml
         exclude:
         - tcp.flags.str
+        redact: {}
         hide:
             0:
             - tcp.flags.syn
@@ -61,16 +58,12 @@ problems:
             3:
             - tcp.flags.syn
             - tcp.ack
-        name: TCP simultaneous connection establishment
-        trace: trace.xml
         feedback:
         -   tcp.flags.syn: The `SYN` flag is set as long as its corresponding sequence
                 number has not been acknowledged by the remote host.
         -   tcp.ack: Remember that the ``SYN`` flag consumes one sequence number
-        type: network-trace
         shuffle-feedback: ''
         shuffle: false
-run_cmd: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

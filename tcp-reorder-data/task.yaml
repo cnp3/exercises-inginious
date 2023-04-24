@@ -2,46 +2,66 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - tcp
-context: 'TCP, as explained in the `TCP chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/tcp.html>`_
-    of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_
-    includes a sequence number in each segment that carries data.'
-environment: mcq
+contact_url: ''
+context: |-
+    TCP, as explained in the `TCP chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/tcp.html>`_ of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_ includes a sequence number in each segment that carries data.
+
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
 name: Reordering the segments exchanged on a connection
 network_grading: false
 order: 31
 problems:
     test:
+        type: network-trace
+        name: Reorder the segments
+        header: During this connection, the client sent some data that was acknowledged
+            by the server. Can you reorder the segments based on their sequence numbers
+            and acknowledgements ? The trace starts at the third ack of the three-way
+            handshake sent by the client to the server.
+        trace: tcp-rfc793-26-34.pcap.xml
         exclude:
         - tcp.flags.str
         - tcp.window_size
         - tcp.window_size_scalefactor
         - tcp.len
         - tcp.checksum
-        name: Reorder the segments
+        redact:
+        - tcp.flags
         hide: {}
-        header: During this connection, the client sent some data that was acknowledged
-            by the server. Can you reorder the segments based on their sequence numbers
-            and acknowledgements ? The trace starts at the third ack of the three-way
-            handshake sent by the client to the server.
-        type: network-trace
-        trace: tcp-rfc793-26-34.pcap.xml
+        feedback: {}
+        shuffle: true
         shuffle-feedback: Obviously, you need to look at the sequence numbers and
             the acknowledgements. The server listens on port 1234. If you are a bit
             lost, you can look at the data contained in the TCP segments sent by the
             client, their payload could help you...
-        redact:
-        - tcp.flags
-        shuffle: true
-        feedback: {}
-run_cmd: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

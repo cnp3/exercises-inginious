@@ -2,103 +2,101 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - tls
+contact_url: ''
 context: |-
     .. raw:: html
 
-        <script>
-        $('#content').css("min-height", 0);
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
 
-        bodyHeight = 0;
-        function resizeAndPostSize() {
-            if (document.getElementById("content")) {
-                if (document.getElementById("content").scrollHeight != bodyHeight) {
-                    bodyHeight = document.getElementById("content").scrollHeight;
-                    window.parent.postMessage({height: bodyHeight}, "*");
-                }
-            }
-        }
+       var observer = new MutationObserver(postSize);
 
-        var target = document.querySelector('body');
+       var config = { attributes: true, subtree: true }
 
-        var observer = new MutationObserver(resizeAndPostSize);
-
-        var config = { attributes: true, subtree: true };
-
-        observer.observe(target, config);
-        $(window).ready(function() {
-           $('#content').css("min-height", 0);
-           setTimeout(resizeAndPostSize, 0);
-        });
-        </script>
-environment: pyjavacpp
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 500);
+       });
+       </script>
+environment_id: pyjavacpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
 file: ''
 groups: false
-input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
+input_random: 0
 name: A first TLS trace
 network_grading: false
 problems:
-    trace:
-        hide: {}
-        type: network-trace
-        feedback: {}
-        exclude:
-        - tcp.flags
-        - tcp.options
-        header: 'The `attached packet trace <https://inginious.org/course/cnp3/q-pkt-tls-1/tls.pcap>`_
-            was collected on a Linux client. '
-        trace: tls.xml
-        name: A TLS trace
-        redact: {}
-        shuffle-feedback: ''
-        shuffle: false
     mcq:
         type: multiple_choice
+        name: Version of TLS
+        header: What is the version of TLS used in this trace ?
+        limit: 0
         choices:
         -   text: TLS 1.0
-        -   valid: true
-            text: TLS 1.2
+        -   text: TLS 1.2
+            valid: true
         -   text: TLS 1.3
-        name: Version of TLS
-        limit: 0
-        header: What is the version of TLS used in this trace ?
     q1:
         type: code_single_line
         name: Cipher suites
         header: How many different cipher suites are proposed by this client ?
         default: ''
     q2:
+        type: code_single_line
+        name: Server name
         header: 'The Server Name Indication is a TLS extension that is used by the
             client to specify the fully qualified domaine name of the contacted server.
             What is the name of the server contacted in this trace ? '
-        type: code_single_line
         default: ''
-        name: Server name
     q3:
+        type: code_single_line
         name: Cipher suite
-        default: ''
         header: In TLS, the server selects its preferred cipher suite among the ones
             supported by the client. These cipher suites are encoded as a string.
             What is the cipher suite used in this trace ?
-        type: code_single_line
+        default: ''
     q4:
         type: code_single_line
-        default: ''
         name: Server certificate
         header: A TLS server sends its certificate to prove its identity. What is
             the issuer of the certificate used in this trace ?
-    q5:
         default: ''
+    q5:
+        type: code_single_line
         name: Certificate validity
         header: TLS certificates are valid for some time. On which day will the certificate
             announced by this server will be invalid ? Provide your answer as year-month-day
             with 2 digits for year, month and day.
-        type: code_single_line
-run_cmd: ''
+        default: ''
+    trace:
+        type: network-trace
+        name: A TLS trace
+        header: 'The `attached packet trace <https://inginious.org/course/cnp3/q-pkt-tls-1/tls.pcap>`_
+            was collected on a Linux client. '
+        trace: tls.xml
+        exclude:
+        - tcp.flags
+        - tcp.options
+        redact: {}
+        hide: {}
+        feedback: {}
+        shuffle-feedback: ''
+        shuffle: false
 stored_submissions: 0
 submission_limit:
     amount: -1

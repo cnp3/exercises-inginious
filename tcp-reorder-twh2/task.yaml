@@ -2,30 +2,56 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - tcp
-context: 'A TCP connection, as explained in the `TCP chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/tcp.html>`_
-    of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_
-    always starts with a three-way-handshake. '
-environment: mcq
+contact_url: ''
+context: |-
+    A TCP connection, as explained in the `TCP chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/tcp.html>`_ of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_ always starts with a three-way-handshake.
+
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
-name: Reordering the three-way-handshake
+name: Reordering the three-way-handshake and infering the TCP flags
 network_grading: false
 order: 29
 problems:
     test:
+        type: network-trace
+        name: Reorder the three-way-handshake and infer the TCP flags
+        header: Can you correctly reorder the three segments that are used to establish
+            a TCP connection and set the `SYN` and `ACK` flags correctly ?
+        trace: tcp-rfc793-98-100.pcap.xml
         exclude:
         - tcp.flags.str
         - tcp.window_size
         - tcp.window_size_scalefactor
         - tcp.len
         - tcp.checksum
-        name: Reorder the three-way-handshake
+        redact: tcp.flags
         hide:
             0:
             - tcp.flags.syn
@@ -36,13 +62,6 @@ problems:
             2:
             - tcp.flags.syn
             - tcp.flags.ack
-        header: Can you correctly reorder the three segments that are used to establish
-            a TCP connection and set the `SYN` and `ACK` flags correctly ?
-        type: network-trace
-        trace: tcp-rfc793-98-100.pcap.xml
-        shuffle-feedback: ''
-        redact: tcp.flags
-        shuffle: true
         feedback:
             tcp.flags.ack: The first segment of the three-way-handshake is always
                 the one with a `SYN` flag set and the `ACK` flag reset. The second
@@ -52,7 +71,8 @@ problems:
                 the one with a `SYN` flag set and the `ACK` flag reset. The second
                 segment has also the `SYN` flag set set and acknowledges the first
                 one. The `SYN`flag is never set in the third segment.
-run_cmd: ''
+        shuffle: true
+        shuffle-feedback: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

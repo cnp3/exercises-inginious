@@ -2,50 +2,54 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - ipv6
+contact_url: ''
 context: |-
     ICMPv6, described in the `IPv6 chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/ipv6.html#icmp-version-6>`_ of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_ is a companion protocol for IPv6 that is used for various functions including network debugging. `ping6` is a popular debugging tool that allows to verify whether a remote host is up and running. For this, it sends an ICMPv6 Echo request that contains some information and waits for an ICMPv6 Echo reply.
 
     .. raw:: html
 
-        <script>
-        $('#content').css("min-height", 0);
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
 
-        bodyHeight = 0;
-        function resizeAndPostSize() {
-            if (document.getElementById("content")) {
-                if (document.getElementById("content").scrollHeight != bodyHeight) {
-                    bodyHeight = document.getElementById("content").scrollHeight;
-                    window.parent.postMessage({height: bodyHeight}, "*");
-                }
-            }
-        }
+       var observer = new MutationObserver(postSize);
 
-        var target = document.querySelector('body');
+       var config = { attributes: true, subtree: true }
 
-        var observer = new MutationObserver(resizeAndPostSize);
-
-        var config = { attributes: true, subtree: true };
-
-        observer.observe(target, config);
-        $(window).ready(function() {
-           $('#content').css("min-height", 0);
-           setTimeout(resizeAndPostSize, 0);
-        });
-        </script>
-environment: mcq
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
-name: 'IPv6 : ping6'
+name: 'IPv6 : a sequence of ping6'
 network_grading: false
 order: 41
 problems:
     test:
+        type: network-trace
+        name: Reorder ICMPv6 messages
+        header: Can you reorder the packets that were captured while a host was using
+            `ping6` to verify the reachability of destination `2001:6a8:3081:1::2`
+            ?
+        trace: ip6-packet80-86.pcap.xml
+        exclude: {}
+        redact: {}
+        hide: {}
+        feedback: {}
         shuffle: true
         shuffle-feedback: 'Remember that two of the fields present in the ICMPv6 header
             could help you to reorder these packets : the Identifier and the Sequence
@@ -53,17 +57,6 @@ problems:
             the same identifier and their Sequence Number will be incremented by one
             after each transmission. The destination simply echoes the received Identifier
             and Sequence Numbers.'
-        header: Can you reorder the packets that were captured while a host was using
-            `ping6` to verify the reachability of destination `2001:6a8:3081:1::2`
-            ?
-        type: network-trace
-        name: Reorder ICMPv6 messages
-        hide: {}
-        exclude: {}
-        feedback: {}
-        redact: {}
-        trace: ip6-packet80-86.pcap.xml
-run_cmd: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

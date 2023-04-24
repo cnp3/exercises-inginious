@@ -2,48 +2,48 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - ipv6
+contact_url: ''
 context: |-
     .. raw:: html
 
-        <script>
-        $('#content').css("min-height", 0);
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
 
-        bodyHeight = 0;
-        function resizeAndPostSize() {
-            if (document.getElementById("content")) {
-                if (document.getElementById("content").scrollHeight != bodyHeight) {
-                    bodyHeight = document.getElementById("content").scrollHeight;
-                    window.parent.postMessage({height: bodyHeight}, "*");
-                }
-            }
-        }
+       var observer = new MutationObserver(postSize);
 
-        var target = document.querySelector('body');
+       var config = { attributes: true, subtree: true }
 
-        var observer = new MutationObserver(resizeAndPostSize);
-
-        var config = { attributes: true, subtree: true };
-
-        observer.observe(target, config);
-        $(window).ready(function() {
-           $('#content').css("min-height", 0);
-           setTimeout(resizeAndPostSize, 0);
-        });
-        </script>
-environment: pyjavacpp
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment_id: pyjavacpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
 file: ''
 groups: false
-input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
+input_random: 0
 name: IPv6 packet forwarding
 network_grading: false
 problems:
     q1:
         type: code_single_line
+        name: Paths in an IPv6 network
         header: |-
             The forwarding tables used in an IPv6 network define the forwarding paths that are used for the packets. Consider the simple network depicted in the figure below. In this network, the hosts have the following addresses :
 
@@ -63,16 +63,14 @@ problems:
 
             What is the path followed by the packets sent by ``A`` towards ``B`` ? Write your path as a ``A-Rw-Rx-Ry-Rz-B``
         optional: 'on'
-        name: Paths in an IPv6 network
         default: ''
     q2:
-        default: ''
         type: code_single_line
+        name: Path from B to A
         header: What is the path followed by the packets sent by ``B`` towards ``A``
             ? Write your path as a ``B-Rw-Rx-Ry-Rz-A``
-        name: Path from B to A
         optional: 'on'
-run_cmd: ''
+        default: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

@@ -2,81 +2,79 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - ipv6
+contact_url: ''
 context: |-
-    .. raw:: html
-
-        <script>
-        $('#content').css("min-height", 0);
-
-        bodyHeight = 0;
-        function resizeAndPostSize() {
-            if (document.getElementById("content")) {
-                if (document.getElementById("content").scrollHeight != bodyHeight) {
-                    bodyHeight = document.getElementById("content").scrollHeight;
-                    window.parent.postMessage({height: bodyHeight}, "*");
-                }
-            }
-        }
-
-        var target = document.querySelector('body');
-
-        var observer = new MutationObserver(resizeAndPostSize);
-
-        var config = { attributes: true, subtree: true };
-
-        observer.observe(target, config);
-        $(window).ready(function() {
-           $('#content').css("min-height", 0);
-           setTimeout(resizeAndPostSize, 0);
-        });
-        </script>
-
     Routers manipulate the binary representation of IPv6 addresses and students often have difficulties to reason about those binary representations.
 
     IPv6 addresses are represented as a series of hexadecimal numbers seperated by `:`.
-environment: pyjavacpp
+
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment_id: pyjavacpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
 name: Binary representation of addresses
 network_grading: false
 problems:
     q1:
         type: code_single_line
+        name: Binary representation
         header: What is the binary representation of ``02`` ?
         optional: 'on'
-        name: Binary representation
         default: ''
     q2:
-        default: ''
         type: code_single_line
+        name: Binary representation
         header: What is the binary representation of ``23`` ?
-        name: Binary representation
         optional: 'on'
-    q3:
         default: ''
+    q3:
         type: code_single_line
         name: Binary representation
-        optional: 'on'
         header: What is the binary representation of ``54`` ?
+        optional: 'on'
+        default: ''
     q4:
         type: code_single_line
-        optional: 'on'
         name: Binary representation
         header: What is the binary representation of ``ba`` ?
-        default: ''
-    q5:
         optional: 'on'
         default: ''
+    q5:
         type: code_single_line
-        header: What is the binary representation of ``9a`` ?
         name: Binary representation
-run_cmd: ''
+        header: What is the binary representation of ``9a`` ?
+        optional: 'on'
+        default: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

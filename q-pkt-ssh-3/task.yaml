@@ -2,53 +2,74 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - ssh
+contact_url: ''
 context: |-
     .. raw:: html
 
-        <script>
-        $('#content').css("min-height", 0);
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
 
-        bodyHeight = 0;
-        function resizeAndPostSize() {
-            if (document.getElementById("content")) {
-                if (document.getElementById("content").scrollHeight != bodyHeight) {
-                    bodyHeight = document.getElementById("content").scrollHeight;
-                    window.parent.postMessage({height: bodyHeight}, "*");
-                }
-            }
-        }
+       var observer = new MutationObserver(postSize);
 
-        var target = document.querySelector('body');
+       var config = { attributes: true, subtree: true }
 
-        var observer = new MutationObserver(resizeAndPostSize);
-
-        var config = { attributes: true, subtree: true };
-
-        observer.observe(target, config);
-        $(window).ready(function() {
-           $('#content').css("min-height", 0);
-           setTimeout(resizeAndPostSize, 0);
-        });
-        </script>
-environment: mcq
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 500);
+       });
+       </script>
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
 evaluate: best
 file: ''
 groups: false
-input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
+input_random: 0
 name: ssh and compression
 network_grading: false
 problems:
+    qcm:
+        type: multiple_choice
+        name: Affirmations
+        header: Looking at the trace above, select the affirmations below that are
+            correct.
+        multiple: true
+        limit: 0
+        choices:
+        -   text: The most preferred compression scheme for the server is ``none``
+            valid: true
+        -   text: The second preferred compression scheme for the server is ``zlib@openssh.com``
+            feedback: This compression scheme is the one supported by the zlib library
+                that is used in the gzip file compression software.
+            valid: true
+        -   text: The most preferred compression scheme for the client is ``none``
+            feedback: '``none`` is the least preferred compression scheme for the
+                client.'
+        -   text: The most preferred compression scheme for the client is ``zlib@openssh.com``
+            valid: true
+        -   text: The second preferred compression scheme for the client is ``zlib``
+            valid: true
+        -   text: The second preferred compression scheme for the server is ``zlib``
+            feedback: The server does not announce the ``zlib`` compression scheme.
+        -   text: The encrypted packets sent over this session have been compressed
+                with the ``zlib`` compression scheme
+            feedback: 'Incorrect, the client and the server agreed on the common and
+                most preferred compression scheme: ``zlib@openssh.com``. ``zlib``
+                was not announced by the server and thus could not be selected.'
+        -   text: The encrypted packets sent over this session have been compressed
+                with the ``zlib@openssh.com`` compression scheme
+            valid: true
     trace:
-        hide: {}
         type: network-trace
-        feedback: {}
-        exclude:
-        - tcp.flags
-        - tcp.options
+        name: A simple ssh trace
         header: The `attached packet trace <https://inginious.org/course/cnp3/q-pkt-ssh-3/ssh.pcap>`_
             was collected on a Linux server. In the ssh protocol, the client and the
             server can request that data be compressed before encryption. This can
@@ -56,42 +77,14 @@ problems:
             compression scheme, the client and the servers propose an ordered list
             in the KeyExchangeInit message.
         trace: ssh.xml
-        name: A simple ssh trace
+        exclude:
+        - tcp.flags
+        - tcp.options
         redact: {}
+        hide: {}
+        feedback: {}
         shuffle-feedback: ''
         shuffle: false
-    qcm:
-        choices:
-        -   valid: true
-            text: The most preferred compression scheme for the server is ``none``
-        -   valid: true
-            feedback: This compression scheme is the one supported by the zlib library
-                that is used in the gzip file compression software.
-            text: The second preferred compression scheme for the server is ``zlib@openssh.com``
-        -   feedback: '``none`` is the least preferred compression scheme for the
-                client.'
-            text: The most preferred compression scheme for the client is ``none``
-        -   text: The most preferred compression scheme for the client is ``zlib@openssh.com``
-            valid: true
-        -   valid: true
-            text: The second preferred compression scheme for the client is ``zlib``
-        -   feedback: The server does not announce the ``zlib`` compression scheme.
-            text: The second preferred compression scheme for the server is ``zlib``
-        -   feedback: 'Incorrect, the client and the server agreed on the common and
-                most preferred compression scheme: ``zlib@openssh.com``. ``zlib``
-                was not announced by the server and thus could not be selected.'
-            text: The encrypted packets sent over this session have been compressed
-                with the ``zlib`` compression scheme
-        -   valid: true
-            text: The encrypted packets sent over this session have been compressed
-                with the ``zlib@openssh.com`` compression scheme
-        header: Looking at the trace above, select the affirmations below that are
-            correct.
-        type: multiple_choice
-        name: Affirmations
-        limit: 0
-        multiple: true
-run_cmd: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

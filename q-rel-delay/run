@@ -36,7 +36,7 @@ if(isfloat(answer)):
 		if(almost(float(answer),delay-de)):
 			response+="Remember that the electrical/optical signal corresponding to each bit needs to travel from the sender to the receiver. \n"
 		if(almost(float(answer),de+(fl/bw)*1000)):
-			response+="Remember that the frame length is specified in bytes while bandwidth is specified in bits per seconde. One byte corresponds to 8 bits.\n"
+			response+="Remember that the frame length is specified in bytes while bandwidth is specified in bits per second. One byte corresponds to 8 bits.\n"
 		feedback.set_problem_feedback(response,"q1")
 		feedback.set_grade(0)
 		feedback.set_global_result("failed")        

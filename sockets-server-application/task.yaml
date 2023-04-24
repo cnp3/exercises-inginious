@@ -43,9 +43,9 @@ context: |-
 environment_id: cpp
 environment_parameters:
     limits:
-        memory: '100'
-        hard_time: ''
         time: '10'
+        hard_time: ''
+        memory: '100'
     run_cmd: ''
 environment_type: docker
 evaluate: best
@@ -59,7 +59,6 @@ problems:
     server-app:
         type: code
         name: An advanced server application
-        language: C
         header: |-
             Copy the function signature and fill in its body
 
@@ -73,6 +72,7 @@ problems:
                     // TODO: Send back the result
                     return 0;
                 }
+        language: C
         default: |-
             int recv_and_handle_message(const struct sockaddr *src_addr, socklen_t addrlen) {
                 // TODO: Create a IPv6 socket supporting datagrams

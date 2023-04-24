@@ -35,7 +35,7 @@ context: |-
            setTimeout(postSize, 0);
        });
        </script>
-environment_id: java7mockito
+environment_id: java8
 environment_parameters:
     limits:
         time: '30'

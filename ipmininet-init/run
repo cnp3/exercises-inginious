@@ -1,0 +1,95 @@
+#!/bin/python3
+
+# Emilie Deprez, 2022
+
+from inginious import feedback, ssh_student
+
+from ipmininet.iptopo import IPTopo
+from ipmininet.router.config import RouterConfig, STATIC
+from ipmininet.ipnet import IPNet
+from ipmininet.cli import IPCLI
+
+class MyTopology(IPTopo):
+
+    def build(self, *args, **kwargs):
+        """
+         Topology :
+            ---       ----       ----       ---
+           | a | --- | r1 | --- | r2 | --- | b |
+            ---       ----       ----       ---
+                        |          |          
+            ---       ----       ----
+           | c | --- | r3 | --- | r4 |
+            ---       ----       ----
+        """
+
+        a = self.addHost("a", defaultRoute=None)
+        b = self.addHost("b", defaultRoute=None)
+        c = self.addHost("c", defaultRoute=None)
+        r1 = self.addRouter("r1", config=RouterConfig)
+        r2 = self.addRouter("r2", config=RouterConfig)
+        r3 = self.addRouter("r3", config=RouterConfig)
+        r4 = self.addRouter("r4", config=RouterConfig)
+
+        lar1 = self.addLink(a, r1)
+        lar1[a].addParams(ip="2001:db8:1341:1::a/64")
+        lar1[r1].addParams(ip="2001:db8:1341:1::1/64")
+
+        lr1r2 = self.addLink(r1, r2)
+        lr1r2[r1].addParams(ip="2001:db8:1341:12::1/64")
+        lr1r2[r2].addParams(ip="2001:db8:1341:12::2/64")
+
+        lr1r3 = self.addLink(r1, r3)
+        lr1r3[r1].addParams(ip="2001:db8:1341:13::1/64")
+        lr1r3[r3].addParams(ip="2001:db8:1341:13::3/64")
+
+        lr2r4 = self.addLink(r2, r4)
+        lr2r4[r2].addParams(ip="2001:db8:1341:24::2/64")
+        lr2r4[r4].addParams(ip="2001:db8:1341:24::4/64")
+
+        lr3r4 = self.addLink(r3, r4)
+        lr3r4[r3].addParams(ip="2001:db8:1341:34::3/64")
+        lr3r4[r4].addParams(ip="2001:db8:1341:34::4/64")
+
+        lbr2 = self.addLink(r2, b)
+        lbr2[b].addParams(ip="2001:db8:1341:2::b/64")
+        lbr2[r2].addParams(ip="2001:db8:1341:2::2/64")
+
+        lcr3 = self.addLink(r3, c)
+        lcr3[c].addParams(ip="2001:db8:1341:3::c/64")
+        lcr3[r3].addParams(ip="2001:db8:1341:3::3/64")
+
+        r1.addDaemon(STATIC, static_routes=[])
+        r2.addDaemon(STATIC, static_routes=[])
+        r3.addDaemon(STATIC, static_routes=[])
+        r4.addDaemon(STATIC, static_routes=[])
+
+
+        super(MyTopology, self).build(*args, **kwargs)
+
+        
+
+net = IPNet(topo=MyTopology(), allocate_IPs=False)
+try:
+    net.start()
+    net["a"].cmd("ip -6 route add default via 2001:db8:1341:1::1")
+    net["b"].cmd("ip -6 route add default via 2001:db8:1341:2::2")
+    net["c"].cmd("ip -6 route add default via 2001:db8:1341:3::3")
+
+    net["r1"].cmd("ip -6 route add default via 2001:db8:1341:12::2")
+    net["r2"].cmd("ip -6 route add default via 2001:db8:1341:24::4")
+    net["r3"].cmd("ip -6 route add default via 2001:db8:1341:13::1")
+    net["r4"].cmd("ip -6 route add default via 2001:db8:1341:34::3")
+    net["r1"].cmd("ip -6 route add 2001:db8:1341:3::/64 via 2001:db8:1341:13::3")
+    net["r2"].cmd("ip -6 route add 2001:db8:1341:1::/64 via 2001:db8:1341:12::1")
+
+    IPCLI(net)
+    
+    ssh_student.ssh_student()
+    
+    feedback.set_grade(100)
+    feedback.set_global_result("success")
+
+
+finally:
+    net.stop()

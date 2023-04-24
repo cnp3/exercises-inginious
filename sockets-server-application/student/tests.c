@@ -322,6 +322,7 @@ void test_create_socket_sent_content_call() {
             CU_ASSERT(false);
             char buf[256];
             sprintf(buf, "Sum of strs: Expecting message of size %d, but received message of size %d", (int) (1 + sizeof(response_payload)), (int) stats.sendto.last_params.len);
+            push_info_msg(buf);
         }
         if (memcmp(response_payload, stats.sendto.last_params_buffered.buf + 1, stats.sendto.last_params.len - 1) != 0) {
             CU_ASSERT(false);
@@ -351,6 +352,7 @@ void test_create_socket_sent_content_call() {
             CU_ASSERT(false);
             char buf[256];
             sprintf(buf, "Product of ints: Expecting message of size %d, but received message of size %d", (int) (1 + sizeof(response_payload)), (int) stats.sendto.last_params.len);
+            push_info_msg(buf);
         }
         if (memcmp(response_payload, stats.sendto.last_params_buffered.buf + 1, stats.sendto.last_params.len - 1) != 0) {
             CU_ASSERT(false);
@@ -380,6 +382,7 @@ void test_create_socket_sent_content_call() {
             CU_ASSERT(false);
             char buf[256];
             sprintf(buf, "Product of strs: Expecting message of size %d, but received message of size %d", (int) (1 + sizeof(response_payload)), (int) stats.sendto.last_params.len);
+            push_info_msg(buf);
         }
         if (memcmp(response_payload, stats.sendto.last_params_buffered.buf + 1, stats.sendto.last_params.len - 1) != 0) {
             CU_ASSERT(false);

@@ -2,21 +2,48 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - bgp
-context: ''
-environment: pyjavacpp
+contact_url: ''
+context: |-
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment_id: pyjavacpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
 name: The BGP decision process
 network_grading: false
 problems:
     q1:
         type: code_single_line
+        name: The BGP decision process
         header: |
             The BGP decision process is the process that is used by a BGP router to select the best path among all the paths learned towards a given destination prefix. The table below represents all the BGP routes learned by a BGP router and their  corresponding attributes. For simplicity, the nexthops are indicated as router names instead of IP addresses.
 
@@ -44,39 +71,37 @@ problems:
 
             What is the next hop that this router will prefer for prefix ``2001:db8:1::/48`` ?
         optional: 'on'
-        name: The BGP decision process
         default: ''
     q2:
-        default: ''
         type: code_single_line
+        name: Best route
         header: |4-
 
             What is the next hop that this router will prefer for prefix ``2001:db8:2::/48`` ?
-        name: Best route
         optional: 'on'
-    q3:
         default: ''
+    q3:
         type: code_single_line
         name: Best route
-        optional: 'on'
         header: |4-
 
             What is the next hop that this router will prefer for prefix ``2001:db8:0::/48`` ?
+        optional: 'on'
+        default: ''
     q4:
         type: code_single_line
-        optional: 'on'
         name: Best route
         header: |4-
 
             What is the next hop that this router will prefer for prefix ``2001:db8:0::/47`` ?
+        optional: 'on'
         default: ''
     q5:
-        default: ''
         type: code_single_line
+        name: Route for a specific packet
         header: 'What is the next hop that this router will use to forward a packet
             whose destination address is ``2001:db8:0::1234`` ? '
-        name: Route for a specific packet
-run_cmd: ''
+        default: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

@@ -2,6 +2,7 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - ipv6
+contact_url: ''
 context: |-
     A router contains a forwarding table that lists for each IPv6 prefix either the interface associated to this prefix if it is directly connected or the nexthop to reach this prefix. Consider a router that has the following forwarding table:
 
@@ -14,86 +15,83 @@ context: |-
        2001:db8:1341:5000/52, nexthop3
        2001:db8:1341:7000/64, interface2
        2001:db8:1341:5555/64, interface3
-       2001:db8::/16 via nexthop4
+       2001:db8::/32 via nexthop4
        ::/0 via nexthop0
 
     Provide your answer by indicating nexthop3, interface9, ...
 
     .. raw:: html
 
-        <script>
-        $('#content').css("min-height", 0);
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
 
-        bodyHeight = 0;
-        function resizeAndPostSize() {
-            if (document.getElementById("content")) {
-                if (document.getElementById("content").scrollHeight != bodyHeight) {
-                    bodyHeight = document.getElementById("content").scrollHeight;
-                    window.parent.postMessage({height: bodyHeight}, "*");
-                }
-            }
-        }
+       var observer = new MutationObserver(postSize);
 
-        var target = document.querySelector('body');
+       var config = { attributes: true, subtree: true }
 
-        var observer = new MutationObserver(resizeAndPostSize);
-
-        var config = { attributes: true, subtree: true };
-
-        observer.observe(target, config);
-        $(window).ready(function() {
-           $('#content').css("min-height", 0);
-           setTimeout(resizeAndPostSize, 0);
-        });
-        </script>
-environment: pyjavacpp
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment_id: pyjavacpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
 name: The IPv6 forwarding table
 network_grading: false
 problems:
     q1:
         type: code_single_line
+        name: Packet
         header: How will the router forward a packet sent towards ``2001:bad:cafe::1234``
             ?
         optional: 'on'
-        name: Packet
         default: ''
     q2:
-        default: ''
         type: code_single_line
+        name: Packet
         header: How will the router forward a packet sent towards ``2001:db8:1342:5555::1``
             ?
-        name: Packet
         optional: 'on'
-    q3:
         default: ''
+    q3:
         type: code_single_line
         name: Packet
-        optional: 'on'
         header: How will the router forward a packet sent towards ``2001:db8:1341:3000::1234``
             ?
+        optional: 'on'
+        default: ''
     q4:
         type: code_single_line
-        optional: 'on'
         name: Packet
         header: How will the router forward a packet sent towards ``2001:db8:1341:6000::cafe:beef``
             ?
-        default: ''
-    q5:
         optional: 'on'
         default: ''
+    q5:
         type: code_single_line
+        name: Packet
         header: How will the router forward a packet sent towards ``2001:db8:1341:5000::f00f:beef``
             ?
-        name: Packet
-run_cmd: ''
+        optional: 'on'
+        default: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

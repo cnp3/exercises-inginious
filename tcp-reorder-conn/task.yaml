@@ -2,38 +2,61 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - tcp
-context: 'A TCP connection, as explained in the `TCP chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/tcp.html>`_
-    of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_
-    starts with a three-way-handshake and ends with the exchange of segments with
-    the `FIN` flag set.'
-environment: mcq
+contact_url: ''
+context: |-
+    A TCP connection, as explained in the `TCP chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/tcp.html>`_ of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_ starts with a three-way-handshake and ends with the exchange of segments with the `FIN` flag set.
+
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
 name: Reordering the segments exchanged on a connection
 network_grading: false
 order: 30
 problems:
     test:
+        type: network-trace
+        name: Reorder the entire connection
+        header: During this connection, the client opens a connection to the server
+            that listens on port 1234. It then sends a single byte of data that was
+            acknowledged by the server and then decided to terminate the connection.
+            Can you reorder all the segments exchanged on this connection ?
+        trace: tcp-rfc793-82-89.pcap.xml
         exclude:
         - tcp.flags.str
         - tcp.window_size
         - tcp.window_size_scalefactor
         - tcp.len
         - tcp.checksum
-        name: Reorder the entire connection
+        redact: tcp.flags
         hide: {}
-        header: During this connection, the client opens a connection to the server
-            that listens on port 1234. It then sends a single byte of data that was
-            acknowledged by the server and then decided to terminate the connection.
-            Can you reorder all the segments exchanged on this connection ?
-        type: network-trace
-        trace: tcp-rfc793-82-89.pcap.xml
+        feedback: {}
+        shuffle: true
         shuffle-feedback: There are a few things that you need to remember to answer
             this question correctly. First, a connection always starts with a three-way
             handshake and the first two segments have their `SYN` flag set. This should
@@ -41,10 +64,6 @@ problems:
             sends one byte (this is the only segment that carries data in the trace)
             and the server acknowledges it. The connection ends with the exchange
             of three segments, two of them have their `FIN` flag set.
-        redact: tcp.flags
-        shuffle: true
-        feedback: {}
-run_cmd: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

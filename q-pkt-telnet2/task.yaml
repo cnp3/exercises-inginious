@@ -2,53 +2,58 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - telnet
+contact_url: ''
 context: |-
     .. raw:: html
 
-        <script>
-        $('#content').css("min-height", 0);
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
 
-        bodyHeight = 0;
-        function resizeAndPostSize() {
-            if (document.getElementById("content")) {
-                if (document.getElementById("content").scrollHeight != bodyHeight) {
-                    bodyHeight = document.getElementById("content").scrollHeight;
-                    window.parent.postMessage({height: bodyHeight}, "*");
-                }
-            }
-        }
+       var observer = new MutationObserver(postSize);
 
-        var target = document.querySelector('body');
+       var config = { attributes: true, subtree: true }
 
-        var observer = new MutationObserver(resizeAndPostSize);
-
-        var config = { attributes: true, subtree: true };
-
-        observer.observe(target, config);
-        $(window).ready(function() {
-           $('#content').css("min-height", 0);
-           setTimeout(resizeAndPostSize, 0);
-        });
-        </script>
-environment: pyjavacpp
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 500);
+       });
+       </script>
+environment_id: pyjavacpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
 file: ''
 groups: false
-input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
+input_random: 0
 name: Another telnet trace
 network_grading: false
 problems:
+    q1:
+        type: code_single_line
+        name: The username
+        header: What is the username that the client used to log on this server ?
+        default: ''
+    q2:
+        type: code_single_line
+        name: The password
+        header: What is the password that the client used to log on this server ?
+        default: ''
     trace:
-        hide: {}
         type: network-trace
-        feedback: {}
-        exclude:
-        - tcp.flags
-        - tcp.options
+        name: Telnet trace
         header: |4-
              This `packet trace <https://inginious.org/course/cnp3/q-pkt-telnet2/telnet.cap>`_ was collected on a server while a client was connecting to the telnet service. Telnet supports remote logins and basically a telnet session is a TCP connection where:
 
@@ -57,21 +62,14 @@ problems:
 
              Looking at the trace below or using `wireshark <https://www.wireshark.org>`_, can you extract some information ? Note that the 20 bytes packets that you see below are pure TCP acknowledgements that do not carry any data.
         trace: telnet.xml
-        name: Telnet trace
+        exclude:
+        - tcp.flags
+        - tcp.options
         redact: {}
+        hide: {}
+        feedback: {}
         shuffle-feedback: ''
         shuffle: false
-    q1:
-        type: code_single_line
-        name: The username
-        header: What is the username that the client used to log on this server ?
-        default: ''
-    q2:
-        header: What is the password that the client used to log on this server ?
-        type: code_single_line
-        default: ''
-        name: The password
-run_cmd: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

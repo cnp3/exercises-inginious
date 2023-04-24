@@ -28,7 +28,7 @@ def checkAnswer(tag_question, student, correct, feedback_list, point):
         @post : return the grade and set feedback
     """
     grade = 0
-    if len(student) < len(correct):
+    if len(student) < len(correct) and student[0] != "0":
         feedback.set_problem_result("failed", tag_question)
         feedback.set_problem_feedback("There are missing paths", tag_question)
         return 0

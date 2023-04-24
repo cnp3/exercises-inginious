@@ -2,43 +2,62 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - tcp
-context: 'The TCP header, shown in the `TCP chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/tcp.html>`_
-    of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_
-    contains a sequence number. The segments below correspond to the beginning of
-    a TCP connection.'
-environment: mcq
+contact_url: ''
+context: |-
+    The TCP header, shown in the `TCP chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/tcp.html>`_ of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_ contains a sequence number. The segments below correspond to the beginning of a TCP connection.
+
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
 name: The TCP sequence numbers used during the data transfer
 network_grading: false
 order: 24
 problems:
     test:
+        type: network-trace
+        name: Sequence numbers
+        header: Can you infer the sequence numbers of the two segments that transfer
+            data in the trace below ?
+        trace: tcp-rfc793-4-10b.pcap.xml
         exclude:
         - tcp.flags.str
         - tcp.window_size
         - tcp.window_size_scalefactor
         - tcp.len
         - tcp.checksum
-        name: Sequence numbers
+        redact:
+        - tcp.flags
         hide:
             3:
             - tcp.seq
             5:
             - tcp.seq
-        header: Can you infer the sequence numbers of the two segments that transfer
-            data in the trace below ?
-        type: network-trace
-        trace: tcp-rfc793-4-10b.pcap.xml
-        shuffle-feedback: ''
-        redact:
-        - tcp.flags
         feedback:
             tcp.seq: The Sequence Number is defined in `Section 3.3 of RFC793 <https://tools.ietf.org/html/rfc793>`_   Remember
                 that on a TCP connection, the `SYN` bit and each byte transferred
@@ -46,8 +65,8 @@ problems:
                 addresses to determine the direction of the data transfer for each
                 packet. Remember that each byte transported in the previous segment
                 consumes one sequence number.
+        shuffle-feedback: ''
         shuffle: false
-run_cmd: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

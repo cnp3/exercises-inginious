@@ -2,35 +2,8 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - ethernet
+contact_url: ''
 context: |-
-    .. raw:: html
-
-        <script>
-        $('#content').css("min-height", 0);
-
-        bodyHeight = 0;
-        function resizeAndPostSize() {
-            if (document.getElementById("content")) {
-                if (document.getElementById("content").scrollHeight != bodyHeight) {
-                    bodyHeight = document.getElementById("content").scrollHeight;
-                    window.parent.postMessage({height: bodyHeight}, "*");
-                }
-            }
-        }
-
-        var target = document.querySelector('body');
-
-        var observer = new MutationObserver(resizeAndPostSize);
-
-        var config = { attributes: true, subtree: true };
-
-        observer.observe(target, config);
-        $(window).ready(function() {
-           $('#content').css("min-height", 0);
-           setTimeout(resizeAndPostSize, 0);
-        });
-        </script>
-
     In an Ethernet network, switch ``32`` has received the following BPDUs from its neighbours :
 
       - ``[R=9,C=21,T=19.2]`` on port 1
@@ -38,66 +11,51 @@ context: |-
       - ``[R=25,C=5,T=25.2]`` on port 3
       - ``[R=9,C=5,T=46.3]`` on port 4
 
-    What is the state of each port of this switch if all the links attached to this switch have a cost of 1?
-environment: pyjavacpp
+    What is the BPDU that switch ``32`` will send?
+
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment_id: pyjavacpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
 name: State of switches ports
 network_grading: false
 problems:
-    p1:
-        choices:
-        -   text: Root
-        -   text: Blocked
-        -   text: Designated
-            valid: true
-        type: multiple_choice
-        header: ''
-        name: State of port 1
-        limit: 0
-    p2:
-        type: multiple_choice
-        header: ''
-        choices:
-        -   text: Root
-        -   text: Blocked
-        -   valid: true
-            text: Designated
-        name: State of port 2
-        limit: 0
-    p3:
-        choices:
-        -   text: Root
-        -   text: Blocked
-        -   text: Designated
-            valid: true
-        limit: 0
-        type: multiple_choice
-        header: ''
-        name: State of port 3
-    p4:
-        header: ''
-        type: multiple_choice
-        choices:
-        -   valid: true
-            text: Root
-        -   text: Blocked
-        -   text: Designated
-        limit: 0
-        name: State of port 4
     bpdu:
-        header: What is the BPDU that switch ``32`` will send to switch ``19``?
         type: code_single_line
-        default: ''
         name: BPDU sent by this switch
+        header: What is the BPDU that switch ``32`` will send to switch ``19``?
+        default: ''
 regenerate_input_random: 'on'
-run_cmd: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

@@ -226,7 +226,7 @@
     <field name="tcp.nxtseq" showname="Next sequence number: 2    (relative sequence number)" size="0" pos="54" show="2"/>
     <field name="tcp.ack" showname="Acknowledgment number: 1    (relative ack number)" size="4" pos="62" show="1" value="8253f649"/>
     <field name="tcp.hdr_len" showname="0101 .... = Header Length: 20 bytes (5)" size="1" pos="66" show="20" value="50"/>
-    <field name="tcp.flags" showname="Flags: 0x018 (PSH, ACK)" size="2" pos="66" show="0x00000018" value="18" unmaskedvalue="5018">
+    <field name="tcp.flags" showname="Flags" size="2" pos="66" show="0x00000018" value="18" unmaskedvalue="5018">
       <field name="tcp.flags.res" showname="000. .... .... = Reserved: Not set" size="1" pos="66" show="0" value="0" unmaskedvalue="50"/>
       <field name="tcp.flags.ns" showname="...0 .... .... = Nonce: Not set" size="1" pos="66" show="0" value="0" unmaskedvalue="50"/>
       <field name="tcp.flags.cwr" showname=".... 0... .... = Congestion Window Reduced (CWR): Not set" size="1" pos="67" show="0" value="0" unmaskedvalue="18"/>
@@ -291,7 +291,7 @@
     <field name="tcp.nxtseq" showname="Next sequence number: 1    (relative sequence number)" size="0" pos="54" show="1"/>
     <field name="tcp.ack" showname="Acknowledgment number: 2    (relative ack number)" size="4" pos="62" show="2" value="cb01e4fa"/>
     <field name="tcp.hdr_len" showname="0101 .... = Header Length: 20 bytes (5)" size="1" pos="66" show="20" value="50"/>
-    <field name="tcp.flags" showname="Flags: 0x010 (ACK)" size="2" pos="66" show="0x00000010" value="10" unmaskedvalue="5010">
+    <field name="tcp.flags" showname="Flags" size="2" pos="66" show="0x00000010" value="10" unmaskedvalue="5010">
       <field name="tcp.flags.res" showname="000. .... .... = Reserved: Not set" size="1" pos="66" show="0" value="0" unmaskedvalue="50"/>
       <field name="tcp.flags.ns" showname="...0 .... .... = Nonce: Not set" size="1" pos="66" show="0" value="0" unmaskedvalue="50"/>
       <field name="tcp.flags.cwr" showname=".... 0... .... = Congestion Window Reduced (CWR): Not set" size="1" pos="67" show="0" value="0" unmaskedvalue="10"/>
@@ -350,7 +350,7 @@
     <field name="tcp.nxtseq" showname="Next sequence number: 2    (relative sequence number)" size="0" pos="54" show="2"/>
     <field name="tcp.ack" showname="Acknowledgment number: 1    (relative ack number)" size="4" pos="62" show="1" value="8253f649"/>
     <field name="tcp.hdr_len" showname="0101 .... = Header Length: 20 bytes (5)" size="1" pos="66" show="20" value="50"/>
-    <field name="tcp.flags" showname="Flags: 0x011 (FIN, ACK)" size="2" pos="66" show="0x00000011" value="11" unmaskedvalue="5011">
+    <field name="tcp.flags" showname="Flags" size="2" pos="66" show="0x00000011" value="11" unmaskedvalue="5011">
       <field name="tcp.flags.res" showname="000. .... .... = Reserved: Not set" size="1" pos="66" show="0" value="0" unmaskedvalue="50"/>
       <field name="tcp.flags.ns" showname="...0 .... .... = Nonce: Not set" size="1" pos="66" show="0" value="0" unmaskedvalue="50"/>
       <field name="tcp.flags.cwr" showname=".... 0... .... = Congestion Window Reduced (CWR): Not set" size="1" pos="67" show="0" value="0" unmaskedvalue="11"/>
@@ -411,7 +411,7 @@
     <field name="tcp.nxtseq" showname="Next sequence number: 1    (relative sequence number)" size="0" pos="54" show="1"/>
     <field name="tcp.ack" showname="Acknowledgment number: 3    (relative ack number)" size="4" pos="62" show="3" value="cb01e4fb"/>
     <field name="tcp.hdr_len" showname="0101 .... = Header Length: 20 bytes (5)" size="1" pos="66" show="20" value="50"/>
-    <field name="tcp.flags" showname="Flags: 0x011 (FIN, ACK)" size="2" pos="66" show="0x00000011" value="11" unmaskedvalue="5011">
+    <field name="tcp.flags" showname="Flags" size="2" pos="66" show="0x00000011" value="11" unmaskedvalue="5011">
       <field name="tcp.flags.res" showname="000. .... .... = Reserved: Not set" size="1" pos="66" show="0" value="0" unmaskedvalue="50"/>
       <field name="tcp.flags.ns" showname="...0 .... .... = Nonce: Not set" size="1" pos="66" show="0" value="0" unmaskedvalue="50"/>
       <field name="tcp.flags.cwr" showname=".... 0... .... = Congestion Window Reduced (CWR): Not set" size="1" pos="67" show="0" value="0" unmaskedvalue="11"/>
@@ -477,7 +477,7 @@
     <field name="tcp.nxtseq" showname="Next sequence number: 3    (relative sequence number)" size="0" pos="54" show="3"/>
     <field name="tcp.ack" showname="Acknowledgment number: 2    (relative ack number)" size="4" pos="62" show="2" value="8253f64a"/>
     <field name="tcp.hdr_len" showname="0101 .... = Header Length: 20 bytes (5)" size="1" pos="66" show="20" value="50"/>
-    <field name="tcp.flags" showname="Flags: 0x010 (ACK)" size="2" pos="66" show="0x00000010" value="10" unmaskedvalue="5010">
+    <field name="tcp.flags" showname="Flags" size="2" pos="66" show="0x00000010" value="10" unmaskedvalue="5010">
       <field name="tcp.flags.res" showname="000. .... .... = Reserved: Not set" size="1" pos="66" show="0" value="0" unmaskedvalue="50"/>
       <field name="tcp.flags.ns" showname="...0 .... .... = Nonce: Not set" size="1" pos="66" show="0" value="0" unmaskedvalue="50"/>
       <field name="tcp.flags.cwr" showname=".... 0... .... = Congestion Window Reduced (CWR): Not set" size="1" pos="67" show="0" value="0" unmaskedvalue="10"/>

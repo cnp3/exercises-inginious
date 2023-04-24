@@ -152,7 +152,7 @@
   <proto name="ipv6" showname="Internet Protocol Version 6, Src: fd::1, Dst: fd::3" size="40" pos="16">
     <field name="filtered" value="ipv6" />
   </proto>
-  <proto name="tcp" showname="Transmission Control Protocol, Src Port: 43494, Dst Port: 8080, Seq: 4224100836, Ack: 1, Len: 0" size="24" pos="56">
+  <proto name="tcp" showname="Transmission Control Protocol, Src Port: 43494, Dst Port: 8080, Seq: 4224100836, Ack: ????, Len: 0" size="24" pos="56">
     <field name="tcp.srcport" showname="Source Port: 43494" size="2" pos="56" show="43494" value="a9e6"/>
     <field name="tcp.dstport" showname="Destination Port: 8080" size="2" pos="58" show="8080" value="1f90"/>
     <field name="tcp.port" showname="Source or Destination Port: 43494" hide="yes" size="2" pos="56" show="43494" value="a9e6"/>
@@ -233,7 +233,7 @@
   <proto name="ipv6" showname="Internet Protocol Version 6, Src: fd::3, Dst: fd::1" size="40" pos="16">
     <field name="filtered" value="ipv6" />
   </proto>
-  <proto name="tcp" showname="Transmission Control Protocol, Src Port: 8080, Dst Port: 43494, Seq: 1, Ack: 4224100837, Len: 0" size="20" pos="56">
+  <proto name="tcp" showname="Transmission Control Protocol, Src Port: 8080, Dst Port: 43494, Seq: 1, Ack: ????, Len: 0" size="20" pos="56">
     <field name="tcp.srcport" showname="Source Port: 8080" size="2" pos="56" show="8080" value="1f90"/>
     <field name="tcp.dstport" showname="Destination Port: 43494" size="2" pos="58" show="43494" value="a9e6"/>
     <field name="tcp.port" showname="Source or Destination Port: 8080" hide="yes" size="2" pos="56" show="8080" value="1f90"/>

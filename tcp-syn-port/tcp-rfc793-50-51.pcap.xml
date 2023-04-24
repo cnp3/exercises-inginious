@@ -18,7 +18,7 @@
   <proto name="ipv6" showname="Internet Protocol Version 6, Src: 2001:7ab:1::a, Dst: 2001:7ab:3::c" size="40" pos="14">
     <field name="filtered" value="ipv6" />
   </proto>
-  <proto name="tcp" showname="Transmission Control Protocol, Src Port: 53710, Dst Port: 1234, Seq: 0, Len: 0" size="24" pos="54">
+  <proto name="tcp" showname="Transmission Control Protocol, Src Port: ????, Dst Port: ????, Seq: 0, Len: 0" size="24" pos="54">
     <field name="tcp.srcport" showname="Source Port: 53710" size="2" pos="54" show="53710" value="d1ce"/>
     <field name="tcp.dstport" showname="Destination Port: 1234" size="2" pos="56" show="1234" value="04d2"/>
     <field name="tcp.port" showname="Source or Destination Port: 53710" hide="yes" size="2" pos="54" show="53710" value="d1ce"/>

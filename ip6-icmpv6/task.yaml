@@ -2,59 +2,54 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - ipv6
+contact_url: ''
 context: |-
     The IPv6 header, shown in the `IPv6 chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/ipv6.html#ipv6-packet-format>`_ of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_ contains a Next Header field that usually indicates the protocol used for the packet payload.
 
     .. raw:: html
 
-        <script>
-        $('#content').css("min-height", 0);
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
 
-        bodyHeight = 0;
-        function resizeAndPostSize() {
-            if (document.getElementById("content")) {
-                if (document.getElementById("content").scrollHeight != bodyHeight) {
-                    bodyHeight = document.getElementById("content").scrollHeight;
-                    window.parent.postMessage({height: bodyHeight}, "*");
-                }
-            }
-        }
+       var observer = new MutationObserver(postSize);
 
-        var target = document.querySelector('body');
+       var config = { attributes: true, subtree: true }
 
-        var observer = new MutationObserver(resizeAndPostSize);
-
-        var config = { attributes: true, subtree: true };
-
-        observer.observe(target, config);
-        $(window).ready(function() {
-           $('#content').css("min-height", 0);
-           setTimeout(resizeAndPostSize, 0);
-        });
-        </script>
-environment: mcq
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
-name: 'IPv6 : the next header'
+name: 'IPv6 : the next header -- ICMPv6 version'
 network_grading: false
 order: 37
 problems:
     test:
-        shuffle-feedback: ''
-        header: Can you infer the Next Header field of this packet knowing that it
-            contains an ICMPv6 message ?
         type: network-trace
         name: Next Header for a packet carrying an ICMPv6 message
+        header: Can you infer the Next Header field of this packet knowing that it
+            contains an ICMPv6 message ?
+        trace: ip6-packet11.pcap.xml
+        exclude: {}
+        redact: {}
         hide:
             0:
             - ipv6.nxt
-        exclude: {}
         feedback:
             ipv6.nxt: 'The Next Header is defined in `Section 3 of RFC8200 <https://tools.ietf.org/html/rfc8200>`_   as
                 follows:  *8-bit selector.  Identifies the type of header immediately
@@ -62,10 +57,8 @@ problems:
                 field [IANA-PN].*  The assigned protocol numbers are defined in `https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
                 <https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml>`_
                 Note that ICMP and ICMPv6 are not the same protocol.'
-        redact: {}
-        trace: ip6-packet11.pcap.xml
+        shuffle-feedback: ''
         shuffle: false
-run_cmd: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

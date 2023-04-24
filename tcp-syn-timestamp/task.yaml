@@ -2,42 +2,61 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - tcp
-context: 'The TCP Timestamp option, defined in `RFC1323 <https://tools.ietf.org/html/rfc1323>`_
-    and described in the `TCP chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/tcp.html>`_
-    of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_
-    allows endhosts to exchange timestamp information.'
-environment: mcq
+contact_url: ''
+context: |-
+    The TCP Timestamp option, defined in `RFC1323 <https://tools.ietf.org/html/rfc1323>`_ and described in the `TCP chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/tcp.html>`_ of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_ allows endhosts to exchange timestamp information.
+
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
 name: The TCP Timestamp option
 network_grading: false
 order: 33
 problems:
     test:
+        type: network-trace
+        name: Negotiation of the TCP Timestamp option
+        header: Assuming that the server supports the timestamp option, can you predict
+            the value of the TS Echo Reply field in both segments ?
+        trace: tcp-timstamp-1-2.pcap.xml
         exclude:
         - tcp.flags.str
         - tcp.window_size
         - tcp.window_size_scalefactor
         - tcp.len
         - tcp.checksum
-        name: Negotiation of the TCP Timestamp option
+        redact: tcp.flags
         hide:
             0:
             - tcp.options.timestamp.tsecr
             1:
             - tcp.options.timestamp.tsecr
-        header: Assuming that the server supports the timestamp option, can you predict
-            the value of the TS Echo Reply field in both segments ?
-        type: network-trace
-        trace: tcp-timstamp-1-2.pcap.xml
-        shuffle-feedback: ''
-        redact: tcp.flags
         feedback:
             tcp.options.timestamp.tsecr: |-
                 The TS Echo Reply field is defined in `Section 3.2 of RFC1323 <https://tools.ietf.org/html/rfc1323>`_  as follows: *         The Timestamp Echo Reply field (TSecr) is only valid if the ACK
@@ -45,8 +64,8 @@ problems:
                        tamp value that was sent by the remote TCP in the TSval field
                        of a Timestamps option.  When TSecr is not valid, its value
                        must be zero. *
+        shuffle-feedback: ''
         shuffle: false
-run_cmd: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

@@ -448,7 +448,7 @@
   <proto name="ipv6" showname="Internet Protocol Version 6, Src: 2001:7ab:3::c, Dst: 2001:7ab:1::a" size="40" pos="14">
     <field name="filtered" value="ipv6" />
   </proto>
-  <proto name="tcp" showname="Transmission Control Protocol, Src Port: 1234, Dst Port: 53710, Seq: 2477434132, Ack: 3378592526, Len: 0" size="20" pos="54">
+  <proto name="tcp" showname="Transmission Control Protocol, Src Port: 1234, Dst Port: 53710, Seq: 2477434132, Ack: ????, Len: 0" size="20" pos="54">
     <field name="tcp.srcport" showname="Source Port: 1234" size="2" pos="54" show="1234" value="04d2"/>
     <field name="tcp.dstport" showname="Destination Port: 53710" size="2" pos="56" show="53710" value="d1ce"/>
     <field name="tcp.port" showname="Source or Destination Port: 1234" hide="yes" size="2" pos="54" show="1234" value="04d2"/>

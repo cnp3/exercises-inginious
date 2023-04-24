@@ -1,0 +1,134 @@
+accessible: false
+author: Emilie Deprez
+categories:
+- bgp
+contact_url: ''
+context: |-
+    .. raw:: html
+
+        <script src="q-bgp-re-4/data.js"></script>
+        <script>
+            var index1 = 0;
+            if (input["@random"][0] != 0){
+                index1 = parseInt(input["@random"][0].toString().slice(2,4));
+            }
+
+            var index2 = 0;
+            if (input["@random"][0] != 0){
+                index2 = parseInt(input["@random"][1].toString().slice(2,4));
+            }
+
+            var index3 = 0;
+            if (input["@random"][0] != 0){
+                index3 = parseInt(input["@random"][2].toString().slice(2,4));
+            }
+
+            function getAS(index, tag){
+                return data[index][tag];
+            }
+         </script>
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: 3
+name: BGP - Setting up links
+network_grading: false
+problems:
+    q2:
+        type: multiple_choice
+        name: ''
+        header: |-
+            .. raw:: html
+
+                <svg width="400" height="300">
+                    <defs>
+                            <marker id="arrow" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto">
+                                    <polygon points="0 0, 0 5, 5 2.5" style=" fill: #f00;" />
+                            </marker>
+                    </defs>
+                    <path d="M 40 62 C 40 62, 200 10, 360 62" style="stroke:#0f0; stroke-width: 2px;" fill="transparent" stroke-dasharray="5,5"/>
+                    <circle cx="40" cy="100" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <circle cx="200" cy="100" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <circle cx="360" cy="100" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <circle cx="200" cy="260" r="38" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                    <line x1="78" y1="100" x2="162" y2="100" style="stroke:#00f; stroke-width: 2px;"/>
+                    <line x1="238" y1="100" x2="322" y2="100" style="stroke:#00f; stroke-width: 2px;"/>
+                    <line x1="200" y1 ="138" x2="200" y2="222"  style="stroke:#f00; stroke-width: 2px;" marker-end="url(#arrow)"/>
+                    <line x1="360" y1 ="138" x2="238" y2="260"  style="stroke:#f00; stroke-width: 2px;" marker-end="url(#arrow)"/>
+                    <text id="ASaq2" x="40" y="100" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="ASbq2" x="200" y="100" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="AScq2" x="360" y="100" text-anchor="middle" dominant-baseline="central"/>
+                    <text id="ASdq2" x="200" y="260" text-anchor="middle" dominant-baseline="central"/>
+                    <text x="120" y="90" text-anchor="middle" dominant-baseline="central" fill="#00f">=</text>
+                    <text x="260" y="90" text-anchor="middle" dominant-baseline="central" fill="#00f">=</text>
+                    <text x="210" y="180" text-anchor="middle" dominant-baseline="central" fill="#f00">$</text>
+                    <text x="310" y="210" text-anchor="middle" dominant-baseline="central" fill="#f00">$</text>
+                    <text x="200" y="20" text-anchor="middle" dominant-baseline="central" fill="#0f0">?</text>
+                </svg>
+                <br><br>
+
+                <p>
+                In order to improve its connectivity and have at least one route per prefix, <code id="asaq2"></code> decides to install a link with <code id="ascq2"></code>. Which type of link should he prefer?
+                </p>
+
+                <script>
+                    document.getElementById("ASaq2").innerHTML = getAS(index2, "ASa");
+                    document.getElementById("ASbq2").innerHTML = getAS(index2, "ASb");
+                    document.getElementById("AScq2").innerHTML = getAS(index2, "ASc");
+                    document.getElementById("ASdq2").innerHTML = getAS(index2, "ASd");
+                    document.getElementById("asaq2").innerHTML = getAS(index2, "ASa");
+                    document.getElementById("ascq2").innerHTML = getAS(index2, "ASc");
+                </script>
+
+
+            ::
+
+             Advice : write the Routing Information Base for each AS
+        unshuffle: true
+        limit: 0
+        success_message: Correct
+        choices:
+        -   text: A shared-cost
+            feedback: |-
+                .. raw:: html
+
+                    <p><code id="asaq2c"></code> will not learn the prefix <code id="pdq2"></code></p>
+                    <script>
+                        document.getElementById("asaq2c").innerHTML = getAS(index2, "ASa");
+                        document.getElementById("pdq2").innerHTML = "p" + getAS(index2, "ASd").slice(2);
+                    </script>
+        -   text: |-
+                .. raw:: html
+
+                   <p> A customer-provider where <code id="asaq21"></code> is customer and <code id="ascq21"></code> is provider </p>
+
+                   <script>
+                       document.getElementById("asaq21").innerHTML = getAS(index2, "ASa");
+                       document.getElementById("ascq21").innerHTML = getAS(index2, "ASc");
+                   </script>
+            valid: true
+        -   text: |-
+                .. raw:: html
+
+                   <p> A customer-provider where <code id="ascq22"></code> is customer and <code id="asaq22"></code> is provider </p>
+
+                   <script>
+                       document.getElementById("asaq22").innerHTML = getAS(index2, "ASa");
+                       document.getElementById("ascq22").innerHTML = getAS(index2, "ASc");
+                   </script>
+            feedback: |-
+                .. raw:: html
+
+                    <p><code id="asaq2c2"></code> will not learn the prefix <code id="pdq22"></code></p>
+                    <script>
+                        document.getElementById("asaq2c2").innerHTML = getAS(index2, "ASa");
+                        document.getElementById("pdq22").innerHTML = "p" + getAS(index2, "ASd").slice(2);
+                    </script>
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

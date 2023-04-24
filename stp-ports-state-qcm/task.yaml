@@ -1,0 +1,92 @@
+accessible: true
+author: Olivier Bonaventure
+categories:
+- ethernet
+contact_url: ''
+context: |-
+    In an Ethernet network, switch ``32`` has received the following BPDUs from its neighbours :
+
+      - ``[R=9,C=21,T=19.2]`` on port 1
+      - ``[R=9,C=12,T=42.1]`` on port 2
+      - ``[R=25,C=5,T=25.2]`` on port 3
+      - ``[R=9,C=5,T=46.3]`` on port 4
+
+    What is the state of each port of this switch if all the links attached to this switch have a cost of 1?
+
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: State of switches ports - QCM
+network_grading: false
+problems:
+    p1:
+        type: multiple_choice
+        name: State of port 1
+        header: ''
+        limit: 0
+        choices:
+        -   text: Root
+        -   text: Blocked
+        -   text: Designated
+            valid: true
+    p2:
+        type: multiple_choice
+        name: State of port 2
+        header: ''
+        limit: 0
+        choices:
+        -   text: Root
+        -   text: Blocked
+        -   text: Designated
+            valid: true
+    p3:
+        type: multiple_choice
+        name: State of port 3
+        header: ''
+        limit: 0
+        choices:
+        -   text: Root
+        -   text: Blocked
+        -   text: Designated
+            valid: true
+    p4:
+        type: multiple_choice
+        name: State of port 4
+        header: ''
+        limit: 0
+        choices:
+        -   text: Root
+            valid: true
+        -   text: Blocked
+        -   text: Designated
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

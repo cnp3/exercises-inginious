@@ -2,63 +2,56 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - ipv6
+contact_url: ''
 context: |-
     ICMPv6, described in the `IPv6 chapter <http://cnp3book.info.ucl.ac.be/2nd/html/protocols/ipv6.html#icmp-version-6>`_ of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_ is a companion protocol for IPv6 that is used for various functions including network debugging. `traceroute6` is a popular debugging tool that allows to trace the path towards a destination.
 
     .. raw:: html
 
-        <script>
-        $('#content').css("min-height", 0);
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
 
-        bodyHeight = 0;
-        function resizeAndPostSize() {
-            if (document.getElementById("content")) {
-                if (document.getElementById("content").scrollHeight != bodyHeight) {
-                    bodyHeight = document.getElementById("content").scrollHeight;
-                    window.parent.postMessage({height: bodyHeight}, "*");
-                }
-            }
-        }
+       var observer = new MutationObserver(postSize);
 
-        var target = document.querySelector('body');
+       var config = { attributes: true, subtree: true }
 
-        var observer = new MutationObserver(resizeAndPostSize);
-
-        var config = { attributes: true, subtree: true };
-
-        observer.observe(target, config);
-        $(window).ready(function() {
-           $('#content').css("min-height", 0);
-           setTimeout(resizeAndPostSize, 0);
-        });
-        </script>
-environment: mcq
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
 name: 'IPv6 : traceroute6'
 network_grading: false
 order: 46
 problems:
     test:
+        type: network-trace
+        name: Reorder UDP segments
+        header: '`traceroute6` sends UDP segments to probe a path. Can you reorder
+            them in this packet trace ?'
+        trace: ip6-traceroute6-udp.pcap.xml
+        exclude: {}
+        redact: {}
+        hide: {}
+        feedback: {}
         shuffle: true
         shuffle-feedback: Remember that `traceroute6` first sends a packet with a
             Hop Limit set to 1, then 2, then 3 ...
-        header: '`traceroute6` sends UDP segments to probe a path. Can you reorder
-            them in this packet trace ?'
-        type: network-trace
-        name: Reorder UDP segments
-        hide: {}
-        exclude: {}
-        feedback: {}
-        redact: {}
-        trace: ip6-traceroute6-udp.pcap.xml
-run_cmd: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

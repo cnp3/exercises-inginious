@@ -29,9 +29,9 @@ context: |-
 environment_id: pyjavacpp
 environment_parameters:
     limits:
-        memory: '100'
-        hard_time: ''
         time: '30'
+        hard_time: ''
+        memory: '100'
     run_cmd: ''
 environment_type: docker
 evaluate: best
@@ -44,7 +44,7 @@ order: 6
 problems:
     q1:
         type: code_single_line
-        default: ''
+        name: How long does it take to deliver a frame ?
         header: |
             .. raw:: html
 
@@ -60,7 +60,7 @@ problems:
                document.getElementById("ipr3").innerHTML = len;
 
                </script>
-        name: How long does it take to deliver a frame ?
+        default: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

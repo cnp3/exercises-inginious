@@ -2,105 +2,103 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - ethernet
+contact_url: ''
 context: |-
-    .. raw:: html
-
-        <script>
-        $('#content').css("min-height", 0);
-
-        bodyHeight = 0;
-        function resizeAndPostSize() {
-            if (document.getElementById("content")) {
-                if (document.getElementById("content").scrollHeight != bodyHeight) {
-                    bodyHeight = document.getElementById("content").scrollHeight;
-                    window.parent.postMessage({height: bodyHeight}, "*");
-                }
-            }
-        }
-
-        var target = document.querySelector('body');
-
-        var observer = new MutationObserver(resizeAndPostSize);
-
-        var config = { attributes: true, subtree: true };
-
-        observer.observe(target, config);
-        $(window).ready(function() {
-           $('#content').css("min-height", 0);
-           setTimeout(resizeAndPostSize, 0);
-        });
-        </script>
-
     Consider the network shown in the figure below
 
     .. image:: https://inginious.org/course/cnp3/q-stp-1/figure.png
        :width: 60%
 
     In this network, all links have a cost of ``1``.
-environment: pyjavacpp
+
+    .. raw:: html
+
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
+
+       var observer = new MutationObserver(postSize);
+
+       var config = { attributes: true, subtree: true }
+
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 0);
+       });
+       </script>
+environment_id: pyjavacpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
 name: The spanning tree protocol
 network_grading: false
 problems:
     q1:
         type: code_single_line
+        name: What is the root switch in this network ?
         header: Return the integer that identifies the root switch.
         default: ''
-        name: What is the root switch in this network ?
     q2:
+        type: code_single_line
         name: What is the BPDU sent by the root ?
         header: Provide your answer as R=123,C=456,T=789
-        type: code_single_line
         default: ''
     q3:
-        name: 'What is the BPDU sent by switch 4 in this network ? '
         type: code_single_line
+        name: 'What is the BPDU sent by switch 4 in this network ? '
         header: Provide your answer as R=123,C=456,T=789
         default: ''
     q4:
-        header: ''
         type: code_single_line
         name: 'What is the BPDU sent by switch 7 in this network ? '
+        header: ''
         default: ''
     q5:
         type: code_single_line
-        header: ''
         name: 'What is the BPDU sent by switch 9 in this network ? '
+        header: ''
         default: ''
     q6:
-        default: ''
         type: code_single_line
+        name: Interfaces in the Root state
         header: The Spanning Tree protocol associates one state (`Root`, `Designated`
             or `Blocked`) to each switch interface. How many switch interfaces are
             in the `Root` state in the entire network ?
-        name: Interfaces in the Root state
+        default: ''
     q7:
+        type: code_single_line
+        name: Interfaces in the Blocked state
         header: The Spanning Tree protocol associates one state (`Root`, `Designated`
             or `Blocked`) to each switch interface. How many switch interfaces are
             in the `Blocked` state in the entire network ?
-        name: Interfaces in the Blocked state
-        type: code_single_line
         default: ''
     q8:
+        type: code_single_line
         name: State of the interface between S4 and S6
         header: What is the state of the interface that switch `S4` uses to send frames
             to switch `S6` ? Reply with `Root`, `Designated` or `Blocked`.
-        type: code_single_line
         default: ''
     q9:
-        name: State of the interface between S4 and S7
-        default: ''
         type: code_single_line
+        name: State of the interface between S4 and S7
         header: What is the state of the interface that switch `S4` uses to send frames
             to switch `S7` ? Reply with `Root`, `Designated` or `Blocked`.
-run_cmd: ''
+        default: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

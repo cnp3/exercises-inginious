@@ -2,6 +2,7 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - dns
+contact_url: ''
 context: |-
     .. raw:: html
 
@@ -25,39 +26,38 @@ context: |-
            setTimeout(postSize, 0);
        });
        </script>
-environment: mcq
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
 name: DNS over TCP
 network_grading: false
 problems:
     tcp:
-        shuffle-feedback: ''
-        trace: tcp-dns.pdml
-        exclude: {}
-        feedback: {}
-        redact: {}
-        name: A short DNS over TCP trace
         type: network-trace
-        hide:
-            3:
-            - dns.length
-            5:
-            - dns.length
+        name: A short DNS over TCP trace
         header: DNS can also be used over TCP instead of UDP. In this case, several
             requests and responses can be sent over the bytestream. The transaction
             identifier is still used to identify the response that matches a request.
             The only difference with DNS over UDP is that each DNS message is prefixed
             with a length field that contains the length of the DNS message. Can you
             infer the value of this length field in the attached TCP trace ?
+        trace: tcp-dns.pdml
+        exclude: {}
+        redact: {}
+        hide:
+            3:
+            - dns.length
+            5:
+            - dns.length
+        feedback:
+            dns.length: Note that the value of the length field does not take into
+                account its own (fixed) length.
+        shuffle-feedback: ''
         shuffle: false
-run_cmd: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

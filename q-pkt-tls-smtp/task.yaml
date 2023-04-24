@@ -2,91 +2,89 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - tls
+contact_url: ''
 context: |-
     .. raw:: html
 
-        <script>
-        $('#content').css("min-height", 0);
+       <script defer>
+       bodyHeight = 0;
+       function postSize() {
+           if (document.body.scrollHeight != bodyHeight) {
+               bodyHeight = document.body.scrollHeight;
+               window.parent.postMessage({height: bodyHeight}, "*");
+           }
+       };
+       var target = document.querySelector('body');
 
-        bodyHeight = 0;
-        function resizeAndPostSize() {
-            if (document.getElementById("content")) {
-                if (document.getElementById("content").scrollHeight != bodyHeight) {
-                    bodyHeight = document.getElementById("content").scrollHeight;
-                    window.parent.postMessage({height: bodyHeight}, "*");
-                }
-            }
-        }
+       var observer = new MutationObserver(postSize);
 
-        var target = document.querySelector('body');
+       var config = { attributes: true, subtree: true }
 
-        var observer = new MutationObserver(resizeAndPostSize);
-
-        var config = { attributes: true, subtree: true };
-
-        observer.observe(target, config);
-        $(window).ready(function() {
-           $('#content').css("min-height", 0);
-           setTimeout(resizeAndPostSize, 0);
-        });
-        </script>
-environment: pyjavacpp
+       observer.observe(target, config);
+       $(document).ready(function(){
+           document.querySelector('#content').style.minHeight = '';
+           setTimeout(postSize, 500);
+       });
+       </script>
+environment_id: pyjavacpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
 file: ''
 groups: false
-input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
+input_random: 0
 name: SMTP over TLS
 network_grading: false
 problems:
+    q1:
+        type: code_single_line
+        name: The SMTP server
+        header: What is the name of the SMTP server ?
+        default: ''
+    q2:
+        type: multiple_choice
+        name: Version of TLS
+        header: What is the version of the TLS protocol used for this session ?
+        limit: 0
+        choices:
+        -   text: TLS 1.0
+            feedback: Check the ServerHello message in the 22nd packet.
+        -   text: TLS 1.2
+            feedback: The client supports different versions of TLS, but the server
+                selects 1.2 in its ServerHello message (22nd packet)
+            valid: true
+        -   text: TLS 1.3
+            feedback: Check the ServerHello message in the 22nd packet.
+    q3:
+        type: code_single_line
+        name: Latency
+        header: How many messages are sent by the client before transmitting its first
+            encrypted record ?
+        default: ''
     trace:
-        redact: {}
+        type: network-trace
+        name: A simple SMTP over TLS trace
         header: The SMTP protocol was originally used directly above TCP. All emails
             were sent in clear text between SMTP servers. Today, most SMTP servers
             run SMTP over TLS over TCP. The `attached trace <https://inginious.org/course/cnp3/q-pkt-tls-smtp/smtp-tls.pcap>`_
             provides a sample connection.
+        trace: smtp-tls.xml
         exclude:
         - ip6
         - tcp.flags
         - tcp.options
         - tcp.payload
         - tcp.segment_data
+        redact: {}
         hide: {}
-        name: A simple SMTP over TLS trace
-        trace: smtp-tls.xml
         feedback: {}
-        type: network-trace
         shuffle-feedback: ''
         shuffle: false
-    q1:
-        type: code_single_line
-        header: What is the name of the SMTP server ?
-        name: The SMTP server
-        default: ''
-    q2:
-        type: multiple_choice
-        choices:
-        -   feedback: Check the ServerHello message in the 22nd packet.
-            text: TLS 1.0
-        -   text: TLS 1.2
-            valid: true
-            feedback: The client supports different versions of TLS, but the server
-                selects 1.2 in its ServerHello message (22nd packet)
-        -   text: TLS 1.3
-            feedback: Check the ServerHello message in the 22nd packet.
-        header: What is the version of the TLS protocol used for this session ?
-        limit: 0
-        name: Version of TLS
-    q3:
-        default: ''
-        type: code_single_line
-        name: Latency
-        header: How many messages are sent by the client before transmitting its first
-            encrypted record ?
-run_cmd: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

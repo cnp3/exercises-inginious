@@ -6,14 +6,20 @@ description: 'This INGINIOUS site contains exercises to complement the `Computer
     see `https://github.com/cnp3/INGInious-packets <https://github.com/cnp3/INGInious-packets>`_
     and `https://github.com/cnp3/INGInious-C <https://github.com/cnp3/INGInious-C>`_'
 admins:
-- obonaventure
-- mpiraux
-- michelfra
+- Emilie
 - duchenef
-- vvandens
+- michelfra
+- mpiraux
+- obonaventure
 - qdeconinck
+- vvandens
+- NicolasRybowski
 tutors:
+- Nicwalle
 - eassogba
+- flod
+- hlibioulle
+- louisna
 groups_student_choice: false
 use_classrooms: true
 allow_unregister: false
@@ -147,84 +153,154 @@ dispenser_data:
     title: The transport layer / Serving applications
 -   config:
         closed: false
-    id: tasks-list
+    id: the_domain_name_system
     rank: 4
     tasks_list:
-        dns-ns: 47
-        dns-records: 0
-        dns-truefalse: 1
-        ip6-frag-icmp6: 72
-        ip6-hop: 66
-        ip6-icmpv6: 67
-        ip6-ping6: 70
-        ip6-ping6-frag1: 74
-        ip6-ping6-frag2: 73
-        ip6-ping6-reorder: 71
-        ip6-tcp: 68
-        ip6-traceroute6-hop: 75
-        ip6-traceroute6-reorder: 76
-        ip6-udp: 69
-        mcq-dns-1: 48
-        mcq-http-10: 2
-        mcq-http-11: 3
-        mcq-http-20: 4
-        mcq-http-trace: 5
-        mcq-pkt-dns-1: 6
-        mcq-pkt-dns-2: 7
-        mcq-pkt-dns-3: 8
-        mcq-pkt-http2-1: 9
-        mcq-pkt-http2-2: 10
-        mcq-pkt-http2-3: 11
-        pkt-dns-computernetworking: 12
-        pkt-dns-example: 13
-        pkt-dns-google: 14
-        pkt-dns-id: 15
-        pkt-dns-port: 16
-        pkt-dns-tcp: 17
-        q-bgp-dp-1: 18
-        q-bgp-pol-0: 19
-        q-bgp-pol-1: 20
-        q-bgp-pol-2: 21
-        q-bgp-pol-3: 22
-        q-bgp-pol-4: 23
-        q-ipv6-binary: 24
-        q-ipv6-forwarding: 25
-        q-ipv6-static-1: 26
-        q-ipv6-static-2: 27
-        q-ipv6-static-3: 28
-        q-pkt-ssh-1: 29
-        q-pkt-ssh-2: 30
-        q-pkt-ssh-3: 31
-        q-pkt-telnet: 32
-        q-pkt-telnet2: 33
-        q-pkt-tls-1: 34
-        q-pkt-tls-2: 35
-        q-pkt-tls-4: 36
-        q-pkt-tls-smtp: 37
-        q-rel-checksum: 46
-        q-stp-1: 38
-        q-tcpdump-trace: 39
-        stp-bpdu: 40
-        stp-ports-state: 41
-        sum_of_ints_tcp1: 50
-        sum_of_ints_udp: 49
-        tcp-data-ack: 54
-        tcp-data-ack2: 56
-        tcp-dual: 42
-        tcp-fin: 62
-        tcp-hl-syn: 65
-        tcp-infer-ack: 57
-        tcp-local-close: 43
-        tcp-local-close2: 44
-        tcp-remote-close: 45
-        tcp-reorder-conn: 60
-        tcp-reorder-data: 61
-        tcp-reorder-twh: 58
-        tcp-reorder-twh2: 59
-        tcp-syn: 51
-        tcp-syn-ack-bits: 55
-        tcp-syn-port: 52
-        tcp-syn-seq-ack: 53
-        tcp-syn-timestamp: 63
-        tcp-wscale: 64
+        dns-records: 1
+        dns-truefalse: 0
+        mcq-pkt-dns-1: 2
+        mcq-pkt-dns-2: 3
+        mcq-pkt-dns-3: 4
+        pkt-dns-computernetworking: 10
+        pkt-dns-example: 8
+        pkt-dns-google: 9
+        pkt-dns-id: 6
+        pkt-dns-port: 5
+        pkt-dns-tcp: 7
+    title: The Domain Name System
+-   config:
+        closed: false
+    id: the_hypertext_transfer_protocol
+    rank: 5
+    tasks_list:
+        mcq-http-10: 0
+        mcq-http-11: 1
+        mcq-http-20: 2
+        mcq-http-trace: 3
+        mcq-pkt-http2-1: 4
+        mcq-pkt-http2-2: 5
+        mcq-pkt-http2-3: 6
+    title: The HyperText Transfer Protocol
+-   config:
+        closed: false
+    id: tls_and_ssh
+    rank: 6
+    tasks_list:
+        q-pkt-ssh-1: 2
+        q-pkt-ssh-2: 3
+        q-pkt-ssh-3: 4
+        q-pkt-telnet: 0
+        q-pkt-telnet2: 1
+        q-pkt-tls-1: 5
+        q-pkt-tls-2: 6
+        q-pkt-tls-4: 7
+        q-pkt-tls-smtp: 8
+    title: TLS and SSH
+-   config:
+        closed: false
+    id: analysis_
+    rank: 7
+    tasks_list:
+        q-tcpdump-trace: 0
+        tcp-data-ack: 7
+        tcp-data-ack2: 8
+        tcp-dual: 16
+        tcp-fin: 11
+        tcp-hl-syn: 14
+        tcp-infer-ack: 9
+        tcp-local-close: 17
+        tcp-local-close2: 18
+        tcp-remote-close: 19
+        tcp-reorder-conn: 15
+        tcp-reorder-data: 10
+        tcp-reorder-twh: 5
+        tcp-reorder-twh2: 6
+        tcp-syn: 2
+        tcp-syn-ack-bits: 4
+        tcp-syn-port: 1
+        tcp-syn-seq-ack: 3
+        tcp-syn-timestamp: 12
+        tcp-wscale: 13
+    title: Analyzing packet traces / TCP
+-   config:
+        closed: false
+    id: ipv6_networks
+    rank: 8
+    tasks_list:
+        ip6-frag-icmp6: 13
+        ip6-hop: 9
+        ip6-icmpv6: 12
+        ip6-ping6: 15
+        ip6-ping6-frag2: 14
+        ip6-ping6-reorder: 16
+        ip6-tcp: 10
+        ip6-traceroute6-hop: 17
+        ip6-traceroute6-reorder: 18
+        ip6-udp: 11
+        q-ipv6-binary: 0
+        q-ipv6-compress: 2
+        q-ipv6-expand: 1
+        q-ipv6-forwarding: 4
+        q-ipv6-forwarding-2: 5
+        q-ipv6-matching: 3
+        q-ipv6-static-1: 6
+        q-ipv6-static-2: 7
+        q-ipv6-static-3: 8
+    title: IPv6 Networks
+-   config:
+        closed: false
+    id: border_gateway_protocol
+    rank: 9
+    tasks_list:
+        q-bgp-dp-1: 10
+        q-bgp-pol-0: 0
+        q-bgp-pol-1: 6
+        q-bgp-pol-2: 7
+        q-bgp-pol-3: 8
+        q-bgp-pol-4: 9
+        q-bgp-re-1: 1
+        q-bgp-re-2: 2
+        q-bgp-re-3: 3
+        q-bgp-re-4: 5
+        q-bgp-rib: 4
+        q-bgp-rt-1: 11
+        q-bgp-rt-2: 12
+        q-bgp-rt-3: 13
+    title: Border Gateway Protocol
+-   config:
+        closed: false
+    id: local_area_networks_the_spanning_tree_protocol
+    rank: 10
+    tasks_list:
+        q-stp-1: 6
+        q-stp-2: 7
+        q-stp-3: 8
+        q-stp-4: 9
+        q-stp-5: 10
+        q-stp-sbs-1: 3
+        q-stp-sbs-2: 4
+        q-stp-sbs-3: 5
+        stp-bpdu: 0
+        stp-ports-state: 1
+        stp-ports-state-qcm: 2
+    title: 'Local Area Networks: The Spanning Tree Protocol'
+-   config:
+        closed: false
+    id: ipmininet-list
+    rank: 11
+    tasks_list:
+        ipmininet-init: 0
+    title: Exercices interactifs IPMininet
+-   config:
+        closed: false
+    id: tasks-list
+    rank: 12
+    tasks_list:
+        dns-ns: 1
+        ip6-ping6-frag1: 5
+        mcq-dns-1: 2
+        q-rel-checksum: 0
+        sum_of_ints_tcp1: 4
+        sum_of_ints_udp: 3
     title: Liste des exercices
+registration_ac_accept: true

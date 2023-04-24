@@ -2,6 +2,7 @@ accessible: true
 author: Olivier Bonaventure
 categories:
 - http
+contact_url: ''
 context: |-
     .. raw:: html
 
@@ -25,52 +26,58 @@ context: |-
            setTimeout(postSize, 0);
        });
        </script>
-environment: mcq
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
 evaluate: best
 file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    time: '30'
-    output: '2'
 name: Another HTTP/2.0 trace
 network_grading: false
 problems:
     q1:
+        type: multiple_choice
+        name: Another HTTP/2.0 trace
+        header: |-
+            The attached `packet trace <mcq-pkt-http2-3/nghttp-trace-2768.pcap>`_ was collected while retrieving the home page of http://nghttp2.org
+
+            Using `wireshark <https://www.wireshark.org>`_, verify which of the following affirmations are valid.
+        multiple: true
+        limit: 7
         choices:
-        -   valid: true
+        -   text: The client authorizes the server to push web objects.
             feedback: The `Settings` frame in packet 4 does not disable server push.
                 This feature is thus enabled.
-            text: The client authorizes the server to push web objects.
-        -   text: The client requests three web objects (including the initial request)
             valid: true
+        -   text: The client requests three web objects (including the initial request)
             feedback: The client receives four web objects, but only requests three
                 of them. The stylesheet (`screen.css`) is automatically pushed by
                 the server, see sixth packet.
-        -   feedback: The client receives four web objects, but only requests three
+            valid: true
+        -   text: The client requests four web objects (including the initial request)
+            feedback: The client receives four web objects, but only requests three
                 of them. The stylesheet (`screen.css`) is automatically pushed by
                 the server, see sixth packet.
-            text: The client requests four web objects (including the initial request)
         -   text: The client sends the `Push_Promise` frame
             feedback: No, the `Push_Promise` frame is sent by the server.
-        -   feedback: In HTTP/2.0, even stream identifiers are used to deliver resources
+        -   text: The `stylesheet/screen.css` resource is delivered on stream 2
+            feedback: In HTTP/2.0, even stream identifiers are used to deliver resources
                 pushed by the server, while odd stream numbers are used for resources
                 requested by the client. The `Push_Promise` frame in packet 6 clearly
                 indicates that this resource will be pushed on stream 2.
             valid: true
-            text: The `stylesheet/screen.css` resource is delivered on stream 2
         -   text: The `stylesheet/screen.css` resource is delivered on stream 1
             feedback: In HTTP/2.0, even stream identifiers are used to deliver resources
                 pushed by the server, while odd stream numbers are used for resources
                 requested by the client. The `Push_Promise` frame in packet 6 clearly
                 indicates that this resource will be pushed on stream 2.
-        -   feedback: In HTTP/2.0, even stream identifiers are used to deliver resources
+        -   text: The `/javascript/modernizr-2.0.js` resource is delivered on stream
+                2.
+            feedback: In HTTP/2.0, even stream identifiers are used to deliver resources
                 pushed by the server, while odd stream numbers are used for resources
                 requested by the client. The `Push_Promise` frame in packet 15 clearly
                 indicates that this resource is expected by the client on stream 3.
-            text: The `/javascript/modernizr-2.0.js` resource is delivered on stream
-                2.
         -   text: The `/javascript/modernizr-2.0.js` resource is delivered on stream
                 3.
             feedback: In HTTP/2.0, even stream identifiers are used to deliver resources
@@ -78,28 +85,19 @@ problems:
                 requested by the client. The `Push_Promise` frame in packet 15 clearly
                 indicates that this resource is expected by the client on stream 3.
             valid: true
-        type: multiple_choice
-        header: |-
-            The attached `packet trace <mcq-pkt-http2-3/nghttp-trace-2768.pcap>`_ was collected while retrieving the home page of http://nghttp2.org
-
-            Using `wireshark <https://www.wireshark.org>`_, verify which of the following affirmations are valid.
-        name: Another HTTP/2.0 trace
-        limit: 6
-        multiple: true
     trace:
+        type: network-trace
+        name: A visualisation of this packet trace
+        header: ''
+        trace: http2-trace.xml
         exclude:
         - tcp.flags
         - tcp.options
-        trace: http2-trace.xml
         redact: {}
-        feedback: {}
-        name: A visualisation of this packet trace
-        shuffle-feedback: ''
-        header: ''
-        type: network-trace
         hide: {}
+        feedback: {}
+        shuffle-feedback: ''
         shuffle: false
-run_cmd: ''
 stored_submissions: 0
 submission_limit:
     amount: -1

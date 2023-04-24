@@ -6,7 +6,8 @@ CPPFLAGS=--error-exitcode=1
 LDFLAGS=-lcunit -lm -lpthread -ldl -rdynamic
 SRC=$(sort $(wildcard *.c)) $(sort $(wildcard CTester/*.c))
 OBJ=$(SRC:.c=.o)
-CFLAGS = -Wall -Werror -Wextra -Wshadow
+CFLAGS = -Wall -Werror -Wno-cast-function-type -Wextra -Wshadow
+CFLAGS_STUDENT_UNUSED = -Wall -Wextra -Wshadow -Werror
 CFLAGS += -std=gnu99
 #CFLAGS += -DC99
 CFLAGS += -ICTester # to include the folder.

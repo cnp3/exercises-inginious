@@ -47,7 +47,7 @@ else:
 if("h2" in a4 or "http/1.1" in a4):
   feedback.set_problem_result("success","q4")
   grade+=25
-  feedback.set_problem_feedback("Indeed, th client indicates in the ALPN extension that it wishes to use either h2, i.e. HTTP/2.0, or HTTP/1.2 over this TLS session.","q4")
+  feedback.set_problem_feedback("Indeed, the client indicates in the ALPN extension that it wishes to use either h2, i.e. HTTP/2.0, or HTTP/1.1 over this TLS session.","q4")
 else:
   feedback.set_problem_result("failed","q4")
   feedback.set_problem_feedback("Check again the contents of the ALPN extension in the ClientHello.","q4") 

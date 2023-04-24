@@ -1,0 +1,144 @@
+accessible: true
+author: Emilie Deprez
+categories:
+- ethernet
+contact_url: ''
+context: |-
+    .. raw:: html
+
+            Consider the network shown in the figure below where the cost of each link is indicated on it.
+
+            <br><br>
+
+            <center>
+            <svg width="400" height="240">
+                <polygon id="a" points="0 40,40 80,80 40,40 0" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                <polygon id="d" points="160 40,200 80,240 40,200 0" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                <polygon id="c" points="320 40,360 80,400 40,360 0" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                <polygon id="b" points="80 200,120 240,160 200,120 160" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                <polygon id="e" points="240 200,280 240,320 200,280 160" style=" fill: #fff; stroke:#000; stroke-width: 1.5px;"/>
+                <line x1="80" y1="40" x2="160" y2="40" style="stroke:#000; stroke-width: 2px;"/>
+                <line x1="240" y1="40" x2="320" y2="40" style="stroke:#000; stroke-width: 2px;"/>
+                <line x1="60" y1="60" x2="100" y2="180" style="stroke:#000; stroke-width: 2px;"/>
+                <line x1="160" y1="200" x2="240" y2="200" style="stroke:#000; stroke-width: 2px;"/>
+                <line x1="340" y1="60" x2="300" y2="180" style="stroke:#000; stroke-width: 2px;"/>
+                <text id="Sa" x="40" y="40" text-anchor="middle" dominant-baseline="central"/>
+                <text id="Sc" x="360" y="40" text-anchor="middle" dominant-baseline="central"/>
+                <text id="Sb" x="120" y="200" text-anchor="middle" dominant-baseline="central"/>
+                <text id="Sd" x="200" y="40" text-anchor="middle" dominant-baseline="central"/>
+                <text id="Se" x="280" y="200" text-anchor="middle" dominant-baseline="central"/>
+                <text x="120" y="30" text-anchor="middle" dominant-baseline="central">1</text>
+                <text x="280" y="30" text-anchor="middle" dominant-baseline="central">2</text>
+                <text x="60" y="120" text-anchor="middle" dominant-baseline="central">5</text>
+                <text x="340" y="120" text-anchor="middle" dominant-baseline="central">1</text>
+                <text x="200" y="210" text-anchor="middle" dominant-baseline="central">2</text>
+            </svg>
+            </center>
+
+            <script src="q-stp-4/data.js"></script>
+            <script>
+            var index = 0;
+            if (input["@random"][0] != 0){
+                index = parseInt(input["@random"][0].toString().slice(2,4));
+            }
+
+            function getSwitch(tag){
+                return data[index][tag];
+            }
+
+            document.getElementById("Sa").innerHTML = getSwitch("Sa");
+            document.getElementById("Sb").innerHTML = getSwitch("Sb");
+            document.getElementById("Sc").innerHTML = getSwitch("Sc");
+            document.getElementById("Sd").innerHTML = getSwitch("Sd");
+            document.getElementById("Se").innerHTML = getSwitch("Se");
+            </script>
+environment_id: pyjavacpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 1
+name: The spanning tree protocol - BPDU exchanged - 1
+network_grading: false
+problems:
+    q1:
+        type: code_single_line
+        name: BPDU sent
+        header: |-
+            .. raw:: html
+
+                <p>
+                What is the BPDU sent by switch <code id="q1" class="docutils literal"></code> in this network ?
+
+                Provide your answer as <code class="docutils literal">R=123,C=456,T=789</code>
+                </p>
+
+                <script> document.getElementById("q1").innerHTML = getSwitch("Sa");</script>
+        default: ''
+    q4:
+        type: code_single_line
+        name: BPDU sent
+        header: |-
+            .. raw:: html
+
+                <p>
+                What is the BPDU sent by switch <code id="q4" class="docutils literal"></code> in this network ?
+
+                Provide your answer as <code class="docutils literal">R=123,C=456,T=789</code>
+                </p>
+
+                <script> document.getElementById("q4").innerHTML = getSwitch("Sd");</script>
+        default: ''
+    q3:
+        type: code_single_line
+        name: BPDU sent
+        header: |-
+            .. raw:: html
+
+                <p>
+                What is the BPDU sent by switch <code id="q3" class="docutils literal"></code> in this network ?
+
+                Provide your answer as <code class="docutils literal">R=123,C=456,T=789</code>
+                </p>
+
+                <script> document.getElementById("q3").innerHTML = getSwitch("Sc");</script>
+        default: ''
+    q2:
+        type: code_single_line
+        name: BPDU sent
+        header: |-
+            .. raw:: html
+
+                <p>
+                What is the BPDU sent by switch <code id="q2" class="docutils literal"></code> in this network ?
+
+                Provide your answer as <code class="docutils literal">R=123,C=456,T=789</code>
+                </p>
+
+                <script> document.getElementById("q2").innerHTML = getSwitch("Sb");</script>
+        default: ''
+    q5:
+        type: code_single_line
+        name: BPDU sent
+        header: |-
+            .. raw:: html
+
+                <p>
+                What is the BPDU sent by switch <code id="q5" class="docutils literal"></code> in this network ?
+
+                Provide your answer as <code class="docutils literal">R=123,C=456,T=789</code>
+                </p>
+
+                <script> document.getElementById("q5").innerHTML = getSwitch("Se");</script>
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

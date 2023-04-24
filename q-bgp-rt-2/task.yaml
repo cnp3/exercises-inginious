@@ -1,0 +1,89 @@
+accessible: true
+author: Emilie Deprez
+categories:
+- bgp
+contact_url: ''
+context: |-
+    .. raw:: html
+
+            <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+            <script src="https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.js"></script>
+            <link rel="stylesheet" type="text/css" href="q-bgp-rt-2/diagram.css">
+
+            Consider the interdomain topology shown in the figure below. Assuming, that <code id="ase" class="docutils literal"></code> advertises  the prefix <code class="docutils literal">p</code>.
+            <br>
+
+            <svg width=960 height=600><g/></svg>
+
+            <br>
+            <p>
+             Compute the routing tables of the different ASes. <br><br>
+             Provide your answers as a comma-separated list of paths starting with the preferred one. For example, the answer:
+            </p>
+            <pre class="literal-block">AS9:AS1, AS8:AS7:AS1</pre>
+            <p>
+            indicates that the AS has learned two different paths. The preferred one is the one via <code class="docutils literal">AS9</code> that has a length of 2 AS hops while the second path has a length of 3 AS hops. If there is no path, return 0 as your answer.
+
+            <script src="q-bgp-rt-2/data.js"></script>
+            <script src="q-bgp-rt-2/diagram.js"></script>
+            <script>document.getElementById("ase").innerHTML = getAS("ASe");</script>
+environment_id: pyjavacpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 1
+name: BGP - interdomain routing - 2
+network_grading: false
+problems:
+    q1:
+        type: code_single_line
+        name: Routing table
+        header: |-
+            .. raw:: html
+
+                Assuming that all the links are up and the network has converged,
+                what are the routes known towards this prefix in <code id="asa" class="docutils literal"></code>? <br><br>
+                <script>document.getElementById("asa").innerHTML = getAS("ASa");</script>
+        default: ''
+    q2:
+        type: code_single_line
+        name: Routing table
+        header: |-
+            .. raw:: html
+
+                Assuming that all the links are up and the network has converged,
+                what are the routes known towards this prefix in <code id="asb" class="docutils literal"></code>? <br><br>
+                <script>document.getElementById("asb").innerHTML = getAS("ASb");</script>
+        default: ''
+    q3:
+        type: code_single_line
+        name: Routing table
+        header: |-
+            .. raw:: html
+
+                Assuming that all the links are up and the network has converged,
+                what are the routes known towards this prefix in <code id="asc" class="docutils literal"></code>? <br><br>
+                <script>document.getElementById("asc").innerHTML = getAS("ASc");</script>
+        default: ''
+    q4:
+        type: code_single_line
+        name: Routing table
+        header: |-
+            .. raw:: html
+
+                Assuming that all the links are up and the network has converged,
+                what are the routes known towards this prefix in <code id="asd" class="docutils literal"></code>? <br><br>
+                <script>document.getElementById("asd").innerHTML = getAS("ASd");</script>
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

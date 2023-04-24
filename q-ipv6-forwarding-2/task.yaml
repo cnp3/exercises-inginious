@@ -1,0 +1,154 @@
+accessible: true
+author: Emilie Deprez
+categories:
+- ipv6
+contact_url: ''
+context: |-
+    Consider the following forwarding table.
+
+    .. raw:: html
+
+        <table class="colwidths-given docutils table table-bordered">
+            <colgroup>
+            <col width="20%" />
+            <col width="20%" />
+            </colgroup>
+            <thead class="thead-light">
+                <tr><th class="head">Destination</th>
+                <th class="head">Nexthop/Interface</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><code class="docutils literal">::/0</code></td>
+                <td><span id="1"></span></td>
+                </tr>
+                <tr><td><code class="docutils literal">2001:db8::/32</code></td>
+                <td><span id="2"></span></td>
+                </tr>
+                <tr><td><code class="docutils literal">2001:db8:12::/46</code></td>
+                <td><span id="3"></span></td>
+                </tr>
+                <tr><td><code class="docutils literal">2001:db8:12::/47</code></td>
+                <td><span id="4"></span></td>
+                </tr>
+                <tr><td><code class="docutils literal">2001:db8:12::/48</code></td>
+                <td><span id="5"></span></td>
+                </tr>
+                <tr><td><code class="docutils literal">2001:db8:14::/48</code></td>
+                <td><span id="6"></span></td>
+                </tr>
+                <tr><td><code class="docutils literal">2001:db8:12:1a4e::/60</code></td>
+                <td><span id="7"></span></td>
+                </tr>
+                <tr><td><code class="docutils literal">2001:db8:12:1a4e::/61</code></td>
+                <td><span id="8"></span></td>
+                </tr>
+                <tr><td><code class="docutils literal">2001:db8:12:1a4e::/63</code></td>
+                <td><span id="9"></span></td>
+                </tr>
+                <tr><td><code class="docutils literal">2001:db8:12:1a4e::/64</code></td>
+                <td><span id="10"></span></td>
+                </tr>
+            </tbody>
+        </table>
+        <script src="q-ipv6-forwarding-2/data.js"></script>
+        <script>
+            var index = 0;
+            if (input["@random"][0] != 0){
+                index = parseInt(input["@random"][0].toString().slice(2,4));
+            }
+            document.getElementById("1").innerHTML = data[index]["1"];
+            document.getElementById("2").innerHTML = data[index]["2"];
+            document.getElementById("3").innerHTML = data[index]["3"];
+            document.getElementById("4").innerHTML = data[index]["4"];
+            document.getElementById("5").innerHTML = data[index]["5"];
+            document.getElementById("6").innerHTML = data[index]["6"];
+            document.getElementById("7").innerHTML = data[index]["7"];
+            document.getElementById("8").innerHTML = data[index]["8"];
+            document.getElementById("9").innerHTML = data[index]["9"];
+            document.getElementById("10").innerHTML = data[index]["10"];
+        </script>
+environment_id: pyjavacpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 1
+name: 'IPv6 - forwarding packets '
+network_grading: false
+problems:
+    q1:
+        type: code_single_line
+        name: ''
+        header: |-
+            On which nexthop or interface will the router forward a packet sent towards ``2001:db8:13::bc`` ?
+
+            *Provide your answer by indicating nexthop9 or interface7*
+        default: ''
+    q2:
+        type: code_single_line
+        name: ''
+        header: |-
+            On which nexthop or interface will the router forward a packet sent towards ``2001:db8:12:1a4d::476`` ?
+
+            *Provide your answer by indicating nexthop9 or interface7*
+        default: ''
+    q3:
+        type: code_single_line
+        name: ''
+        header: |-
+            On which nexthop or interface will the router forward a packet sent towards ``2001:db8:16::de`` ?
+
+            *Provide your answer by indicating nexthop9 or interface7*
+        default: ''
+    q4:
+        type: code_single_line
+        name: ''
+        header: |-
+            On which nexthop or interface will the router forward a packet sent towards ``2001:db8:12:1a4f::5`` ?
+
+            *Provide your answer by indicating nexthop9 or interface7*
+        default: ''
+    q5:
+        type: code_single_line
+        name: ''
+        header: |-
+            On which nexthop or interface will the router forward a packet sent towards ``2001:db8:10::bad:cafe`` ?
+
+            *Provide your answer by indicating nexthop9 or interface7*
+        default: ''
+    q6:
+        type: code_single_line
+        name: ''
+        header: |-
+            On which nexthop or interface will the router forward a packet sent towards ``2001:db8:14:1431::2`` ?
+
+            *Provide your answer by indicating nexthop9 or interface7*
+        default: ''
+    q7:
+        type: code_single_line
+        name: ''
+        header: |-
+            On which nexthop or interface will the router forward a packet sent towards ``2001:db8:12:1a40::26`` ?
+
+            *Provide your answer by indicating nexthop9 or interface7*
+        default: ''
+    q8:
+        type: code_single_line
+        name: ''
+        header: |-
+            On which nexthop or interface will the router forward a packet sent towards ``2001:db9::`` ?
+
+            *Provide your answer by indicating nexthop9 or interface7*
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

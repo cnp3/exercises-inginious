@@ -1,0 +1,134 @@
+accessible: true
+author: Emilie Deprez
+categories:
+- ipv6
+contact_url: ''
+context: |-
+    An IPv6 address has a full representation of eight groups of four digits separated by colons (:). However, it can be written in compressed form to allow a better lisibility.  For example, the address ``2001:db8:bad:cafe::`` is a compressed form of ``2001:0db8:0bad:cafe:0000:0000:0000:0000``.
+
+
+    More information about format can be found in the `IPv6 addressing architecture chapter <https://beta.computer-networking.info/syllabus/default/protocols/ipv6.html#ipv6-addressing-architecture>`_ of `Computer Networking: Principles, Protocols and Practice <http://cnp3book.info.ucl.ac.be/>`_.
+
+
+    Compress the following IPv6 addresses into a shortest form.
+
+    .. raw:: html
+
+        <script src="q-ipv6-compress/data.js"></script>
+        <script>
+            var index = 0;
+            if (input["@random"][0] != 0){
+                index = parseInt(input["@random"][0].toString().slice(2,4));
+            }
+            function getAddress(tag){
+                return data[index][tag]
+            }
+        </script>
+environment_id: pyjavacpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 1
+name: Compress IPv6 addresses
+network_grading: false
+problems:
+    q1:
+        type: code_single_line
+        name: Compress address
+        header: |-
+            .. raw:: html
+
+                Compress the IPv6 address <code id="q1" class="docutils literal"></code> <br> <br>
+                <script>
+                    document.getElementById("q1").innerHTML = getAddress("q1");
+                </script>
+        default: ''
+    q2:
+        type: code_single_line
+        name: Compress address
+        header: |-
+            .. raw:: html
+
+                Compress the IPv6 address <code id="q2" class="docutils literal"></code> <br> <br>
+                <script>
+                    document.getElementById("q2").innerHTML = getAddress("q2");
+                </script>
+        default: ''
+    q3:
+        type: code_single_line
+        name: Compress address
+        header: |-
+            .. raw:: html
+
+                Compress the IPv6 address <code id="q3" class="docutils literal"></code> <br> <br>
+                <script>
+                    document.getElementById("q3").innerHTML = getAddress("q3");
+                </script>
+        default: ''
+    q4:
+        type: code_single_line
+        name: Compress address
+        header: |-
+            .. raw:: html
+
+                Compress the IPv6 address <code id="q4" class="docutils literal"></code> <br> <br>
+                <script>
+                    document.getElementById("q4").innerHTML = getAddress("q4");
+                </script>
+        default: ''
+    q5:
+        type: code_single_line
+        name: Compress address
+        header: |-
+            .. raw:: html
+
+                Compress the IPv6 address <code id="q5" class="docutils literal"></code> <br> <br>
+                <script>
+                    document.getElementById("q5").innerHTML = getAddress("q5");
+                </script>
+        default: ''
+    q6:
+        type: code_single_line
+        name: Compress address
+        header: |-
+            .. raw:: html
+
+                Compress the IPv6 address <code id="q6" class="docutils literal"></code> <br> <br>
+                <script>
+                    document.getElementById("q6").innerHTML = getAddress("q6");
+                </script>
+        default: ''
+    q7:
+        type: code_single_line
+        name: Compress address
+        header: |-
+            .. raw:: html
+
+                Compress the IPv6 address <code id="q7" class="docutils literal"></code> <br> <br>
+                <script>
+                    document.getElementById("q7").innerHTML = getAddress("q7");
+                </script>
+        default: ''
+    q8:
+        type: code_single_line
+        name: Compress address
+        header: |-
+            .. raw:: html
+
+                Compress the IPv6 address <code id="q8" class="docutils literal"></code> <br> <br>
+                <script>
+                    document.getElementById("q8").innerHTML = getAddress("q8");
+                </script>
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

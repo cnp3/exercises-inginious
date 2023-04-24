@@ -1,0 +1,177 @@
+accessible: true
+author: Emilie Deprez
+categories:
+- ipv6
+contact_url: ''
+context: |
+    Consider the following forwarding table.
+
+    ========================== ==========================
+    Destination                Nexthop/Interface
+    ========================== ==========================
+    ``::/0``                   nexthop0
+    ``2001:db8::/31``          nexthop1
+    ``2001:db8::/32``          nexthop2
+    ``2001:db8:cafe::/47``     nexthop3
+    ``2001:db8:cafe::/48``     nexthop4
+    ``2001:db8:caff::/46``     nexthop5
+    ``2001:db8:caff::/48``     nexthop6
+    ``2001:db8:cafe:bad::/58`` interface0
+    ``2001:db8:cafe:bad::/60`` interface1
+    ``2001:db8:cafe:bad::/64`` interface2
+    ========================== ==========================
+environment_id: mcq
+environment_parameters: {}
+environment_type: mcq
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: IPv6 - matching addresses
+network_grading: false
+problems:
+    q1:
+        type: multiple_choice
+        name: Matching addresses
+        header: Select all prefixes that match this address ``2001:db8:cafe:bad::123``
+            .
+        multiple: true
+        limit: 0
+        success_message: Correct
+        error_message: Remember the binary representation of addresses
+        choices:
+        -   text: '``::/0``'
+            valid: true
+        -   text: '``2001:db8::/31``'
+            valid: true
+        -   text: '``2001:db8::/32``'
+            valid: true
+        -   text: '``2001:db8:cafe::/47``'
+            valid: true
+        -   text: '``2001:db8:cafe::/48``'
+            valid: true
+        -   text: '``2001:db8:caff::/46``'
+            valid: true
+        -   text: '``2001:db8:caff::/48``'
+        -   text: '``2001:db8:cafe:bad::/58``'
+            valid: true
+        -   text: '``2001:db8:cafe:bad::/60``'
+            valid: true
+        -   text: '``2001:db8:cafe:bad::/64``'
+            valid: true
+    q2:
+        type: multiple_choice
+        name: Forwarding packet
+        header: On which nexthop or interface will the router forward a packet sent
+            towards ``2001:db8:cafe:bad::123`` ?
+        limit: 0
+        success_message: Correct
+        error_message: IPv6 routers forward packets according to the *longest match*
+            between the destination address of the packet and the routes in the forwarding
+            table.
+        choices:
+        -   text: nexthop0
+        -   text: nexthop1
+        -   text: nexthop2
+        -   text: nexthop3
+        -   text: nexthop4
+        -   text: nexthop5
+        -   text: nexthop6
+        -   text: interface0
+        -   text: interface1
+        -   text: interface2
+            valid: true
+    q3:
+        type: multiple_choice
+        name: Matching addresses
+        header: Select all prefixes that match this address ``2001:db8:cafc::123``
+            .
+        multiple: true
+        limit: 0
+        success_message: Correct
+        error_message: Remember the binary representation of addresses
+        choices:
+        -   text: '``::/0``'
+            valid: true
+        -   text: '``2001:db8::/31``'
+            valid: true
+        -   text: '``2001:db8::/32``'
+            valid: true
+        -   text: '``2001:db8:cafe::/47``'
+        -   text: '``2001:db8:cafe::/48``'
+        -   text: '``2001:db8:caff::/46``'
+            valid: true
+        -   text: '``2001:db8:caff::/48``'
+        -   text: '``2001:db8:cafe:bad::/58``'
+        -   text: '``2001:db8:cafe:bad::/60``'
+        -   text: '``2001:db8:cafe:bad::/64``'
+    q4:
+        type: multiple_choice
+        name: 'Forwarding packet '
+        header: On which nexthop or interface will the router forward a packet sent
+            towards ``2001:db8:cafc::123`` ?
+        limit: 0
+        success_message: Correct
+        error_message: IPv6 routers forward packets according to the *longest match*
+            between the destination address of the packet and the routes in the forwarding
+            table.
+        choices:
+        -   text: nexthop0
+        -   text: nexthop1
+        -   text: nexthop2
+        -   text: nexthop3
+        -   text: nexthop4
+        -   text: nexthop5
+            valid: true
+        -   text: nexthop6
+        -   text: interface0
+        -   text: interface1
+        -   text: interface2
+    q5:
+        type: multiple_choice
+        name: Matching addresses
+        header: Select all prefixes that match this address ``2001:db9::`` .
+        multiple: true
+        limit: 0
+        success_message: Correct
+        error_message: Remember the binary representation of addresses
+        choices:
+        -   text: '``::/0``'
+            valid: true
+        -   text: '``2001:db8::/31``'
+            valid: true
+        -   text: '``2001:db8::/32``'
+        -   text: '``2001:db8:cafe::/47``'
+        -   text: '``2001:db8:cafe::/48``'
+        -   text: '``2001:db8:caff::/46``'
+        -   text: '``2001:db8:caff::/48``'
+        -   text: '``2001:db8:cafe:bad::/58``'
+        -   text: '``2001:db8:cafe:bad::/60``'
+        -   text: '``2001:db8:cafe:bad::/64``'
+    q6:
+        type: multiple_choice
+        name: Forwarding packet
+        header: On which nexthop or interface will the router forward a packet sent
+            towards ``2001:db9::`` ?
+        limit: 0
+        success_message: Correct
+        error_message: IPv6 routers forward packets according to the *longest match*
+            between the destination address of the packet and the routes in the forwarding
+            table.
+        choices:
+        -   text: nexthop0
+        -   text: nexthop1
+            valid: true
+        -   text: nexthop2
+        -   text: nexthop3
+        -   text: nexthop4
+        -   text: nexthop5
+        -   text: nexthop6
+        -   text: interface0
+        -   text: interface1
+        -   text: interface2
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

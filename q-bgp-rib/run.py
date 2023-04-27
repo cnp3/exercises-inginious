@@ -40,7 +40,8 @@ def checkFormat(string, mapping):
             elif p_as[0][1:] == "100" or mapping[int(p_as[0][1:])] in d: return (-1, "There is always and only one preferred route for each prefix.")
             else : 
                 d[mapping[int(p_as[0][1:])]] = route
-                if route not in existing_path[mapping[int(p_as[0][1:])]]: return (-1, f"Route for {p_as[0]} is not in the RIB")
+                if (route[0] != "100"): return (-1, "Announced route should start with AS100")
+                if route[1:] not in existing_path[mapping[int(p_as[0][1:])]]: return (-1, f"Route for {p_as[0]} is not in the RIB")
         except:
             return (-1, "Wrong input format. Please provide your answer as a list <prefix>-<route> such as p1-AS2:AS1, p2-AS2, ...")
     return (0, d)
@@ -114,14 +115,13 @@ tag_question = ["q1", "q2", "q3", "q4"]
 grade += checkQ1({"a" : ["d", "e", "a"], "b" : ["j", "b"], "c" : ["k", "c"], "l":["o", "l"]}, {"a" : "A route learned by a client is preferred over a route learned by a provider or through a shared-cost link", "b" : "When a route is learned by the same link type, the shortest one is preferred", "c": "A route learned by a shared-cost link is preferred over a route learned by a provider", "l":"A route learned by a client is preferred over a route learned by a provider and when a route is learned by the same link type, the shortest one is preferred."}, 25, "q1", mapping, data, index)
 
 # advertise to a provider
-grade += checkQ234({"a" : ["d", "e", "a"], "b" : [], "c" : [], "l":["o", "l"], "100": ["100"]}, {"a" : "AS100 will annouce a prefix learned by a client to a provider", "b" : "AS100 will not announce a prefix learned by a provider to a provider", "c": "AS100 will not announce a prefix learned by a shared-cost to a provider", "100" : "AS100 will always advertise his prefix", "l":"AS100 will always advertise a prefixe learned by a client"}, 25, "q2", mapping, data, index)
+grade += checkQ234({"a" : ["100", "d", "e", "a"], "b" : [], "c" : [], "l":["100", "o", "l"], "100": ["100"]}, {"a" : "AS100 will annouce a prefix learned by a client to a provider", "b" : "AS100 will not announce a prefix learned by a provider to a provider", "c": "AS100 will not announce a prefix learned by a shared-cost to a provider", "100" : "AS100 will always advertise his prefix", "l":"AS100 will always advertise a prefixe learned by a client"}, 25, "q2", mapping, data, index)
 
 # advertise to a client
-grade += checkQ234({"a" : ["d", "e", "a"], "b" : ["j", "b"], "c" : ["k", "c"], "l":["o", "l"], "100": ["100"]}, {"a" : "AS100 will annouce a prefix learned by a client to a client", "b" : "AS100 will announce a prefix learned by a provider to a client", "c": "AS100 will announce a prefix learned by a shared-cost to a client", "100" : "AS100 will always advertise his prefix", "l":"AS100 will always advertise a prefixe learned by a client"}, 25, "q3", mapping, data, index)
+grade += checkQ234({"a" : ["100", "d", "e", "a"], "b" : ["100", "j", "b"], "c" : ["100", "k", "c"], "l":["100", "o", "l"], "100": ["100"]}, {"a" : "AS100 will annouce a prefix learned by a client to a client", "b" : "AS100 will announce a prefix learned by a provider to a client", "c": "AS100 will announce a prefix learned by a shared-cost to a client", "100" : "AS100 will always advertise his prefix", "l":"AS100 will always advertise a prefixe learned by a client"}, 25, "q3", mapping, data, index)
 
 # advertise to a shared-cost
-grade += checkQ234({"a" : ["d", "e", "a"], "b" : [], "c" : [], "l":["o", "l"], "100": ["100"]}, {"a" : "AS100 will annouce a prefix learned by a client to a shared-cost", "b" : "AS100 will not announce a prefix learned by a provider to a shared-cost", "c": "AS100 will not announce a prefix learned by a shared-cost to a shared-cost", "100" : "AS100 will always advertise his prefix", "l":"AS100 will always advertise a prefixe learned by a client"}, 25, "q4", mapping, data, index)
-
+grade += checkQ234({"a" : ["100", "d", "e", "a"], "b" : [], "c" : [], "l":["100", "o", "l"], "100": ["100"]}, {"a" : "AS100 will annouce a prefix learned by a client to a shared-cost", "b" : "AS100 will not announce a prefix learned by a provider to a shared-cost", "c": "AS100 will not announce a prefix learned by a shared-cost to a shared-cost", "100" : "AS100 will always advertise his prefix", "l":"AS100 will always advertise a prefixe learned by a client"}, 25, "q4", mapping, data, index)
 
 feedback.set_grade(grade)
 if int(grade) == 100:

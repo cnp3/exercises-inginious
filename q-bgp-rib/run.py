@@ -16,8 +16,36 @@ def get_mapping(data, index):
 def get_index(random):
     return int(str(random)[2:4])
 
-
 def checkFormat(string, mapping):
+    d = {}
+    existing_path = {"a":[["d", "e", "a"], ["f", "a"], ["g", "a"]], "b":[["h", "i", "b"], ["j", "b"]], "c":[["k", "c"], ["c"]], "l":[["m", "n", "l"], ["o", "l"], ["l"]], "100":[["100"]]}
+    answer = string.lower().replace(" ", "").split(",")
+    for p in answer:
+        p_as = p.split("-")
+        try:
+            if len(p_as) != 2 or not p_as[0].startswith("p"): return (-1, "Wrong input format. Please provide your answer as a list <prefix>-<route> such as p1-AS2:AS1, p2-AS2, ...")
+            AS = p_as[1].split(":")
+            route = []
+            for a in AS:
+                if not a.startswith("as"): return (-1, "Wrong input format. Please provide your answer as a list <prefix>-<route> such as p1-AS2:AS1, p2-AS2, ...")
+                if a[2:] != "100" and int(a[2:]) in mapping:
+                    route.append(mapping[int(a[2:])])
+                elif a[2:] != "100":
+                    return (-1, f"Route for {p_as[0]} is not in the RIB")
+                else:
+                    route.append("100")
+            
+            if p_as[0][1:] == "100" and "100" not in d: d["100"] = route
+            elif p_as[0][1:] == "100" or mapping[int(p_as[0][1:])] in d: return (-1, "There is always and only one preferred route for each prefix.")
+            else : 
+                d[mapping[int(p_as[0][1:])]] = route
+                if route not in existing_path[mapping[int(p_as[0][1:])]]: return (-1, f"Route for {p_as[0]} is not in the RIB")
+        except:
+            return (-1, "Wrong input format. Please provide your answer as a list <prefix>-<route> such as p1-AS2:AS1, p2-AS2, ...")
+    return (0, d)
+
+
+def checkFormatQ234(string, mapping):
     d = {}
     existing_path = {"a":[["d", "e", "a"], ["f", "a"], ["g", "a"]], "b":[["h", "i", "b"], ["j", "b"]], "c":[["k", "c"], ["c"]], "l":[["m", "n", "l"], ["o", "l"], ["l"]], "100":[["100"]]}
     answer = string.lower().replace(" ", "").split(",")
@@ -74,7 +102,7 @@ def checkQ1(correct, fb, point, tag, mapping, data, index):
         return 0    
  
 def checkQ234(correct, fb, point, tag, mapping, data, index):
-    answer = checkFormat(input.get_input(tag), mapping)
+    answer = checkFormatQ234(input.get_input(tag), mapping)
     error_comment = []
     if answer[0] == -1:
         feedback.set_problem_result("failed", tag)
